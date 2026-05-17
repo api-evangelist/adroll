@@ -41,7 +41,7 @@ apis:
     properties:
       - type: Documentation
         url: https://apidocs.nextroll.com/index.html
-      - type: Getting Started
+      - type: GettingStarted
         url: https://apidocs.nextroll.com/guides/get-started.html
       - type: OAuth Guide
         url: https://apidocs.nextroll.com/guides/oauth.html
@@ -55,7 +55,7 @@ common:
     url: https://apidocs.nextroll.com
   - type: Pricing
     url: https://www.adroll.com/pricing
-  - type: Sign Up
+  - type: SignUp
     url: https://app.adroll.com/signup
 maintainers:
   - FN: Kin Lane
