@@ -49,6 +49,10 @@ apis:
         url: https://apidocs.nextroll.com/guides/index.html
 
 common:
+  - type: GitHubOrganization
+    url: https://github.com/adroll
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/adroll
   - type: Website
     url: https://www.adroll.com
   - type: Documentation
