@@ -1,0 +1,864 @@
+"""
+AdRoll GraphQL Schema
+Conceptual schema derived from the NextRoll REST API for AdRoll.
+Covers advertisers, campaigns, ads, audiences, creatives, attribution, and reporting.
+"""
+
+# ─────────────────────────────────────────────
+# Scalars
+# ─────────────────────────────────────────────
+
+scalar DateTime
+scalar JSON
+scalar URL
+scalar BigInt
+
+# ─────────────────────────────────────────────
+# Enums
+# ─────────────────────────────────────────────
+
+enum CampaignStatus {
+  ACTIVE
+  PAUSED
+  ENDED
+  ARCHIVED
+  DRAFT
+}
+
+enum CampaignType {
+  RETARGETING
+  PROSPECTING
+  EMAIL
+  SOCIAL
+  CROSS_CHANNEL
+}
+
+enum AdStatus {
+  ACTIVE
+  PAUSED
+  PENDING_REVIEW
+  REJECTED
+  ARCHIVED
+}
+
+enum AdType {
+  DISPLAY
+  VIDEO
+  NATIVE
+  EMAIL
+  SOCIAL
+  DYNAMIC
+}
+
+enum AdFormat {
+  BANNER
+  LEADERBOARD
+  RECTANGLE
+  HALF_PAGE
+  INTERSTITIAL
+  RESPONSIVE
+  SKYSCRAPER
+}
+
+enum AudienceStatus {
+  ACTIVE
+  BUILDING
+  PAUSED
+  ARCHIVED
+}
+
+enum AudienceType {
+  PIXEL_BASED
+  CRM_LIST
+  LOOKALIKE
+  CONTEXTUAL
+  INTEREST
+  RETARGETING_SEGMENT
+}
+
+enum BudgetType {
+  DAILY
+  LIFETIME
+  MONTHLY
+}
+
+enum BiddingStrategy {
+  CPC
+  CPM
+  CPA
+  ROAS
+  AUTO
+}
+
+enum AttributionModel {
+  LAST_CLICK
+  FIRST_CLICK
+  LINEAR
+  TIME_DECAY
+  POSITION_BASED
+  DATA_DRIVEN
+}
+
+enum ConversionEventType {
+  PURCHASE
+  LEAD
+  ADD_TO_CART
+  VIEW_CONTENT
+  COMPLETE_REGISTRATION
+  INITIATE_CHECKOUT
+  CUSTOM
+}
+
+enum PixelStatus {
+  ACTIVE
+  INACTIVE
+  UNVERIFIED
+}
+
+enum AdvertiserStatus {
+  ACTIVE
+  PAUSED
+  SUSPENDED
+  PENDING
+}
+
+enum ReportInterval {
+  HOURLY
+  DAILY
+  WEEKLY
+  MONTHLY
+}
+
+enum SortDirection {
+  ASC
+  DESC
+}
+
+enum CreativeType {
+  IMAGE
+  HTML5
+  VIDEO
+  DYNAMIC_TEMPLATE
+  RESPONSIVE_DISPLAY
+}
+
+enum ChannelType {
+  DISPLAY
+  SOCIAL
+  EMAIL
+  SEARCH
+  VIDEO
+}
+
+enum SegmentRule {
+  INCLUDE
+  EXCLUDE
+}
+
+# ─────────────────────────────────────────────
+# Core Resource Types
+# ─────────────────────────────────────────────
+
+"""An AdRoll advertiser account."""
+type Advertiser {
+  eid: ID!
+  name: String!
+  status: AdvertiserStatus!
+  website: URL
+  industry: String
+  currency: String!
+  timezone: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  campaigns(first: Int, after: String, status: CampaignStatus): CampaignConnection!
+  audiences(first: Int, after: String): AudienceConnection!
+  pixels: [Pixel!]!
+  conversionGoals: [ConversionGoal!]!
+  reportingSummary(dateRange: DateRangeInput!): AdvertiserReport
+}
+
+"""A campaign within an AdRoll advertiser account."""
+type Campaign {
+  eid: ID!
+  name: String!
+  status: CampaignStatus!
+  type: CampaignType!
+  advertiser: Advertiser!
+  startDate: DateTime
+  endDate: DateTime
+  budget: Budget!
+  biddingStrategy: BiddingStrategy!
+  targetCPA: Float
+  targetROAS: Float
+  channels: [ChannelType!]!
+  audiences: [Audience!]!
+  ads(first: Int, after: String, status: AdStatus): AdConnection!
+  attributionModel: AttributionModel!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  metrics(dateRange: DateRangeInput!): CampaignMetrics
+}
+
+"""Budget configuration for a campaign."""
+type Budget {
+  amount: Float!
+  currency: String!
+  type: BudgetType!
+  spent: Float
+  remaining: Float
+}
+
+"""An ad (creative + targeting combination) within a campaign."""
+type Ad {
+  eid: ID!
+  name: String!
+  status: AdStatus!
+  type: AdType!
+  format: AdFormat
+  campaign: Campaign!
+  creative: Creative!
+  audience: Audience
+  destinationURL: URL!
+  impressions: BigInt
+  clicks: BigInt
+  spend: Float
+  ctr: Float
+  cpc: Float
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  metrics(dateRange: DateRangeInput!): AdMetrics
+}
+
+"""A creative asset used in ads."""
+type Creative {
+  eid: ID!
+  name: String!
+  type: CreativeType!
+  advertiser: Advertiser!
+  width: Int
+  height: Int
+  fileURL: URL
+  previewURL: URL
+  clickThroughURL: URL
+  altText: String
+  dynamicTemplate: DynamicTemplate
+  status: AdStatus!
+  reviewStatus: String
+  rejectionReason: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""A dynamic creative template for personalized ads."""
+type DynamicTemplate {
+  eid: ID!
+  name: String!
+  feedURL: URL
+  mappingRules: JSON
+  previewURL: URL
+}
+
+"""An audience segment for targeting."""
+type Audience {
+  eid: ID!
+  name: String!
+  status: AudienceStatus!
+  type: AudienceType!
+  advertiser: Advertiser!
+  size: BigInt
+  rules: [AudienceRule!]!
+  lookalikeSource: Audience
+  lookalikeExpansion: Float
+  retentionDays: Int
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""A rule defining audience membership criteria."""
+type AudienceRule {
+  ruleType: SegmentRule!
+  field: String!
+  operator: String!
+  value: String!
+}
+
+"""A tracking pixel placed on an advertiser's website."""
+type Pixel {
+  eid: ID!
+  name: String!
+  status: PixelStatus!
+  advertiser: Advertiser!
+  pixelCode: String!
+  domain: String
+  lastFiredAt: DateTime
+  pageViews: BigInt
+  uniqueVisitors: BigInt
+  createdAt: DateTime!
+}
+
+"""A conversion goal for measuring campaign performance."""
+type ConversionGoal {
+  eid: ID!
+  name: String!
+  eventType: ConversionEventType!
+  advertiser: Advertiser!
+  pixel: Pixel
+  value: Float
+  currency: String
+  attributionWindow: Int
+  conversions: BigInt
+  conversionValue: Float
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""Cross-channel attribution report."""
+type AttributionReport {
+  advertiser: Advertiser!
+  dateRange: DateRange!
+  model: AttributionModel!
+  totalConversions: BigInt!
+  totalRevenue: Float!
+  channelBreakdown: [ChannelAttribution!]!
+  campaignBreakdown: [CampaignAttribution!]!
+}
+
+"""Attribution data for a single channel."""
+type ChannelAttribution {
+  channel: ChannelType!
+  conversions: BigInt!
+  revenue: Float!
+  percentContribution: Float!
+  spend: Float!
+  roas: Float
+}
+
+"""Attribution data for a single campaign."""
+type CampaignAttribution {
+  campaign: Campaign!
+  conversions: BigInt!
+  revenue: Float!
+  spend: Float!
+  roas: Float
+  cpa: Float
+}
+
+"""Advertiser-level performance summary."""
+type AdvertiserReport {
+  advertiser: Advertiser!
+  dateRange: DateRange!
+  impressions: BigInt!
+  clicks: BigInt!
+  spend: Float!
+  conversions: BigInt!
+  revenue: Float!
+  roas: Float
+  ctr: Float
+  cpc: Float
+  cpa: Float
+  campaignBreakdown: [CampaignMetrics!]!
+}
+
+"""Performance metrics for a campaign."""
+type CampaignMetrics {
+  campaign: Campaign!
+  dateRange: DateRange
+  impressions: BigInt!
+  clicks: BigInt!
+  spend: Float!
+  conversions: BigInt!
+  revenue: Float!
+  roas: Float
+  ctr: Float
+  cpc: Float
+  cpa: Float
+  viewThroughConversions: BigInt
+  crossDeviceConversions: BigInt
+  byDate: [DailyMetrics!]
+}
+
+"""Performance metrics for an individual ad."""
+type AdMetrics {
+  ad: Ad!
+  dateRange: DateRange
+  impressions: BigInt!
+  clicks: BigInt!
+  spend: Float!
+  conversions: BigInt!
+  revenue: Float!
+  ctr: Float
+  cpc: Float
+  cpa: Float
+  frequencyCap: Float
+  viewability: Float
+}
+
+"""Daily metrics data point."""
+type DailyMetrics {
+  date: DateTime!
+  impressions: BigInt!
+  clicks: BigInt!
+  spend: Float!
+  conversions: BigInt!
+  revenue: Float!
+  ctr: Float
+  cpc: Float
+}
+
+"""A date range returned in reports."""
+type DateRange {
+  startDate: DateTime!
+  endDate: DateTime!
+}
+
+"""A product feed for dynamic creative."""
+type ProductFeed {
+  eid: ID!
+  name: String!
+  advertiser: Advertiser!
+  feedURL: URL!
+  lastFetchedAt: DateTime
+  productCount: Int
+  errorCount: Int
+  status: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""A retargeting segment based on pixel events."""
+type RetargetingSegment {
+  eid: ID!
+  name: String!
+  advertiser: Advertiser!
+  pixel: Pixel!
+  urlRules: [URLRule!]!
+  retentionDays: Int!
+  size: BigInt
+  audience: Audience
+  createdAt: DateTime!
+}
+
+"""A URL-matching rule for retargeting segments."""
+type URLRule {
+  pattern: String!
+  matchType: String!
+}
+
+"""Email campaign configuration."""
+type EmailCampaign {
+  eid: ID!
+  name: String!
+  status: CampaignStatus!
+  advertiser: Advertiser!
+  subject: String!
+  fromName: String!
+  fromEmail: String!
+  templateURL: URL
+  audienceSize: BigInt
+  sends: BigInt
+  opens: BigInt
+  clicks: BigInt
+  openRate: Float
+  clickRate: Float
+  unsubscribes: BigInt
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""An API access token for authentication."""
+type AccessToken {
+  token: String!
+  expiresAt: DateTime!
+  scopes: [String!]!
+}
+
+# ─────────────────────────────────────────────
+# Connection / Pagination Types
+# ─────────────────────────────────────────────
+
+type CampaignConnection {
+  edges: [CampaignEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type CampaignEdge {
+  node: Campaign!
+  cursor: String!
+}
+
+type AdConnection {
+  edges: [AdEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type AdEdge {
+  node: Ad!
+  cursor: String!
+}
+
+type AudienceConnection {
+  edges: [AudienceEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type AudienceEdge {
+  node: Audience!
+  cursor: String!
+}
+
+type CreativeConnection {
+  edges: [CreativeEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type CreativeEdge {
+  node: Creative!
+  cursor: String!
+}
+
+type AdvertiserConnection {
+  edges: [AdvertiserEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type AdvertiserEdge {
+  node: Advertiser!
+  cursor: String!
+}
+
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+}
+
+# ─────────────────────────────────────────────
+# Input Types
+# ─────────────────────────────────────────────
+
+"""Date range filter for report queries."""
+input DateRangeInput {
+  startDate: DateTime!
+  endDate: DateTime!
+}
+
+input BudgetInput {
+  amount: Float!
+  currency: String!
+  type: BudgetType!
+}
+
+input CreateCampaignInput {
+  name: String!
+  advertiserEid: ID!
+  type: CampaignType!
+  startDate: DateTime
+  endDate: DateTime
+  budget: BudgetInput!
+  biddingStrategy: BiddingStrategy!
+  targetCPA: Float
+  targetROAS: Float
+  channels: [ChannelType!]!
+  attributionModel: AttributionModel
+  audienceEids: [ID!]
+}
+
+input UpdateCampaignInput {
+  name: String
+  status: CampaignStatus
+  endDate: DateTime
+  budget: BudgetInput
+  biddingStrategy: BiddingStrategy
+  targetCPA: Float
+  targetROAS: Float
+  channels: [ChannelType!]
+  attributionModel: AttributionModel
+  audienceEids: [ID!]
+}
+
+input CreateAdInput {
+  name: String!
+  campaignEid: ID!
+  type: AdType!
+  format: AdFormat
+  creativeEid: ID!
+  audienceEid: ID
+  destinationURL: URL!
+}
+
+input UpdateAdInput {
+  name: String
+  status: AdStatus
+  destinationURL: URL
+  audienceEid: ID
+}
+
+input CreateCreativeInput {
+  name: String!
+  advertiserEid: ID!
+  type: CreativeType!
+  fileURL: URL
+  clickThroughURL: URL
+  altText: String
+  width: Int
+  height: Int
+}
+
+input UpdateCreativeInput {
+  name: String
+  clickThroughURL: URL
+  altText: String
+}
+
+input AudienceRuleInput {
+  ruleType: SegmentRule!
+  field: String!
+  operator: String!
+  value: String!
+}
+
+input CreateAudienceInput {
+  name: String!
+  advertiserEid: ID!
+  type: AudienceType!
+  rules: [AudienceRuleInput!]
+  lookalikeSourceEid: ID
+  lookalikeExpansion: Float
+  retentionDays: Int
+}
+
+input UpdateAudienceInput {
+  name: String
+  status: AudienceStatus
+  rules: [AudienceRuleInput!]
+  retentionDays: Int
+}
+
+input CreateConversionGoalInput {
+  name: String!
+  advertiserEid: ID!
+  eventType: ConversionEventType!
+  pixelEid: ID
+  value: Float
+  currency: String
+  attributionWindow: Int
+}
+
+input URLRuleInput {
+  pattern: String!
+  matchType: String!
+}
+
+input CreateRetargetingSegmentInput {
+  name: String!
+  advertiserEid: ID!
+  pixelEid: ID!
+  urlRules: [URLRuleInput!]!
+  retentionDays: Int!
+}
+
+input CampaignFilterInput {
+  status: CampaignStatus
+  type: CampaignType
+  channel: ChannelType
+  search: String
+}
+
+input AdFilterInput {
+  status: AdStatus
+  type: AdType
+  campaignEid: ID
+}
+
+input CreativeFilterInput {
+  type: CreativeType
+  status: AdStatus
+  search: String
+}
+
+# ─────────────────────────────────────────────
+# Query Root
+# ─────────────────────────────────────────────
+
+type Query {
+  """Fetch a single advertiser by EID."""
+  advertiser(eid: ID!): Advertiser
+
+  """List all advertisers accessible to the authenticated user."""
+  advertisers(first: Int, after: String): AdvertiserConnection!
+
+  """Fetch a single campaign by EID."""
+  campaign(eid: ID!): Campaign
+
+  """List campaigns for an advertiser with optional filters."""
+  campaigns(
+    advertiserEid: ID!
+    filter: CampaignFilterInput
+    first: Int
+    after: String
+  ): CampaignConnection!
+
+  """Fetch a single ad by EID."""
+  ad(eid: ID!): Ad
+
+  """List ads for an advertiser or campaign."""
+  ads(
+    advertiserEid: ID!
+    filter: AdFilterInput
+    first: Int
+    after: String
+  ): AdConnection!
+
+  """Fetch a single creative by EID."""
+  creative(eid: ID!): Creative
+
+  """List creatives for an advertiser."""
+  creatives(
+    advertiserEid: ID!
+    filter: CreativeFilterInput
+    first: Int
+    after: String
+  ): CreativeConnection!
+
+  """Fetch a single audience segment by EID."""
+  audience(eid: ID!): Audience
+
+  """List audience segments for an advertiser."""
+  audiences(
+    advertiserEid: ID!
+    first: Int
+    after: String
+    status: AudienceStatus
+  ): AudienceConnection!
+
+  """Fetch a tracking pixel by EID."""
+  pixel(eid: ID!): Pixel
+
+  """List pixels for an advertiser."""
+  pixels(advertiserEid: ID!): [Pixel!]!
+
+  """Fetch a conversion goal by EID."""
+  conversionGoal(eid: ID!): ConversionGoal
+
+  """List conversion goals for an advertiser."""
+  conversionGoals(advertiserEid: ID!): [ConversionGoal!]!
+
+  """Fetch campaign performance metrics."""
+  campaignMetrics(
+    campaignEid: ID!
+    dateRange: DateRangeInput!
+    interval: ReportInterval
+  ): CampaignMetrics
+
+  """Fetch ad performance metrics."""
+  adMetrics(
+    adEid: ID!
+    dateRange: DateRangeInput!
+  ): AdMetrics
+
+  """Fetch advertiser-level performance summary."""
+  advertiserReport(
+    advertiserEid: ID!
+    dateRange: DateRangeInput!
+  ): AdvertiserReport
+
+  """Fetch cross-channel attribution report."""
+  attributionReport(
+    advertiserEid: ID!
+    dateRange: DateRangeInput!
+    model: AttributionModel
+  ): AttributionReport
+
+  """Fetch a product feed by EID."""
+  productFeed(eid: ID!): ProductFeed
+
+  """List product feeds for an advertiser."""
+  productFeeds(advertiserEid: ID!): [ProductFeed!]!
+
+  """Fetch a retargeting segment by EID."""
+  retargetingSegment(eid: ID!): RetargetingSegment
+
+  """List retargeting segments for an advertiser."""
+  retargetingSegments(advertiserEid: ID!): [RetargetingSegment!]!
+
+  """Fetch an email campaign by EID."""
+  emailCampaign(eid: ID!): EmailCampaign
+
+  """List email campaigns for an advertiser."""
+  emailCampaigns(advertiserEid: ID!, status: CampaignStatus): [EmailCampaign!]!
+}
+
+# ─────────────────────────────────────────────
+# Mutation Root
+# ─────────────────────────────────────────────
+
+type Mutation {
+  """Create a new campaign."""
+  createCampaign(input: CreateCampaignInput!): Campaign!
+
+  """Update an existing campaign."""
+  updateCampaign(eid: ID!, input: UpdateCampaignInput!): Campaign!
+
+  """Pause a campaign."""
+  pauseCampaign(eid: ID!): Campaign!
+
+  """Resume a paused campaign."""
+  resumeCampaign(eid: ID!): Campaign!
+
+  """Archive a campaign."""
+  archiveCampaign(eid: ID!): Campaign!
+
+  """Create a new ad within a campaign."""
+  createAd(input: CreateAdInput!): Ad!
+
+  """Update an existing ad."""
+  updateAd(eid: ID!, input: UpdateAdInput!): Ad!
+
+  """Delete an ad."""
+  deleteAd(eid: ID!): Boolean!
+
+  """Create a new creative asset."""
+  createCreative(input: CreateCreativeInput!): Creative!
+
+  """Update an existing creative."""
+  updateCreative(eid: ID!, input: UpdateCreativeInput!): Creative!
+
+  """Delete a creative asset."""
+  deleteCreative(eid: ID!): Boolean!
+
+  """Create a new audience segment."""
+  createAudience(input: CreateAudienceInput!): Audience!
+
+  """Update an existing audience segment."""
+  updateAudience(eid: ID!, input: UpdateAudienceInput!): Audience!
+
+  """Delete an audience segment."""
+  deleteAudience(eid: ID!): Boolean!
+
+  """Create a conversion goal."""
+  createConversionGoal(input: CreateConversionGoalInput!): ConversionGoal!
+
+  """Update a conversion goal."""
+  updateConversionGoal(eid: ID!, name: String, value: Float): ConversionGoal!
+
+  """Delete a conversion goal."""
+  deleteConversionGoal(eid: ID!): Boolean!
+
+  """Create a retargeting segment."""
+  createRetargetingSegment(input: CreateRetargetingSegmentInput!): RetargetingSegment!
+
+  """Delete a retargeting segment."""
+  deleteRetargetingSegment(eid: ID!): Boolean!
+
+  """Attach an audience to a campaign."""
+  addAudienceToCampaign(campaignEid: ID!, audienceEid: ID!): Campaign!
+
+  """Remove an audience from a campaign."""
+  removeAudienceFromCampaign(campaignEid: ID!, audienceEid: ID!): Campaign!
+}
