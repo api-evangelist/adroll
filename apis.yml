@@ -45,6 +45,10 @@ apis:
   - url: graphql/adroll-graphql.md
     type: GraphQL
 common:
+- type: DomainSecurity
+  url: security/adroll-domain-security.yml
+- url: https://www.nextroll.com/blog
+  type: Blog
 - type: GitHubOrganization
   url: https://github.com/adroll
 - type: LinkedIn
