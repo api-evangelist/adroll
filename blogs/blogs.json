@@ -1,0 +1,14 @@
+{
+  "repo": "adroll",
+  "feeds": [
+    {
+      "source": "https://www.nextroll.com/blog",
+      "feed_url": "https://www.nextroll.com/processors/feed",
+      "title": "",
+      "saved": 0,
+      "method": "discovered"
+    }
+  ],
+  "fetched": "2026-07-11T11:50:51Z",
+  "post_count": 10
+}
