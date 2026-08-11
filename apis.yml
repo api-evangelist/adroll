@@ -33,9 +33,10 @@ specificationVersion: '0.19'
 apis:
 - aid: adroll:nextroll-api
   name: NextRoll API for AdRoll
-  description: REST API for managing AdRoll advertisers, campaigns, ads, audience
-    segments, and reporting on the NextRoll platform. Supports OAuth 2.0 flows and
-    Personal Access Tokens with the client API key sent as a query parameter.
+  description: >-
+    REST API for managing AdRoll advertisers, campaigns, ads, audience segments, and reporting on the
+    NextRoll platform. Supports OAuth 2.0 flows and Personal Access Tokens with the client API key sent
+    as a query parameter.
   humanURL: https://apidocs.nextroll.com/index.html
   baseURL: https://services.adroll.com/api/v1
   tags:
@@ -55,6 +56,662 @@ apis:
     url: https://apidocs.nextroll.com/guides/index.html
   - url: graphql/adroll-graphql.md
     type: GraphQL
+- aid: adroll:adroll-accept-a-share-invitation-api
+  name: AdRoll Accept a share invitation API
+  description: >-
+    The Accept a share invitation API from AdRoll — 1 operation(s) for accept a share invitation.
+  humanURL: https://apidocs.nextroll.com/index.html
+  baseURL: https://services.adroll.com/api/v1
+  tags:
+  - Accept a share invitation
+  properties:
+  - type: OpenAPI
+    url: openapi/adroll-accept-a-share-invitation-api-openapi.yml
+- aid: adroll:adroll-ad-api
+  name: AdRoll Ad API
+  description: The Ad API from AdRoll — 3 operation(s) for ad.
+  humanURL: https://apidocs.nextroll.com/index.html
+  baseURL: https://services.adroll.com/api/v1
+  tags:
+  - Ad
+  properties:
+  - type: OpenAPI
+    url: openapi/adroll-ad-api-openapi.yml
+- aid: adroll:adroll-add-adgroups-to-your-campaign-api
+  name: AdRoll Add AdGroups to your campaign API
+  description: >-
+    The Add AdGroups to your campaign API from AdRoll — 1 operation(s) for add adgroups to your campaign.
+  humanURL: https://apidocs.nextroll.com/index.html
+  baseURL: https://services.adroll.com/api/v1
+  tags:
+  - Add AdGroups to your campaign
+  properties:
+  - type: OpenAPI
+    url: openapi/adroll-add-adgroups-to-your-campaign-api-openapi.yml
+- aid: adroll:adroll-add-an-audience-to-your-adgroups-optional-api
+  name: AdRoll Add an audience to your AdGroups Optional API
+  description: >-
+    The Add an audience to your AdGroups Optional API from AdRoll — 1 operation(s) for add an audience
+    to your adgroups optional.
+  humanURL: https://apidocs.nextroll.com/index.html
+  baseURL: https://services.adroll.com/api/v1
+  tags:
+  - Add an audience to your AdGroups Optional
+  properties:
+  - type: OpenAPI
+    url: openapi/adroll-add-an-audience-to-your-adgroups-optional-api-openapi.yml
+- aid: adroll:adroll-add-parser-configurations-api
+  name: AdRoll Add Parser Configurations API
+  description: >-
+    The Add Parser Configurations API from AdRoll — 1 operation(s) for add parser configurations.
+  humanURL: https://apidocs.nextroll.com/index.html
+  baseURL: https://services.adroll.com/api/v1
+  tags:
+  - Add Parser Configurations
+  properties:
+  - type: OpenAPI
+    url: openapi/adroll-add-parser-configurations-api-openapi.yml
+- aid: adroll:adroll-add-your-first-feed-configuration-api
+  name: AdRoll Add your first feed configuration API
+  description: >-
+    The Add your first feed configuration API from AdRoll — 1 operation(s) for add your first feed configuration.
+  humanURL: https://apidocs.nextroll.com/index.html
+  baseURL: https://services.adroll.com/api/v1
+  tags:
+  - Add your first feed configuration
+  properties:
+  - type: OpenAPI
+    url: openapi/adroll-add-your-first-feed-configuration-api-openapi.yml
+- aid: adroll:adroll-adding-a-product-feed-api
+  name: AdRoll Adding a Product Feed API
+  description: The Adding a Product Feed API from AdRoll — 1 operation(s) for adding a product feed.
+  humanURL: https://apidocs.nextroll.com/index.html
+  baseURL: https://services.adroll.com/api/v1
+  tags:
+  - Adding a Product Feed
+  properties:
+  - type: OpenAPI
+    url: openapi/adroll-adding-a-product-feed-api-openapi.yml
+- aid: adroll:adroll-adgroup-api
+  name: AdRoll Adgroup API
+  description: The Adgroup API from AdRoll — 13 operation(s) for adgroup.
+  humanURL: https://apidocs.nextroll.com/index.html
+  baseURL: https://services.adroll.com/api/v1
+  tags:
+  - Adgroup
+  properties:
+  - type: OpenAPI
+    url: openapi/adroll-adgroup-api-openapi.yml
+- aid: adroll:adroll-adgroups-api
+  name: AdRoll Adgroups API
+  description: The Adgroups API from AdRoll — 1 operation(s) for adgroups.
+  humanURL: https://apidocs.nextroll.com/index.html
+  baseURL: https://services.adroll.com/api/v1
+  tags:
+  - Adgroups
+  properties:
+  - type: OpenAPI
+    url: openapi/adroll-adgroups-api-openapi.yml
+- aid: adroll:adroll-advertisable-api
+  name: AdRoll Advertisable API
+  description: The Advertisable API from AdRoll — 11 operation(s) for advertisable.
+  humanURL: https://apidocs.nextroll.com/index.html
+  baseURL: https://services.adroll.com/api/v1
+  tags:
+  - Advertisable
+  properties:
+  - type: OpenAPI
+    url: openapi/adroll-advertisable-api-openapi.yml
+- aid: adroll:adroll-advertisable-logo-api
+  name: AdRoll Advertisable Logo API
+  description: The Advertisable Logo API from AdRoll — 1 operation(s) for advertisable logo.
+  humanURL: https://apidocs.nextroll.com/index.html
+  baseURL: https://services.adroll.com/api/v1
+  tags:
+  - Advertisable Logo
+  properties:
+  - type: OpenAPI
+    url: openapi/adroll-advertisable-logo-api-openapi.yml
+- aid: adroll:adroll-advertisables-api
+  name: AdRoll Advertisables API
+  description: The Advertisables API from AdRoll — 2 operation(s) for advertisables.
+  humanURL: https://apidocs.nextroll.com/index.html
+  baseURL: https://services.adroll.com/api/v1
+  tags:
+  - Advertisables
+  properties:
+  - type: OpenAPI
+    url: openapi/adroll-advertisables-api-openapi.yml
+- aid: adroll:adroll-attach-product-sets-to-an-adgroup-api
+  name: AdRoll Attach Product Sets to an AdGroup API
+  description: >-
+    The Attach Product Sets to an AdGroup API from AdRoll — 1 operation(s) for attach product sets to
+    an adgroup.
+  humanURL: https://apidocs.nextroll.com/index.html
+  baseURL: https://services.adroll.com/api/v1
+  tags:
+  - Attach Product Sets to an AdGroup
+  properties:
+  - type: OpenAPI
+    url: openapi/adroll-attach-product-sets-to-an-adgroup-api-openapi.yml
+- aid: adroll:adroll-audiences-api
+  name: AdRoll Audiences API
+  description: The Audiences API from AdRoll — 1 operation(s) for audiences.
+  humanURL: https://apidocs.nextroll.com/index.html
+  baseURL: https://services.adroll.com/api/v1
+  tags:
+  - Audiences
+  properties:
+  - type: OpenAPI
+    url: openapi/adroll-audiences-api-openapi.yml
+- aid: adroll:adroll-automatic-setup-api
+  name: AdRoll Automatic Setup API
+  description: The Automatic Setup API from AdRoll — 1 operation(s) for automatic setup.
+  humanURL: https://apidocs.nextroll.com/index.html
+  baseURL: https://services.adroll.com/api/v1
+  tags:
+  - Automatic Setup
+  properties:
+  - type: OpenAPI
+    url: openapi/adroll-automatic-setup-api-openapi.yml
+- aid: adroll:adroll-campaign-api
+  name: AdRoll Campaign API
+  description: The Campaign API from AdRoll — 8 operation(s) for campaign.
+  humanURL: https://apidocs.nextroll.com/index.html
+  baseURL: https://services.adroll.com/api/v1
+  tags:
+  - Campaign
+  properties:
+  - type: OpenAPI
+    url: openapi/adroll-campaign-api-openapi.yml
+- aid: adroll:adroll-campaigns-api
+  name: AdRoll Campaigns API
+  description: The Campaigns API from AdRoll — 1 operation(s) for campaigns.
+  humanURL: https://apidocs.nextroll.com/index.html
+  baseURL: https://services.adroll.com/api/v1
+  tags:
+  - Campaigns
+  properties:
+  - type: OpenAPI
+    url: openapi/adroll-campaigns-api-openapi.yml
+- aid: adroll:adroll-configure-marketplace-mapping-api
+  name: AdRoll Configure Marketplace Mapping API
+  description: >-
+    The Configure Marketplace Mapping API from AdRoll — 1 operation(s) for configure marketplace mapping.
+  humanURL: https://apidocs.nextroll.com/index.html
+  baseURL: https://services.adroll.com/api/v1
+  tags:
+  - Configure Marketplace Mapping
+  properties:
+  - type: OpenAPI
+    url: openapi/adroll-configure-marketplace-mapping-api-openapi.yml
+- aid: adroll:adroll-consent-banner-api
+  name: AdRoll Consent Banner API
+  description: The Consent Banner API from AdRoll — 2 operation(s) for consent banner.
+  humanURL: https://apidocs.nextroll.com/index.html
+  baseURL: https://services.adroll.com/api/v1
+  tags:
+  - Consent Banner
+  properties:
+  - type: OpenAPI
+    url: openapi/adroll-consent-banner-api-openapi.yml
+- aid: adroll:adroll-contextual-categories-api
+  name: AdRoll Contextual Categories API
+  description: The Contextual Categories API from AdRoll — 1 operation(s) for contextual categories.
+  humanURL: https://apidocs.nextroll.com/index.html
+  baseURL: https://services.adroll.com/api/v1
+  tags:
+  - Contextual Categories
+  properties:
+  - type: OpenAPI
+    url: openapi/adroll-contextual-categories-api-openapi.yml
+- aid: adroll:adroll-create-a-campaign-api
+  name: AdRoll Create a campaign API
+  description: The Create a campaign API from AdRoll — 1 operation(s) for create a campaign.
+  humanURL: https://apidocs.nextroll.com/index.html
+  baseURL: https://services.adroll.com/api/v1
+  tags:
+  - Create a campaign
+  properties:
+  - type: OpenAPI
+    url: openapi/adroll-create-a-campaign-api-openapi.yml
+- aid: adroll:adroll-create-a-product-set-api
+  name: AdRoll Create a Product Set API
+  description: The Create a Product Set API from AdRoll — 1 operation(s) for create a product set.
+  humanURL: https://apidocs.nextroll.com/index.html
+  baseURL: https://services.adroll.com/api/v1
+  tags:
+  - Create a Product Set
+  properties:
+  - type: OpenAPI
+    url: openapi/adroll-create-a-product-set-api-openapi.yml
+- aid: adroll:adroll-create-a-share-invitation-api
+  name: AdRoll Create a share invitation API
+  description: >-
+    The Create a share invitation API from AdRoll — 1 operation(s) for create a share invitation.
+  humanURL: https://apidocs.nextroll.com/index.html
+  baseURL: https://services.adroll.com/api/v1
+  tags:
+  - Create a share invitation
+  properties:
+  - type: OpenAPI
+    url: openapi/adroll-create-a-share-invitation-api-openapi.yml
+- aid: adroll:adroll-creating-an-advertisable-api
+  name: AdRoll Creating an Advertisable API
+  description: >-
+    The Creating an Advertisable API from AdRoll — 1 operation(s) for creating an advertisable.
+  humanURL: https://apidocs.nextroll.com/index.html
+  baseURL: https://services.adroll.com/api/v1
+  tags:
+  - Creating an Advertisable
+  properties:
+  - type: OpenAPI
+    url: openapi/adroll-creating-an-advertisable-api-openapi.yml
+- aid: adroll:adroll-crm-api
+  name: AdRoll CRM API
+  description: The CRM API from AdRoll — 1 operation(s) for crm.
+  humanURL: https://apidocs.nextroll.com/index.html
+  baseURL: https://services.adroll.com/api/v1
+  tags:
+  - CRM
+  properties:
+  - type: OpenAPI
+    url: openapi/adroll-crm-api-openapi.yml
+- aid: adroll:adroll-delete-a-product-set-api
+  name: AdRoll Delete a Product Set API
+  description: The Delete a Product Set API from AdRoll — 1 operation(s) for delete a product set.
+  humanURL: https://apidocs.nextroll.com/index.html
+  baseURL: https://services.adroll.com/api/v1
+  tags:
+  - Delete a Product Set
+  properties:
+  - type: OpenAPI
+    url: openapi/adroll-delete-a-product-set-api-openapi.yml
+- aid: adroll:adroll-dynamic-configuration-api
+  name: AdRoll Dynamic Configuration API
+  description: The Dynamic Configuration API from AdRoll — 2 operation(s) for dynamic configuration.
+  humanURL: https://apidocs.nextroll.com/index.html
+  baseURL: https://services.adroll.com/api/v1
+  tags:
+  - Dynamic Configuration
+  properties:
+  - type: OpenAPI
+    url: openapi/adroll-dynamic-configuration-api-openapi.yml
+- aid: adroll:adroll-edit-a-product-set-api
+  name: AdRoll Edit a Product Set API
+  description: The Edit a Product Set API from AdRoll — 1 operation(s) for edit a product set.
+  humanURL: https://apidocs.nextroll.com/index.html
+  baseURL: https://services.adroll.com/api/v1
+  tags:
+  - Edit a Product Set
+  properties:
+  - type: OpenAPI
+    url: openapi/adroll-edit-a-product-set-api-openapi.yml
+- aid: adroll:adroll-edit-an-adgroup-with-a-product-set-attached-api
+  name: AdRoll Edit an AdGroup with a Product Set attached API
+  description: >-
+    The Edit an AdGroup with a Product Set attached API from AdRoll — 1 operation(s) for edit an adgroup
+    with a product set attached.
+  humanURL: https://apidocs.nextroll.com/index.html
+  baseURL: https://services.adroll.com/api/v1
+  tags:
+  - Edit an AdGroup with a Product Set attached
+  properties:
+  - type: OpenAPI
+    url: openapi/adroll-edit-an-adgroup-with-a-product-set-attached-api-openapi.yml
+- aid: adroll:adroll-edit-your-feed-configuration-api
+  name: AdRoll Edit your feed configuration API
+  description: >-
+    The Edit your feed configuration API from AdRoll — 2 operation(s) for edit your feed configuration.
+  humanURL: https://apidocs.nextroll.com/index.html
+  baseURL: https://services.adroll.com/api/v1
+  tags:
+  - Edit your feed configuration
+  properties:
+  - type: OpenAPI
+    url: openapi/adroll-edit-your-feed-configuration-api-openapi.yml
+- aid: adroll:adroll-fetch-share-invitations-api
+  name: AdRoll Fetch share invitations API
+  description: >-
+    The Fetch share invitations API from AdRoll — 1 operation(s) for fetch share invitations.
+  humanURL: https://apidocs.nextroll.com/index.html
+  baseURL: https://services.adroll.com/api/v1
+  tags:
+  - Fetch share invitations
+  properties:
+  - type: OpenAPI
+    url: openapi/adroll-fetch-share-invitations-api-openapi.yml
+- aid: adroll:adroll-flights-api
+  name: AdRoll Flights API
+  description: The Flights API from AdRoll — 1 operation(s) for flights.
+  humanURL: https://apidocs.nextroll.com/index.html
+  baseURL: https://services.adroll.com/api/v1
+  tags:
+  - Flights
+  properties:
+  - type: OpenAPI
+    url: openapi/adroll-flights-api-openapi.yml
+- aid: adroll:adroll-get-a-product-set-api
+  name: AdRoll Get a Product Set API
+  description: The Get a Product Set API from AdRoll — 1 operation(s) for get a product set.
+  humanURL: https://apidocs.nextroll.com/index.html
+  baseURL: https://services.adroll.com/api/v1
+  tags:
+  - Get a Product Set
+  properties:
+  - type: OpenAPI
+    url: openapi/adroll-get-a-product-set-api-openapi.yml
+- aid: adroll:adroll-getting-started-api
+  name: AdRoll Getting Started API
+  description: The Getting Started API from AdRoll — 1 operation(s) for getting started.
+  humanURL: https://apidocs.nextroll.com/index.html
+  baseURL: https://services.adroll.com/api/v1
+  tags:
+  - Getting Started
+  properties:
+  - type: OpenAPI
+    url: openapi/adroll-getting-started-api-openapi.yml
+- aid: adroll:adroll-invoice-api
+  name: AdRoll Invoice API
+  description: The Invoice API from AdRoll — 1 operation(s) for invoice.
+  humanURL: https://apidocs.nextroll.com/index.html
+  baseURL: https://services.adroll.com/api/v1
+  tags:
+  - Invoice
+  properties:
+  - type: OpenAPI
+    url: openapi/adroll-invoice-api-openapi.yml
+- aid: adroll:adroll-launching-a-campaign-api
+  name: AdRoll Launching a Campaign API
+  description: The Launching a Campaign API from AdRoll — 1 operation(s) for launching a campaign.
+  humanURL: https://apidocs.nextroll.com/index.html
+  baseURL: https://services.adroll.com/api/v1
+  tags:
+  - Launching a Campaign
+  properties:
+  - type: OpenAPI
+    url: openapi/adroll-launching-a-campaign-api-openapi.yml
+- aid: adroll:adroll-list-of-operations-api
+  name: AdRoll List of Operations API
+  description: The List of Operations API from AdRoll — 14 operation(s) for list of operations.
+  humanURL: https://apidocs.nextroll.com/index.html
+  baseURL: https://services.adroll.com/api/v1
+  tags:
+  - List of Operations
+  properties:
+  - type: OpenAPI
+    url: openapi/adroll-list-of-operations-api-openapi.yml
+- aid: adroll:adroll-list-product-sets-for-an-advertisable-api
+  name: AdRoll List Product Sets for an Advertisable API
+  description: >-
+    The List Product Sets for an Advertisable API from AdRoll — 1 operation(s) for list product sets for
+    an advertisable.
+  humanURL: https://apidocs.nextroll.com/index.html
+  baseURL: https://services.adroll.com/api/v1
+  tags:
+  - List Product Sets for an Advertisable
+  properties:
+  - type: OpenAPI
+    url: openapi/adroll-list-product-sets-for-an-advertisable-api-openapi.yml
+- aid: adroll:adroll-marketplace-api
+  name: AdRoll Marketplace API
+  description: The Marketplace API from AdRoll — 1 operation(s) for marketplace.
+  humanURL: https://apidocs.nextroll.com/index.html
+  baseURL: https://services.adroll.com/api/v1
+  tags:
+  - Marketplace
+  properties:
+  - type: OpenAPI
+    url: openapi/adroll-marketplace-api-openapi.yml
+- aid: adroll:adroll-marketplace-deals-api
+  name: AdRoll Marketplace Deals API
+  description: The Marketplace Deals API from AdRoll — 2 operation(s) for marketplace deals.
+  humanURL: https://apidocs.nextroll.com/index.html
+  baseURL: https://services.adroll.com/api/v1
+  tags:
+  - Marketplace Deals
+  properties:
+  - type: OpenAPI
+    url: openapi/adroll-marketplace-deals-api-openapi.yml
+- aid: adroll:adroll-native-ads-api
+  name: AdRoll Native Ads API
+  description: The Native Ads API from AdRoll — 1 operation(s) for native ads.
+  humanURL: https://apidocs.nextroll.com/index.html
+  baseURL: https://services.adroll.com/api/v1
+  tags:
+  - Native Ads
+  properties:
+  - type: OpenAPI
+    url: openapi/adroll-native-ads-api-openapi.yml
+- aid: adroll:adroll-note-api
+  name: AdRoll NOTE API
+  description: The NOTE API from AdRoll — 1 operation(s) for note.
+  humanURL: https://apidocs.nextroll.com/index.html
+  baseURL: https://services.adroll.com/api/v1
+  tags:
+  - NOTE
+  properties:
+  - type: OpenAPI
+    url: openapi/adroll-note-api-openapi.yml
+- aid: adroll:adroll-organization-api
+  name: AdRoll Organization API
+  description: The Organization API from AdRoll — 4 operation(s) for organization.
+  humanURL: https://apidocs.nextroll.com/index.html
+  baseURL: https://services.adroll.com/api/v1
+  tags:
+  - Organization
+  properties:
+  - type: OpenAPI
+    url: openapi/adroll-organization-api-openapi.yml
+- aid: adroll:adroll-organization-setup-api
+  name: AdRoll Organization Setup API
+  description: The Organization Setup API from AdRoll — 1 operation(s) for organization setup.
+  humanURL: https://apidocs.nextroll.com/index.html
+  baseURL: https://services.adroll.com/api/v1
+  tags:
+  - Organization Setup
+  properties:
+  - type: OpenAPI
+    url: openapi/adroll-organization-setup-api-openapi.yml
+- aid: adroll:adroll-outline-for-a-server-to-server-integration-api
+  name: AdRoll Outline for a server to server integration API
+  description: >-
+    The Outline for a server to server integration API from AdRoll — 1 operation(s) for outline for a
+    server to server integration.
+  humanURL: https://apidocs.nextroll.com/index.html
+  baseURL: https://services.adroll.com/api/v1
+  tags:
+  - Outline for a server to server integration
+  properties:
+  - type: OpenAPI
+    url: openapi/adroll-outline-for-a-server-to-server-integration-api-openapi.yml
+- aid: adroll:adroll-partner-api
+  name: AdRoll Partner API
+  description: The Partner API from AdRoll — 1 operation(s) for partner.
+  humanURL: https://apidocs.nextroll.com/index.html
+  baseURL: https://services.adroll.com/api/v1
+  tags:
+  - Partner
+  properties:
+  - type: OpenAPI
+    url: openapi/adroll-partner-api-openapi.yml
+- aid: adroll:adroll-pausing-the-campaign-api
+  name: AdRoll Pausing the Campaign API
+  description: The Pausing the Campaign API from AdRoll — 1 operation(s) for pausing the campaign.
+  humanURL: https://apidocs.nextroll.com/index.html
+  baseURL: https://services.adroll.com/api/v1
+  tags:
+  - Pausing the Campaign
+  properties:
+  - type: OpenAPI
+    url: openapi/adroll-pausing-the-campaign-api-openapi.yml
+- aid: adroll:adroll-pixel-api
+  name: AdRoll Pixel API
+  description: The Pixel API from AdRoll — 3 operation(s) for pixel.
+  humanURL: https://apidocs.nextroll.com/index.html
+  baseURL: https://services.adroll.com/api/v1
+  tags:
+  - Pixel
+  properties:
+  - type: OpenAPI
+    url: openapi/adroll-pixel-api-openapi.yml
+- aid: adroll:adroll-policy-api
+  name: AdRoll Policy API
+  description: The Policy API from AdRoll — 1 operation(s) for policy.
+  humanURL: https://apidocs.nextroll.com/index.html
+  baseURL: https://services.adroll.com/api/v1
+  tags:
+  - Policy
+  properties:
+  - type: OpenAPI
+    url: openapi/adroll-policy-api-openapi.yml
+- aid: adroll:adroll-product-feeds-api
+  name: AdRoll Product Feeds API
+  description: The Product Feeds API from AdRoll — 7 operation(s) for product feeds.
+  humanURL: https://apidocs.nextroll.com/index.html
+  baseURL: https://services.adroll.com/api/v1
+  tags:
+  - Product Feeds
+  properties:
+  - type: OpenAPI
+    url: openapi/adroll-product-feeds-api-openapi.yml
+- aid: adroll:adroll-report-api
+  name: AdRoll Report API
+  description: The Report API from AdRoll — 3 operation(s) for report.
+  humanURL: https://apidocs.nextroll.com/index.html
+  baseURL: https://services.adroll.com/api/v1
+  tags:
+  - Report
+  properties:
+  - type: OpenAPI
+    url: openapi/adroll-report-api-openapi.yml
+- aid: adroll:adroll-retrieve-list-of-dynamic-web-templates-api
+  name: AdRoll Retrieve List of Dynamic Web Templates API
+  description: >-
+    The Retrieve List of Dynamic Web Templates API from AdRoll — 2 operation(s) for retrieve list of dynamic
+    web templates.
+  humanURL: https://apidocs.nextroll.com/index.html
+  baseURL: https://services.adroll.com/api/v1
+  tags:
+  - Retrieve List of Dynamic Web Templates
+  properties:
+  - type: OpenAPI
+    url: openapi/adroll-retrieve-list-of-dynamic-web-templates-api-openapi.yml
+- aid: adroll:adroll-retrieve-list-of-dynamic-web-templates-capabilit-api
+  name: AdRoll Retrieve List of Dynamic Web Templates Capabilit API
+  description: >-
+    The Retrieve List of Dynamic Web Templates Capabilit API from AdRoll — 1 operation(s) for retrieve
+    list of dynamic web templates capabilit.
+  humanURL: https://apidocs.nextroll.com/index.html
+  baseURL: https://services.adroll.com/api/v1
+  tags:
+  - Retrieve List of Dynamic Web Templates Capabilit
+  properties:
+  - type: OpenAPI
+    url: openapi/adroll-retrieve-list-of-dynamic-web-templates-capabilit-api-openapi.yml
+- aid: adroll:adroll-retrieve-the-pixel-api
+  name: AdRoll Retrieve the Pixel API
+  description: The Retrieve the Pixel API from AdRoll — 1 operation(s) for retrieve the pixel.
+  humanURL: https://apidocs.nextroll.com/index.html
+  baseURL: https://services.adroll.com/api/v1
+  tags:
+  - Retrieve the Pixel
+  properties:
+  - type: OpenAPI
+    url: openapi/adroll-retrieve-the-pixel-api-openapi.yml
+- aid: adroll:adroll-retrieve-the-size-of-a-segment-api
+  name: AdRoll Retrieve the size of a segment API
+  description: >-
+    The Retrieve the size of a segment API from AdRoll — 1 operation(s) for retrieve the size of a segment.
+  humanURL: https://apidocs.nextroll.com/index.html
+  baseURL: https://services.adroll.com/api/v1
+  tags:
+  - Retrieve the size of a segment
+  properties:
+  - type: OpenAPI
+    url: openapi/adroll-retrieve-the-size-of-a-segment-api-openapi.yml
+- aid: adroll:adroll-revoke-a-shared-audience-api
+  name: AdRoll Revoke a shared audience API
+  description: >-
+    The Revoke a shared audience API from AdRoll — 1 operation(s) for revoke a shared audience.
+  humanURL: https://apidocs.nextroll.com/index.html
+  baseURL: https://services.adroll.com/api/v1
+  tags:
+  - Revoke a shared audience
+  properties:
+  - type: OpenAPI
+    url: openapi/adroll-revoke-a-shared-audience-api-openapi.yml
+- aid: adroll:adroll-rule-api
+  name: AdRoll Rule API
+  description: The Rule API from AdRoll — 2 operation(s) for rule.
+  humanURL: https://apidocs.nextroll.com/index.html
+  baseURL: https://services.adroll.com/api/v1
+  tags:
+  - Rule
+  properties:
+  - type: OpenAPI
+    url: openapi/adroll-rule-api-openapi.yml
+- aid: adroll:adroll-search-for-a-geotarget-api
+  name: AdRoll Search for a geotarget API
+  description: The Search for a geotarget API from AdRoll — 1 operation(s) for search for a geotarget.
+  humanURL: https://apidocs.nextroll.com/index.html
+  baseURL: https://services.adroll.com/api/v1
+  tags:
+  - Search for a geotarget
+  properties:
+  - type: OpenAPI
+    url: openapi/adroll-search-for-a-geotarget-api-openapi.yml
+- aid: adroll:adroll-segment-api
+  name: AdRoll Segment API
+  description: The Segment API from AdRoll — 2 operation(s) for segment.
+  humanURL: https://apidocs.nextroll.com/index.html
+  baseURL: https://services.adroll.com/api/v1
+  tags:
+  - Segment
+  properties:
+  - type: OpenAPI
+    url: openapi/adroll-segment-api-openapi.yml
+- aid: adroll:adroll-target-account-lists-api
+  name: AdRoll Target Account Lists API
+  description: The Target Account Lists API from AdRoll — 3 operation(s) for target account lists.
+  humanURL: https://apidocs.nextroll.com/index.html
+  baseURL: https://services.adroll.com/api/v1
+  tags:
+  - Target Account Lists
+  properties:
+  - type: OpenAPI
+    url: openapi/adroll-target-account-lists-api-openapi.yml
+- aid: adroll:adroll-untagged-api
+  name: AdRoll Untagged API
+  description: The Untagged API from AdRoll — 23 operation(s) for untagged.
+  humanURL: https://apidocs.nextroll.com/index.html
+  baseURL: https://services.adroll.com/api/v1
+  tags:
+  - Untagged
+  properties:
+  - type: OpenAPI
+    url: openapi/adroll-untagged-api-openapi.yml
+- aid: adroll:adroll-url-api
+  name: AdRoll URL API
+  description: The URL API from AdRoll — 2 operation(s) for url.
+  humanURL: https://apidocs.nextroll.com/index.html
+  baseURL: https://services.adroll.com/api/v1
+  tags:
+  - URL
+  properties:
+  - type: OpenAPI
+    url: openapi/adroll-url-api-openapi.yml
+- aid: adroll:adroll-verify-product-feed-set-up-api
+  name: AdRoll Verify product feed set up API
+  description: >-
+    The Verify product feed set up API from AdRoll — 4 operation(s) for verify product feed set up.
+  humanURL: https://apidocs.nextroll.com/index.html
+  baseURL: https://services.adroll.com/api/v1
+  tags:
+  - Verify product feed set up
+  properties:
+  - type: OpenAPI
+    url: openapi/adroll-verify-product-feed-set-up-api-openapi.yml
 common:
 - type: DomainSecurity
   url: security/adroll-domain-security.yml

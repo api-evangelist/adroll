@@ -1,0 +1,38 @@
+openapi: 3.2.0
+info:
+  title: AdRoll Consent Banner API
+  version: derived-2026-08-10
+  description: Derived from AdRoll's published documentation. Every operation in this document corresponds to a literal HTTP method and path found in that documentation; nothing is inferred. Request and response schemas are NOT described -- only the operations that are demonstrably documented.
+  x-provenance: derived-from-documentation
+  x-source-documentation: https://apidocs.nextroll.com/llms-full.txt
+  x-documentation-url: https://apidocs.nextroll.com
+  x-derived: '2026-08-10'
+  x-derivation-method: literal METHOD+path extraction from provider documentation; no pattern completion, no inferred operations
+  x-not-a-provider-contract: This is API Evangelist's reading of the documentation, not a contract published or endorsed by the provider.
+servers:
+- url: https://services.adroll.com/api/v1
+tags:
+- name: Consent Banner
+paths:
+  /api/v1/consent_banner/retrieve:
+    get:
+      summary: Retrieve retrieve
+      tags:
+      - Consent Banner
+      operationId: get_api_v1_consent_banner_retrieve
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11866
+      x-source-context: '- [`GET /api/v1/consent_banner/retrieve`](#get--api-v1-consent_banner-retrieve)'
+  /api/v1/consent_banner/update:
+    post:
+      summary: Create update
+      tags:
+      - Consent Banner
+      operationId: post_api_v1_consent_banner_update
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11867
+      x-source-context: '- [`POST /api/v1/consent_banner/update`](#post--api-v1-consent_banner-update)'

@@ -1,0 +1,27 @@
+openapi: 3.2.0
+info:
+  title: AdRoll Invoice API
+  version: derived-2026-08-10
+  description: Derived from AdRoll's published documentation. Every operation in this document corresponds to a literal HTTP method and path found in that documentation; nothing is inferred. Request and response schemas are NOT described -- only the operations that are demonstrably documented.
+  x-provenance: derived-from-documentation
+  x-source-documentation: https://apidocs.nextroll.com/llms-full.txt
+  x-documentation-url: https://apidocs.nextroll.com
+  x-derived: '2026-08-10'
+  x-derivation-method: literal METHOD+path extraction from provider documentation; no pattern completion, no inferred operations
+  x-not-a-provider-contract: This is API Evangelist's reading of the documentation, not a contract published or endorsed by the provider.
+servers:
+- url: https://services.adroll.com/api/v1
+tags:
+- name: Invoice
+paths:
+  /api/v1/invoice/get:
+    get:
+      summary: Retrieve get
+      tags:
+      - Invoice
+      operationId: get_api_v1_invoice_get
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11893
+      x-source-context: '- [`GET /api/v1/invoice/get`](#get--api-v1-invoice-get)'

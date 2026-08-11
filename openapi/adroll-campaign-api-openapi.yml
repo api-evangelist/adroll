@@ -1,0 +1,104 @@
+openapi: 3.2.0
+info:
+  title: AdRoll Campaign API
+  version: derived-2026-08-10
+  description: Derived from AdRoll's published documentation. Every operation in this document corresponds to a literal HTTP method and path found in that documentation; nothing is inferred. Request and response schemas are NOT described -- only the operations that are demonstrably documented.
+  x-provenance: derived-from-documentation
+  x-source-documentation: https://apidocs.nextroll.com/llms-full.txt
+  x-documentation-url: https://apidocs.nextroll.com
+  x-derived: '2026-08-10'
+  x-derivation-method: literal METHOD+path extraction from provider documentation; no pattern completion, no inferred operations
+  x-not-a-provider-contract: This is API Evangelist's reading of the documentation, not a contract published or endorsed by the provider.
+servers:
+- url: https://services.adroll.com/api/v1
+tags:
+- name: Campaign
+paths:
+  /api/v1/campaign/create:
+    post:
+      summary: Create create
+      tags:
+      - Campaign
+      operationId: post_api_v1_campaign_create
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11855
+      x-source-context: '- [`POST /api/v1/campaign/create`](#post--api-v1-campaign-create)'
+  /api/v1/campaign/edit:
+    post:
+      summary: Create edit
+      tags:
+      - Campaign
+      operationId: post_api_v1_campaign_edit
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11856
+      x-source-context: '- [`POST /api/v1/campaign/edit`](#post--api-v1-campaign-edit)'
+  /api/v1/campaign/get:
+    get:
+      summary: Retrieve get
+      tags:
+      - Campaign
+      operationId: get_api_v1_campaign_get
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11857
+      x-source-context: '- [`GET /api/v1/campaign/get`](#get--api-v1-campaign-get)'
+  /api/v1/campaign/get_adgroups:
+    get:
+      summary: Retrieve get adgroups
+      tags:
+      - Campaign
+      operationId: get_api_v1_campaign_get_adgroups
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11858
+      x-source-context: '- [`GET /api/v1/campaign/get_adgroups`](#get--api-v1-campaign-get_adgroups)'
+  /api/v1/campaign/pause:
+    put:
+      summary: Update pause
+      tags:
+      - Campaign
+      operationId: put_api_v1_campaign_pause
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11859
+      x-source-context: '- [`PUT /api/v1/campaign/pause`](#put--api-v1-campaign-pause)'
+  /api/v1/campaign/pause_ads:
+    put:
+      summary: Update pause ads
+      tags:
+      - Campaign
+      operationId: put_api_v1_campaign_pause_ads
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11860
+      x-source-context: '- [`PUT /api/v1/campaign/pause_ads`](#put--api-v1-campaign-pause_ads)'
+  /api/v1/campaign/unpause:
+    put:
+      summary: Update unpause
+      tags:
+      - Campaign
+      operationId: put_api_v1_campaign_unpause
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11861
+      x-source-context: '- [`PUT /api/v1/campaign/unpause`](#put--api-v1-campaign-unpause)'
+  /api/v1/campaign/unpause_ads:
+    put:
+      summary: Update unpause ads
+      tags:
+      - Campaign
+      operationId: put_api_v1_campaign_unpause_ads
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11862
+      x-source-context: '- [`PUT /api/v1/campaign/unpause_ads`](#put--api-v1-campaign-unpause_ads)'

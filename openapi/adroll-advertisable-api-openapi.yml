@@ -1,0 +1,137 @@
+openapi: 3.2.0
+info:
+  title: AdRoll Advertisable API
+  version: derived-2026-08-10
+  description: Derived from AdRoll's published documentation. Every operation in this document corresponds to a literal HTTP method and path found in that documentation; nothing is inferred. Request and response schemas are NOT described -- only the operations that are demonstrably documented.
+  x-provenance: derived-from-documentation
+  x-source-documentation: https://apidocs.nextroll.com/llms-full.txt
+  x-documentation-url: https://apidocs.nextroll.com
+  x-derived: '2026-08-10'
+  x-derivation-method: literal METHOD+path extraction from provider documentation; no pattern completion, no inferred operations
+  x-not-a-provider-contract: This is API Evangelist's reading of the documentation, not a contract published or endorsed by the provider.
+servers:
+- url: https://services.adroll.com/api/v1
+tags:
+- name: Advertisable
+paths:
+  /api/v1/advertisable/edit:
+    post:
+      summary: Create edit
+      tags:
+      - Advertisable
+      operationId: post_api_v1_advertisable_edit
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11836
+      x-source-context: '- [`POST /api/v1/advertisable/edit`](#post--api-v1-advertisable-edit)'
+  /api/v1/advertisable/enable_rollcrawl:
+    post:
+      summary: Create enable rollcrawl
+      tags:
+      - Advertisable
+      operationId: post_api_v1_advertisable_enable_rollcrawl
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11837
+      x-source-context: '- [`POST /api/v1/advertisable/enable_rollcrawl`](#post--api-v1-advertisable-enable_rollcrawl)'
+  /api/v1/advertisable/get:
+    get:
+      summary: Retrieve get
+      tags:
+      - Advertisable
+      operationId: get_api_v1_advertisable_get
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11838
+      x-source-context: '- [`GET /api/v1/advertisable/get`](#get--api-v1-advertisable-get)'
+  /api/v1/advertisable/get_adgroups:
+    get:
+      summary: Retrieve get adgroups
+      tags:
+      - Advertisable
+      operationId: get_api_v1_advertisable_get_adgroups
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11839
+      x-source-context: '- [`GET /api/v1/advertisable/get_adgroups`](#get--api-v1-advertisable-get_adgroups)'
+  /api/v1/advertisable/get_adgroups_fast:
+    get:
+      summary: Retrieve get adgroups fast
+      tags:
+      - Advertisable
+      operationId: get_api_v1_advertisable_get_adgroups_fast
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11840
+      x-source-context: '- [`GET /api/v1/advertisable/get_adgroups_fast`](#get--api-v1-advertisable-get_adgroups_fast)'
+  /api/v1/advertisable/get_ads:
+    get:
+      summary: Retrieve get ads
+      tags:
+      - Advertisable
+      operationId: get_api_v1_advertisable_get_ads
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11841
+      x-source-context: '- [`GET /api/v1/advertisable/get_ads`](#get--api-v1-advertisable-get_ads)'
+  /api/v1/advertisable/get_ads_fast:
+    get:
+      summary: Retrieve get ads fast
+      tags:
+      - Advertisable
+      operationId: get_api_v1_advertisable_get_ads_fast
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11842
+      x-source-context: '- [`GET /api/v1/advertisable/get_ads_fast`](#get--api-v1-advertisable-get_ads_fast)'
+  /api/v1/advertisable/get_campaigns:
+    get:
+      summary: Retrieve get campaigns
+      tags:
+      - Advertisable
+      operationId: get_api_v1_advertisable_get_campaigns
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11843
+      x-source-context: '- [`GET /api/v1/advertisable/get_campaigns`](#get--api-v1-advertisable-get_campaigns)'
+  /api/v1/advertisable/get_campaigns_fast:
+    get:
+      summary: Retrieve get campaigns fast
+      tags:
+      - Advertisable
+      operationId: get_api_v1_advertisable_get_campaigns_fast
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11844
+      x-source-context: '- [`GET /api/v1/advertisable/get_campaigns_fast`](#get--api-v1-advertisable-get_campaigns_fast)'
+  /api/v1/advertisable/get_segments:
+    get:
+      summary: Retrieve get segments
+      tags:
+      - Advertisable
+      operationId: get_api_v1_advertisable_get_segments
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11846
+      x-source-context: '- [`GET /api/v1/advertisable/get_segments`](#get--api-v1-advertisable-get_segments)'
+  /api/v1/advertisable/get_suggested_country:
+    get:
+      summary: Retrieve get suggested country
+      tags:
+      - Advertisable
+      operationId: get_api_v1_advertisable_get_suggested_country
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11847
+      x-source-context: '- [`GET /api/v1/advertisable/get_suggested_country`](#get--api-v1-advertisable-get_suggested_country)'
