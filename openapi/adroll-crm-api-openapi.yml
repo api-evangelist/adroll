@@ -1,0 +1,27 @@
+openapi: 3.2.0
+info:
+  title: AdRoll CRM API
+  version: derived-2026-08-10
+  description: Derived from AdRoll's published documentation. Every operation in this document corresponds to a literal HTTP method and path found in that documentation; nothing is inferred. Request and response schemas are NOT described -- only the operations that are demonstrably documented.
+  x-provenance: derived-from-documentation
+  x-source-documentation: https://apidocs.nextroll.com/llms-full.txt
+  x-documentation-url: https://apidocs.nextroll.com
+  x-derived: '2026-08-10'
+  x-derivation-method: literal METHOD+path extraction from provider documentation; no pattern completion, no inferred operations
+  x-not-a-provider-contract: This is API Evangelist's reading of the documentation, not a contract published or endorsed by the provider.
+servers:
+- url: https://services.adroll.com/api/v1
+tags:
+- name: CRM
+paths:
+  /audience/v1/segments:
+    post:
+      summary: Create segments
+      tags:
+      - CRM
+      operationId: post_audience_v1_segments
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L1203
+      x-source-context: 'To create a CRM Audience, call [`POST /audience/v1/segments`](../audience-api/reference.md#post--audience-v1-segments) with the following body:'

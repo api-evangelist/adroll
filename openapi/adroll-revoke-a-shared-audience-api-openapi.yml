@@ -1,0 +1,27 @@
+openapi: 3.2.0
+info:
+  title: AdRoll Revoke a shared audience API
+  version: derived-2026-08-10
+  description: Derived from AdRoll's published documentation. Every operation in this document corresponds to a literal HTTP method and path found in that documentation; nothing is inferred. Request and response schemas are NOT described -- only the operations that are demonstrably documented.
+  x-provenance: derived-from-documentation
+  x-source-documentation: https://apidocs.nextroll.com/llms-full.txt
+  x-documentation-url: https://apidocs.nextroll.com
+  x-derived: '2026-08-10'
+  x-derivation-method: literal METHOD+path extraction from provider documentation; no pattern completion, no inferred operations
+  x-not-a-provider-contract: This is API Evangelist's reading of the documentation, not a contract published or endorsed by the provider.
+servers:
+- url: https://services.adroll.com/api/v1
+tags:
+- name: Revoke a shared audience
+paths:
+  /audience/v1/sharing/invitation:
+    delete:
+      summary: Delete invitation
+      tags:
+      - Revoke a shared audience
+      operationId: delete_audience_v1_sharing_invitation
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L1109
+      x-source-context: If you no longer wish to share a segment, you can call the [`DELETE /audience/v1/sharing/invitation`](../audience-api/reference.md#delete--audience-v1-sharing-i

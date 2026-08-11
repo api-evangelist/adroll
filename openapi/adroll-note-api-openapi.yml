@@ -1,0 +1,27 @@
+openapi: 3.2.0
+info:
+  title: AdRoll NOTE API
+  version: derived-2026-08-10
+  description: Derived from AdRoll's published documentation. Every operation in this document corresponds to a literal HTTP method and path found in that documentation; nothing is inferred. Request and response schemas are NOT described -- only the operations that are demonstrably documented.
+  x-provenance: derived-from-documentation
+  x-source-documentation: https://apidocs.nextroll.com/llms-full.txt
+  x-documentation-url: https://apidocs.nextroll.com
+  x-derived: '2026-08-10'
+  x-derivation-method: literal METHOD+path extraction from provider documentation; no pattern completion, no inferred operations
+  x-not-a-provider-contract: This is API Evangelist's reading of the documentation, not a contract published or endorsed by the provider.
+servers:
+- url: https://services.adroll.com/api/v1
+tags:
+- name: NOTE
+paths:
+  /audience/v1/user_attribute_names/:
+    get:
+      summary: Retrieve user attribute names
+      tags:
+      - NOTE
+      operationId: get_audience_v1_user_attribute_names
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L1308
+      x-source-context: To create an Attribute Audience, you specify one or more attributes. You can retrieve a list of available attribute names and values for your Advertisable by ca

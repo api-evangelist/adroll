@@ -1,0 +1,159 @@
+openapi: 3.2.0
+info:
+  title: AdRoll Adgroup API
+  version: derived-2026-08-10
+  description: Derived from AdRoll's published documentation. Every operation in this document corresponds to a literal HTTP method and path found in that documentation; nothing is inferred. Request and response schemas are NOT described -- only the operations that are demonstrably documented.
+  x-provenance: derived-from-documentation
+  x-source-documentation: https://apidocs.nextroll.com/llms-full.txt
+  x-documentation-url: https://apidocs.nextroll.com
+  x-derived: '2026-08-10'
+  x-derivation-method: literal METHOD+path extraction from provider documentation; no pattern completion, no inferred operations
+  x-not-a-provider-contract: This is API Evangelist's reading of the documentation, not a contract published or endorsed by the provider.
+servers:
+- url: https://services.adroll.com/api/v1
+tags:
+- name: Adgroup
+paths:
+  /api/v1/adgroup/edit:
+    post:
+      summary: Create edit
+      tags:
+      - Adgroup
+      operationId: post_api_v1_adgroup_edit
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11821
+      x-source-context: '- [`POST /api/v1/adgroup/edit`](#post--api-v1-adgroup-edit)'
+  /api/v1/adgroup/add_segments:
+    post:
+      summary: Create add segments
+      tags:
+      - Adgroup
+      operationId: post_api_v1_adgroup_add_segments
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11818
+      x-source-context: '- [`POST /api/v1/adgroup/add_segments`](#post--api-v1-adgroup-add_segments)'
+  /api/v1/adgroup/deselect_ads:
+    post:
+      summary: Create deselect ads
+      tags:
+      - Adgroup
+      operationId: post_api_v1_adgroup_deselect_ads
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11820
+      x-source-context: '- [`POST /api/v1/adgroup/deselect_ads`](#post--api-v1-adgroup-deselect_ads)'
+  /api/v1/adgroup/get:
+    get:
+      summary: Retrieve get
+      tags:
+      - Adgroup
+      operationId: get_api_v1_adgroup_get
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11822
+      x-source-context: '- [`GET /api/v1/adgroup/get`](#get--api-v1-adgroup-get)'
+  /api/v1/adgroup/get_ads:
+    get:
+      summary: Retrieve get ads
+      tags:
+      - Adgroup
+      operationId: get_api_v1_adgroup_get_ads
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11823
+      x-source-context: '- [`GET /api/v1/adgroup/get_ads`](#get--api-v1-adgroup-get_ads)'
+  /api/v1/adgroup/pause:
+    post:
+      summary: Create pause
+      tags:
+      - Adgroup
+      operationId: post_api_v1_adgroup_pause
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11824
+      x-source-context: '- [`POST /api/v1/adgroup/pause`](#post--api-v1-adgroup-pause)'
+  /api/v1/adgroup/pause_ad:
+    post:
+      summary: Create pause ad
+      tags:
+      - Adgroup
+      operationId: post_api_v1_adgroup_pause_ad
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11825
+      x-source-context: '- [`POST /api/v1/adgroup/pause_ad`](#post--api-v1-adgroup-pause_ad)'
+  /api/v1/adgroup/pause_ads:
+    post:
+      summary: Create pause ads
+      tags:
+      - Adgroup
+      operationId: post_api_v1_adgroup_pause_ads
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11826
+      x-source-context: '- [`POST /api/v1/adgroup/pause_ads`](#post--api-v1-adgroup-pause_ads)'
+  /api/v1/adgroup/remove_segments:
+    post:
+      summary: Create remove segments
+      tags:
+      - Adgroup
+      operationId: post_api_v1_adgroup_remove_segments
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11827
+      x-source-context: '- [`POST /api/v1/adgroup/remove_segments`](#post--api-v1-adgroup-remove_segments)'
+  /api/v1/adgroup/select_ads:
+    post:
+      summary: Create select ads
+      tags:
+      - Adgroup
+      operationId: post_api_v1_adgroup_select_ads
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11828
+      x-source-context: '- [`POST /api/v1/adgroup/select_ads`](#post--api-v1-adgroup-select_ads)'
+  /api/v1/adgroup/unpause:
+    post:
+      summary: Create unpause
+      tags:
+      - Adgroup
+      operationId: post_api_v1_adgroup_unpause
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11829
+      x-source-context: '- [`POST /api/v1/adgroup/unpause`](#post--api-v1-adgroup-unpause)'
+  /api/v1/adgroup/unpause_ad:
+    post:
+      summary: Create unpause ad
+      tags:
+      - Adgroup
+      operationId: post_api_v1_adgroup_unpause_ad
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11830
+      x-source-context: '- [`POST /api/v1/adgroup/unpause_ad`](#post--api-v1-adgroup-unpause_ad)'
+  /api/v1/adgroup/unpause_ads:
+    post:
+      summary: Create unpause ads
+      tags:
+      - Adgroup
+      operationId: post_api_v1_adgroup_unpause_ads
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11831
+      x-source-context: '- [`POST /api/v1/adgroup/unpause_ads`](#post--api-v1-adgroup-unpause_ads)'

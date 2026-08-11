@@ -1,0 +1,89 @@
+openapi: 3.2.0
+info:
+  title: AdRoll Target Account Lists API
+  version: derived-2026-08-10
+  description: Derived from AdRoll's published documentation. Every operation in this document corresponds to a literal HTTP method and path found in that documentation; nothing is inferred. Request and response schemas are NOT described -- only the operations that are demonstrably documented.
+  x-provenance: derived-from-documentation
+  x-source-documentation: https://apidocs.nextroll.com/llms-full.txt
+  x-documentation-url: https://apidocs.nextroll.com
+  x-derived: '2026-08-10'
+  x-derivation-method: literal METHOD+path extraction from provider documentation; no pattern completion, no inferred operations
+  x-not-a-provider-contract: This is API Evangelist's reading of the documentation, not a contract published or endorsed by the provider.
+servers:
+- url: https://services.adroll.com/api/v1
+tags:
+- name: Target Account Lists
+paths:
+  /audience/v1/target_accounts:
+    get:
+      summary: Retrieve target accounts
+      tags:
+      - Target Account Lists
+      operationId: get_audience_v1_target_accounts
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L6782
+      x-source-context: '- [`GET /audience/v1/target_accounts`](#get--audience-v1-target_accounts)'
+    post:
+      summary: Create target accounts
+      tags:
+      - Target Account Lists
+      operationId: post_audience_v1_target_accounts
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L6783
+      x-source-context: '- [`POST /audience/v1/target_accounts`](#post--audience-v1-target_accounts)'
+  /audience/v1/target_accounts/names:
+    get:
+      summary: Retrieve names
+      tags:
+      - Target Account Lists
+      operationId: get_audience_v1_target_accounts_names
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L6784
+      x-source-context: '- [`GET /audience/v1/target_accounts/names`](#get--audience-v1-target_accounts-names)'
+  /audience/v1/target_accounts/:
+    get:
+      summary: Retrieve target accounts
+      tags:
+      - Target Account Lists
+      operationId: get_audience_v1_target_accounts
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L6785
+      x-source-context: '- [`GET /audience/v1/target_accounts/(tal_eid)`](#get--audience-v1-target_accounts-(tal_eid))'
+    post:
+      summary: Create target accounts
+      tags:
+      - Target Account Lists
+      operationId: post_audience_v1_target_accounts
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L6786
+      x-source-context: '- [`POST /audience/v1/target_accounts/(tal_eid)`](#post--audience-v1-target_accounts-(tal_eid))'
+    delete:
+      summary: Delete target accounts
+      tags:
+      - Target Account Lists
+      operationId: delete_audience_v1_target_accounts
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L6787
+      x-source-context: '- [`DELETE /audience/v1/target_accounts/(tal_eid)`](#delete--audience-v1-target_accounts-(tal_eid))'
+    put:
+      summary: Update target accounts
+      tags:
+      - Target Account Lists
+      operationId: put_audience_v1_target_accounts
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L6795
+      x-source-context: '- [`PUT /audience/v1/target_accounts/(tal_eid)/tiers/(ta_tier_eid)/items`](#put--audience-v1-target_accounts-(tal_eid)-tiers-(ta_tier_eid)-items)'

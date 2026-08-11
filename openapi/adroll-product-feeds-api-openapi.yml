@@ -1,0 +1,93 @@
+openapi: 3.2.0
+info:
+  title: AdRoll Product Feeds API
+  version: derived-2026-08-10
+  description: Derived from AdRoll's published documentation. Every operation in this document corresponds to a literal HTTP method and path found in that documentation; nothing is inferred. Request and response schemas are NOT described -- only the operations that are demonstrably documented.
+  x-provenance: derived-from-documentation
+  x-source-documentation: https://apidocs.nextroll.com/llms-full.txt
+  x-documentation-url: https://apidocs.nextroll.com
+  x-derived: '2026-08-10'
+  x-derivation-method: literal METHOD+path extraction from provider documentation; no pattern completion, no inferred operations
+  x-not-a-provider-contract: This is API Evangelist's reading of the documentation, not a contract published or endorsed by the provider.
+servers:
+- url: https://services.adroll.com/api/v1
+tags:
+- name: Product Feeds
+paths:
+  /api/v1/product_feeds/delete_feed_config:
+    get:
+      summary: Retrieve delete feed config
+      tags:
+      - Product Feeds
+      operationId: get_api_v1_product_feeds_delete_feed_config
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11928
+      x-source-context: '- [`GET /api/v1/product_feeds/delete_feed_config`](#get--api-v1-product_feeds-delete_feed_config)'
+  /api/v1/product_feeds/delete_parser_config:
+    get:
+      summary: Retrieve delete parser config
+      tags:
+      - Product Feeds
+      operationId: get_api_v1_product_feeds_delete_parser_config
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11929
+      x-source-context: '- [`GET /api/v1/product_feeds/delete_parser_config`](#get--api-v1-product_feeds-delete_parser_config)'
+  /api/v1/product_feeds/get_feed_config:
+    get:
+      summary: Retrieve get feed config
+      tags:
+      - Product Feeds
+      operationId: get_api_v1_product_feeds_get_feed_config
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11933
+      x-source-context: '- [`GET /api/v1/product_feeds/get_feed_config`](#get--api-v1-product_feeds-get_feed_config)'
+  /api/v1/product_feeds/get_parser_config:
+    get:
+      summary: Retrieve get parser config
+      tags:
+      - Product Feeds
+      operationId: get_api_v1_product_feeds_get_parser_config
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11934
+      x-source-context: '- [`GET /api/v1/product_feeds/get_parser_config`](#get--api-v1-product_feeds-get_parser_config)'
+  /api/v1/product_feeds/get_products:
+    get:
+      summary: Retrieve get products
+      tags:
+      - Product Feeds
+      operationId: get_api_v1_product_feeds_get_products
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11935
+      x-source-context: '- [`GET /api/v1/product_feeds/get_products`](#get--api-v1-product_feeds-get_products)'
+  /api/v1/product_feeds/get_troubled_products:
+    get:
+      summary: Retrieve get troubled products
+      tags:
+      - Product Feeds
+      operationId: get_api_v1_product_feeds_get_troubled_products
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11936
+      x-source-context: '- [`GET /api/v1/product_feeds/get_troubled_products`](#get--api-v1-product_feeds-get_troubled_products)'
+  /api/v1/product_feeds/set_parser_config:
+    get:
+      summary: Retrieve set parser config
+      tags:
+      - Product Feeds
+      operationId: get_api_v1_product_feeds_set_parser_config
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11939
+      x-source-context: '- [`GET /api/v1/product_feeds/set_parser_config`](#get--api-v1-product_feeds-set_parser_config)'

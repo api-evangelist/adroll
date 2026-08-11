@@ -1,0 +1,319 @@
+openapi: 3.2.0
+info:
+  title: AdRoll Untagged API
+  version: derived-2026-08-10
+  description: Derived from AdRoll's published documentation. Every operation in this document corresponds to a literal HTTP method and path found in that documentation; nothing is inferred. Request and response schemas are NOT described -- only the operations that are demonstrably documented.
+  x-provenance: derived-from-documentation
+  x-source-documentation: https://apidocs.nextroll.com/llms-full.txt
+  x-documentation-url: https://apidocs.nextroll.com
+  x-derived: '2026-08-10'
+  x-derivation-method: literal METHOD+path extraction from provider documentation; no pattern completion, no inferred operations
+  x-not-a-provider-contract: This is API Evangelist's reading of the documentation, not a contract published or endorsed by the provider.
+servers:
+- url: https://services.adroll.com/api/v1
+tags:
+- name: Untagged
+paths:
+  /audience/v1/sharing/segment:
+    delete:
+      summary: Delete segment
+      tags:
+      - Untagged
+      operationId: delete_audience_v1_sharing_segment
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L6827
+      x-source-context: '- [`DELETE /audience/v1/sharing/segment`](#delete--audience-v1-sharing-segment)'
+  /audience/v1/segments:
+    get:
+      summary: Retrieve segments
+      tags:
+      - Untagged
+      operationId: get_audience_v1_segments
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L6811
+      x-source-context: '- [`GET /audience/v1/segments`](#get--audience-v1-segments)'
+  /audience/v1/segments/:
+    get:
+      summary: Retrieve segments
+      tags:
+      - Untagged
+      operationId: get_audience_v1_segments
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L6817
+      x-source-context: '- [`GET /audience/v1/segments/(segment_id)`](#get--audience-v1-segments-(segment_id))'
+    delete:
+      summary: Delete segments
+      tags:
+      - Untagged
+      operationId: delete_audience_v1_segments
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L6819
+      x-source-context: '- [`DELETE /audience/v1/segments/(segment_id)`](#delete--audience-v1-segments-(segment_id))'
+  /audience/v1/advertisers:
+    get:
+      summary: Retrieve advertisers
+      tags:
+      - Untagged
+      operationId: get_audience_v1_advertisers
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L6802
+      x-source-context: '- [`GET /audience/v1/advertisers`](#get--audience-v1-advertisers)'
+  /audience/v1/crosschannel_lal_segments/valid-segments:
+    get:
+      summary: Retrieve untagged
+      tags:
+      - Untagged
+      operationId: get_audience_v1_crosschannel_lal_segments_valid_segments
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L6803
+      x-source-context: '- [`GET /audience/v1/crosschannel_lal_segments/valid-segments`](#get--audience-v1-crosschannel_lal_segments-valid-segments)'
+  /audience/v1/ideal_customer_profile:
+    get:
+      summary: Retrieve ideal customer profile
+      tags:
+      - Untagged
+      operationId: get_audience_v1_ideal_customer_profile
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L6804
+      x-source-context: '- [`GET /audience/v1/ideal_customer_profile`](#get--audience-v1-ideal_customer_profile)'
+    post:
+      summary: Create ideal customer profile
+      tags:
+      - Untagged
+      operationId: post_audience_v1_ideal_customer_profile
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L6805
+      x-source-context: '- [`POST /audience/v1/ideal_customer_profile`](#post--audience-v1-ideal_customer_profile)'
+  /audience/v1/ideal_customer_profile/accounts:
+    post:
+      summary: Create accounts
+      tags:
+      - Untagged
+      operationId: post_audience_v1_ideal_customer_profile_accounts
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L6806
+      x-source-context: '- [`POST /audience/v1/ideal_customer_profile/accounts`](#post--audience-v1-ideal_customer_profile-accounts)'
+  /audience/v1/ideal_customer_profile/all_scores:
+    get:
+      summary: Retrieve all scores
+      tags:
+      - Untagged
+      operationId: get_audience_v1_ideal_customer_profile_all_scores
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L6807
+      x-source-context: '- [`GET /audience/v1/ideal_customer_profile/all_scores`](#get--audience-v1-ideal_customer_profile-all_scores)'
+  /audience/v1/ideal_customer_profile/:
+    get:
+      summary: Retrieve ideal customer profile
+      tags:
+      - Untagged
+      operationId: get_audience_v1_ideal_customer_profile
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L6808
+      x-source-context: '- [`GET /audience/v1/ideal_customer_profile/(icp_eid)`](#get--audience-v1-ideal_customer_profile-(icp_eid))'
+    post:
+      summary: Create ideal customer profile
+      tags:
+      - Untagged
+      operationId: post_audience_v1_ideal_customer_profile
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L6809
+      x-source-context: '- [`POST /audience/v1/ideal_customer_profile/(icp_eid)`](#post--audience-v1-ideal_customer_profile-(icp_eid))'
+    delete:
+      summary: Delete ideal customer profile
+      tags:
+      - Untagged
+      operationId: delete_audience_v1_ideal_customer_profile
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L6810
+      x-source-context: '- [`DELETE /audience/v1/ideal_customer_profile/(icp_eid)`](#delete--audience-v1-ideal_customer_profile-(icp_eid))'
+  /audience/v1/segments/bulk:
+    post:
+      summary: Create bulk
+      tags:
+      - Untagged
+      operationId: post_audience_v1_segments_bulk
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L6813
+      x-source-context: '- [`POST /audience/v1/segments/bulk`](#post--audience-v1-segments-bulk)'
+  /audience/v1/segments/general_exclusions:
+    get:
+      summary: Retrieve general exclusions
+      tags:
+      - Untagged
+      operationId: get_audience_v1_segments_general_exclusions
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L6814
+      x-source-context: '- [`GET /audience/v1/segments/general_exclusions`](#get--audience-v1-segments-general_exclusions)'
+  /audience/v1/segments/tal_references:
+    get:
+      summary: Retrieve tal references
+      tags:
+      - Untagged
+      operationId: get_audience_v1_segments_tal_references
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L6815
+      x-source-context: '- [`GET /audience/v1/segments/tal_references`](#get--audience-v1-segments-tal_references)'
+    put:
+      summary: Update tal references
+      tags:
+      - Untagged
+      operationId: put_audience_v1_segments_tal_references
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L6816
+      x-source-context: '- [`PUT /audience/v1/segments/tal_references`](#put--audience-v1-segments-tal_references)'
+  /audience/v1/segments_bulk/put:
+    post:
+      summary: Create put
+      tags:
+      - Untagged
+      operationId: post_audience_v1_segments_bulk_put
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L6821
+      x-source-context: '- [`POST /audience/v1/segments_bulk/put`](#post--audience-v1-segments_bulk-put)'
+  /audience/v1/sharing/get_source_segment:
+    get:
+      summary: Retrieve get source segment
+      tags:
+      - Untagged
+      operationId: get_audience_v1_sharing_get_source_segment
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L6822
+      x-source-context: '- [`GET /audience/v1/sharing/get_source_segment`](#get--audience-v1-sharing-get_source_segment)'
+  /audience/v1/target_accounts/domain_references:
+    post:
+      summary: Create domain references
+      tags:
+      - Untagged
+      operationId: post_audience_v1_target_accounts_domain_references
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L6830
+      x-source-context: '- [`POST /audience/v1/target_accounts/domain_references`](#post--audience-v1-target_accounts-domain_references)'
+  /audience/v1/target_accounts/domains:
+    get:
+      summary: Retrieve domains
+      tags:
+      - Untagged
+      operationId: get_audience_v1_target_accounts_domains
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L6831
+      x-source-context: '- [`GET /audience/v1/target_accounts/domains`](#get--audience-v1-target_accounts-domains)'
+  /audience/v1/target_accounts/general_exclusions:
+    get:
+      summary: Retrieve general exclusions
+      tags:
+      - Untagged
+      operationId: get_audience_v1_target_accounts_general_exclusions
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L6832
+      x-source-context: '- [`GET /audience/v1/target_accounts/general_exclusions`](#get--audience-v1-target_accounts-general_exclusions)'
+  /audience/v1/user_attribute_counts:
+    post:
+      summary: Create user attribute counts
+      tags:
+      - Untagged
+      operationId: post_audience_v1_user_attribute_counts
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L6848
+      x-source-context: '- [`POST /audience/v1/user_attribute_counts`](#post--audience-v1-user_attribute_counts)'
+  /api/v1/user/edit:
+    post:
+      summary: Create edit
+      tags:
+      - Untagged
+      operationId: post_api_v1_user_edit
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L12049
+      x-source-context: '- [`POST /api/v1/user/edit`](#post--api-v1-user-edit)'
+  /api/v1/user/get:
+    get:
+      summary: Retrieve get
+      tags:
+      - Untagged
+      operationId: get_api_v1_user_get
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L12050
+      x-source-context: '- [`GET /api/v1/user/get`](#get--api-v1-user-get)'
+  /api/v1/user/grant:
+    post:
+      summary: Create grant
+      tags:
+      - Untagged
+      operationId: post_api_v1_user_grant
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L12051
+      x-source-context: '- [`POST /api/v1/user/grant`](#post--api-v1-user-grant)'
+  /api/v1/xdevice_opt_in/retrieve:
+    get:
+      summary: Retrieve retrieve
+      tags:
+      - Untagged
+      operationId: get_api_v1_xdevice_opt_in_retrieve
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L12052
+      x-source-context: '- [`GET /api/v1/xdevice_opt_in/retrieve`](#get--api-v1-xdevice_opt_in-retrieve)'
+  /api/v1/xdevice_opt_in/update:
+    post:
+      summary: Create update
+      tags:
+      - Untagged
+      operationId: post_api_v1_xdevice_opt_in_update
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L12053
+      x-source-context: '- [`POST /api/v1/xdevice_opt_in/update`](#post--api-v1-xdevice_opt_in-update)'

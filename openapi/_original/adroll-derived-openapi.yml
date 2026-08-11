@@ -1,0 +1,2009 @@
+openapi: 3.2.0
+info:
+  title: AdRoll API
+  version: derived-2026-08-10
+  description: Derived from AdRoll's published documentation. Every operation in this document corresponds
+    to a literal HTTP method and path found in that documentation; nothing is inferred. Request and response
+    schemas are NOT described -- only the operations that are demonstrably documented.
+  x-provenance: derived-from-documentation
+  x-source-documentation: https://apidocs.nextroll.com/llms-full.txt
+  x-documentation-url: https://apidocs.nextroll.com
+  x-derived: '2026-08-10'
+  x-derivation-method: literal METHOD+path extraction from provider documentation; no pattern completion,
+    no inferred operations
+  x-not-a-provider-contract: This is API Evangelist's reading of the documentation, not a contract published
+    or endorsed by the provider.
+servers:
+- url: https://services.adroll.com/api/v1
+tags:
+- name: Untagged
+- name: List of Operations
+- name: Adgroup
+- name: Advertisable
+- name: Campaign
+- name: Target Account Lists
+- name: Product Feeds
+- name: Verify product feed set up
+- name: Organization
+- name: Ad
+- name: Pixel
+- name: Report
+- name: Advertisables
+- name: URL
+- name: Retrieve List of Dynamic Web Templates
+- name: Edit your feed configuration
+- name: Consent Banner
+- name: Dynamic Configuration
+- name: Marketplace Deals
+- name: Rule
+- name: Segment
+- name: Audiences
+- name: Flights
+- name: Create a share invitation
+- name: Fetch share invitations
+- name: Accept a share invitation
+- name: Revoke a shared audience
+- name: CRM
+- name: Partner
+- name: NOTE
+- name: Create a campaign
+- name: Add AdGroups to your campaign
+- name: Add an audience to your AdGroups Optional
+- name: Native Ads
+- name: Retrieve List of Dynamic Web Templates Capabilit
+- name: Retrieve the Pixel
+- name: Search for a geotarget
+- name: Retrieve the size of a segment
+- name: Organization Setup
+- name: Creating an Advertisable
+- name: Launching a Campaign
+- name: Pausing the Campaign
+- name: Configure Marketplace Mapping
+- name: Adding a Product Feed
+- name: Outline for a server to server integration
+- name: Getting Started
+- name: Automatic Setup
+- name: Add your first feed configuration
+- name: Add Parser Configurations
+- name: Create a Product Set
+- name: Edit a Product Set
+- name: List Product Sets for an Advertisable
+- name: Get a Product Set
+- name: Delete a Product Set
+- name: Attach Product Sets to an AdGroup
+- name: Edit an AdGroup with a Product Set attached
+- name: Advertisable Logo
+- name: Contextual Categories
+- name: Invoice
+- name: Marketplace
+- name: Policy
+- name: Adgroups
+- name: Campaigns
+paths:
+  /audience/v1/sharing/invitation:
+    post:
+      summary: Create invitation
+      tags:
+      - Create a share invitation
+      operationId: post_audience_v1_sharing_invitation
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L992
+      x-source-context: The first step in sharing an audience is to send a share invitation. This is done
+        by making a request to [`POST /audience/v1/sharing/invitation`](../audience-ap
+    get:
+      summary: Retrieve invitation
+      tags:
+      - Fetch share invitations
+      operationId: get_audience_v1_sharing_invitation
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L1019
+      x-source-context: You can view the list of outstanding share invitations you’ve been sent by calling
+        [`GET /audience/v1/sharing/invitation`](../audience-api/reference.md#get--aud
+    delete:
+      summary: Delete invitation
+      tags:
+      - Revoke a shared audience
+      operationId: delete_audience_v1_sharing_invitation
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L1109
+      x-source-context: If you no longer wish to share a segment, you can call the [`DELETE /audience/v1/sharing/invitation`](../audience-api/reference.md#delete--audience-v1-sharing-i
+  /audience/v1/sharing/segment:
+    post:
+      summary: Create segment
+      tags:
+      - Accept a share invitation
+      operationId: post_audience_v1_sharing_segment
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L1047
+      x-source-context: After you’ve created a sharing invitation, the receiving Advertisable needs to
+        accept the invitation. This is done using the [`POST /audience/v1/sharing/segment
+    delete:
+      summary: Delete segment
+      tags:
+      - Untagged
+      operationId: delete_audience_v1_sharing_segment
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L6827
+      x-source-context: '- [`DELETE /audience/v1/sharing/segment`](#delete--audience-v1-sharing-segment)'
+  /api/v1/rule/create:
+    post:
+      summary: Create create
+      tags:
+      - URL
+      operationId: post_api_v1_rule_create
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L1153
+      x-source-context: To create a URL Audience, you’ll need to create a rule on the Pixel. To create
+        a rule on a Pixel, you call [`POST /api/v1/rule/create`](../crud-api/reference.md
+  /api/v1/advertisable/get_pixel:
+    get:
+      summary: Retrieve get pixel
+      tags:
+      - URL
+      operationId: get_api_v1_advertisable_get_pixel
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L1156
+      x-source-context: ': Pixel EID to create the rule on. You can retrieve the Pixel EID by calling
+        [`GET /api/v1/advertisable/get_pixel`](../crud-api/reference.md#get--api-v1-adverti'
+  /audience/v1/segments:
+    post:
+      summary: Create segments
+      tags:
+      - CRM
+      operationId: post_audience_v1_segments
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L1203
+      x-source-context: 'To create a CRM Audience, call [`POST /audience/v1/segments`](../audience-api/reference.md#post--audience-v1-segments)
+        with the following body:'
+    get:
+      summary: Retrieve segments
+      tags:
+      - Untagged
+      operationId: get_audience_v1_segments
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L6811
+      x-source-context: '- [`GET /audience/v1/segments`](#get--audience-v1-segments)'
+  /audience/v1/segments/:
+    post:
+      summary: Create segments
+      tags:
+      - Partner
+      operationId: post_audience_v1_segments
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L1263
+      x-source-context: There are not limits on the number of identifiers that can be added to a segment.
+        However, our APIs limits the size of the body request up to 20MB. If you requi
+    get:
+      summary: Retrieve segments
+      tags:
+      - Untagged
+      operationId: get_audience_v1_segments
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L6817
+      x-source-context: '- [`GET /audience/v1/segments/(segment_id)`](#get--audience-v1-segments-(segment_id))'
+    delete:
+      summary: Delete segments
+      tags:
+      - Untagged
+      operationId: delete_audience_v1_segments
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L6819
+      x-source-context: '- [`DELETE /audience/v1/segments/(segment_id)`](#delete--audience-v1-segments-(segment_id))'
+  /audience/v1/user_attribute_names/:
+    get:
+      summary: Retrieve user attribute names
+      tags:
+      - NOTE
+      operationId: get_audience_v1_user_attribute_names
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L1308
+      x-source-context: To create an Attribute Audience, you specify one or more attributes. You can retrieve
+        a list of available attribute names and values for your Advertisable by ca
+  /prospecting/api/v2/advertisables/:
+    post:
+      summary: Create advertisables
+      tags:
+      - Create a campaign
+      operationId: post_prospecting_api_v2_advertisables
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L1466
+      x-source-context: '[`POST /prospecting/api/v2/advertisables/(adv)/campaigns`](../prospecting-api/reference.md#post--prospecting-api-v2-advertisables-(adv)-campaigns):'
+    get:
+      summary: Retrieve advertisables
+      tags:
+      - Advertisables
+      operationId: get_prospecting_api_v2_advertisables
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L17973
+      x-source-context: '- [`GET /prospecting/api/v2/advertisables/(adv)/campaigns`](#get--prospecting-api-v2-advertisables-(adv)-campaigns)'
+    patch:
+      summary: Update advertisables
+      tags:
+      - Advertisables
+      operationId: patch_prospecting_api_v2_advertisables
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L17975
+      x-source-context: '- [`PATCH /prospecting/api/v2/advertisables/(adv)/campaigns`](#patch--prospecting-api-v2-advertisables-(adv)-campaigns)'
+  /prospecting/api/v2/campaigns/:
+    post:
+      summary: Create campaigns
+      tags:
+      - Add AdGroups to your campaign
+      operationId: post_prospecting_api_v2_campaigns
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L1502
+      x-source-context: '[`POST /prospecting/api/v2/campaigns/(campaign)/adgroups`](../prospecting-api/reference.md#post--prospecting-api-v2-campaigns-(campaign)-adgroups):'
+    get:
+      summary: Retrieve campaigns
+      tags:
+      - Campaigns
+      operationId: get_prospecting_api_v2_campaigns
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L17989
+      x-source-context: '- [`GET /prospecting/api/v2/campaigns/(campaign)`](#get--prospecting-api-v2-campaigns-(campaign))'
+  /prospecting/api/v2/adgroups/:
+    post:
+      summary: Create adgroups
+      tags:
+      - Add an audience to your AdGroups Optional
+      operationId: post_prospecting_api_v2_adgroups
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L1551
+      x-source-context: '[`POST /prospecting/api/v2/adgroups/(adgroup)/audience`](../prospecting-api/reference.md#post--prospecting-api-v2-adgroups-(adgroup)-audience):'
+    get:
+      summary: Retrieve adgroups
+      tags:
+      - Adgroups
+      operationId: get_prospecting_api_v2_adgroups
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L17962
+      x-source-context: '- [`GET /prospecting/api/v2/adgroups/(adgroup)`](#get--prospecting-api-v2-adgroups-(adgroup))'
+  /api/v1/ad/create:
+    post:
+      summary: Create create
+      tags:
+      - Native Ads
+      operationId: post_api_v1_ad_create
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L1642
+      x-source-context: To create Native Ads, you’ll need to specify `type=native` and `inventory_type=iab`
+        when calling [`POST /api/v1/ad/create`](../crud-api/reference.md#post--api-v
+  /api/v1/dynamic_template/get_all_for_advertisable:
+    get:
+      summary: Retrieve get all for advertisable
+      tags:
+      - Retrieve List of Dynamic Web Templates
+      operationId: get_api_v1_dynamic_template_get_all_for_advertisable
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L1847
+      x-source-context: Call [`GET /api/v1/dynamic_template/get_all_for_advertisable`](../crud-api/reference.md#get--api-v1-dynamic_template-get_all_for_advertisable)
+        to retrieve the l
+  /api/v1/ad/create_templated_web_ads:
+    post:
+      summary: Create create templated web ads
+      tags:
+      - Retrieve List of Dynamic Web Templates
+      operationId: post_api_v1_ad_create_templated_web_ads
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L1847
+      x-source-context: Call [`GET /api/v1/dynamic_template/get_all_for_advertisable`](../crud-api/reference.md#get--api-v1-dynamic_template-get_all_for_advertisable)
+        to retrieve the l
+  /api/v1/dynamic_template_capability_description/get_all:
+    get:
+      summary: Retrieve get all
+      tags:
+      - Retrieve List of Dynamic Web Templates Capabilit
+      operationId: get_api_v1_dynamic_template_capability_description_get_all
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L1890
+      x-source-context: Call [`GET /api/v1/dynamic_template_capability_description/get_all`](../crud-api/reference.md#get--api-v1-dynamic_template_capability_description-get_all)
+        to qu
+  /api/v1/organization/get_advertisables:
+    get:
+      summary: Retrieve get advertisables
+      tags:
+      - Retrieve the Pixel
+      operationId: get_api_v1_organization_get_advertisables
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L2117
+      x-source-context: 1. Call [`GET /api/v1/organization/get_advertisables`](../crud-api/reference.md#get--api-v1-organization-get_advertisables)
+        to retrieve the list of Advertisable
+  /geo/api/search/v2/geo:
+    get:
+      summary: Retrieve geo
+      tags:
+      - Search for a geotarget
+      operationId: get_geo_api_search_v2_geo
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L3455
+      x-source-context: To search for a geotarget by name, you can use the [`GET /geo/api/search/v2/geo`](reference.md#get--geo-api-search-v2-geo)
+        endpoint.
+  /user-lists/api/v1/userlists/segment:
+    get:
+      summary: Retrieve segment
+      tags:
+      - Retrieve the size of a segment
+      operationId: get_user_lists_api_v1_userlists_segment
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L4231
+      x-source-context: To retrieve a summary of the size of a segment, you can use the [`GET /user-lists/api/v1/userlists/segment`](reference.md#get--user-lists-api-v1-userlists-segme
+    post:
+      summary: Create segment
+      tags:
+      - List of Operations
+      operationId: post_user_lists_api_v1_userlists_segment
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L24627
+      x-source-context: '- [`POST /user-lists/api/v1/userlists/segment`](#post--user-lists-api-v1-userlists-segment)'
+  /api/v1/organization/get:
+    get:
+      summary: Retrieve get
+      tags:
+      - Organization Setup
+      operationId: get_api_v1_organization_get
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L4773
+      x-source-context: To create accounts for your customers, therefore generate customer-specific Advertisables,
+        you’ll need your Organization EID. This can be found in the `eid` fie
+  /api/v1/advertisable/create:
+    post:
+      summary: Create create
+      tags:
+      - Creating an Advertisable
+      operationId: post_api_v1_advertisable_create
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L4785
+      x-source-context: 'Call [`POST /api/v1/advertisable/create`](../crud-api/reference.md#post--api-v1-advertisable-create)
+        with the following parameters:'
+  /activate/api/v2/campaign:
+    post:
+      summary: Create campaign
+      tags:
+      - Launching a Campaign
+      operationId: post_activate_api_v2_campaign
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L4846
+      x-source-context: Once you’ve successfully created your ads and audiences, you can create a Campaign
+        by calling [`POST /activate/api/v2/campaign`](../universal-campaigns-api/refe
+    put:
+      summary: Update campaign
+      tags:
+      - Pausing the Campaign
+      operationId: put_activate_api_v2_campaign
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L4891
+      x-source-context: 'Call [`PUT /activate/api/v2/campaign`](../universal-campaigns-api/reference.md#put--activate-api-v2-campaign)
+        to pause a campaign. The body of the request will '
+    get:
+      summary: Retrieve campaign
+      tags:
+      - List of Operations
+      operationId: get_activate_api_v2_campaign
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L21404
+      x-source-context: '- [`GET /activate/api/v2/campaign`](#get--activate-api-v2-campaign)'
+  /api/v1/marketplace/create:
+    post:
+      summary: Create create
+      tags:
+      - Configure Marketplace Mapping
+      operationId: post_api_v1_marketplace_create
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L5087
+      x-source-context: 'Call [`POST /api/v1/marketplace/create`](../crud-api/reference.md#post--api-v1-marketplace-create)
+        with the following parameters:'
+  /api/v1/feed/autoconfigure:
+    post:
+      summary: Create autoconfigure
+      tags:
+      - Adding a Product Feed
+      operationId: post_api_v1_feed_autoconfigure
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L5097
+      x-source-context: 'Call [`POST /api/v1/feed/autoconfigure`](../crud-api/reference.md#post--api-v1-feed-autoconfigure)
+        with the feed URL we can access on an ongoing basis. We will '
+  /auth/token:
+    post:
+      summary: Create token
+      tags:
+      - Outline for a server to server integration
+      operationId: post_auth_token
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L5345
+      x-source-context: POST https://services.adroll.com/auth/token
+  /reporting/api/v1/query:
+    post:
+      summary: Create query
+      tags:
+      - Getting Started
+      operationId: post_reporting_api_v1_query
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L5596
+      x-source-context: 'To make an API call, you’ll need to write a GraphQL query. Once you’ve written
+        the query, you’ll package that query inside a JSON object. Then you’ll then send '
+  /api/v1/product_feeds/autoconfigure:
+    post:
+      summary: Create autoconfigure
+      tags:
+      - Automatic Setup
+      operationId: post_api_v1_product_feeds_autoconfigure
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L6246
+      x-source-context: If your product feed uses the Google Products Feed (aka Google Base) format, you
+        can use the [`POST /api/v1/product_feeds/autoconfigure`](../crud-api/reference.
+  /api/v1/dynamic_configuration/enable:
+    post:
+      summary: Create enable
+      tags:
+      - Add your first feed configuration
+      operationId: post_api_v1_dynamic_configuration_enable
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L6256
+      x-source-context: To enable your Advertisable’s dynamic configuration and add your first product
+        feed, make a call to [`POST /api/v1/dynamic_configuration/enable`](../crud-api/re
+  /api/v1/product_feeds/edit_feed_config:
+    put:
+      summary: Update edit feed config
+      tags:
+      - Edit your feed configuration
+      operationId: put_api_v1_product_feeds_edit_feed_config
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L6279
+      x-source-context: Once you’ve added your first feed configuration you can configure its values using
+        [`PUT /api/v1/product_feeds/edit_feed_config`](../crud-api/reference.md#put--
+  /api/v1/product_feeds/add_feed_config:
+    put:
+      summary: Update add feed config
+      tags:
+      - Edit your feed configuration
+      operationId: put_api_v1_product_feeds_add_feed_config
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L6279
+      x-source-context: Once you’ve added your first feed configuration you can configure its values using
+        [`PUT /api/v1/product_feeds/edit_feed_config`](../crud-api/reference.md#put--
+  /api/v1/product_feeds/set_parser_configs:
+    post:
+      summary: Create set parser configs
+      tags:
+      - Add Parser Configurations
+      operationId: post_api_v1_product_feeds_set_parser_configs
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L6325
+      x-source-context: Once you’ve registered a product feed, you need to tell us which fields to parse.
+        This is done with the [`POST /api/v1/product_feeds/set_parser_configs`](../cru
+  /api/v1/product_feeds/feed_status:
+    get:
+      summary: Retrieve feed status
+      tags:
+      - Verify product feed set up
+      operationId: get_api_v1_product_feeds_feed_status
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L6424
+      x-source-context: '[`GET /api/v1/product_feeds/feed_status`](../crud-api/reference.md#get--api-v1-product_feeds-feed_status)'
+  /api/v1/product_feeds/match_rate:
+    get:
+      summary: Retrieve match rate
+      tags:
+      - Verify product feed set up
+      operationId: get_api_v1_product_feeds_match_rate
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L6427
+      x-source-context: '[`GET /api/v1/product_feeds/match_rate`](../crud-api/reference.md#get--api-v1-product_feeds-match_rate)'
+  /api/v1/product_feeds/feed_downloadable:
+    get:
+      summary: Retrieve feed downloadable
+      tags:
+      - Verify product feed set up
+      operationId: get_api_v1_product_feeds_feed_downloadable
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L6430
+      x-source-context: '[`GET /api/v1/product_feeds/feed_downloadable`](../crud-api/reference.md#get--api-v1-product_feeds-feed_downloadable)'
+  /api/v1/product_feeds/parse_preview:
+    get:
+      summary: Retrieve parse preview
+      tags:
+      - Verify product feed set up
+      operationId: get_api_v1_product_feeds_parse_preview
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L6433
+      x-source-context: '[`GET /api/v1/product_feeds/parse_preview`](../crud-api/reference.md#get--api-v1-product_feeds-parse_preview)'
+  /api/v1/product_sets/create:
+    post:
+      summary: Create create
+      tags:
+      - Create a Product Set
+      operationId: post_api_v1_product_sets_create
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L6464
+      x-source-context: 'Once you have the file to upload, you can make a request to `POST /api/v1/product_sets/create`.
+        You must specify the Advertisable EID that will own the product '
+  /api/v1/product_sets/edit:
+    put:
+      summary: Update edit
+      tags:
+      - Edit a Product Set
+      operationId: put_api_v1_product_sets_edit
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L6475
+      x-source-context: You can update the name and the file for the product set by calling `PUT /api/v1/product_sets/edit`.
+        When you upload a new file, the file replaces the current l
+  /api/v1/product_sets/list:
+    get:
+      summary: Retrieve list
+      tags:
+      - List Product Sets for an Advertisable
+      operationId: get_api_v1_product_sets_list
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L6486
+      x-source-context: You can retrieve the Product Sets that the provided Advertisable EID owns by calling
+        `GET /api/v1/product_sets/list`.
+  /api/v1/product_sets/get:
+    get:
+      summary: Retrieve get
+      tags:
+      - Get a Product Set
+      operationId: get_api_v1_product_sets_get
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L6495
+      x-source-context: You can retrieve a specific Product Set that an Advertisable owns by calling `GET
+        /api/v1/product_sets/get`. You must specify both the product set and the Adver
+  /api/v1/product_sets/delete:
+    delete:
+      summary: Delete delete
+      tags:
+      - Delete a Product Set
+      operationId: delete_api_v1_product_sets_delete
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L6504
+      x-source-context: You can delete a product set by calling `DELETE /api/v1/product_sets/delete`.
+        You must specify both the product set and the Advertisable EID.
+  /api/v1/adgroup/create:
+    post:
+      summary: Create create
+      tags:
+      - Attach Product Sets to an AdGroup
+      operationId: post_api_v1_adgroup_create
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L6519
+      x-source-context: If you don’t have an AdGroup yet, you can attach a product set when creating the
+        AdGroup when calling [`POST /api/v1/adgroup/create`](../crud-api/reference.md#p
+  /api/v1/adgroup/edit:
+    put:
+      summary: Update edit
+      tags:
+      - Edit an AdGroup with a Product Set attached
+      operationId: put_api_v1_adgroup_edit
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L6531
+      x-source-context: If you already have an AdGroup that you want to use your Product Set with, you
+        can use the `PUT /api/v1/adgroup/edit` endpoint to attach the product set. Specif
+    post:
+      summary: Create edit
+      tags:
+      - Adgroup
+      operationId: post_api_v1_adgroup_edit
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11821
+      x-source-context: '- [`POST /api/v1/adgroup/edit`](#post--api-v1-adgroup-edit)'
+  /audience/v1/target_accounts:
+    get:
+      summary: Retrieve target accounts
+      tags:
+      - Target Account Lists
+      operationId: get_audience_v1_target_accounts
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L6782
+      x-source-context: '- [`GET /audience/v1/target_accounts`](#get--audience-v1-target_accounts)'
+    post:
+      summary: Create target accounts
+      tags:
+      - Target Account Lists
+      operationId: post_audience_v1_target_accounts
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L6783
+      x-source-context: '- [`POST /audience/v1/target_accounts`](#post--audience-v1-target_accounts)'
+  /audience/v1/target_accounts/names:
+    get:
+      summary: Retrieve names
+      tags:
+      - Target Account Lists
+      operationId: get_audience_v1_target_accounts_names
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L6784
+      x-source-context: '- [`GET /audience/v1/target_accounts/names`](#get--audience-v1-target_accounts-names)'
+  /audience/v1/target_accounts/:
+    get:
+      summary: Retrieve target accounts
+      tags:
+      - Target Account Lists
+      operationId: get_audience_v1_target_accounts
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L6785
+      x-source-context: '- [`GET /audience/v1/target_accounts/(tal_eid)`](#get--audience-v1-target_accounts-(tal_eid))'
+    post:
+      summary: Create target accounts
+      tags:
+      - Target Account Lists
+      operationId: post_audience_v1_target_accounts
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L6786
+      x-source-context: '- [`POST /audience/v1/target_accounts/(tal_eid)`](#post--audience-v1-target_accounts-(tal_eid))'
+    delete:
+      summary: Delete target accounts
+      tags:
+      - Target Account Lists
+      operationId: delete_audience_v1_target_accounts
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L6787
+      x-source-context: '- [`DELETE /audience/v1/target_accounts/(tal_eid)`](#delete--audience-v1-target_accounts-(tal_eid))'
+    put:
+      summary: Update target accounts
+      tags:
+      - Target Account Lists
+      operationId: put_audience_v1_target_accounts
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L6795
+      x-source-context: '- [`PUT /audience/v1/target_accounts/(tal_eid)/tiers/(ta_tier_eid)/items`](#put--audience-v1-target_accounts-(tal_eid)-tiers-(ta_tier_eid)-items)'
+  /audience/v1/advertisers:
+    get:
+      summary: Retrieve advertisers
+      tags:
+      - Untagged
+      operationId: get_audience_v1_advertisers
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L6802
+      x-source-context: '- [`GET /audience/v1/advertisers`](#get--audience-v1-advertisers)'
+  /audience/v1/crosschannel_lal_segments/valid-segments:
+    get:
+      summary: Retrieve untagged
+      tags:
+      - Untagged
+      operationId: get_audience_v1_crosschannel_lal_segments_valid_segments
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L6803
+      x-source-context: '- [`GET /audience/v1/crosschannel_lal_segments/valid-segments`](#get--audience-v1-crosschannel_lal_segments-valid-segments)'
+  /audience/v1/ideal_customer_profile:
+    get:
+      summary: Retrieve ideal customer profile
+      tags:
+      - Untagged
+      operationId: get_audience_v1_ideal_customer_profile
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L6804
+      x-source-context: '- [`GET /audience/v1/ideal_customer_profile`](#get--audience-v1-ideal_customer_profile)'
+    post:
+      summary: Create ideal customer profile
+      tags:
+      - Untagged
+      operationId: post_audience_v1_ideal_customer_profile
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L6805
+      x-source-context: '- [`POST /audience/v1/ideal_customer_profile`](#post--audience-v1-ideal_customer_profile)'
+  /audience/v1/ideal_customer_profile/accounts:
+    post:
+      summary: Create accounts
+      tags:
+      - Untagged
+      operationId: post_audience_v1_ideal_customer_profile_accounts
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L6806
+      x-source-context: '- [`POST /audience/v1/ideal_customer_profile/accounts`](#post--audience-v1-ideal_customer_profile-accounts)'
+  /audience/v1/ideal_customer_profile/all_scores:
+    get:
+      summary: Retrieve all scores
+      tags:
+      - Untagged
+      operationId: get_audience_v1_ideal_customer_profile_all_scores
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L6807
+      x-source-context: '- [`GET /audience/v1/ideal_customer_profile/all_scores`](#get--audience-v1-ideal_customer_profile-all_scores)'
+  /audience/v1/ideal_customer_profile/:
+    get:
+      summary: Retrieve ideal customer profile
+      tags:
+      - Untagged
+      operationId: get_audience_v1_ideal_customer_profile
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L6808
+      x-source-context: '- [`GET /audience/v1/ideal_customer_profile/(icp_eid)`](#get--audience-v1-ideal_customer_profile-(icp_eid))'
+    post:
+      summary: Create ideal customer profile
+      tags:
+      - Untagged
+      operationId: post_audience_v1_ideal_customer_profile
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L6809
+      x-source-context: '- [`POST /audience/v1/ideal_customer_profile/(icp_eid)`](#post--audience-v1-ideal_customer_profile-(icp_eid))'
+    delete:
+      summary: Delete ideal customer profile
+      tags:
+      - Untagged
+      operationId: delete_audience_v1_ideal_customer_profile
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L6810
+      x-source-context: '- [`DELETE /audience/v1/ideal_customer_profile/(icp_eid)`](#delete--audience-v1-ideal_customer_profile-(icp_eid))'
+  /audience/v1/segments/bulk:
+    post:
+      summary: Create bulk
+      tags:
+      - Untagged
+      operationId: post_audience_v1_segments_bulk
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L6813
+      x-source-context: '- [`POST /audience/v1/segments/bulk`](#post--audience-v1-segments-bulk)'
+  /audience/v1/segments/general_exclusions:
+    get:
+      summary: Retrieve general exclusions
+      tags:
+      - Untagged
+      operationId: get_audience_v1_segments_general_exclusions
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L6814
+      x-source-context: '- [`GET /audience/v1/segments/general_exclusions`](#get--audience-v1-segments-general_exclusions)'
+  /audience/v1/segments/tal_references:
+    get:
+      summary: Retrieve tal references
+      tags:
+      - Untagged
+      operationId: get_audience_v1_segments_tal_references
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L6815
+      x-source-context: '- [`GET /audience/v1/segments/tal_references`](#get--audience-v1-segments-tal_references)'
+    put:
+      summary: Update tal references
+      tags:
+      - Untagged
+      operationId: put_audience_v1_segments_tal_references
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L6816
+      x-source-context: '- [`PUT /audience/v1/segments/tal_references`](#put--audience-v1-segments-tal_references)'
+  /audience/v1/segments_bulk/put:
+    post:
+      summary: Create put
+      tags:
+      - Untagged
+      operationId: post_audience_v1_segments_bulk_put
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L6821
+      x-source-context: '- [`POST /audience/v1/segments_bulk/put`](#post--audience-v1-segments_bulk-put)'
+  /audience/v1/sharing/get_source_segment:
+    get:
+      summary: Retrieve get source segment
+      tags:
+      - Untagged
+      operationId: get_audience_v1_sharing_get_source_segment
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L6822
+      x-source-context: '- [`GET /audience/v1/sharing/get_source_segment`](#get--audience-v1-sharing-get_source_segment)'
+  /audience/v1/target_accounts/domain_references:
+    post:
+      summary: Create domain references
+      tags:
+      - Untagged
+      operationId: post_audience_v1_target_accounts_domain_references
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L6830
+      x-source-context: '- [`POST /audience/v1/target_accounts/domain_references`](#post--audience-v1-target_accounts-domain_references)'
+  /audience/v1/target_accounts/domains:
+    get:
+      summary: Retrieve domains
+      tags:
+      - Untagged
+      operationId: get_audience_v1_target_accounts_domains
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L6831
+      x-source-context: '- [`GET /audience/v1/target_accounts/domains`](#get--audience-v1-target_accounts-domains)'
+  /audience/v1/target_accounts/general_exclusions:
+    get:
+      summary: Retrieve general exclusions
+      tags:
+      - Untagged
+      operationId: get_audience_v1_target_accounts_general_exclusions
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L6832
+      x-source-context: '- [`GET /audience/v1/target_accounts/general_exclusions`](#get--audience-v1-target_accounts-general_exclusions)'
+  /audience/v1/user_attribute_counts:
+    post:
+      summary: Create user attribute counts
+      tags:
+      - Untagged
+      operationId: post_audience_v1_user_attribute_counts
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L6848
+      x-source-context: '- [`POST /audience/v1/user_attribute_counts`](#post--audience-v1-user_attribute_counts)'
+  /activate/api/v1/campaign:
+    get:
+      summary: Retrieve campaign
+      tags:
+      - List of Operations
+      operationId: get_activate_api_v1_campaign
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11016
+      x-source-context: '- [`GET /activate/api/v1/campaign`](#get--activate-api-v1-campaign)'
+    put:
+      summary: Update campaign
+      tags:
+      - List of Operations
+      operationId: put_activate_api_v1_campaign
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11017
+      x-source-context: '- [`PUT /activate/api/v1/campaign`](#put--activate-api-v1-campaign)'
+  /activate/api/v1/strategy:
+    get:
+      summary: Retrieve strategy
+      tags:
+      - List of Operations
+      operationId: get_activate_api_v1_strategy
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11018
+      x-source-context: '- [`GET /activate/api/v1/strategy`](#get--activate-api-v1-strategy)'
+    post:
+      summary: Create strategy
+      tags:
+      - List of Operations
+      operationId: post_activate_api_v1_strategy
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11019
+      x-source-context: '- [`POST /activate/api/v1/strategy`](#post--activate-api-v1-strategy)'
+    put:
+      summary: Update strategy
+      tags:
+      - List of Operations
+      operationId: put_activate_api_v1_strategy
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11020
+      x-source-context: '- [`PUT /activate/api/v1/strategy`](#put--activate-api-v1-strategy)'
+  /api/v1/ad/clone:
+    post:
+      summary: Create clone
+      tags:
+      - Ad
+      operationId: post_api_v1_ad_clone
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11810
+      x-source-context: '- [`POST /api/v1/ad/clone`](#post--api-v1-ad-clone)'
+  /api/v1/ad/edit:
+    put:
+      summary: Update edit
+      tags:
+      - Ad
+      operationId: put_api_v1_ad_edit
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11813
+      x-source-context: '- [`PUT /api/v1/ad/edit`](#put--api-v1-ad-edit)'
+  /api/v1/ad/get:
+    get:
+      summary: Retrieve get
+      tags:
+      - Ad
+      operationId: get_api_v1_ad_get
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11814
+      x-source-context: '- [`GET /api/v1/ad/get`](#get--api-v1-ad-get)'
+  /api/v1/adgroup/add_segments:
+    post:
+      summary: Create add segments
+      tags:
+      - Adgroup
+      operationId: post_api_v1_adgroup_add_segments
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11818
+      x-source-context: '- [`POST /api/v1/adgroup/add_segments`](#post--api-v1-adgroup-add_segments)'
+  /api/v1/adgroup/deselect_ads:
+    post:
+      summary: Create deselect ads
+      tags:
+      - Adgroup
+      operationId: post_api_v1_adgroup_deselect_ads
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11820
+      x-source-context: '- [`POST /api/v1/adgroup/deselect_ads`](#post--api-v1-adgroup-deselect_ads)'
+  /api/v1/adgroup/get:
+    get:
+      summary: Retrieve get
+      tags:
+      - Adgroup
+      operationId: get_api_v1_adgroup_get
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11822
+      x-source-context: '- [`GET /api/v1/adgroup/get`](#get--api-v1-adgroup-get)'
+  /api/v1/adgroup/get_ads:
+    get:
+      summary: Retrieve get ads
+      tags:
+      - Adgroup
+      operationId: get_api_v1_adgroup_get_ads
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11823
+      x-source-context: '- [`GET /api/v1/adgroup/get_ads`](#get--api-v1-adgroup-get_ads)'
+  /api/v1/adgroup/pause:
+    post:
+      summary: Create pause
+      tags:
+      - Adgroup
+      operationId: post_api_v1_adgroup_pause
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11824
+      x-source-context: '- [`POST /api/v1/adgroup/pause`](#post--api-v1-adgroup-pause)'
+  /api/v1/adgroup/pause_ad:
+    post:
+      summary: Create pause ad
+      tags:
+      - Adgroup
+      operationId: post_api_v1_adgroup_pause_ad
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11825
+      x-source-context: '- [`POST /api/v1/adgroup/pause_ad`](#post--api-v1-adgroup-pause_ad)'
+  /api/v1/adgroup/pause_ads:
+    post:
+      summary: Create pause ads
+      tags:
+      - Adgroup
+      operationId: post_api_v1_adgroup_pause_ads
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11826
+      x-source-context: '- [`POST /api/v1/adgroup/pause_ads`](#post--api-v1-adgroup-pause_ads)'
+  /api/v1/adgroup/remove_segments:
+    post:
+      summary: Create remove segments
+      tags:
+      - Adgroup
+      operationId: post_api_v1_adgroup_remove_segments
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11827
+      x-source-context: '- [`POST /api/v1/adgroup/remove_segments`](#post--api-v1-adgroup-remove_segments)'
+  /api/v1/adgroup/select_ads:
+    post:
+      summary: Create select ads
+      tags:
+      - Adgroup
+      operationId: post_api_v1_adgroup_select_ads
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11828
+      x-source-context: '- [`POST /api/v1/adgroup/select_ads`](#post--api-v1-adgroup-select_ads)'
+  /api/v1/adgroup/unpause:
+    post:
+      summary: Create unpause
+      tags:
+      - Adgroup
+      operationId: post_api_v1_adgroup_unpause
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11829
+      x-source-context: '- [`POST /api/v1/adgroup/unpause`](#post--api-v1-adgroup-unpause)'
+  /api/v1/adgroup/unpause_ad:
+    post:
+      summary: Create unpause ad
+      tags:
+      - Adgroup
+      operationId: post_api_v1_adgroup_unpause_ad
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11830
+      x-source-context: '- [`POST /api/v1/adgroup/unpause_ad`](#post--api-v1-adgroup-unpause_ad)'
+  /api/v1/adgroup/unpause_ads:
+    post:
+      summary: Create unpause ads
+      tags:
+      - Adgroup
+      operationId: post_api_v1_adgroup_unpause_ads
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11831
+      x-source-context: '- [`POST /api/v1/adgroup/unpause_ads`](#post--api-v1-adgroup-unpause_ads)'
+  /api/v1/advertisable/edit:
+    post:
+      summary: Create edit
+      tags:
+      - Advertisable
+      operationId: post_api_v1_advertisable_edit
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11836
+      x-source-context: '- [`POST /api/v1/advertisable/edit`](#post--api-v1-advertisable-edit)'
+  /api/v1/advertisable/enable_rollcrawl:
+    post:
+      summary: Create enable rollcrawl
+      tags:
+      - Advertisable
+      operationId: post_api_v1_advertisable_enable_rollcrawl
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11837
+      x-source-context: '- [`POST /api/v1/advertisable/enable_rollcrawl`](#post--api-v1-advertisable-enable_rollcrawl)'
+  /api/v1/advertisable/get:
+    get:
+      summary: Retrieve get
+      tags:
+      - Advertisable
+      operationId: get_api_v1_advertisable_get
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11838
+      x-source-context: '- [`GET /api/v1/advertisable/get`](#get--api-v1-advertisable-get)'
+  /api/v1/advertisable/get_adgroups:
+    get:
+      summary: Retrieve get adgroups
+      tags:
+      - Advertisable
+      operationId: get_api_v1_advertisable_get_adgroups
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11839
+      x-source-context: '- [`GET /api/v1/advertisable/get_adgroups`](#get--api-v1-advertisable-get_adgroups)'
+  /api/v1/advertisable/get_adgroups_fast:
+    get:
+      summary: Retrieve get adgroups fast
+      tags:
+      - Advertisable
+      operationId: get_api_v1_advertisable_get_adgroups_fast
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11840
+      x-source-context: '- [`GET /api/v1/advertisable/get_adgroups_fast`](#get--api-v1-advertisable-get_adgroups_fast)'
+  /api/v1/advertisable/get_ads:
+    get:
+      summary: Retrieve get ads
+      tags:
+      - Advertisable
+      operationId: get_api_v1_advertisable_get_ads
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11841
+      x-source-context: '- [`GET /api/v1/advertisable/get_ads`](#get--api-v1-advertisable-get_ads)'
+  /api/v1/advertisable/get_ads_fast:
+    get:
+      summary: Retrieve get ads fast
+      tags:
+      - Advertisable
+      operationId: get_api_v1_advertisable_get_ads_fast
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11842
+      x-source-context: '- [`GET /api/v1/advertisable/get_ads_fast`](#get--api-v1-advertisable-get_ads_fast)'
+  /api/v1/advertisable/get_campaigns:
+    get:
+      summary: Retrieve get campaigns
+      tags:
+      - Advertisable
+      operationId: get_api_v1_advertisable_get_campaigns
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11843
+      x-source-context: '- [`GET /api/v1/advertisable/get_campaigns`](#get--api-v1-advertisable-get_campaigns)'
+  /api/v1/advertisable/get_campaigns_fast:
+    get:
+      summary: Retrieve get campaigns fast
+      tags:
+      - Advertisable
+      operationId: get_api_v1_advertisable_get_campaigns_fast
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11844
+      x-source-context: '- [`GET /api/v1/advertisable/get_campaigns_fast`](#get--api-v1-advertisable-get_campaigns_fast)'
+  /api/v1/advertisable/get_segments:
+    get:
+      summary: Retrieve get segments
+      tags:
+      - Advertisable
+      operationId: get_api_v1_advertisable_get_segments
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11846
+      x-source-context: '- [`GET /api/v1/advertisable/get_segments`](#get--api-v1-advertisable-get_segments)'
+  /api/v1/advertisable/get_suggested_country:
+    get:
+      summary: Retrieve get suggested country
+      tags:
+      - Advertisable
+      operationId: get_api_v1_advertisable_get_suggested_country
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11847
+      x-source-context: '- [`GET /api/v1/advertisable/get_suggested_country`](#get--api-v1-advertisable-get_suggested_country)'
+  /api/v1/advertisable_logo/create:
+    post:
+      summary: Create create
+      tags:
+      - Advertisable Logo
+      operationId: post_api_v1_advertisable_logo_create
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11851
+      x-source-context: '- [`POST /api/v1/advertisable_logo/create`](#post--api-v1-advertisable_logo-create)'
+  /api/v1/campaign/create:
+    post:
+      summary: Create create
+      tags:
+      - Campaign
+      operationId: post_api_v1_campaign_create
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11855
+      x-source-context: '- [`POST /api/v1/campaign/create`](#post--api-v1-campaign-create)'
+  /api/v1/campaign/edit:
+    post:
+      summary: Create edit
+      tags:
+      - Campaign
+      operationId: post_api_v1_campaign_edit
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11856
+      x-source-context: '- [`POST /api/v1/campaign/edit`](#post--api-v1-campaign-edit)'
+  /api/v1/campaign/get:
+    get:
+      summary: Retrieve get
+      tags:
+      - Campaign
+      operationId: get_api_v1_campaign_get
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11857
+      x-source-context: '- [`GET /api/v1/campaign/get`](#get--api-v1-campaign-get)'
+  /api/v1/campaign/get_adgroups:
+    get:
+      summary: Retrieve get adgroups
+      tags:
+      - Campaign
+      operationId: get_api_v1_campaign_get_adgroups
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11858
+      x-source-context: '- [`GET /api/v1/campaign/get_adgroups`](#get--api-v1-campaign-get_adgroups)'
+  /api/v1/campaign/pause:
+    put:
+      summary: Update pause
+      tags:
+      - Campaign
+      operationId: put_api_v1_campaign_pause
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11859
+      x-source-context: '- [`PUT /api/v1/campaign/pause`](#put--api-v1-campaign-pause)'
+  /api/v1/campaign/pause_ads:
+    put:
+      summary: Update pause ads
+      tags:
+      - Campaign
+      operationId: put_api_v1_campaign_pause_ads
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11860
+      x-source-context: '- [`PUT /api/v1/campaign/pause_ads`](#put--api-v1-campaign-pause_ads)'
+  /api/v1/campaign/unpause:
+    put:
+      summary: Update unpause
+      tags:
+      - Campaign
+      operationId: put_api_v1_campaign_unpause
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11861
+      x-source-context: '- [`PUT /api/v1/campaign/unpause`](#put--api-v1-campaign-unpause)'
+  /api/v1/campaign/unpause_ads:
+    put:
+      summary: Update unpause ads
+      tags:
+      - Campaign
+      operationId: put_api_v1_campaign_unpause_ads
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11862
+      x-source-context: '- [`PUT /api/v1/campaign/unpause_ads`](#put--api-v1-campaign-unpause_ads)'
+  /api/v1/consent_banner/retrieve:
+    get:
+      summary: Retrieve retrieve
+      tags:
+      - Consent Banner
+      operationId: get_api_v1_consent_banner_retrieve
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11866
+      x-source-context: '- [`GET /api/v1/consent_banner/retrieve`](#get--api-v1-consent_banner-retrieve)'
+  /api/v1/consent_banner/update:
+    post:
+      summary: Create update
+      tags:
+      - Consent Banner
+      operationId: post_api_v1_consent_banner_update
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11867
+      x-source-context: '- [`POST /api/v1/consent_banner/update`](#post--api-v1-consent_banner-update)'
+  /api/v1/contextual_categories/get_all_contextual_categories:
+    get:
+      summary: Retrieve get all contextual categories
+      tags:
+      - Contextual Categories
+      operationId: get_api_v1_contextual_categories_get_all_contextual_categori
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11871
+      x-source-context: '- [`GET /api/v1/contextual_categories/get_all_contextual_categories`](#get--api-v1-contextual_categories-get_all_contextual_categories)'
+  /api/v1/dynamic_configuration/edit:
+    put:
+      summary: Update edit
+      tags:
+      - Dynamic Configuration
+      operationId: put_api_v1_dynamic_configuration_edit
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11875
+      x-source-context: '- [`PUT /api/v1/dynamic_configuration/edit`](#put--api-v1-dynamic_configuration-edit)'
+  /api/v1/dynamic_configuration/get:
+    get:
+      summary: Retrieve get
+      tags:
+      - Dynamic Configuration
+      operationId: get_api_v1_dynamic_configuration_get
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11877
+      x-source-context: '- [`GET /api/v1/dynamic_configuration/get`](#get--api-v1-dynamic_configuration-get)'
+  /api/v1/invoice/get:
+    get:
+      summary: Retrieve get
+      tags:
+      - Invoice
+      operationId: get_api_v1_invoice_get
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11893
+      x-source-context: '- [`GET /api/v1/invoice/get`](#get--api-v1-invoice-get)'
+  /api/v1/marketplace/get:
+    get:
+      summary: Retrieve get
+      tags:
+      - Marketplace
+      operationId: get_api_v1_marketplace_get
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11898
+      x-source-context: '- [`GET /api/v1/marketplace/get`](#get--api-v1-marketplace-get)'
+  /api/v1/marketplace_deals/get:
+    get:
+      summary: Retrieve get
+      tags:
+      - Marketplace Deals
+      operationId: get_api_v1_marketplace_deals_get
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11902
+      x-source-context: '- [`GET /api/v1/marketplace_deals/get`](#get--api-v1-marketplace_deals-get)'
+  /api/v1/marketplace_deals/metadata:
+    get:
+      summary: Retrieve metadata
+      tags:
+      - Marketplace Deals
+      operationId: get_api_v1_marketplace_deals_metadata
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11903
+      x-source-context: '- [`GET /api/v1/marketplace_deals/metadata`](#get--api-v1-marketplace_deals-metadata)'
+  /api/v1/organization/get_accounts:
+    get:
+      summary: Retrieve get accounts
+      tags:
+      - Organization
+      operationId: get_api_v1_organization_get_accounts
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11908
+      x-source-context: '- [`GET /api/v1/organization/get_accounts`](#get--api-v1-organization-get_accounts)'
+  /api/v1/organization/get_advertisables_paginated:
+    get:
+      summary: Retrieve get advertisables paginated
+      tags:
+      - Organization
+      operationId: get_api_v1_organization_get_advertisables_paginated
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11910
+      x-source-context: '- [`GET /api/v1/organization/get_advertisables_paginated`](#get--api-v1-organization-get_advertisables_paginated)'
+  /api/v1/organization/get_billing_methods:
+    get:
+      summary: Retrieve get billing methods
+      tags:
+      - Organization
+      operationId: get_api_v1_organization_get_billing_methods
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11911
+      x-source-context: '- [`GET /api/v1/organization/get_billing_methods`](#get--api-v1-organization-get_billing_methods)'
+  /api/v1/organization/get_users:
+    get:
+      summary: Retrieve get users
+      tags:
+      - Organization
+      operationId: get_api_v1_organization_get_users
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11912
+      x-source-context: '- [`GET /api/v1/organization/get_users`](#get--api-v1-organization-get_users)'
+  /api/v1/pixel/get:
+    get:
+      summary: Retrieve get
+      tags:
+      - Pixel
+      operationId: get_api_v1_pixel_get
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11916
+      x-source-context: '- [`GET /api/v1/pixel/get`](#get--api-v1-pixel-get)'
+  /api/v1/pixel/get_rules:
+    get:
+      summary: Retrieve get rules
+      tags:
+      - Pixel
+      operationId: get_api_v1_pixel_get_rules
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11917
+      x-source-context: '- [`GET /api/v1/pixel/get_rules`](#get--api-v1-pixel-get_rules)'
+  /api/v1/pixel/get_segments:
+    get:
+      summary: Retrieve get segments
+      tags:
+      - Pixel
+      operationId: get_api_v1_pixel_get_segments
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11918
+      x-source-context: '- [`GET /api/v1/pixel/get_segments`](#get--api-v1-pixel-get_segments)'
+  /api/v1/policy/send_email:
+    post:
+      summary: Create send email
+      tags:
+      - Policy
+      operationId: post_api_v1_policy_send_email
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11922
+      x-source-context: '- [`POST /api/v1/policy/send_email`](#post--api-v1-policy-send_email)'
+  /api/v1/product_feeds/delete_feed_config:
+    get:
+      summary: Retrieve delete feed config
+      tags:
+      - Product Feeds
+      operationId: get_api_v1_product_feeds_delete_feed_config
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11928
+      x-source-context: '- [`GET /api/v1/product_feeds/delete_feed_config`](#get--api-v1-product_feeds-delete_feed_config)'
+  /api/v1/product_feeds/delete_parser_config:
+    get:
+      summary: Retrieve delete parser config
+      tags:
+      - Product Feeds
+      operationId: get_api_v1_product_feeds_delete_parser_config
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11929
+      x-source-context: '- [`GET /api/v1/product_feeds/delete_parser_config`](#get--api-v1-product_feeds-delete_parser_config)'
+  /api/v1/product_feeds/get_feed_config:
+    get:
+      summary: Retrieve get feed config
+      tags:
+      - Product Feeds
+      operationId: get_api_v1_product_feeds_get_feed_config
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11933
+      x-source-context: '- [`GET /api/v1/product_feeds/get_feed_config`](#get--api-v1-product_feeds-get_feed_config)'
+  /api/v1/product_feeds/get_parser_config:
+    get:
+      summary: Retrieve get parser config
+      tags:
+      - Product Feeds
+      operationId: get_api_v1_product_feeds_get_parser_config
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11934
+      x-source-context: '- [`GET /api/v1/product_feeds/get_parser_config`](#get--api-v1-product_feeds-get_parser_config)'
+  /api/v1/product_feeds/get_products:
+    get:
+      summary: Retrieve get products
+      tags:
+      - Product Feeds
+      operationId: get_api_v1_product_feeds_get_products
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11935
+      x-source-context: '- [`GET /api/v1/product_feeds/get_products`](#get--api-v1-product_feeds-get_products)'
+  /api/v1/product_feeds/get_troubled_products:
+    get:
+      summary: Retrieve get troubled products
+      tags:
+      - Product Feeds
+      operationId: get_api_v1_product_feeds_get_troubled_products
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11936
+      x-source-context: '- [`GET /api/v1/product_feeds/get_troubled_products`](#get--api-v1-product_feeds-get_troubled_products)'
+  /api/v1/product_feeds/set_parser_config:
+    get:
+      summary: Retrieve set parser config
+      tags:
+      - Product Feeds
+      operationId: get_api_v1_product_feeds_set_parser_config
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11939
+      x-source-context: '- [`GET /api/v1/product_feeds/set_parser_config`](#get--api-v1-product_feeds-set_parser_config)'
+  /api/v1/report/ad:
+    get:
+      summary: Retrieve ad
+      tags:
+      - Report
+      operationId: get_api_v1_report_ad
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11944
+      x-source-context: '- [`GET /api/v1/report/ad`](#get--api-v1-report-ad)'
+  /api/v1/report/advertisable:
+    get:
+      summary: Retrieve advertisable
+      tags:
+      - Report
+      operationId: get_api_v1_report_advertisable
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11945
+      x-source-context: '- [`GET /api/v1/report/advertisable`](#get--api-v1-report-advertisable)'
+  /api/v1/report/campaign:
+    get:
+      summary: Retrieve campaign
+      tags:
+      - Report
+      operationId: get_api_v1_report_campaign
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11946
+      x-source-context: '- [`GET /api/v1/report/campaign`](#get--api-v1-report-campaign)'
+  /api/v1/rule/get:
+    get:
+      summary: Retrieve get
+      tags:
+      - Rule
+      operationId: get_api_v1_rule_get
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11951
+      x-source-context: '- [`GET /api/v1/rule/get`](#get--api-v1-rule-get)'
+  /api/v1/rule/get_segments:
+    get:
+      summary: Retrieve get segments
+      tags:
+      - Rule
+      operationId: get_api_v1_rule_get_segments
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11952
+      x-source-context: '- [`GET /api/v1/rule/get_segments`](#get--api-v1-rule-get_segments)'
+  /api/v1/segment/edit:
+    post:
+      summary: Create edit
+      tags:
+      - Segment
+      operationId: post_api_v1_segment_edit
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11956
+      x-source-context: '- [`POST /api/v1/segment/edit`](#post--api-v1-segment-edit)'
+  /api/v1/segment/get:
+    get:
+      summary: Retrieve get
+      tags:
+      - Segment
+      operationId: get_api_v1_segment_get
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11957
+      x-source-context: '- [`GET /api/v1/segment/get`](#get--api-v1-segment-get)'
+  /api/v1/user/edit:
+    post:
+      summary: Create edit
+      tags:
+      - Untagged
+      operationId: post_api_v1_user_edit
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L12049
+      x-source-context: '- [`POST /api/v1/user/edit`](#post--api-v1-user-edit)'
+  /api/v1/user/get:
+    get:
+      summary: Retrieve get
+      tags:
+      - Untagged
+      operationId: get_api_v1_user_get
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L12050
+      x-source-context: '- [`GET /api/v1/user/get`](#get--api-v1-user-get)'
+  /api/v1/user/grant:
+    post:
+      summary: Create grant
+      tags:
+      - Untagged
+      operationId: post_api_v1_user_grant
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L12051
+      x-source-context: '- [`POST /api/v1/user/grant`](#post--api-v1-user-grant)'
+  /api/v1/xdevice_opt_in/retrieve:
+    get:
+      summary: Retrieve retrieve
+      tags:
+      - Untagged
+      operationId: get_api_v1_xdevice_opt_in_retrieve
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L12052
+      x-source-context: '- [`GET /api/v1/xdevice_opt_in/retrieve`](#get--api-v1-xdevice_opt_in-retrieve)'
+  /api/v1/xdevice_opt_in/update:
+    post:
+      summary: Create update
+      tags:
+      - Untagged
+      operationId: post_api_v1_xdevice_opt_in_update
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L12053
+      x-source-context: '- [`POST /api/v1/xdevice_opt_in/update`](#post--api-v1-xdevice_opt_in-update)'
+  /prospecting/api/v2/attribute_names/:
+    get:
+      summary: Retrieve attribute names
+      tags:
+      - Advertisables
+      operationId: get_prospecting_api_v2_attribute_names
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L17978
+      x-source-context: '- [`GET /prospecting/api/v2/attribute_names/(adv)`](#get--prospecting-api-v2-attribute_names-(adv))'
+  /prospecting/api/v2/audiences/:
+    get:
+      summary: Retrieve audiences
+      tags:
+      - Audiences
+      operationId: get_prospecting_api_v2_audiences
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L17984
+      x-source-context: '- [`GET /prospecting/api/v2/audiences/(audience)`](#get--prospecting-api-v2-audiences-(audience))'
+    post:
+      summary: Create audiences
+      tags:
+      - Audiences
+      operationId: post_prospecting_api_v2_audiences
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L17985
+      x-source-context: '- [`POST /prospecting/api/v2/audiences/(audience)`](#post--prospecting-api-v2-audiences-(audience))'
+  /prospecting/api/v2/flights/:
+    put:
+      summary: Update flights
+      tags:
+      - Flights
+      operationId: put_prospecting_api_v2_flights
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L17997
+      x-source-context: '- [`PUT /prospecting/api/v2/flights/(flight)`](#put--prospecting-api-v2-flights-(flight))'
+    delete:
+      summary: Delete flights
+      tags:
+      - Flights
+      operationId: delete_prospecting_api_v2_flights
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L17998
+      x-source-context: '- [`DELETE /prospecting/api/v2/flights/(flight)`](#delete--prospecting-api-v2-flights-(flight))'
+  /activate/api/v2/adgroup:
+    get:
+      summary: Retrieve adgroup
+      tags:
+      - List of Operations
+      operationId: get_activate_api_v2_adgroup
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L21400
+      x-source-context: '- [`GET /activate/api/v2/adgroup`](#get--activate-api-v2-adgroup)'
+    post:
+      summary: Create adgroup
+      tags:
+      - List of Operations
+      operationId: post_activate_api_v2_adgroup
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L21401
+      x-source-context: '- [`POST /activate/api/v2/adgroup`](#post--activate-api-v2-adgroup)'
+    put:
+      summary: Update adgroup
+      tags:
+      - List of Operations
+      operationId: put_activate_api_v2_adgroup
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L21402
+      x-source-context: '- [`PUT /activate/api/v2/adgroup`](#put--activate-api-v2-adgroup)'
+  /activate/api/v2/adgroup_ad:
+    put:
+      summary: Update adgroup ad
+      tags:
+      - List of Operations
+      operationId: put_activate_api_v2_adgroup_ad
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L21403
+      x-source-context: '- [`PUT /activate/api/v2/adgroup_ad`](#put--activate-api-v2-adgroup_ad)'
+  /activate/api/v2/playbooks:
+    get:
+      summary: Retrieve playbooks
+      tags:
+      - List of Operations
+      operationId: get_activate_api_v2_playbooks
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L21407
+      x-source-context: '- [`GET /activate/api/v2/playbooks`](#get--activate-api-v2-playbooks)'
+    post:
+      summary: Create playbooks
+      tags:
+      - List of Operations
+      operationId: post_activate_api_v2_playbooks
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L21408
+      x-source-context: '- [`POST /activate/api/v2/playbooks`](#post--activate-api-v2-playbooks)'
+    put:
+      summary: Update playbooks
+      tags:
+      - List of Operations
+      operationId: put_activate_api_v2_playbooks
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L21409
+      x-source-context: '- [`PUT /activate/api/v2/playbooks`](#put--activate-api-v2-playbooks)'
+  /activate/api/v2/playbooks/simple:
+    get:
+      summary: Retrieve simple
+      tags:
+      - List of Operations
+      operationId: get_activate_api_v2_playbooks_simple
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L21410
+      x-source-context: '- [`GET /activate/api/v2/playbooks/simple`](#get--activate-api-v2-playbooks-simple)'
+  /user-lists/api/v1/userlists/ad:
+    get:
+      summary: Retrieve ad
+      tags:
+      - List of Operations
+      operationId: get_user_lists_api_v1_userlists_ad
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L24622
+      x-source-context: '- [`GET /user-lists/api/v1/userlists/ad`](#get--user-lists-api-v1-userlists-ad)'
+  /user-lists/api/v1/userlists/adgroup:
+    get:
+      summary: Retrieve adgroup
+      tags:
+      - List of Operations
+      operationId: get_user_lists_api_v1_userlists_adgroup
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L24623
+      x-source-context: '- [`GET /user-lists/api/v1/userlists/adgroup`](#get--user-lists-api-v1-userlists-adgroup)'
+  /user-lists/api/v1/userlists/advertisable:
+    get:
+      summary: Retrieve advertisable
+      tags:
+      - List of Operations
+      operationId: get_user_lists_api_v1_userlists_advertisable
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L24624
+      x-source-context: '- [`GET /user-lists/api/v1/userlists/advertisable`](#get--user-lists-api-v1-userlists-advertisable)'
+  /user-lists/api/v1/userlists/audience_preview:
+    get:
+      summary: Retrieve audience preview
+      tags:
+      - List of Operations
+      operationId: get_user_lists_api_v1_userlists_audience_preview
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L24625
+      x-source-context: '- [`GET /user-lists/api/v1/userlists/audience_preview`](#get--user-lists-api-v1-userlists-audience_preview)'
+  /user-lists/api/v1/userlists/segment/cdp_plus:
+    get:
+      summary: Retrieve cdp plus
+      tags:
+      - List of Operations
+      operationId: get_user_lists_api_v1_userlists_segment_cdp_plus
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L24628
+      x-source-context: '- [`GET /user-lists/api/v1/userlists/segment/cdp_plus`](#get--user-lists-api-v1-userlists-segment-cdp_plus)'
+  /user-lists/api/v1/userlists/segment/exact:
+    get:
+      summary: Retrieve exact
+      tags:
+      - List of Operations
+      operationId: get_user_lists_api_v1_userlists_segment_exact
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L24629
+      x-source-context: '- [`GET /user-lists/api/v1/userlists/segment/exact`](#get--user-lists-api-v1-userlists-segment-exact)'

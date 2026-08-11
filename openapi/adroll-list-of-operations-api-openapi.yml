@@ -1,0 +1,240 @@
+openapi: 3.2.0
+info:
+  title: AdRoll List of Operations API
+  version: derived-2026-08-10
+  description: Derived from AdRoll's published documentation. Every operation in this document corresponds to a literal HTTP method and path found in that documentation; nothing is inferred. Request and response schemas are NOT described -- only the operations that are demonstrably documented.
+  x-provenance: derived-from-documentation
+  x-source-documentation: https://apidocs.nextroll.com/llms-full.txt
+  x-documentation-url: https://apidocs.nextroll.com
+  x-derived: '2026-08-10'
+  x-derivation-method: literal METHOD+path extraction from provider documentation; no pattern completion, no inferred operations
+  x-not-a-provider-contract: This is API Evangelist's reading of the documentation, not a contract published or endorsed by the provider.
+servers:
+- url: https://services.adroll.com/api/v1
+tags:
+- name: List of Operations
+paths:
+  /user-lists/api/v1/userlists/segment:
+    post:
+      summary: Create segment
+      tags:
+      - List of Operations
+      operationId: post_user_lists_api_v1_userlists_segment
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L24627
+      x-source-context: '- [`POST /user-lists/api/v1/userlists/segment`](#post--user-lists-api-v1-userlists-segment)'
+  /activate/api/v2/campaign:
+    get:
+      summary: Retrieve campaign
+      tags:
+      - List of Operations
+      operationId: get_activate_api_v2_campaign
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L21404
+      x-source-context: '- [`GET /activate/api/v2/campaign`](#get--activate-api-v2-campaign)'
+  /activate/api/v1/campaign:
+    get:
+      summary: Retrieve campaign
+      tags:
+      - List of Operations
+      operationId: get_activate_api_v1_campaign
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11016
+      x-source-context: '- [`GET /activate/api/v1/campaign`](#get--activate-api-v1-campaign)'
+    put:
+      summary: Update campaign
+      tags:
+      - List of Operations
+      operationId: put_activate_api_v1_campaign
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11017
+      x-source-context: '- [`PUT /activate/api/v1/campaign`](#put--activate-api-v1-campaign)'
+  /activate/api/v1/strategy:
+    get:
+      summary: Retrieve strategy
+      tags:
+      - List of Operations
+      operationId: get_activate_api_v1_strategy
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11018
+      x-source-context: '- [`GET /activate/api/v1/strategy`](#get--activate-api-v1-strategy)'
+    post:
+      summary: Create strategy
+      tags:
+      - List of Operations
+      operationId: post_activate_api_v1_strategy
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11019
+      x-source-context: '- [`POST /activate/api/v1/strategy`](#post--activate-api-v1-strategy)'
+    put:
+      summary: Update strategy
+      tags:
+      - List of Operations
+      operationId: put_activate_api_v1_strategy
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L11020
+      x-source-context: '- [`PUT /activate/api/v1/strategy`](#put--activate-api-v1-strategy)'
+  /activate/api/v2/adgroup:
+    get:
+      summary: Retrieve adgroup
+      tags:
+      - List of Operations
+      operationId: get_activate_api_v2_adgroup
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L21400
+      x-source-context: '- [`GET /activate/api/v2/adgroup`](#get--activate-api-v2-adgroup)'
+    post:
+      summary: Create adgroup
+      tags:
+      - List of Operations
+      operationId: post_activate_api_v2_adgroup
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L21401
+      x-source-context: '- [`POST /activate/api/v2/adgroup`](#post--activate-api-v2-adgroup)'
+    put:
+      summary: Update adgroup
+      tags:
+      - List of Operations
+      operationId: put_activate_api_v2_adgroup
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L21402
+      x-source-context: '- [`PUT /activate/api/v2/adgroup`](#put--activate-api-v2-adgroup)'
+  /activate/api/v2/adgroup_ad:
+    put:
+      summary: Update adgroup ad
+      tags:
+      - List of Operations
+      operationId: put_activate_api_v2_adgroup_ad
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L21403
+      x-source-context: '- [`PUT /activate/api/v2/adgroup_ad`](#put--activate-api-v2-adgroup_ad)'
+  /activate/api/v2/playbooks:
+    get:
+      summary: Retrieve playbooks
+      tags:
+      - List of Operations
+      operationId: get_activate_api_v2_playbooks
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L21407
+      x-source-context: '- [`GET /activate/api/v2/playbooks`](#get--activate-api-v2-playbooks)'
+    post:
+      summary: Create playbooks
+      tags:
+      - List of Operations
+      operationId: post_activate_api_v2_playbooks
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L21408
+      x-source-context: '- [`POST /activate/api/v2/playbooks`](#post--activate-api-v2-playbooks)'
+    put:
+      summary: Update playbooks
+      tags:
+      - List of Operations
+      operationId: put_activate_api_v2_playbooks
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L21409
+      x-source-context: '- [`PUT /activate/api/v2/playbooks`](#put--activate-api-v2-playbooks)'
+  /activate/api/v2/playbooks/simple:
+    get:
+      summary: Retrieve simple
+      tags:
+      - List of Operations
+      operationId: get_activate_api_v2_playbooks_simple
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L21410
+      x-source-context: '- [`GET /activate/api/v2/playbooks/simple`](#get--activate-api-v2-playbooks-simple)'
+  /user-lists/api/v1/userlists/ad:
+    get:
+      summary: Retrieve ad
+      tags:
+      - List of Operations
+      operationId: get_user_lists_api_v1_userlists_ad
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L24622
+      x-source-context: '- [`GET /user-lists/api/v1/userlists/ad`](#get--user-lists-api-v1-userlists-ad)'
+  /user-lists/api/v1/userlists/adgroup:
+    get:
+      summary: Retrieve adgroup
+      tags:
+      - List of Operations
+      operationId: get_user_lists_api_v1_userlists_adgroup
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L24623
+      x-source-context: '- [`GET /user-lists/api/v1/userlists/adgroup`](#get--user-lists-api-v1-userlists-adgroup)'
+  /user-lists/api/v1/userlists/advertisable:
+    get:
+      summary: Retrieve advertisable
+      tags:
+      - List of Operations
+      operationId: get_user_lists_api_v1_userlists_advertisable
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L24624
+      x-source-context: '- [`GET /user-lists/api/v1/userlists/advertisable`](#get--user-lists-api-v1-userlists-advertisable)'
+  /user-lists/api/v1/userlists/audience_preview:
+    get:
+      summary: Retrieve audience preview
+      tags:
+      - List of Operations
+      operationId: get_user_lists_api_v1_userlists_audience_preview
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L24625
+      x-source-context: '- [`GET /user-lists/api/v1/userlists/audience_preview`](#get--user-lists-api-v1-userlists-audience_preview)'
+  /user-lists/api/v1/userlists/segment/cdp_plus:
+    get:
+      summary: Retrieve cdp plus
+      tags:
+      - List of Operations
+      operationId: get_user_lists_api_v1_userlists_segment_cdp_plus
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L24628
+      x-source-context: '- [`GET /user-lists/api/v1/userlists/segment/cdp_plus`](#get--user-lists-api-v1-userlists-segment-cdp_plus)'
+  /user-lists/api/v1/userlists/segment/exact:
+    get:
+      summary: Retrieve exact
+      tags:
+      - List of Operations
+      operationId: get_user_lists_api_v1_userlists_segment_exact
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L24629
+      x-source-context: '- [`GET /user-lists/api/v1/userlists/segment/exact`](#get--user-lists-api-v1-userlists-segment-exact)'

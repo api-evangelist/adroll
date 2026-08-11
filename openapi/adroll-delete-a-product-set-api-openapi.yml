@@ -1,0 +1,27 @@
+openapi: 3.2.0
+info:
+  title: AdRoll Delete a Product Set API
+  version: derived-2026-08-10
+  description: Derived from AdRoll's published documentation. Every operation in this document corresponds to a literal HTTP method and path found in that documentation; nothing is inferred. Request and response schemas are NOT described -- only the operations that are demonstrably documented.
+  x-provenance: derived-from-documentation
+  x-source-documentation: https://apidocs.nextroll.com/llms-full.txt
+  x-documentation-url: https://apidocs.nextroll.com
+  x-derived: '2026-08-10'
+  x-derivation-method: literal METHOD+path extraction from provider documentation; no pattern completion, no inferred operations
+  x-not-a-provider-contract: This is API Evangelist's reading of the documentation, not a contract published or endorsed by the provider.
+servers:
+- url: https://services.adroll.com/api/v1
+tags:
+- name: Delete a Product Set
+paths:
+  /api/v1/product_sets/delete:
+    delete:
+      summary: Delete delete
+      tags:
+      - Delete a Product Set
+      operationId: delete_api_v1_product_sets_delete
+      responses:
+        '200':
+          description: Successful response
+      x-source-documentation: https://apidocs.nextroll.com/llms-full.txt#L6504
+      x-source-context: You can delete a product set by calling `DELETE /api/v1/product_sets/delete`. You must specify both the product set and the Advertisable EID.
