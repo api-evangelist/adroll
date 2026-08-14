@@ -28,7 +28,7 @@ tags:
 - Programmatic
 url: https://raw.githubusercontent.com/api-evangelist/adroll/refs/heads/main/apis.yml
 created: '2026-05-11'
-modified: '2026-05-11'
+modified: '2026-08-13'
 specificationVersion: '0.19'
 apis:
 - aid: adroll:nextroll-api
@@ -53,8 +53,100 @@ apis:
     url: https://apidocs.nextroll.com/guides/oauth.html
   - type: Guides
     url: https://apidocs.nextroll.com/guides/index.html
-  - url: graphql/adroll-graphql.md
-    type: GraphQL
+  - type: APIReference
+    url: https://apidocs.nextroll.com/crud-api/reference.html
+  - type: Authentication
+    url: authentication/adroll-authentication.yml
+  - type: Conventions
+    url: conventions/adroll-conventions.yml
+  - type: ErrorCatalog
+    url: errors/adroll-error-codes.yml
+  - type: DataModel
+    url: data-model/adroll-data-model.yml
+  - type: RateLimits
+    url: rate-limits/adroll-rate-limits.yml
+- aid: adroll:nextroll-graphql-reporting
+  name: NextRoll GraphQL Reporting API
+  description: GraphQL API for retrieving all AdRoll and AdRoll ABM reporting data
+    in a single request — organization, advertisable, campaign, adgroup, ad, audience,
+    email and automation metrics, plus conversions, reach and frequency, brand awareness,
+    CTV household, contextual targeting and UTM-based attribution. It replaces the
+    /report endpoints of the CRUD API and the /report and /metrics endpoints of the
+    Prospecting API. 107 types and 1,710 fields are documented in the published schema
+    reference; live introspection is authenticated.
+  humanURL: https://apidocs.nextroll.com/graphql-reporting-api/overview.html
+  baseURL: https://services.adroll.com/reporting/api/v1/query
+  tags:
+  - Reporting
+  - Analytics
+  - GraphQL
+  - Attribution
+  - Advertising
+  properties:
+  - type: GraphQL
+    url: graphql/adroll-reporting.graphql
+  - type: Documentation
+    url: graphql/adroll-graphql.md
+  - type: APIReference
+    url: https://apidocs.nextroll.com/graphql-reporting-api/reference.html
+  - type: Schema
+    url: https://apidocs.nextroll.com/graphql-reporting-api/schema.html
+  - type: Console
+    url: https://app.adroll.com/reporting/graphiql
+  - type: Examples
+    url: https://apidocs.nextroll.com/graphql-reporting-api/examples.html
+- aid: adroll:nextroll-mcp
+  name: AdRoll MCP Server
+  description: Remote Model Context Protocol server that exposes AdRoll and AdRoll
+    ABM data and supported workflows to MCP-compatible AI clients including Claude,
+    ChatGPT, Cursor, n8n and Microsoft Copilot Studio. Launched in open beta on 27
+    May 2026. Covers campaign performance retrieval, trend summarisation, campaign
+    draft creation with draft-first human review, and ABM account intelligence. Authorization
+    is OAuth 2.1 with dynamic client registration and PKCE, published as RFC 8414
+    and RFC 9728 metadata documents; the live tools/list manifest is authenticated.
+  humanURL: https://www.adroll.com/blog/adroll-mcp-server
+  baseURL: https://services.adroll.com/mcp
+  tags:
+  - MCP
+  - Agents
+  - Advertising
+  - Reporting
+  - Campaigns
+  properties:
+  - type: MCPServer
+    url: mcp/adroll-mcp.yml
+  - type: ToolCrosswalk
+    url: mcp/adroll-tool-crosswalk.yml
+  - type: Documentation
+    url: https://help.adroll.com/hc/en-us/articles/44128588376077-AdRoll-MCP-Server-Beta
+  - type: Blog
+    url: https://www.adroll.com/blog/adroll-mcp-server
+- aid: adroll:nextroll-s2s
+  name: NextRoll Server-to-Server (S2S) Event API
+  description: Server-side event ingestion API for sending user events and conversions
+    to AdRoll directly from your own servers, complementing the AdRoll pixel and mobile
+    measurement partner integrations. Accepts batched JSON events keyed by an AdRoll
+    click ID or first-party cookie, with hashed email, device and user identifiers,
+    covering both B2C events (page view, product search, add to cart, purchase) and
+    B2B/ABM events (high-value page, gated content, demo request, form fill). Supports
+    a dry_run validation mode and gzip compression.
+  humanURL: https://apidocs.nextroll.com/server-to-server-api/overview.html
+  baseURL: https://srv.adroll.com/api
+  tags:
+  - Events
+  - Conversions
+  - Attribution
+  - Server-to-Server
+  - Advertising
+  properties:
+  - type: Documentation
+    url: https://apidocs.nextroll.com/server-to-server-api/overview.html
+  - type: APIReference
+    url: https://apidocs.nextroll.com/server-to-server-api/reference.html
+  - type: SourceCode
+    url: https://github.com/AdRoll/server-to-server
+  - type: EventCatalog
+    url: https://apidocs.nextroll.com/server-to-server-api/events.html
 common:
 - type: DomainSecurity
   url: security/adroll-domain-security.yml
@@ -70,8 +162,79 @@ common:
   url: https://apidocs.nextroll.com
 - type: Pricing
   url: https://www.adroll.com/pricing
-- type: Signup
+- type: SignUp
   url: https://app.adroll.com/signup
+- type: Login
+  url: https://app.adroll.com/login
+- type: DeveloperPortal
+  url: https://developers.nextroll.com/
+- type: APIReference
+  url: https://apidocs.nextroll.com/crud-api/reference.html
+- type: GettingStarted
+  url: https://apidocs.nextroll.com/guides/get-started.html
+- type: Support
+  url: https://apidocs.nextroll.com/support.html
+- type: HelpCenter
+  url: https://help.adroll.com/hc/en-us
+- type: TermsOfService
+  url: https://www.nextroll.com/terms
+- type: TermsOfUse
+  url: https://www.nextroll.com/terms/api
+- type: PrivacyPolicy
+  url: https://www.nextroll.com/privacy
+- type: Authentication
+  url: authentication/adroll-authentication.yml
+- type: OAuthScopes
+  url: scopes/adroll-scopes.yml
+- type: Conventions
+  url: conventions/adroll-conventions.yml
+- type: ErrorCatalog
+  url: errors/adroll-error-codes.yml
+- type: DataModel
+  url: data-model/adroll-data-model.yml
+- type: Lifecycle
+  url: lifecycle/adroll-lifecycle.yml
+- type: StatusPage
+  url: https://status.nextroll.com
+- type: Deprecation
+  url: lifecycle/adroll-lifecycle.yml
+- type: RateLimits
+  url: rate-limits/adroll-rate-limits.yml
+- type: Plans
+  url: plans/adroll-plans-pricing.yml
+- type: Conformance
+  url: conformance/adroll-conformance.yml
+- type: Compliance
+  url: https://security.nextroll.com/
+- type: TrustCenter
+  url: security/adroll-trust-center.yml
+- type: VulnerabilityDisclosure
+  url: security/adroll-vulnerability-disclosure.yml
+- type: Security
+  url: https://security.nextroll.com/
+- type: WellKnown
+  url: well-known/adroll-well-known.yml
+- type: MCPServer
+  url: mcp/adroll-mcp.yml
+- type: ToolCrosswalk
+  url: mcp/adroll-tool-crosswalk.yml
+- type: LLMsTxt
+  url: llms/adroll-llms.txt
+- type: AgentSkill
+  url: skills/_index.yml
+- type: Sandbox
+  url: sandbox/adroll-sandbox.yml
+- type: Components
+  url: components/adroll-components.yml
+- type: Packages
+  url: packages/adroll-packages.yml
+- type: GraphQL
+  url: graphql/adroll-reporting.graphql
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
+x-enrichment:
+  date: '2026-08-13'
+  status: enriched
+  artifacts_added: 29
+  pass: local-v1
