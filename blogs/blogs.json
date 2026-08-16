@@ -9,6 +9,13 @@
       "method": "feed"
     },
     {
+      "source": "https://help.adroll.com/hc/en-us/articles/44128588376077-AdRoll-MCP-Server-Beta",
+      "feed_url": "https://help.adroll.com/hc/en-us/articles/44128588376077-AdRoll-MCP-Server-Beta",
+      "title": "",
+      "saved": 0,
+      "method": "none"
+    },
+    {
       "source": "https://www.nextroll.com/blog",
       "feed_url": "https://www.nextroll.com/processors/feed",
       "title": "",
@@ -16,6 +23,6 @@
       "method": "discovered"
     }
   ],
-  "fetched": "2026-08-06T14:08:46Z",
+  "fetched": "2026-08-15T12:22:01Z",
   "post_count": 15
 }
