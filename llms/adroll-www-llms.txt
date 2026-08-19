@@ -1,0 +1,31 @@
+# AdRoll
+
+> AdRoll is a digital advertising and marketing platform by NextRoll, Inc. that helps businesses grow with AI-powered retargeting, display ads, video ads, social ads, email, and account-based marketing — managed from a single platform.
+
+AdRoll serves direct-to-consumer and B2B brands as well as agencies, offering audience targeting, cross-channel campaign management, attribution, and analytics. The platform integrates with major ecommerce, CRM, and marketing tools including Shopify, HubSpot, Salesforce, Klaviyo, and Google Ads.
+
+## Platform
+
+- [Digital Advertising Platform](https://www.adroll.com/digital-advertising-platform): Overview of AdRoll's full-funnel, multichannel advertising platform
+- [Retargeting](https://www.adroll.com/features/retargeting): Web and social retargeting to re-engage site visitors
+- [Pricing](https://www.adroll.com/pricing): Plans and pricing details
+- [Why AdRoll](https://www.adroll.com/why-adroll): How AdRoll compares and what makes it different
+
+## Solutions
+
+- [Ecommerce Marketing](https://www.adroll.com/ecommerce-marketing): Solutions for online retailers and D2C brands
+- [Account-Based Marketing](https://www.adroll.com/solutions/account-based-marketing): B2B ABM advertising solutions
+- [For Agencies](https://www.adroll.com/agency): Tools and programs for marketing agencies
+
+## Resources
+
+- [Marketing Resources Library](https://www.adroll.com/resources): Guides, reports, webinars, and case studies
+- [Customer Case Studies](https://www.adroll.com/customers): Results real customers have achieved with AdRoll
+- [Digital Advertising Knowledge Center](https://www.adroll.com/digital-advertising): Educational articles on retargeting, display advertising, CTV, and more
+- [Marketing Glossary](https://www.adroll.com/glossary): Definitions of digital marketing and advertising terms
+- [AdRoll Blog](https://www.adroll.com/blog): Marketing news, tips, and best practices
+
+## Company
+
+- [About NextRoll](https://www.nextroll.com/about): AdRoll is a division of NextRoll, Inc., headquartered in San Francisco
+- [Contact / Request a Demo](https://www.adroll.com/request-demo): Talk to the AdRoll team

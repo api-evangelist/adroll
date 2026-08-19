@@ -1,0 +1,32 @@
+generated: '2026-08-13'
+method: generated
+source: >-
+  https://apidocs.nextroll.com/ reference pages (176 documented operations) and
+  graphql/adroll-reporting.graphql
+note: >-
+  NextRoll publishes no OpenAPI, so these skills are grounded in documented
+  HTTP method + path pairs verified against the published reference pages and in
+  GraphQL fields verified against the transcribed schema — not in operationIds,
+  because none exist. Every endpoint named in a skill appears verbatim in the
+  NextRoll reference. Nothing is invented.
+skills:
+- file: adroll-get-oriented.md
+  name: Get oriented on the NextRoll API
+  api: NextRoll API for AdRoll
+  operations: ['GET /api/v1/organization/get_advertisables', 'GET /api/v1/organization/get', 'GET /api/v1/advertisable/get']
+- file: adroll-report-campaign-performance.md
+  name: Report on AdRoll performance
+  api: NextRoll GraphQL Reporting API
+  operations: ['POST /reporting/api/v1/query']
+- file: adroll-launch-retargeting-campaign.md
+  name: Launch an AdRoll retargeting campaign
+  api: NextRoll API for AdRoll (CRUD API)
+  operations: ['POST /api/v1/campaign/create', 'POST /api/v1/adgroup/create', 'POST /api/v1/ad/create', 'POST /api/v1/adgroup/select_ads', 'POST /api/v1/adgroup/add_segments']
+- file: adroll-manage-audiences.md
+  name: Manage AdRoll audiences
+  api: NextRoll Audience API
+  operations: ['GET /audience/v1/segments', 'POST /audience/v1/segments', 'POST /audience/v1/segments/bulk', 'GET /audience/v1/target_accounts', 'GET /user-lists/api/v1/userlists/segment']
+- file: adroll-send-server-side-conversions.md
+  name: Send server-side conversions to AdRoll
+  api: NextRoll Server-to-Server (S2S) Event API
+  operations: ['POST /api?advertisable=<ADVERTISABLE_EID>']

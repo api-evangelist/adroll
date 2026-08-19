@@ -1,0 +1,85 @@
+generated: '2026-08-13'
+method: searched
+source: https://apidocs.nextroll.com/crud-api/api-usage.html
+format: vendor-json
+rfc9457: false
+note: >-
+  NextRoll does not use RFC 9457 problem+json. It publishes its own error
+  envelope plus a small numeric code enum, and the GraphQL Reporting API uses a
+  third, different shape again. All three are captured here verbatim from the
+  docs. Per-operation error catalogues cannot be derived because no OpenAPI is
+  published.
+
+envelopes:
+- surface: REST (CRUD, Audience, Prospecting, User Lists, Geotargeting)
+  shape: '{"errors": [{"message": "...", "code": <int>, "field": "<input field>"}]}'
+  replaces: the `results` field present on success
+  rules:
+  - Each error object carries a `message` and either a `code` or a `field`.
+  - Both `code` and `field` on the same object is documented as rare.
+  - Errors with a `field` are input-validation errors; errors without one are generic.
+  - 'On HTTP 405 the permitted methods are listed in the response `Allow` header.'
+  source: https://apidocs.nextroll.com/crud-api/api-usage.html
+- surface: GraphQL Reporting API
+  shape: '{"has_errors": true, "errors": [{"id": "E001", "msg": "HTTP request failed"}], "request": "req46209", "version": "...", "data": {...}}'
+  rules:
+  - Root `has_errors` is the fast check — the docs say to test it before processing data.
+  - Object-level `errors[]` contain error IDs that reference the root `errors[]` messages.
+  - Error IDs are unique per request; several objects may reference the same ID.
+  - '`has_errors: true` propagates from any failing nested object up to the root.'
+  - Partial data may be returned alongside errors; the docs advise discarding or explicitly handling it rather than displaying a mix.
+  source: https://apidocs.nextroll.com/graphql-reporting-api/overview.html
+- surface: API gateway (services.adroll.com proxy)
+  shape: '{"errors": [{"code": "apiproxy:<n>", "message": "..."}]}'
+  note: >-
+    Observed live, ahead of any service. Distinct from the CRUD envelope because
+    `code` here is a namespaced STRING, not the numeric enum.
+  observed:
+  - {code: 'apiproxy:3', http_status: 401, message: "Missing 'apikey' query parameter. Register for an API key at https://developers.nextroll.com/"}
+  - {code: 'apiproxy:11', http_status: 404, message: 'This is not a valid path, double-check the URL'}
+  source: probed https://services.adroll.com/api/openapi.json and /reporting/api/v1/query on 2026-08-13
+
+http_statuses:
+- {status: 200, meaning: Good to go}
+- {status: 400, meaning: Validation error or missing input}
+- {status: 401, meaning: You do not have access}
+- {status: 403, meaning: You do not have access}
+- {status: 404, meaning: We could not find the object}
+- {status: 405, meaning: HTTP method not allowed (permitted methods returned in the Allow header)}
+- {status: 429, meaning: Too Many Requests — rate limit exceeded (RFC 6585)}
+- {status: 500, meaning: Server-side failure}
+
+codes:
+- {code: 1, name: INVALID, meaning: The supplied value is invalid}
+- {code: 2, name: MISMATCH, meaning: Values that must agree do not}
+- {code: 4, name: NO_DEFAULT, meaning: No default is available for a required value}
+- {code: 8, name: FAIL, meaning: The operation failed}
+- {code: 16, name: NOT_FOUND, meaning: The referenced object could not be found}
+- {code: 32, name: UNSET, meaning: A required value was not set}
+- {code: 64, name: INCOMPLETE, meaning: The submitted object is incomplete}
+- {code: 128, name: EXTERNAL, meaning: An external system caused the failure}
+- {code: 256, name: DUPLICATE, meaning: The value duplicates an existing one}
+- {code: 512, name: FORBIDDEN, meaning: The operation is not permitted}
+code_enum_note: >-
+  The values are powers of two (1, 2, 4, 8, 16, 32, 64, 128, 256, 512), i.e. a
+  bit-flag enum, though the docs present each code singly and do not document
+  combined values.
+
+remediation:
+  support: https://help.adroll.com/hc/en-us/requests/new
+  support_guidance: >-
+    Select "API Issue" in the Issue field and include the request id (GraphQL
+    `request` field), the full query and response, and captured HTTP headers.
+  rate_limit_increase: https://docs.google.com/forms/d/e/1FAIpQLSccdzxBoB_BHfAzkjoz9tc_gCPXsniGXcgYNMFvPXMRxS17uA/viewform
+
+gaps:
+- No machine-readable error registry (no problem type URIs, no per-operation error lists).
+- The numeric `code` enum applies only to the CRUD API; Audience, Prospecting and User Lists errors are not catalogued.
+- Retry guidance is qualitative — "implement retry logic for transient errors" — with no Retry-After contract documented.
+
+x-evidence:
+  checked: '2026-08-13'
+  probes:
+  - {url: 'https://apidocs.nextroll.com/crud-api/api-usage.html', http_status: 200}
+  - {url: 'https://apidocs.nextroll.com/graphql-reporting-api/overview.html', http_status: 200}
+  - {url: 'https://services.adroll.com/reporting/api/v1/query', http_status: 401}

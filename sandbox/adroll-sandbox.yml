@@ -1,0 +1,80 @@
+generated: '2026-08-13'
+method: searched
+source: https://apidocs.nextroll.com/guides/get-started.html
+note: >-
+  AdRoll has no test mode. There is no sandbox account, no test-vs-live key
+  prefix, no magic test identifiers and no fixture tooling — every credential
+  addresses production data and production ad spend. What DOES exist is an
+  interactive query console and one server-side validation flag, both captured
+  below. Nothing here is invented; the absences are recorded as absences.
+
+test_mode:
+  exists: false
+  key_prefixes: null
+  test_credentials: null
+  magic_values: null
+  test_clock: null
+  note: >-
+    The nearest published guidance is organisational, not technical: "It is
+    recommended that you create an application for production and one for
+    testing. This allows you to have a separate OAuth 2.0 redirect URI for each
+    of your development environments." Two application registrations against the
+    same live account — separate credentials, identical blast radius.
+
+console:
+  name: GraphiQL — GraphQL Reporting API console
+  url: https://app.adroll.com/reporting/graphiql
+  kind: interactive query console
+  auth: signed-in AdRoll dashboard session
+  read_only: true
+  description: >-
+    NextRoll points developers here to browse the reporting schema and build
+    queries interactively: "You can experiment with building queries using
+    GraphiQL." The Reporting API is read-only, so the console cannot mutate
+    campaigns — which makes it the one genuinely safe place to explore this API.
+  source: https://apidocs.nextroll.com/graphql-reporting-api/overview.html
+
+dry_run:
+  surface: Server-to-Server (S2S) Event API
+  endpoint: 'POST https://srv.adroll.com/api?advertisable=<ADVERTISABLE_EID>'
+  parameter: dry_run
+  value: 'true'
+  behaviour: >-
+    "When used, the payload is validated and logged, but doesn't impact your
+    audiences or attribution." A payload-validation mode for event ingestion —
+    the only non-destructive write path AdRoll documents.
+  source: https://apidocs.nextroll.com/server-to-server-api/reference.html
+
+draft_first:
+  surface: AdRoll MCP Server
+  behaviour: >-
+    Campaigns created through the MCP server are staged as drafts for human
+    review before going live. A safety control on agent writes, not a sandbox —
+    the draft is created in the real account.
+  source: https://www.adroll.com/blog/adroll-mcp-server
+
+campaign_draft_status:
+  status: draft
+  meaning: 'The campaign is in draft state and has not yet been launched.'
+  note: >-
+    The CRUD API's campaign status vocabulary includes `draft`, so a campaign can
+    be created and inspected in production without serving impressions. This is
+    the practical substitute for a sandbox on the write path.
+  source: https://apidocs.nextroll.com/crud-api/api-usage.html
+
+verification_tools:
+- {name: PixelPal, purpose: 'verify the pixel is firing', url: 'https://help.adroll.com/hc/en-us/articles/360040010352'}
+- {name: Pixel Assistant, purpose: 'verify pixel implementation', url: 'https://help.adroll.com/hc/en-us/articles/8261197025165'}
+
+gap: >-
+  An agent or an integrator cannot exercise campaign creation, ad upload,
+  audience mutation or billing paths without touching a live advertising account.
+  For a platform whose write operations spend money, the absence of a test mode
+  is the single largest onboarding risk on this API.
+
+x-evidence:
+  checked: '2026-08-13'
+  probes:
+  - {url: 'https://apidocs.nextroll.com/graphql-reporting-api/overview.html', http_status: 200}
+  - {url: 'https://apidocs.nextroll.com/server-to-server-api/reference.html', http_status: 200}
+  - {url: 'https://apidocs.nextroll.com/guides/get-started.html', http_status: 200}

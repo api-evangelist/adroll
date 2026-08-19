@@ -1,0 +1,146 @@
+generated: '2026-08-13'
+method: searched
+source: https://apidocs.nextroll.com/crud-api/api-usage.html
+note: >-
+  Cross-cutting request/response semantics for the NextRoll API family, read from
+  the published usage guides. NextRoll publishes no OpenAPI, so nothing here is
+  derived from a spec.
+
+authentication:
+  style: 'Authorization header (Token or Bearer) PLUS apikey query parameter'
+  detail: authentication/adroll-authentication.yml
+  https_only: true
+
+request:
+  base_url: https://services.adroll.com
+  accept_header: 'The docs ask clients to set Accept: application/json'
+  parameter_placement: >-
+    For PUT and POST, parameters may be sent either in the body
+    (application/x-www-form-urlencoded or multipart/form-data) or in the URL
+    query string. The apikey parameter is the exception — it is ALWAYS in the
+    query string, never in the body.
+  content_types_accepted:
+  - application/x-www-form-urlencoded
+  - multipart/form-data
+  - application/json  # GraphQL Reporting API and Server-to-Server Event API
+  compression: 'The S2S event endpoint documents gzip request compression to reduce payload size.'
+
+verb_semantics:
+  note: >-
+    The CRUD API is RPC-shaped REST — the action is in the path
+    (/api/v1/ad/create, /api/v1/adgroup/pause) rather than expressed purely by
+    the verb. The reference page is the source of truth for each endpoint's
+    method; the documented common mapping is:
+  mapping:
+    POST: create
+    GET: get
+    PUT or POST: edit
+    DELETE: deactivate/delete
+
+response:
+  success_envelope:
+    status: 200
+    shape: '{"results": <return value>}'
+    note: 'Successful CRUD responses wrap the payload in a top-level `results` field.'
+  error_envelope:
+    shape: '{"errors": [{"message": "...", "code": <int>, "field": "..."}]}'
+    note: >-
+      On error the `errors` array REPLACES `results`. Each error object carries a
+      `message` plus either a numeric `code` or a `field` name (rarely both).
+      See errors/adroll-error-codes.yml.
+  graphql_envelope:
+    shape: '{"data": {...}, "errors": [{"id": "E001", "msg": "..."}], "has_errors": true, "request": "req46209", "version": "2018.09.11-1"}'
+    note: >-
+      The GraphQL Reporting API deviates from standard GraphQL error handling:
+      a boolean `has_errors` appears at the root AND on every affected object,
+      object-level `errors[]` hold error IDs that reference the messages in the
+      root `errors[]`, and has_errors propagates up the object hierarchy.
+
+request_tracing:
+  supported: true
+  field: request
+  location: response body (GraphQL Reporting API)
+  example: req46209
+  note: >-
+    Every GraphQL Reporting API response carries a `request` id and a `version`
+    build string. The docs instruct you to quote the request id when opening a
+    support ticket. No X-Request-Id response header is documented for the REST
+    services.
+
+idempotency:
+  supported: false
+  key_header: null
+  note: >-
+    NextRoll documents no idempotency key, no request de-duplication window and
+    no safe-retry contract on any of its write operations. The closest published
+    facility is the S2S event endpoint's `dry_run=true` query parameter, which
+    validates and logs a payload without applying it — a validation mode, not
+    idempotency. Retrying a failed POST /api/v1/campaign/create is therefore
+    unsafe for an autonomous agent.
+
+pagination:
+  style: mixed
+  note: >-
+    Pagination is not a platform-wide convention. It appears per endpoint —
+    GET /api/v1/organization/get_advertisables_paginated exists as a distinct
+    paginated sibling of the unpaginated get_advertisables, and the *_fast
+    variants (advertisable/get_ads_fast, get_adgroups_fast, get_campaigns_fast)
+    are separate reduced-payload endpoints rather than a projection parameter.
+    There is no cursor/offset envelope shared across services.
+  cursor: null
+  offset: null
+
+field_expansion:
+  supported: false
+  note: >-
+    Not available on the REST surface. The GraphQL Reporting API is NextRoll's
+    answer to over/under-fetching: the overview states its purpose is to
+    "retrieve only the data you need" and query multiple advertisables in one
+    request, replacing the CRUD /report and Prospecting /report + /metrics
+    endpoints.
+
+identifiers:
+  scheme: EID (External ID)
+  format: alphanumeric string, e.g. 48F9EA2E5ACAEE24EB766F
+  note: >-
+    Every object — Organization, Advertisable, Campaign, AdGroup, Ad, Audience —
+    is addressed by an EID. EIDs are not typed by prefix, so an EID alone does
+    not tell a caller which object class it belongs to.
+
+data_types:
+  String: A string
+  Integer: An integer
+  Float: A real number
+  Boolean: true or false
+  List: comma-separated values on input, JSON array on output
+  Binary: a binary stream such as a file upload
+  DateTime: ISO 8601, with or without time, always UTC
+
+time:
+  timezone: UTC
+  note: 'All dates and times are UTC. Reporting for a day is typically available within twelve hours of that day ending and is not final until 48 hours after the start of the current UTC day.'
+
+soft_delete:
+  supported: true
+  note: >-
+    Objects are not truly deleted. Ads carry an `is_active` flag that is set to
+    false instead; `is_active` is independent of the object's `status`.
+
+versioning:
+  scheme: uri-path
+  detail: lifecycle/adroll-lifecycle.yml
+
+rate_limit_signaling:
+  detail: rate-limits/adroll-rate-limits.yml
+  status_on_exhaustion: 429
+  headers_documented: false
+
+errors:
+  detail: errors/adroll-error-codes.yml
+
+x-evidence:
+  checked: '2026-08-13'
+  probes:
+  - {url: 'https://apidocs.nextroll.com/crud-api/api-usage.html', http_status: 200}
+  - {url: 'https://apidocs.nextroll.com/graphql-reporting-api/overview.html', http_status: 200}
+  - {url: 'https://apidocs.nextroll.com/faq.html', http_status: 200}

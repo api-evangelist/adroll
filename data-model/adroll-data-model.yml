@@ -1,0 +1,209 @@
+generated: '2026-08-13'
+method: derived
+source: >-
+  https://apidocs.nextroll.com/guides/object-structure.html,
+  graphql/adroll-reporting.graphql, and the NextRoll REST reference pages
+note: >-
+  NextRoll publishes its object hierarchy in prose and a diagram, and publishes a
+  107-type GraphQL reporting schema. This entity graph is derived from both plus
+  the 176 documented REST endpoints. No OpenAPI exists to derive $ref links from,
+  so relationships come from the published hierarchy and from the GraphQL field
+  types, not from a spec.
+
+identifiers:
+  scheme: EID
+  name: External ID
+  format: alphanumeric string
+  example: 48F9EA2E5ACAEE24EB766F
+  typed_prefixes: false
+  note: >-
+    Every object class uses the same untyped EID format, so an identifier alone
+    does not reveal what it identifies. Contrast with prefixed-id designs where
+    `cus_`/`inv_` are self-describing.
+
+entities:
+- name: Organization
+  description: The account root. Every User belongs to exactly one Organization.
+  rest: ['GET /api/v1/organization/get', 'GET /api/v1/organization/get_advertisables', 'GET /api/v1/organization/get_advertisables_paginated', 'GET /api/v1/organization/get_accounts', 'GET /api/v1/organization/get_users', 'GET /api/v1/organization/get_billing_methods']
+  graphql: [Organization, OrganizationQuery, OrganizationGroupData]
+  relationships:
+  - {type: has_many, target: Advertisable, via: advertisables}
+  - {type: has_many, target: User, via: users}
+  - {type: has_many, target: BillingMethod, via: billing_methods}
+
+- name: Advertisable
+  description: >-
+    "A thing that can be advertised" — a business, product or service. Agencies
+    typically run one Advertisable per client. The EID most calls need first.
+  rest: ['GET /api/v1/advertisable/get', 'POST /api/v1/advertisable/create', 'POST /api/v1/advertisable/edit', 'GET /api/v1/advertisable/get_campaigns', 'GET /api/v1/advertisable/get_adgroups', 'GET /api/v1/advertisable/get_ads', 'GET /api/v1/advertisable/get_segments', 'GET /api/v1/advertisable/get_pixel', 'POST /api/v1/advertisable/enable_rollcrawl']
+  graphql: [Advertisable, AdvertisableQuery, AdvertisableMetricResult, FieldsAdvertisable]
+  relationships:
+  - {type: belongs_to, target: Organization, via: organization}
+  - {type: has_many, target: Campaign, via: campaigns}
+  - {type: has_many, target: AdGroup, via: adgroups}
+  - {type: has_many, target: Ad, via: ads}
+  - {type: has_many, target: Audience, via: segments}
+  - {type: has_one, target: Pixel, via: pixel}
+  - {type: has_many, target: ProductFeed, via: product_feeds}
+
+- name: Campaign
+  description: One or more AdGroups with a budget, schedule and status.
+  rest: ['GET /api/v1/campaign/get', 'POST /api/v1/campaign/create', 'POST /api/v1/campaign/edit', 'PUT /api/v1/campaign/pause', 'PUT /api/v1/campaign/unpause', 'GET /api/v1/campaign/get_adgroups', 'GET /prospecting/api/v2/campaigns/(campaign)', 'POST /prospecting/api/v2/advertisables/(adv)/campaigns']
+  graphql: [Campaign, CampaignQuery, CampaignMetricResult, FieldsCampaign, InventoryCampaign]
+  relationships:
+  - {type: belongs_to, target: Advertisable, via: advertisable}
+  - {type: has_many, target: AdGroup, via: adgroups}
+  statuses: [approved, paused, admin_review, completed, draft, admin_paused, cancelled, rejected]
+  flags: [is_active]
+
+- name: AdGroup
+  description: Joins Audiences to Ads — the targeting unit inside a Campaign.
+  rest: ['GET /api/v1/adgroup/get', 'POST /api/v1/adgroup/create', 'POST /api/v1/adgroup/edit', 'POST /api/v1/adgroup/add_segments', 'POST /api/v1/adgroup/remove_segments', 'POST /api/v1/adgroup/select_ads', 'POST /api/v1/adgroup/deselect_ads', 'POST /api/v1/adgroup/pause', 'POST /api/v1/adgroup/unpause', 'GET /api/v1/adgroup/get_ads', 'GET /prospecting/api/v2/adgroups/(adgroup)']
+  graphql: [Adgroup, AdgroupQuery, AdgroupGroupData, AdGroupData]
+  relationships:
+  - {type: belongs_to, target: Campaign, via: campaign}
+  - {type: has_many, target: Ad, via: ads}
+  - {type: has_many, target: Audience, via: segments}
+  - {type: has_many, target: Flight, via: flights}
+  - {type: has_many, target: GeoTarget, via: geo-targets}
+
+- name: Ad
+  description: The creative shown to a targeted Audience. Types include static web and dynamic web.
+  rest: ['GET /api/v1/ad/get', 'POST /api/v1/ad/create', 'PUT /api/v1/ad/edit', 'POST /api/v1/ad/clone', 'POST /api/v1/ad/create_templated_web_ads']
+  graphql: [Ad, AdQuery, AdLabel, FieldsAd, FieldsAdMetrics]
+  relationships:
+  - {type: belongs_to, target: Advertisable, via: advertisable}
+  - {type: has_many, target: AdGroup, via: adgroups}
+  statuses: [approved, paused, admin_review, admin_paused, kicked]
+  flags: [is_active]
+  note: 'Ads are never truly deleted — is_active is set to false instead.'
+
+- name: Audience
+  aliases: [Segment]
+  description: >-
+    A set of people targeted or excluded by Campaigns. Types include Conversion,
+    CRM and URL segments.
+  rest: ['GET /api/v1/segment/get', 'POST /api/v1/segment/edit', 'GET /audience/v1/segments', 'POST /audience/v1/segments', 'GET /audience/v1/segments/(segment_id)', 'DELETE /audience/v1/segments/(segment_id)', 'POST /audience/v1/segments/bulk', 'GET /user-lists/api/v1/userlists/segment']
+  graphql: [Audience, AudienceMetric, AudienceMetricResult, Segment, SegmentQuery, FieldsAudience, FieldsSegment]
+  relationships:
+  - {type: belongs_to, target: Advertisable, via: advertisable}
+  - {type: has_many, target: AdGroup, via: adgroups}
+  - {type: belongs_to, target: Pixel, via: pixel, note: 'conversion and URL segments are populated by pixel rules'}
+
+- name: Pixel
+  description: The site tag that populates audiences and records conversions.
+  rest: ['GET /api/v1/pixel/get', 'GET /api/v1/pixel/get_rules', 'GET /api/v1/pixel/get_segments', 'GET /api/v1/advertisable/get_pixel']
+  relationships:
+  - {type: belongs_to, target: Advertisable, via: advertisable}
+  - {type: has_many, target: Rule, via: rules}
+  - {type: has_many, target: Audience, via: segments}
+
+- name: Rule
+  description: Pixel rule that assigns visitors to segments.
+  rest: ['GET /api/v1/rule/get', 'POST /api/v1/rule/create', 'GET /api/v1/rule/get_segments']
+  relationships:
+  - {type: belongs_to, target: Pixel, via: pixel}
+  - {type: has_many, target: Audience, via: segments}
+
+- name: User
+  description: A dashboard user. Belongs to exactly one Organization.
+  rest: ['GET /api/v1/user/get', 'POST /api/v1/user/edit', 'POST /api/v1/user/grant', 'GET /api/v1/organization/get_users']
+  graphql: [User]
+  relationships:
+  - {type: belongs_to, target: Organization, via: organization}
+  access_note: >-
+    A user may have access to only a subset of an Organization's Advertisables.
+    The docs state only full access is currently offered, with read-only access
+    "considered in the future".
+
+- name: TargetAccountList
+  description: AdRoll ABM target account lists, tiers and items.
+  rest: ['GET /audience/v1/target_accounts', 'POST /audience/v1/target_accounts', 'GET /audience/v1/target_accounts/(tal_eid)', 'DELETE /audience/v1/target_accounts/(tal_eid)', 'GET /audience/v1/target_accounts/(tal_eid)/tiers', 'POST /audience/v1/target_accounts/(tal_eid)/tiers/(ta_tier_eid)/items']
+  relationships:
+  - {type: has_many, target: TargetAccountTier, via: tiers}
+  - {type: has_many, target: TargetAccountItem, via: items}
+
+- name: IdealCustomerProfile
+  description: ABM ideal-customer-profile definitions and account scores.
+  rest: ['GET /audience/v1/ideal_customer_profile', 'POST /audience/v1/ideal_customer_profile', 'GET /audience/v1/ideal_customer_profile/all_scores', 'POST /audience/v1/ideal_customer_profile/accounts']
+
+- name: ProductFeed
+  description: Product catalogue feeds driving dynamic creative, with parser configuration and match-rate reporting.
+  rest: ['PUT /api/v1/product_feeds/add_feed_config', 'GET /api/v1/product_feeds/get_feed_config', 'GET /api/v1/product_feeds/feed_status', 'GET /api/v1/product_feeds/get_products', 'GET /api/v1/product_feeds/match_rate', 'GET /api/v1/product_feeds/get_troubled_products', 'POST /api/v1/product_feeds/autoconfigure']
+  relationships:
+  - {type: belongs_to, target: Advertisable, via: advertisable}
+
+- name: Flight
+  description: Prospecting flight — a scheduled budget window on an adgroup.
+  rest: ['GET /prospecting/api/v2/adgroups/(adgroup)/flights', 'POST /prospecting/api/v2/adgroups/(adgroup)/flights', 'PUT /prospecting/api/v2/flights/(flight)', 'DELETE /prospecting/api/v2/flights/(flight)']
+  relationships:
+  - {type: belongs_to, target: AdGroup, via: adgroup}
+
+- name: GeoTarget
+  description: Geotargeting EIDs resolved by search and attached to campaigns/adgroups.
+  rest: ['GET /geo/api/search/v2/geo', 'GET /prospecting/api/v2/campaigns/(campaign)/geo-targets', 'POST /prospecting/api/v2/adgroups/(adgroup)/geo-targets']
+
+- name: Invoice
+  description: Billing records for the organization.
+  rest: ['GET /api/v1/invoice/get', 'GET /api/v1/organization/get_billing_methods']
+
+- name: MarketplaceDeal
+  description: Programmatic marketplace deals and their metadata.
+  rest: ['GET /api/v1/marketplace/get', 'POST /api/v1/marketplace/create', 'GET /api/v1/marketplace_deals/get', 'GET /api/v1/marketplace_deals/metadata']
+
+hierarchy: >-
+  Organization -> Advertisable -> Campaign -> AdGroup -> (Ad, Audience).
+  Users hang off Organization; Pixel, Rule and ProductFeed hang off Advertisable.
+
+reporting_model:
+  surface: GraphQL Reporting API
+  schema: graphql/adroll-reporting.graphql
+  types: 107
+  fields: 1710
+  roots: [organization, advertisable, campaign, adgroup, ad, automation, email, segment, group, log]
+  metric_shapes:
+  - MetricResult / MetricAggregateResult / MetricForAdvertisable / MetricForCampaign
+  - ConversionResult, Conversions, ConversionsByDate, ConversionsSummary, GranularConversion
+  - MetricCountry, MetricDomain, Placement, CTVPlacement, Keyword
+  - FieldsReachMetrics, FieldsReachFrequencyMetrics, FieldsBrandAwarenessForAdvertisables, FieldsBrandAwarenessForCampaigns
+  - FieldsVideoMetrics, FieldsSMSMetrics, FieldsEmailMetrics, FieldsCTVHouseholdMetrics
+  - ContextualKeywordTargetingMetrics, ContextualTopicTargetingMetrics
+  - UtmBasedConversionsForAdvertisable, UtmBasedConversionsForCampaign
+  - FieldsInfluencedAttributionMetrics, FieldAccountMetrics (ABM)
+  note: >-
+    The reporting model is far richer than the REST model — reach/frequency,
+    brand awareness, CTV household, contextual targeting and UTM-based
+    conversion shapes exist only in GraphQL.
+
+event_model:
+  surface: Server-to-Server (S2S) Event API + Pixel JS API
+  endpoint: 'POST https://srv.adroll.com/api?advertisable=<ADVERTISABLE_EID>'
+  direction: inbound only
+  note: >-
+    AdRoll ingests events; it does not emit them. There are no outbound webhooks
+    and no AsyncAPI document, so a consumer cannot subscribe to AdRoll state
+    changes — only poll.
+  identifiers_accepted: [adct, first_party_cookie, email, email_sha256, email_md5, device_id, user_id]
+  identifier_rule: 'Every event must carry at least one of first_party_cookie or adct.'
+  envelope_fields: [advertisable_eid, pixel_eid, event_name, event_attributes, external_data, ip, user_agent, conversion_value, currency, page_location, device_os, device_type, package_app_name, package_app_version, timestamp, identifiers]
+  event_types:
+    b2c: [page view, home view, product search, add to cart, purchase]
+    b2b_abm: [high-value page, gated content, demo request, signup plan, signup trial, contact sales, live chat, form fill]
+  source: https://apidocs.nextroll.com/server-to-server-api/events.html
+
+data_types:
+  String: A string
+  Integer: An integer
+  Float: A real number
+  Boolean: true or false
+  List: comma-separated on input, JSON array on output
+  Binary: binary stream such as a file
+  DateTime: ISO 8601, UTC
+
+x-evidence:
+  checked: '2026-08-13'
+  probes:
+  - {url: 'https://apidocs.nextroll.com/guides/object-structure.html', http_status: 200}
+  - {url: 'https://apidocs.nextroll.com/graphql-reporting-api/schema.html', http_status: 200}
+  - {url: 'https://apidocs.nextroll.com/crud-api/reference.html', http_status: 200}
+  - {url: 'https://apidocs.nextroll.com/server-to-server-api/reference.html', http_status: 200}

@@ -1,0 +1,3814 @@
+# NextRoll GraphQL Reporting API — Schema Definition Language
+#
+# generated: 2026-08-13
+# method: derived
+# source: https://apidocs.nextroll.com/graphql-reporting-api/schema.html
+# endpoint: POST https://services.adroll.com/reporting/api/v1/query
+#
+# Faithfully transcribed from the schema reference NextRoll publishes for the
+# GraphQL Reporting API. Live introspection is auth-gated (HTTP 401,
+# "Missing 'apikey' query parameter"), so this SDL is derived from the
+# published reference rather than an introspection response. Only types and
+# fields that appear on that page are included; nothing is invented.
+
+scalar Date
+scalar DateTime
+scalar Decimal
+scalar JSON
+
+type Ad {
+  """EID of the ad."""
+  eid: String!
+  """The id of the corresponding ad format in the AdRoll system."""
+  adFormatID: Int!
+  """Format string. i.e. ‘300 wide x 250 high’."""
+  adFormat: String!
+  """Format string. i.e. ‘300x250’."""
+  adFormatName: String!
+  """The EID of the advertisable to which this ad belongs."""
+  advertisable: String!
+  """Whether or not this ad has the possibility of serving based on the adgroups and campaigns in which it inhabits."""
+  hasFutureCampaigns: Boolean!
+  """The URL that the browser will navigate to when this ad is clicked."""
+  destinationURL: String!
+  """For Facebook ads, the text to be displayed as the ad’s headline."""
+  headline: String!
+  """For Facebook ads, the text to be displayed as the ad’s body."""
+  body: String!
+  """For Facebook Newsfeed ads, the text to be displayed as the ad’s message."""
+  message: String!
+  """Facebook call to action constant."""
+  callToAction: String!
+  """Whether or not this ad is currently active."""
+  isActive: Boolean!
+  """The name of this ad."""
+  name: String!
+  """This ad’s creative’s source URL."""
+  src: String!
+  """The preview URL for dynamic ads like HTML5."""
+  previewURL: String!
+  """One of ‘running’, ‘paused’, ‘review’, ‘draft’, ‘rejected’, ‘suspended’ or ‘deleted’."""
+  status: String!
+  """The effective status of the campaign. Details the reasons why it is not running, if applicable."""
+  actualStatus: JSON
+  """Minimal string representation of the actual status. One of ‘running’, ‘notRunning’ ,’ended’, ‘paused’, ‘review’, ‘draft’, ‘rejected’ or ‘deleted’."""
+  actualStatusString: String!
+  """The ad type: ‘liquid’, ‘image’, ‘flash’ or ‘ad_network’."""
+  type: String!
+  """The height in pixels of this ad’s creative."""
+  height: Int!
+  """The width in pixels of this ad’s creative."""
+  width: Int!
+  """The date this ad was created."""
+  createdDate: DateTime
+  """The date this ad was last updated."""
+  updatedDate: DateTime
+  """Whether or not this ad has been edited such that another ad has it’s original ad parameter set to this ad’s EID."""
+  hasEdits: Boolean!
+  """Whether or not this ad has edits that must be reviewed by an AdRoll administrator."""
+  hasPendingEdits: Boolean!
+  """The EID of the ad that was edited to create this ad."""
+  originalAd: String!
+  """Whether or not this is an ad that is dynamically composed when it is served to the user."""
+  isDynamic: Boolean!
+  """Whether or not an outline has been applied to the ad to satisfy network compliancy."""
+  isOutlined: Boolean!
+  """Hexadecimal color code corresponding to the outline of an ad."""
+  outlineColor: String!
+  """If the ad is in flash format, this is the flag showing whether or not the clickTAG is compliant."""
+  validClicktag: Boolean!
+  """DEPRECATED: please use adsManagerPermalink instead"""
+  facebookAdsManagerPermalink: String!
+  """The URL to the ad if it has been externally connected."""
+  adsManagerPermalink: String!
+  """Facebook permalink if applicable."""
+  facebookPermalink: String!
+  """Instagram permalink if applicable."""
+  instagramPermalink: String!
+  """LinkedIn permalink if applicable."""
+  linkedInPermalink: String!
+  """Only for Connected Campaigns’ ads, indicates the status of the sync’ing with the external service. When available, can be one of “pending”, “synced” or “error”"""
+  syncStatus: String!
+  """Only for Connected Campaigns’ ads, shows the error that caused the sync’ing with the external service to fail. Provided if the syncStatus field is “error”."""
+  syncError: String!
+  """The status of the Ad on the inventory network NextRoll has sync’ed it to (ex: Facebook)"""
+  remoteStatus: String!
+  """The reason why an Ad has been rejected on the inventory network NextRoll has sync’ed it to (ex: Facebook)"""
+  disapprovalReason: String!
+  """UTM Source Parameter from this Ad’s destination."""
+  utmSource: String!
+  """UTM Medium Parameter from this Ad’s destination."""
+  utmMedium: String!
+  """UTM Campaign Parameter from this Ad’s destination."""
+  utmCampaign: String!
+  """UTM Term Parameter from this Ad’s destination."""
+  utmTerm: String!
+  """UTM Content Parameter from this Ad’s destination."""
+  utmContent: String!
+  """The channel for the campaign this ad belongs to. This is only available when loading the ads through a campaign."""
+  channel: String!
+  """The type for the campaign this ad belongs to. This is only available when loading the ads through a campaign."""
+  campaignType: String!
+  """The adroll EID for prospecting ads."""
+  adrollEID: String!
+  """The AdCrab ad EID for this ad (ending in 8ADS)."""
+  adcrabEID: String!
+  """The AdGroup’s EID in the AdGroupAd relationship, if listed inside an AdGroup."""
+  inAdgroupEID: String!
+  """True of the AdGroupAd relationship is active, if listed inside an AdGroup."""
+  inAdgroupIsActive: Boolean!
+  """The status of the AdGroupAd relationship, if listed inside an AdGroup."""
+  inAdgroupStatus: String!
+  """The the internal EID of the AdGroupAd relationship, if such a EID exists and if the ad is listed inside an AdGroup."""
+  inAdgroupRelationshipEID: String!
+  """The list of custom labels to organize and filter the ad."""
+  labels: [AdLabel]!
+  """The list of custom labels as String. e.g.: “label1, label2”"""
+  labelsString: String!
+  """Metrics for the entity."""
+  metrics(start: Date, end: Date, pastDays: Int, currency: String, duration: Int): MetricResult!
+  """Metrics for the entity broken down by conversion audiences."""
+  conversions(start: Date, end: Date, pastDays: Int, currency: String): ConversionResult!
+  """Provides aggregation for any metrics in the current and child nodes."""
+  metricsTotal: MetricAggregateResult
+}
+
+type AdGroupData {
+  """EID of the ad."""
+  eid: String!
+  """The id of the corresponding ad format in the AdRoll system."""
+  adFormatID: Int!
+  """Format string. i.e. ‘300 wide x 250 high’."""
+  adFormat: String!
+  """Format string. i.e. ‘300x250’."""
+  adFormatName: String!
+  """The EID of the advertisable to which this ad belongs."""
+  advertisable: String!
+  """Whether or not this ad has the possibility of serving based on the adgroups and campaigns in which it inhabits."""
+  hasFutureCampaigns: Boolean!
+  """The URL that the browser will navigate to when this ad is clicked."""
+  destinationURL: String!
+  """For Facebook ads, the text to be displayed as the ad’s headline."""
+  headline: String!
+  """For Facebook ads, the text to be displayed as the ad’s body."""
+  body: String!
+  """For Facebook Newsfeed ads, the text to be displayed as the ad’s message."""
+  message: String!
+  """Facebook call to action constant."""
+  callToAction: String!
+  """Whether or not this ad is currently active."""
+  isActive: Boolean!
+  """The name of this ad."""
+  name: String!
+  """This ad’s creative’s source URL."""
+  src: String!
+  """The preview URL for dynamic ads like HTML5."""
+  previewURL: String!
+  """One of ‘running’, ‘paused’, ‘review’, ‘draft’, ‘rejected’, ‘suspended’ or ‘deleted’."""
+  status: String!
+  """The effective status of the campaign. Details the reasons why it is not running, if applicable."""
+  actualStatus: JSON
+  """Minimal string representation of the actual status. One of ‘running’, ‘notRunning’ ,’ended’, ‘paused’, ‘review’, ‘draft’, ‘rejected’ or ‘deleted’."""
+  actualStatusString: String!
+  """The ad type: ‘liquid’, ‘image’, ‘flash’ or ‘ad_network’."""
+  type: String!
+  """The height in pixels of this ad’s creative."""
+  height: Int!
+  """The width in pixels of this ad’s creative."""
+  width: Int!
+  """The date this ad was created."""
+  createdDate: DateTime
+  """The date this ad was last updated."""
+  updatedDate: DateTime
+  """Whether or not this ad has been edited such that another ad has it’s original ad parameter set to this ad’s EID."""
+  hasEdits: Boolean!
+  """Whether or not this ad has edits that must be reviewed by an AdRoll administrator."""
+  hasPendingEdits: Boolean!
+  """The EID of the ad that was edited to create this ad."""
+  originalAd: String!
+  """Whether or not this is an ad that is dynamically composed when it is served to the user."""
+  isDynamic: Boolean!
+  """Whether or not an outline has been applied to the ad to satisfy network compliancy."""
+  isOutlined: Boolean!
+  """Hexadecimal color code corresponding to the outline of an ad."""
+  outlineColor: String!
+  """If the ad is in flash format, this is the flag showing whether or not the clickTAG is compliant."""
+  validClicktag: Boolean!
+  """DEPRECATED: please use adsManagerPermalink instead"""
+  facebookAdsManagerPermalink: String!
+  """The URL to the ad if it has been externally connected."""
+  adsManagerPermalink: String!
+  """Facebook permalink if applicable."""
+  facebookPermalink: String!
+  """Instagram permalink if applicable."""
+  instagramPermalink: String!
+  """LinkedIn permalink if applicable."""
+  linkedInPermalink: String!
+  """Only for Connected Campaigns’ ads, indicates the status of the sync’ing with the external service. When available, can be one of “pending”, “synced” or “error”"""
+  syncStatus: String!
+  """Only for Connected Campaigns’ ads, shows the error that caused the sync’ing with the external service to fail. Provided if the syncStatus field is “error”."""
+  syncError: String!
+  """The status of the Ad on the inventory network NextRoll has sync’ed it to (ex: Facebook)"""
+  remoteStatus: String!
+  """The reason why an Ad has been rejected on the inventory network NextRoll has sync’ed it to (ex: Facebook)"""
+  disapprovalReason: String!
+  """UTM Source Parameter from this Ad’s destination."""
+  utmSource: String!
+  """UTM Medium Parameter from this Ad’s destination."""
+  utmMedium: String!
+  """UTM Campaign Parameter from this Ad’s destination."""
+  utmCampaign: String!
+  """UTM Term Parameter from this Ad’s destination."""
+  utmTerm: String!
+  """UTM Content Parameter from this Ad’s destination."""
+  utmContent: String!
+  """The channel for the campaign this ad belongs to. This is only available when loading the ads through a campaign."""
+  channel: String!
+  """The type for the campaign this ad belongs to. This is only available when loading the ads through a campaign."""
+  campaignType: String!
+  """The adroll EID for prospecting ads."""
+  adrollEID: String!
+  """The AdCrab ad EID for this ad (ending in 8ADS)."""
+  adcrabEID: String!
+  """The AdGroup’s EID in the AdGroupAd relationship, if listed inside an AdGroup."""
+  inAdgroupEID: String!
+  """True of the AdGroupAd relationship is active, if listed inside an AdGroup."""
+  inAdgroupIsActive: Boolean!
+  """The status of the AdGroupAd relationship, if listed inside an AdGroup."""
+  inAdgroupStatus: String!
+  """The the internal EID of the AdGroupAd relationship, if such a EID exists and if the ad is listed inside an AdGroup."""
+  inAdgroupRelationshipEID: String!
+  """The list of custom labels to organize and filter the ad."""
+  labels: [AdLabel]!
+  """The list of custom labels as String. e.g.: “label1, label2”"""
+  labelsString: String!
+}
+
+type AdLabel {
+  """Label EID."""
+  eid: String!
+  """Label name."""
+  name: String!
+}
+
+type AdQuery {
+  """Resolves an Ad by its EID."""
+  byEID(ad: String!): Ad
+  """Resolves Ads by their EIDs."""
+  byEIDs(eids: [String!]!): [Ad]!
+  """Resolves all Ads for an Advertisable."""
+  byAdvertisable(advertisable: String!, isActive: Boolean, statuses: [String!], types: [String!], width: Int, height: Int, createdDateAfterOrOn: String, createdDateBefore: String, updatedDateAfterOrOn: String, updatedDateBefore: String): [Ad]!
+  """Resolves all Ads for an AdGroup."""
+  byAdgroup(adgroup: String!, isActive: Boolean, statuses: [String!], types: [String!], width: Int, height: Int, createdDateAfterOrOn: String, createdDateBefore: String, updatedDateAfterOrOn: String, updatedDateBefore: String): [Ad]!
+  """Provides aggregation for any metrics in the current and child nodes."""
+  metricsTotal: MetricAggregateResult
+}
+
+type Adgroup {
+  """The EID of the adgroup."""
+  eid: String!
+  """The strategy used to optimize ads when multiple ads fit a single ad space."""
+  adOptimization: String!
+  """The EID of the campaign that this adgroup is associated with."""
+  campaign: String!
+  """Whether or not this adgroup is currently active."""
+  isActive: Boolean!
+  """The name of this adgroup."""
+  name: String!
+  """One of ‘approved’, ‘paused’, ‘draft’, ‘rejected’ or ‘deleted’."""
+  status: String!
+  """The effective status of the adgroup. Details the reasons why it is not running, if applicable."""
+  actualStatus: JSON
+  """Minimal string representation of the actual status. One of ‘running’, ‘notRunning’ ,’ended’, ‘paused’, ‘review’, ‘draft’, ‘rejected’ or ‘deleted’."""
+  actualStatusString: String!
+  """The date this adgroup was created."""
+  createdDate: DateTime
+  """The date this adgroup was last updated."""
+  updatedDate: DateTime
+  """The timezone preference of all flights of this adgroup."""
+  flightTimezone: String!
+  """Scheduled flight periods when ads will be served. Null if there is no limitation."""
+  flights: JSON
+  """The processing status of the campaign inside the AdRoll. It may have a transient value other than “created” while the AdGroup is being processed by an internal job."""
+  processingStatus: String!
+  """Start date for the active or most recent flight period in the adgroup."""
+  significantFlightStartDate: DateTime
+  """End date for the active or most recent flight period in the adgroup."""
+  significantFlightEndDate: DateTime
+  """Advertisable for this Adgroup. NOTE/FIXME: the advertisable information is not usually available, so querying this will cause an additional request to be made."""
+  advertisable: String!
+  """Goal -for the kpiMetric- that drives the campaign’s bid strategy. Null for automatic."""
+  kpiGoal: Decimal
+  """ISO 4217 currency code for kpiGoal. If not provided assume the currency provided at the Advertisable level."""
+  kpiCurrency: String!
+  """Metric being targeted by the campaign’s bid strategy."""
+  kpiMetric: String!
+  """Ad type restriction for this adgroup. Empty if there is no explicit restriction. Currently one of “static”or “dynamic."""
+  adType: String!
+  """DEPRECATED: please use adsManagerPermalink instead"""
+  facebookAdsManagerPermalink: String!
+  """The URL to the adgroup if it has been externally connected."""
+  adsManagerPermalink: String!
+  """Only for Connected Campaigns’ adgroups, indicates the status of the sync’ing with the external service. When available, can be one of “pending”, “synced” or “error”"""
+  syncStatus: String!
+  """Only for Connected Campaigns’ adgroups, shows the error that caused the sync’ing with the external service to fail. Provided if the syncStatus field is “error”."""
+  syncError: String!
+  """The allowed targeting type configured for this adgroup."""
+  allowedTargeting: String!
+  """Ads for this Adgroup."""
+  ads(isActive: Boolean, statuses: [String!], types: [String!], width: Int, height: Int, createdDateAfterOrOn: String, createdDateBefore: String, updatedDateAfterOrOn: String, updatedDateBefore: String): [Ad]!
+  """Audiences for this Adgroup"""
+  audiences(includeInactive: Boolean): [Audience]!
+  """Metrics for the entity."""
+  metrics(start: Date, end: Date, pastDays: Int, currency: String, duration: Int): MetricResult!
+  """Metrics for the AdGroup broken down by conversion audiences. This breakdown will only be provided for Facebook campaigns."""
+  placements(start: Date, end: Date, pastDays: Int, currency: String): PlacementResult!
+  """CTV Metrics for the AdGroup."""
+  ctvPlacements(start: Date, end: Date, pastDays: Int, breakdown: String!, currency: String): CTVPlacementResult!
+  """[ALPHA] This GraphQL field is currently under development and QA Contextual Targeting Metrics for the AdGroup."""
+  contextualTargeting(start: Date, end: Date, pastDays: Int, currency: String): ContextualTargetingResult!
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  keywords(start: Date, end: Date, pastDays: Int, currency: String): KeywordResult!
+  """Metrics for the entity broken down by conversion audiences."""
+  conversions(start: Date, end: Date, pastDays: Int, currency: String): ConversionResult!
+  """Provides aggregation for any metrics in the current and child nodes."""
+  metricsTotal: MetricAggregateResult
+}
+
+type AdgroupGroupData {
+  """The EID of the adgroup."""
+  eid: String!
+  """The strategy used to optimize ads when multiple ads fit a single ad space."""
+  adOptimization: String!
+  """The EID of the campaign that this adgroup is associated with."""
+  campaign: String!
+  """Whether or not this adgroup is currently active."""
+  isActive: Boolean!
+  """The name of this adgroup."""
+  name: String!
+  """One of ‘approved’, ‘paused’, ‘draft’, ‘rejected’ or ‘deleted’."""
+  status: String!
+  """The effective status of the adgroup. Details the reasons why it is not running, if applicable."""
+  actualStatus: JSON
+  """Minimal string representation of the actual status. One of ‘running’, ‘notRunning’ ,’ended’, ‘paused’, ‘review’, ‘draft’, ‘rejected’ or ‘deleted’."""
+  actualStatusString: String!
+  """The date this adgroup was created."""
+  createdDate: DateTime
+  """The date this adgroup was last updated."""
+  updatedDate: DateTime
+  """The timezone preference of all flights of this adgroup."""
+  flightTimezone: String!
+  """Scheduled flight periods when ads will be served. Null if there is no limitation."""
+  flights: JSON
+  """The processing status of the campaign inside the AdRoll. It may have a transient value other than “created” while the AdGroup is being processed by an internal job."""
+  processingStatus: String!
+  """Start date for the active or most recent flight period in the adgroup."""
+  significantFlightStartDate: DateTime
+  """End date for the active or most recent flight period in the adgroup."""
+  significantFlightEndDate: DateTime
+  """Advertisable for this Adgroup. NOTE/FIXME: the advertisable information is not usually available, so querying this will cause an additional request to be made."""
+  advertisable: String!
+  """Goal -for the kpiMetric- that drives the campaign’s bid strategy. Null for automatic."""
+  kpiGoal: Decimal
+  """ISO 4217 currency code for kpiGoal. If not provided assume the currency provided at the Advertisable level."""
+  kpiCurrency: String!
+  """Metric being targeted by the campaign’s bid strategy."""
+  kpiMetric: String!
+  """Ad type restriction for this adgroup. Empty if there is no explicit restriction. Currently one of “static”or “dynamic."""
+  adType: String!
+  """DEPRECATED: please use adsManagerPermalink instead"""
+  facebookAdsManagerPermalink: String!
+  """The URL to the adgroup if it has been externally connected."""
+  adsManagerPermalink: String!
+  """Only for Connected Campaigns’ adgroups, indicates the status of the sync’ing with the external service. When available, can be one of “pending”, “synced” or “error”"""
+  syncStatus: String!
+  """Only for Connected Campaigns’ adgroups, shows the error that caused the sync’ing with the external service to fail. Provided if the syncStatus field is “error”."""
+  syncError: String!
+  """The allowed targeting type configured for this adgroup."""
+  allowedTargeting: String!
+}
+
+type AdgroupQuery {
+  """Resolves an Adgroup by its EID."""
+  byEID(adgroup: String!): Adgroup
+  """Resolves a Adgroups by their EIDs."""
+  byEIDs(eids: [String!]!): [Adgroup]!
+  """Resolves all Adgroups for a Advertisable."""
+  byAdvertisable(advertisable: String!, isActive: Boolean, statuses: [String!], excludeStatuses: [String!]): [Adgroup]!
+  """Resolves all Adgroups for a Campaign."""
+  byCampaign(campaign: String!, isActive: Boolean, statuses: [String!], excludeStatuses: [String!]): [Adgroup]!
+  """Provides aggregation for any metrics in the current and child nodes."""
+  metricsTotal: MetricAggregateResult
+}
+
+type Advertisable {
+  """EID of the advertisable."""
+  eid: String!
+  """Whether or not the advertisable is currently active."""
+  isActive: Boolean!
+  """Whether or not the advertisable is a B2B customer. Deprecated field: use businessUnit instead."""
+  isB2B: Boolean!
+  """The business unit this Advertisable has signed up for."""
+  businessUnit: String!
+  """Whether or not the advertisable is an ABM customer."""
+  isAbmCustomer: Boolean!
+  """The name of the advertisable."""
+  name: String!
+  """The EID of this advertisable’s organization."""
+  organization: String!
+  """The status of the advertisable. One of [‘admin_review’, ‘approved’, ‘rejected’, ‘suspended’]."""
+  status: String!
+  """The advertisable’s URL."""
+  url: String!
+  """The currency code (ISO-4217) use by the advertisable’s account."""
+  currency: String!
+  """Duration of this advertisable’s click through conversion window in days."""
+  clickThroughConversionWindow: Int!
+  """Duration of this advertisable’s view through conversion window in days."""
+  viewThroughConversionWindow: Int!
+  """The date this advertisable was created."""
+  createdDate: DateTime
+  revshareViewPercent: Decimal!
+  revshareClickPercent: Decimal!
+  """Campaigns for this Advertisable."""
+  campaigns(isActive: Boolean, statuses: [String!], excludeStatuses: [String!], blacklistStatuses: [String!], useCases: [String!], types: [String!], targetingTypes: [String!], abmTypes: [String!], channels: [String!], sources: [String!], funnelStages: [String!], objectives: [String!], excludeUseCases: [String!], excludeTypes: [String!], excludeTargetingTypes: [String!], excludeABMTypes: [String!], excludeChannels: [String!], excludeSources: [String!], excludeFunnelStages: [String!], tagPrefixes: [String!]): [Campaign]!
+  """Automations for this Advertisable."""
+  automations: [Automation]!
+  """Adgroups for this Advertisable."""
+  adgroups(isActive: Boolean, statuses: [String!], excludeStatuses: [String!]): [Adgroup]!
+  """Emails for this Advertisable."""
+  emails: [Email]!
+  """Ads for this Advertisable."""
+  ads(isActive: Boolean, statuses: [String!], types: [String!], width: Int, height: Int, createdDateAfterOrOn: String, createdDateBefore: String, updatedDateAfterOrOn: String, updatedDateBefore: String): [Ad]!
+  """Segments for this Advertisable."""
+  segments(isActive: Boolean, isConversion: Boolean): [Segment]!
+  """Metrics for the Advertisable."""
+  metrics(start: Date, end: Date, pastDays: Int, currency: String, duration: Int): AdvertisableMetricResult!
+  """Metrics for the entity broken down by conversion audiences."""
+  conversions(start: Date, end: Date, pastDays: Int, currency: String): ConversionResult!
+  """Provides aggregation for any metrics in the current and child nodes."""
+  metricsTotal: MetricAggregateResult
+  """The granular conversions help understand the channels, campaigns, and ads that influence conversions. Lists the details about a conversion and the data points that determined the decision about its attribution. Limited to 90 days."""
+  granularConversions(start: Date, end: Date, pastDays: Int, currency: String): [GranularConversion!]!
+  """UTM based conversions for the Advertisable."""
+  utmBasedConversions(start: Date, end: Date, pastDays: Int, currency: String, model: String!): [UtmBasedConversionsForAdvertisable!]!
+}
+
+type AdvertisableGroupData {
+  """EID of the advertisable."""
+  eid: String!
+  """Whether or not the advertisable is currently active."""
+  isActive: Boolean!
+  """Whether or not the advertisable is a B2B customer. Deprecated field: use businessUnit instead."""
+  isB2B: Boolean!
+  """The business unit this Advertisable has signed up for."""
+  businessUnit: String!
+  """Whether or not the advertisable is an ABM customer."""
+  isAbmCustomer: Boolean!
+  """The name of the advertisable."""
+  name: String!
+  """The EID of this advertisable’s organization."""
+  organization: String!
+  """The status of the advertisable. One of [‘admin_review’, ‘approved’, ‘rejected’, ‘suspended’]."""
+  status: String!
+  """The advertisable’s URL."""
+  url: String!
+  """The currency code (ISO-4217) use by the advertisable’s account."""
+  currency: String!
+  """Duration of this advertisable’s click through conversion window in days."""
+  clickThroughConversionWindow: Int!
+  """Duration of this advertisable’s view through conversion window in days."""
+  viewThroughConversionWindow: Int!
+  """The date this advertisable was created."""
+  createdDate: DateTime
+  revshareViewPercent: Decimal!
+  revshareClickPercent: Decimal!
+}
+
+"""
+Groups reporting metric data in summary, by date and by domain format.
+"""
+type AdvertisableMetricResult {
+  """Summarizes the reporting data for the given date range."""
+  summary: MetricForAdvertisable!
+  """Reporting data by date in the given range."""
+  byDate: [MetricForAdvertisable!]!
+  """Reporting data by domain."""
+  byDomain: [MetricDomainResult!]!
+}
+
+type AdvertisableQuery {
+  """Obtain an Advertisable by its unique identifier (EID)."""
+  byEID(advertisable: String!): Advertisable
+  """Obtain a list of Advertisables by their unique identifiers (EID)."""
+  byEIDs(eids: [String!]!): [Advertisable]!
+  """Obtain a list Advertisables owned by an Organization."""
+  byOrganization(organization: String!): [Advertisable]!
+  """All the advertisables for the current user."""
+  forUser: [Advertisable]!
+  """Provides aggregation for any metrics in the current and child nodes."""
+  metricsTotal: MetricAggregateResult
+}
+
+type Audience {
+  """The EID of the audience in use."""
+  eid: String!
+  """The EID of the segment describing this audience."""
+  segmentEID: String!
+  """The Advertisable for the segment."""
+  advertisable: String!
+  """The Campaign for the segment."""
+  campaign: String!
+  """The Audience Name."""
+  name: String!
+  """The type of the segment. One of: - “url”: URL - “crm”: crm - “pages_viewed”: Pages Viewed - “products_viewed”: Products Viewed - “arbitrary_data”: External Data - “app_install”: App Install - “facebook_prospecting”: Facebook Prospecting - “custom”: Partner - “intent”: Intent - “impression”: Impression - “user_attributes”: Attributes - “user_events”: Events - “lead_generation”: Lead Generation - “composite”: Composite - “event_match”: Event JS Match - “js_match”: Explicit JS Match - “ipixel_match”: IPixel Match - “css_selector”: CSS Selector - “email_list”: Email List in AdRoll Email. - “email_domain”: Email Address Domain Match."""
+  type: String!
+  """Tags explicitly assigned to the segment."""
+  tags: String!
+  """Pieces to build the Audience’s description formatted following the type."""
+  description: JSON!
+  """The duration of the Audience, in days."""
+  duration: Int!
+  """False if this is segment has been deleted."""
+  isActive: Boolean!
+  """Is the segment an inclusion segment."""
+  inclusion: Boolean!
+  """True if this is a conversion audience."""
+  isConversion: Boolean!
+  """The value of a conversion from this segment."""
+  conversionValue: Decimal!
+  """The value of a conversion from this segment. Default to the Advertisable’s currency."""
+  currency: String!
+  """Date of creation."""
+  createdDate: DateTime
+  """Product the segment belongs to."""
+  product: String
+  """Metrics for the audience visitors."""
+  metrics(start: Date, end: Date, pastDays: Int): AudienceMetricResult!
+}
+
+type AudienceGroupData {
+  """The EID of the audience in use."""
+  eid: String!
+  """The EID of the segment describing this audience."""
+  segmentEID: String!
+  """The Advertisable for the segment."""
+  advertisable: String!
+  """The Campaign for the segment."""
+  campaign: String!
+  """The Audience Name."""
+  name: String!
+  """The type of the segment. One of: - “url”: URL - “crm”: crm - “pages_viewed”: Pages Viewed - “products_viewed”: Products Viewed - “arbitrary_data”: External Data - “app_install”: App Install - “facebook_prospecting”: Facebook Prospecting - “custom”: Partner - “intent”: Intent - “impression”: Impression - “user_attributes”: Attributes - “user_events”: Events - “lead_generation”: Lead Generation - “composite”: Composite - “event_match”: Event JS Match - “js_match”: Explicit JS Match - “ipixel_match”: IPixel Match - “css_selector”: CSS Selector - “email_list”: Email List in AdRoll Email. - “email_domain”: Email Address Domain Match."""
+  type: String!
+  """Tags explicitly assigned to the segment."""
+  tags: String!
+  """Pieces to build the Audience’s description formatted following the type."""
+  description: JSON!
+  """The duration of the Audience, in days."""
+  duration: Int!
+  """False if this is segment has been deleted."""
+  isActive: Boolean!
+  """Is the segment an inclusion segment."""
+  inclusion: Boolean!
+  """True if this is a conversion audience."""
+  isConversion: Boolean!
+  """The value of a conversion from this segment."""
+  conversionValue: Decimal!
+  """The value of a conversion from this segment. Default to the Advertisable’s currency."""
+  currency: String!
+  """Date of creation."""
+  createdDate: DateTime
+  """Product the segment belongs to."""
+  product: String
+}
+
+"""
+Groups reporting metric audience data in summary and by date format.
+"""
+type AudienceMetric {
+  """Total number of unique visitors within the duration of the segment. i.e. [TODAY - DURATION, TODAY)."""
+  audienceSizeCurrent: Decimal!
+  """[DEPRECATED] Please use the other metrics in this node instead. Count of unique new visitors who visited the entities between the specified date range."""
+  audienceSizeNew: Decimal!
+  """Total number of unique visitors between the specified start date (inclusive) and end date (exclusive) ignoring the segment’s own duration. i.e. [START_DATE, END_DATE)"""
+  audienceSizeTotal: Decimal!
+  """Total number of unique visitors within the duration of the entity with the specified date range. i.e. [$END_DATE - $DURATION, $END_DATE)"""
+  audienceSizeInDateRange: Decimal!
+}
+
+"""
+Groups reporting metric audience data in summary and by date format.
+"""
+type AudienceMetricResult {
+  """Summarizes the reporting data for the given date range and duration."""
+  summary: AudienceMetric!
+}
+
+type Automation {
+  """EID of the automation."""
+  eid: String!
+  """Name of the automation."""
+  name: String!
+  """EID of the advertisable to which this automation belongs to."""
+  advertisable: String!
+  """False if the automation has been marked as deleted."""
+  isActive: Boolean!
+  """The timestamp for when this automation was created."""
+  createdDate: DateTime
+  """The timestamp for when this automation was last modified."""
+  updatedDate: DateTime
+  """The timestamp for the first time that a node was successfully launched from this automation"""
+  firstLaunchDate: DateTime
+  """EID of the base internal segment that includes contacts in the automation."""
+  entrySegmentEID: String!
+  """EID of the base internal segment that removes contacts in the automation."""
+  exitSegmentEID: String!
+  """EID of the template originally used to create this automation."""
+  templateEID: String
+  triggerRules: String!
+  exclusionRules: String!
+  """Classification for the automation. A non-localized constant identifying the automation’s type."""
+  classification: String!
+  """Funnel stage for the automation. One of ‘awareness’, ‘consideration’, ‘conversion’, or ‘other’."""
+  funnelStage: String!
+  """Actual status derived from the actual statuses of the child Campaigns"""
+  actualStatus: JSON
+  """Minimal string representation of the actual status."""
+  actualStatusString: String!
+  """EID of the email campaign that backs the emails in this automation."""
+  emailCampaignEID: String
+  emailCampaign: Campaign
+  """[DEPRECATED] The SMS API backing this field has been retired. This field always returns null."""
+  smsCampaignEID: String
+  """[DEPRECATED] The SMS API backing this field has been retired. This field always returns null."""
+  smsCampaign: Campaign
+  entryAudiences: String
+  exitAudiences: String
+  nodes: [AutomationNode]!
+  """Metrics for the Campaign."""
+  metrics(start: Date, end: Date, pastDays: Int, currency: String, duration: Int): CampaignMetricResult!
+  """Metrics for the entity broken down by conversion audiences."""
+  conversions(start: Date, end: Date, pastDays: Int, currency: String): ConversionResult!
+  """Provides aggregation for any metrics in the current and child nodes."""
+  metricsTotal: MetricAggregateResult
+}
+
+type AutomationNode {
+  """EID of the automation node."""
+  eid: String!
+  """Name of the automation node."""
+  name: String!
+  """EID of the advertisable to which this automation belongs to."""
+  advertisable: String!
+  """EID of the automation."""
+  automation: String!
+  """True if this node is one of the tree’s roots."""
+  isRoot: Boolean!
+  """EID of the parent node that places this node in the tree structure."""
+  parentNodeEID: String
+  """False if the automation has been marked as deleted."""
+  isActive: Boolean!
+  """Status of the automation node itself, independent from the campaign."""
+  status: String!
+  """One of conditional, campaign_ad, campaign_email, or campaign_sms."""
+  nodeType: String!
+  """Additional time to wait—since the completion of the previous node—before the contact reaches this node."""
+  delayHours: Float!
+  """Relative order between nodes at the same level."""
+  trackOrder: Float!
+  """The timestamp for when this automation node was created."""
+  createdDate: DateTime
+  """The timestamp for when this automation node was last modified."""
+  updatedDate: DateTime
+  condition: String!
+  conditionOperator: String
+  conditionValue: String
+  """Additional rules to be layered on top of the baseline established by the Automation’s trigger & exclusion plus the node position on the flow."""
+  audienceAdditionalRules: String
+  """For Ad campaigns, maximum time that the user would be served this campaign."""
+  durationHours: Float
+  """EID of the targeted audience for the node."""
+  entrySegmentEID: String
+  """EID of the excluded audience for the node."""
+  exitSegmentEID: String
+  """Additional segment EIDs that extend the reach of the campaign;’s entry audience"""
+  extensionEntrySegmentEIDs: JSON
+  """Additional segment EIDs that extend the reach of the campaign;’s exit audience"""
+  extensionExitSegmentEIDs: JSON
+  campaignEID: String
+  campaign: Campaign
+  emailEID: String
+  email: Email
+  """Metrics for the Campaign."""
+  metrics(start: Date, end: Date, pastDays: Int, currency: String, duration: Int): CampaignMetricResult!
+  """Metrics for the entity broken down by conversion audiences."""
+  conversions(start: Date, end: Date, pastDays: Int, currency: String): ConversionResult!
+  """Provides aggregation for any metrics in the current and child nodes."""
+  metricsTotal: MetricAggregateResult
+}
+
+type AutomationQuery {
+  """Arguments:"""
+  byEID(automation: String!): Automation
+  """Arguments:"""
+  byEIDs(eids: [String!]!): [Automation!]!
+  """Arguments:"""
+  byAdvertisable(advertisable: String!, isActive: Boolean): [Automation!]!
+}
+
+type CTVPlacement {
+  """Placement of the Ad in Connected TV. Depending on the breakdown arg it can be by App name, seller of device make"""
+  placement: String!
+  """The sum of the number of ad impressions."""
+  impressions: Decimal!
+  """The sum of clicks of ads."""
+  clicks: Decimal!
+  """Cost associated to ads."""
+  cost: Decimal!
+  """Cost per mille. Cost per one thousand ad serves on the domain."""
+  cpm: Decimal!
+  """Impressions from video ads."""
+  videoImpressions: Decimal
+  """Number of times the video begun playing."""
+  videoViews: Decimal
+  """Number of times at least 25% of the video duration was played."""
+  videoTwentyFivePercent: Decimal
+  """Number of times at least 50% of the video duration was played."""
+  videoFiftyPercent: Decimal
+  """Number of times at least 75% of the video duration was played."""
+  videoSeventyFivePercent: Decimal
+  """Number of times the full video duration was played."""
+  videoHundredPercent: Decimal
+  """Video completion rate"""
+  videoCompletionRate: Decimal
+}
+
+"""
+Groups reporting metric data in summary and by date format.
+"""
+type CTVPlacementResult {
+  """Summarizes by placement the reporting data for the given date range."""
+  byPlacement: [CTVPlacement!]!
+}
+
+type Campaign {
+  """EID of the campaign."""
+  eid: String!
+  """EID of the advertisable to which this campaign belongs."""
+  advertisable: String!
+  """The daily budget of the campaign. Note that this can be an approximation, for example when budgetType = “lifetime” it is: budget = budgetGoal / numberOfDays(budgetStartDate, budgetEndDate)"""
+  budget: Decimal!
+  """The budget of the campaign, considered for the whole extent of its budgetType. When budgetType = “lifetime”, it will be applied in the period since budgetStartDate until budgetEndDate."""
+  budgetGoal: Decimal!
+  """The type of budget of the campaign (daily, lifetime…). If this includes -auto (i.e. daily-auto), then it is the inventory campaign of a proxy strategy that is auto-balancing the budget for this campaign"""
+  budgetType: String!
+  """The start date of a lifetime budget."""
+  budgetStartDate: DateTime
+  """The end date of a lifetime budget."""
+  budgetEndDate: DateTime
+  """Serialized budget settings as a string. “budgetType,budgetStartDate,budgetEndDate,budgetGoal”"""
+  budgetSettingsString: String!
+  """The date this campaign was created."""
+  createdDate: DateTime
+  """The CPC for this campaign."""
+  cpc: Decimal!
+  """The CPM for this campaign."""
+  cpm: Decimal!
+  """The maximum CPM for this campaign."""
+  maxCpm: Decimal!
+  """The name of this campaign."""
+  name: String!
+  """The day the campaign will start."""
+  startDate: DateTime
+  """The day the campaign will end, exclusive."""
+  endDate: DateTime
+  """The status of the campaign. One of ‘running’, ‘ended’, ‘paused’, ‘review’, ‘draft’, ‘rejected’ or ‘deleted’. Result is ‘billingFailedPermanent’ or ‘billingFailedRecoverable’ when BillingAuthStatus is ‘failed’."""
+  status: String!
+  """The effective status of the campaign. Details the reasons why it is not running, if applicable."""
+  actualStatus: JSON
+  """Minimal string representation of the actual status. One of ‘running’, ‘notRunning’ ,’ended’, ‘paused’, ‘review’, ‘draft’, ‘rejected’ or ‘deleted’."""
+  actualStatusString: String!
+  """The date this campaign was last updated."""
+  updatedDate: DateTime
+  """Campaign channel: one of ‘email’, ‘social’ or ‘web’"""
+  channel: String!
+  """True if the campaign is run by a third party."""
+  isConnectedChannel: Boolean!
+  """The service responsible for the creation of this campaign."""
+  source: String!
+  """ISO-4217 currency code for the given amount."""
+  currency: String!
+  """Type for the campaign. One of “prospecting”, “blended”r “retargeting”."""
+  type: String!
+  """Type of ABM campaign. Empty string if this is not an ABM campaign."""
+  abmType: String!
+  """The type of targeting that is used to pick which customers will be reached by this campaign."""
+  targetingType: String!
+  """Goal -for the kpiMetric- that drives the campaign’s bid strategy. Null for automatic."""
+  kpiGoal: Decimal!
+  """ISO 4217 currency code for kpiGoal. If not provided assume the currency provided at the Advertisable level."""
+  kpiCurrency: String!
+  """Metric being targeted by the campaign’s bid strategy."""
+  kpiMetric: String!
+  """SpendLimitUntil"""
+  spendLimitUntil: DateTime
+  """SpendLimitUntilReason"""
+  spendLimitUntilReason: String!
+  """The processing status of the campaign inside the AdRoll. It may have a transient value other than “created” while the campaign is being processed by an internal job."""
+  processingStatus: String!
+  """The billing auth status of the campaign inside the AdRoll. Will default to empty string when API BillingAuthStatus not present. Result is “failed” when the billing authorization did not complete."""
+  billingAuthStatus: String
+  """The parent Playbook’s EID for the campaign, only if it exists."""
+  playbookEID: String!
+  """The parent Playbook’s Name for the campaign, only if it exists."""
+  playbookName: String!
+  """The parent Playbook’s Type for the campaign, only if it exists."""
+  playbookType: String!
+  """The EID of this campaign as referenced from its Voltron strategy. Only available for inventory campaigns of Universal Campaigns."""
+  inVoltronStrategyEID: String!
+  """The eid of the Proxy Strategy that contains this campaign. Only for Inventory campaigns."""
+  proxyStrategyEID: String!
+  """The isFrozen value of the Proxy Strategy that contains this campaign. Only for Inventory campaigns."""
+  proxyStrategyIsFrozen: Boolean!
+  """The status of the Proxy Strategy that contains this campaign. Only for Inventory campaigns."""
+  proxyStrategyStatus: String!
+  """The name of the Proxy Strategy that contains this campaign. Only for Inventory campaigns."""
+  proxyStrategyName: String!
+  """If this is an Email Newsletter campaign, the number of potential recipients."""
+  newsletterScheduled: Decimal!
+  """If this is an Email Newsletter campaign, the number of emails sent."""
+  newsletterSends: Decimal!
+  """If this is an Email Newsletter campaign, the scheduled date for delivery. Only if the delivery is scheduled to happen or of it has already occurred. Omitted if in draft, paused or cancelled."""
+  newsletterScheduledDate: DateTime
+  """True if the campaign is run by NextRoll and will be directly billed to the advertisable’s account. False if it is run by a third party."""
+  isBillable: Boolean!
+  """True if the strategy is frozen, and no changes can be made to it."""
+  isFrozen: Boolean!
+  """Only for Connected Campaigns, indicates the status of the sync’ing with the external service. When available, can be one of “pending”, “synced” or “error”"""
+  syncStatus: String!
+  """Only for Connected Campaigns, shows the error that caused the sync’ing with the external service to fail. Provided if the syncStatus field is “error”."""
+  syncError: String!
+  """DEPRECATED: please use adsManagerPermalink instead"""
+  facebookAdsManagerPermalink: String!
+  """The URL to the campaign if it has been externally connected."""
+  adsManagerPermalink: String!
+  isIntegrated: Boolean!
+  useCase: String!
+  """The campaign marketing objective returned by AdRoll API."""
+  objective: String!
+  """Funnel stage for the campaign. One of “awareness”, “consideration”, “conversion”, or “other”."""
+  funnelStage: String
+  """Indicates if this campaign is a strategy that balances the budget automatically across its inventory campaigns. False means that inventory campaign budgets are manually set."""
+  isBudgetBalancingAutomated: Boolean!
+  """Available status changes for the current campaign. BETA."""
+  possibleStatusChanges: [String!]
+  """PerformanceTargets"""
+  performanceTargets: [PerformanceTarget]
+  """Internal tags set on creation."""
+  tags: [String!]
+  """If managed by an Automation, the EID of the Automation."""
+  automationEID: String
+  """If managed by an Automation, the EID of the Automation Node that references this entity."""
+  automationNodeEID: String
+  """If managed by an Automation, the name of the Automation."""
+  automationName: String
+  """Indicates if the campaign is disabled. Currently applies only to Automation-managed campaigns that have been disabled by subscription downgrade action."""
+  disabled: Boolean!
+  """If managed by a Klaviyo Flow, the EID of the Flow."""
+  klaviyoFlowEID: String
+  """If managed by a Klaviyo Flow, the name of the Flow."""
+  klaviyoFlowName: String
+  """EID for the parent Universal/Proxy campaign group for an inventory campaign."""
+  campaignGroupEID: String!
+  """Name for the parent Universal/Proxy campaign group for an inventory campaign."""
+  campaignGroupName: String!
+  """Adgroups for this Campaign."""
+  adgroups(isActive: Boolean, statuses: [String!], excludeStatuses: [String!]): [Adgroup]!
+  """Emails for this Campaign"""
+  emails: [Email]!
+  """Audiences for this Campaign."""
+  audiences(includeInactive: Boolean): [Audience]!
+  """Metrics for the Campaign."""
+  metrics(start: Date, end: Date, pastDays: Int, currency: String, duration: Int): CampaignMetricResult!
+  """Metrics for the entity broken down by conversion audiences."""
+  conversions(start: Date, end: Date, pastDays: Int, currency: String): ConversionResult!
+  """Provides aggregation for any metrics in the current and child nodes."""
+  metricsTotal: MetricAggregateResult
+  """Inventory Campaigns that compose this campaign in the case of Proxy Campaigns."""
+  inventoryCampaigns: [InventoryCampaign]!
+}
+
+type CampaignGroupData {
+  """EID of the campaign."""
+  eid: String!
+  """EID of the advertisable to which this campaign belongs."""
+  advertisable: String!
+  """The daily budget of the campaign. Note that this can be an approximation, for example when budgetType = “lifetime” it is: budget = budgetGoal / numberOfDays(budgetStartDate, budgetEndDate)"""
+  budget: Decimal!
+  """The budget of the campaign, considered for the whole extent of its budgetType. When budgetType = “lifetime”, it will be applied in the period since budgetStartDate until budgetEndDate."""
+  budgetGoal: Decimal!
+  """The type of budget of the campaign (daily, lifetime…). If this includes -auto (i.e. daily-auto), then it is the inventory campaign of a proxy strategy that is auto-balancing the budget for this campaign"""
+  budgetType: String!
+  """The start date of a lifetime budget."""
+  budgetStartDate: DateTime
+  """The end date of a lifetime budget."""
+  budgetEndDate: DateTime
+  """Serialized budget settings as a string. “budgetType,budgetStartDate,budgetEndDate,budgetGoal”"""
+  budgetSettingsString: String!
+  """The date this campaign was created."""
+  createdDate: DateTime
+  """The CPC for this campaign."""
+  cpc: Decimal!
+  """The CPM for this campaign."""
+  cpm: Decimal!
+  """The maximum CPM for this campaign."""
+  maxCpm: Decimal!
+  """The name of this campaign."""
+  name: String!
+  """The day the campaign will start."""
+  startDate: DateTime
+  """The day the campaign will end, exclusive."""
+  endDate: DateTime
+  """The status of the campaign. One of ‘running’, ‘ended’, ‘paused’, ‘review’, ‘draft’, ‘rejected’ or ‘deleted’. Result is ‘billingFailedPermanent’ or ‘billingFailedRecoverable’ when BillingAuthStatus is ‘failed’."""
+  status: String!
+  """The effective status of the campaign. Details the reasons why it is not running, if applicable."""
+  actualStatus: JSON
+  """Minimal string representation of the actual status. One of ‘running’, ‘notRunning’ ,’ended’, ‘paused’, ‘review’, ‘draft’, ‘rejected’ or ‘deleted’."""
+  actualStatusString: String!
+  """The date this campaign was last updated."""
+  updatedDate: DateTime
+  """Campaign channel: one of ‘email’, ‘social’ or ‘web’"""
+  channel: String!
+  """True if the campaign is run by a third party."""
+  isConnectedChannel: Boolean!
+  """The service responsible for the creation of this campaign."""
+  source: String!
+  """ISO-4217 currency code for the given amount."""
+  currency: String!
+  """Type for the campaign. One of “prospecting”, “blended”r “retargeting”."""
+  type: String!
+  """Type of ABM campaign. Empty string if this is not an ABM campaign."""
+  abmType: String!
+  """The type of targeting that is used to pick which customers will be reached by this campaign."""
+  targetingType: String!
+  """Goal -for the kpiMetric- that drives the campaign’s bid strategy. Null for automatic."""
+  kpiGoal: Decimal!
+  """ISO 4217 currency code for kpiGoal. If not provided assume the currency provided at the Advertisable level."""
+  kpiCurrency: String!
+  """Metric being targeted by the campaign’s bid strategy."""
+  kpiMetric: String!
+  """SpendLimitUntil"""
+  spendLimitUntil: DateTime
+  """SpendLimitUntilReason"""
+  spendLimitUntilReason: String!
+  """The processing status of the campaign inside the AdRoll. It may have a transient value other than “created” while the campaign is being processed by an internal job."""
+  processingStatus: String!
+  """The billing auth status of the campaign inside the AdRoll. Will default to empty string when API BillingAuthStatus not present. Result is “failed” when the billing authorization did not complete."""
+  billingAuthStatus: String
+  """The parent Playbook’s EID for the campaign, only if it exists."""
+  playbookEID: String!
+  """The parent Playbook’s Name for the campaign, only if it exists."""
+  playbookName: String!
+  """The parent Playbook’s Type for the campaign, only if it exists."""
+  playbookType: String!
+  """The EID of this campaign as referenced from its Voltron strategy. Only available for inventory campaigns of Universal Campaigns."""
+  inVoltronStrategyEID: String!
+  """The eid of the Proxy Strategy that contains this campaign. Only for Inventory campaigns."""
+  proxyStrategyEID: String!
+  """The isFrozen value of the Proxy Strategy that contains this campaign. Only for Inventory campaigns."""
+  proxyStrategyIsFrozen: Boolean!
+  """The status of the Proxy Strategy that contains this campaign. Only for Inventory campaigns."""
+  proxyStrategyStatus: String!
+  """The name of the Proxy Strategy that contains this campaign. Only for Inventory campaigns."""
+  proxyStrategyName: String!
+  """If this is an Email Newsletter campaign, the number of potential recipients."""
+  newsletterScheduled: Decimal!
+  """If this is an Email Newsletter campaign, the number of emails sent."""
+  newsletterSends: Decimal!
+  """If this is an Email Newsletter campaign, the scheduled date for delivery. Only if the delivery is scheduled to happen or of it has already occurred. Omitted if in draft, paused or cancelled."""
+  newsletterScheduledDate: DateTime
+  """True if the campaign is run by NextRoll and will be directly billed to the advertisable’s account. False if it is run by a third party."""
+  isBillable: Boolean!
+  """True if the strategy is frozen, and no changes can be made to it."""
+  isFrozen: Boolean!
+  """Only for Connected Campaigns, indicates the status of the sync’ing with the external service. When available, can be one of “pending”, “synced” or “error”"""
+  syncStatus: String!
+  """Only for Connected Campaigns, shows the error that caused the sync’ing with the external service to fail. Provided if the syncStatus field is “error”."""
+  syncError: String!
+  """DEPRECATED: please use adsManagerPermalink instead"""
+  facebookAdsManagerPermalink: String!
+  """The URL to the campaign if it has been externally connected."""
+  adsManagerPermalink: String!
+  isIntegrated: Boolean!
+  useCase: String!
+  """The campaign marketing objective returned by AdRoll API."""
+  objective: String!
+  """Funnel stage for the campaign. One of “awareness”, “consideration”, “conversion”, or “other”."""
+  funnelStage: String
+  """Indicates if this campaign is a strategy that balances the budget automatically across its inventory campaigns. False means that inventory campaign budgets are manually set."""
+  isBudgetBalancingAutomated: Boolean!
+  """Available status changes for the current campaign. BETA."""
+  possibleStatusChanges: [String!]
+  """PerformanceTargets"""
+  performanceTargets: [PerformanceTarget]
+  """Internal tags set on creation."""
+  tags: [String!]
+  """If managed by an Automation, the EID of the Automation."""
+  automationEID: String
+  """If managed by an Automation, the EID of the Automation Node that references this entity."""
+  automationNodeEID: String
+  """If managed by an Automation, the name of the Automation."""
+  automationName: String
+  """Indicates if the campaign is disabled. Currently applies only to Automation-managed campaigns that have been disabled by subscription downgrade action."""
+  disabled: Boolean!
+  """If managed by a Klaviyo Flow, the EID of the Flow."""
+  klaviyoFlowEID: String
+  """If managed by a Klaviyo Flow, the name of the Flow."""
+  klaviyoFlowName: String
+}
+
+"""
+Groups reporting metric data in summary and by date.
+"""
+type CampaignMetricResult {
+  """Summarizes the reporting data for the given date range."""
+  summary: Metric!
+  """Reporting data by date in the given range."""
+  byDate: [MetricForCampaign!]!
+  """Reporting data by country."""
+  byCountry: [MetricCountryResult!]!
+}
+
+type CampaignQuery {
+  """Obtain a campaign by its unique identifier (EID)."""
+  byEID(campaign: String!): Campaign
+  """Obtain a list of campaigns by their unique identifiers (EID)."""
+  byEIDs(eids: [String!]!): [Campaign]!
+  """Obtain a list advertisables owned by an Advertisable."""
+  byAdvertisable(advertisable: String!, isActive: Boolean, statuses: [String!], excludeStatuses: [String!], blacklistStatuses: [String!], useCases: [String!], types: [String!], targetingTypes: [String!], abmTypes: [String!], channels: [String!], sources: [String!], funnelStages: [String!], objectives: [String!], excludeUseCases: [String!], excludeTypes: [String!], excludeTargetingTypes: [String!], excludeABMTypes: [String!], excludeChannels: [String!], excludeSources: [String!], excludeFunnelStages: [String!], tagPrefixes: [String!]): [Campaign]!
+  """Obtain a list advertisables owned by an Organization."""
+  byOrganization(organization: String!, isActive: Boolean, statuses: [String!], excludeStatuses: [String!], blacklistStatuses: [String!], useCases: [String!], types: [String!], targetingTypes: [String!], abmTypes: [String!], channels: [String!], sources: [String!], excludeUseCases: [String!], excludeTypes: [String!], excludeTargetingTypes: [String!], excludeABMTypes: [String!], excludeChannels: [String!], excludeSources: [String!], tagPrefixes: [String!]): [Campaign]!
+  """Provides aggregation for any metrics in the current and child nodes."""
+  metricsTotal: MetricAggregateResult
+}
+
+type ContextualKeywordTargetingMetrics {
+  """Labels of the keywords that were targeted."""
+  keywords: [String!]!
+  """The sum of the number of ad impressions."""
+  impressions: Decimal!
+  """The sum of clicks of ads."""
+  clicks: Decimal!
+  """Cost associated to ads."""
+  cost: Decimal!
+  """Click-through rate: The percentage of ad serves that were clicked. CTR = Clicks / Impressions"""
+  ctr: Decimal!
+  """Cost per mille. Cost per one thousand ad serves on the domain."""
+  cpm: Decimal!
+  """Cost per click: Your average spend for one click. CPC ($) = Spend / Clicks"""
+  cpc: Decimal!
+  """Impressions from video ads."""
+  videoImpressions: Decimal
+  """Number of times the video begun playing."""
+  videoViews: Decimal
+  """Number of times at least 25% of the video duration was played."""
+  videoTwentyFivePercent: Decimal
+  """Number of times at least 50% of the video duration was played."""
+  videoFiftyPercent: Decimal
+  """Number of times at least 75% of the video duration was played."""
+  videoSeventyFivePercent: Decimal
+  """Number of times the full video duration was played."""
+  videoHundredPercent: Decimal
+  """Video completion rate"""
+  videoCompletionRate: Decimal
+}
+
+"""
+Groups reporting metric data in summary and by date format.
+"""
+type ContextualTargetingResult {
+  """Summarizes by keyword the reporting data for the given date range."""
+  byKeywords: [ContextualKeywordTargetingMetrics!]!
+  """Summarizes by topic the reporting data for the given date range."""
+  byTopics: [ContextualTopicTargetingMetrics!]!
+}
+
+type ContextualTopicTargetingMetrics {
+  """Labels of the contextual topics that were targeted."""
+  topics: [String!]!
+  """The sum of the number of ad impressions."""
+  impressions: Decimal!
+  """The sum of clicks of ads."""
+  clicks: Decimal!
+  """Cost associated to ads."""
+  cost: Decimal!
+  """Click-through rate: The percentage of ad serves that were clicked. CTR = Clicks / Impressions"""
+  ctr: Decimal!
+  """Cost per mille. Cost per one thousand ad serves on the domain."""
+  cpm: Decimal!
+  """Cost per click: Your average spend for one click. CPC ($) = Spend / Clicks"""
+  cpc: Decimal!
+  """Impressions from video ads."""
+  videoImpressions: Decimal
+  """Number of times the video begun playing."""
+  videoViews: Decimal
+  """Number of times at least 25% of the video duration was played."""
+  videoTwentyFivePercent: Decimal
+  """Number of times at least 50% of the video duration was played."""
+  videoFiftyPercent: Decimal
+  """Number of times at least 75% of the video duration was played."""
+  videoSeventyFivePercent: Decimal
+  """Number of times the full video duration was played."""
+  videoHundredPercent: Decimal
+  """Video completion rate"""
+  videoCompletionRate: Decimal
+}
+
+"""
+Groups reporting metric data for conversions.
+"""
+type ConversionResult {
+  """Summarizes by conversion the reporting data for the given date range."""
+  byAudience(isActive: Boolean): [Conversions!]!
+}
+
+"""
+Contains reporting metric data for attributions, deliveries
+"""
+type Conversions {
+  """The unique identifier of the audience."""
+  audienceEID: String!
+  """The name of the audience."""
+  audienceName: String!
+  """The duration in days of the audience."""
+  audienceDuration: Int!
+  """True if the audience is active."""
+  audienceIsActive: Boolean!
+  """Summarizes the reporting data for the given date range."""
+  summary: ConversionsSummary!
+  """Reporting data by date in the given range."""
+  byDate: [ConversionsByDate!]!
+  """The sum of the number of ad impressions."""
+  impressions: Decimal
+  """The sum of clicks of all kinds of ads and emails."""
+  clicks: Decimal
+  """Cost associated to all kinds of ads and emails."""
+  cost: Decimal
+  """Conversions Total. Conversions (count) = View Conversions + Click Conversions"""
+  conversions: Decimal
+  """Click-through conversion (CTC). A goal completion that happens after someone clicks your ad."""
+  clickThroughs: Decimal
+  """View-through conversion (VTC). A goal completion that happens after someone views your ad, but does not click."""
+  viewThroughs: Decimal
+  """Revenue (amount) = View Revenue + Click Conversions"""
+  revenue: Decimal
+  """Click-Attributed Revenue. Total earnings when someone clicks your ad and converts."""
+  clickRevenue: Decimal
+  """View-Attributed Revenue. Total earnings when someone views your ad and converts."""
+  viewRevenue: Decimal
+  """Click-through rate. The percentage of ad serves that were clicked."""
+  ctr: Decimal
+  """Cost per click. Your average spend for one click."""
+  cpc: Decimal
+  """Cost per mille. Cost per one thousand ad serves."""
+  cpm: Decimal
+  """Cost per acquisition. Your average spend per conversion."""
+  cpa: Decimal
+  """Cost-per-click acquisition. Your average spend for a conversion that happens after someone clicks your ad."""
+  clickCPA: Decimal
+  """Cost-per-view acquisition: Your average spend for a conversion that happens after someone views your ad."""
+  viewCPA: Decimal
+  """Average Order Value Average revenue per attributed conversion."""
+  averageOrderValue: Decimal
+  """Click-through conversion rate. The percentage of clicks that resulted in a click-through conversion."""
+  ctcRate: Decimal
+  """View-through conversion rate: The percentage of impressions that resulted in a view-through conversion."""
+  vtcRate: Decimal
+  """Return on advertising spend: Your profit per dollar spent on ads."""
+  roas: Decimal
+  """Click return on advertising spend: Your profit per dollar spent, generated from conversions that happen after someone clicks your ad."""
+  clickROAS: Decimal
+  """View return on advertising spend: Your profit per dollar spent, generated from conversions that happen after someone views your ad."""
+  viewROAS: Decimal
+  """Alias for ‘roas’."""
+  roi: Decimal
+  """Alias for ‘clickROAS’."""
+  clickROI: Decimal
+  """Alias for ‘viewROAS’."""
+  viewROI: Decimal
+  """Influenced Conversions."""
+  influencedThroughs: Decimal
+  """Influenced Revenue."""
+  influencedRevenue: Decimal
+}
+
+type ConversionsByDate {
+  """Reporting data by date in the given range."""
+  date: Date
+  """The sum of the number of ad impressions."""
+  impressions: Decimal
+  """The sum of clicks of all kinds of ads and emails."""
+  clicks: Decimal
+  """Cost associated to all kinds of ads and emails."""
+  cost: Decimal
+  """Conversions Total. Conversions (count) = View Conversions + Click Conversions"""
+  conversions: Decimal
+  """Click-through conversion (CTC). A goal completion that happens after someone clicks your ad."""
+  clickThroughs: Decimal
+  """View-through conversion (VTC). A goal completion that happens after someone views your ad, but does not click."""
+  viewThroughs: Decimal
+  """Revenue (amount) = View Revenue + Click Conversions"""
+  revenue: Decimal
+  """Click-Attributed Revenue. Total earnings when someone clicks your ad and converts."""
+  clickRevenue: Decimal
+  """View-Attributed Revenue. Total earnings when someone views your ad and converts."""
+  viewRevenue: Decimal
+  """Click-through rate. The percentage of ad serves that were clicked."""
+  ctr: Decimal
+  """Cost per click. Your average spend for one click."""
+  cpc: Decimal
+  """Cost per mille. Cost per one thousand ad serves."""
+  cpm: Decimal
+  """Cost per acquisition. Your average spend per conversion."""
+  cpa: Decimal
+  """Cost-per-click acquisition. Your average spend for a conversion that happens after someone clicks your ad."""
+  clickCPA: Decimal
+  """Cost-per-view acquisition: Your average spend for a conversion that happens after someone views your ad."""
+  viewCPA: Decimal
+  """Average Order Value Average revenue per attributed conversion."""
+  averageOrderValue: Decimal
+  """Click-through conversion rate. The percentage of clicks that resulted in a click-through conversion."""
+  ctcRate: Decimal
+  """View-through conversion rate: The percentage of impressions that resulted in a view-through conversion."""
+  vtcRate: Decimal
+  """Return on advertising spend: Your profit per dollar spent on ads."""
+  roas: Decimal
+  """Click return on advertising spend: Your profit per dollar spent, generated from conversions that happen after someone clicks your ad."""
+  clickROAS: Decimal
+  """View return on advertising spend: Your profit per dollar spent, generated from conversions that happen after someone views your ad."""
+  viewROAS: Decimal
+  """Alias for ‘roas’."""
+  roi: Decimal
+  """Alias for ‘clickROAS’."""
+  clickROI: Decimal
+  """Alias for ‘viewROAS’."""
+  viewROI: Decimal
+  """Influenced Conversions."""
+  influencedThroughs: Decimal
+  """Influenced Revenue."""
+  influencedRevenue: Decimal
+}
+
+type ConversionsSummary {
+  """The sum of the number of ad impressions."""
+  impressions: Decimal
+  """The sum of clicks of all kinds of ads and emails."""
+  clicks: Decimal
+  """Cost associated to all kinds of ads and emails."""
+  cost: Decimal
+  """Conversions Total. Conversions (count) = View Conversions + Click Conversions"""
+  conversions: Decimal
+  """Click-through conversion (CTC). A goal completion that happens after someone clicks your ad."""
+  clickThroughs: Decimal
+  """View-through conversion (VTC). A goal completion that happens after someone views your ad, but does not click."""
+  viewThroughs: Decimal
+  """Revenue (amount) = View Revenue + Click Conversions"""
+  revenue: Decimal
+  """Click-Attributed Revenue. Total earnings when someone clicks your ad and converts."""
+  clickRevenue: Decimal
+  """View-Attributed Revenue. Total earnings when someone views your ad and converts."""
+  viewRevenue: Decimal
+  """Click-through rate. The percentage of ad serves that were clicked."""
+  ctr: Decimal
+  """Cost per click. Your average spend for one click."""
+  cpc: Decimal
+  """Cost per mille. Cost per one thousand ad serves."""
+  cpm: Decimal
+  """Cost per acquisition. Your average spend per conversion."""
+  cpa: Decimal
+  """Cost-per-click acquisition. Your average spend for a conversion that happens after someone clicks your ad."""
+  clickCPA: Decimal
+  """Cost-per-view acquisition: Your average spend for a conversion that happens after someone views your ad."""
+  viewCPA: Decimal
+  """Average Order Value Average revenue per attributed conversion."""
+  averageOrderValue: Decimal
+  """Click-through conversion rate. The percentage of clicks that resulted in a click-through conversion."""
+  ctcRate: Decimal
+  """View-through conversion rate: The percentage of impressions that resulted in a view-through conversion."""
+  vtcRate: Decimal
+  """Return on advertising spend: Your profit per dollar spent on ads."""
+  roas: Decimal
+  """Click return on advertising spend: Your profit per dollar spent, generated from conversions that happen after someone clicks your ad."""
+  clickROAS: Decimal
+  """View return on advertising spend: Your profit per dollar spent, generated from conversions that happen after someone views your ad."""
+  viewROAS: Decimal
+  """Alias for ‘roas’."""
+  roi: Decimal
+  """Alias for ‘clickROAS’."""
+  clickROI: Decimal
+  """Alias for ‘viewROAS’."""
+  viewROI: Decimal
+  """Influenced Conversions."""
+  influencedThroughs: Decimal
+  """Influenced Revenue."""
+  influencedRevenue: Decimal
+}
+
+type Email {
+  """The SendRoll email EID."""
+  eid: String!
+  """The EID of the AdRoll email campaign who owns this email."""
+  campaign: String!
+  """The position of this email in the campaign’s sequence. (0 for the first email)."""
+  sequencePosition: Int!
+  """The email’s subject."""
+  subject: String!
+  """The email’s name."""
+  name: String!
+  """One of ‘running’, ‘scheduled’, ‘ended’, ‘paused’, ‘draft’ or ‘deleted’."""
+  status: String!
+  """The effective status of the campaign. Details the reasons why it is not running, if applicable."""
+  actualStatus: JSON
+  """Minimal string representation of the actual status. One of ‘running’, ‘notRunning’ ,’ended’, ‘paused’, ‘draft’ or ‘deleted’."""
+  actualStatusString: String!
+  """Delay in hours between the previous event in the drip sequence and when this email is scheduled to be sent."""
+  delayHours: Float!
+  """The date this email was created."""
+  createdDate: DateTime
+  """Advertisable for this Email."""
+  advertisable: String!
+  """Metrics for the entity."""
+  metrics(start: Date, end: Date, pastDays: Int, currency: String, duration: Int): MetricResult!
+  """Provides aggregation for any metrics in the current and child nodes."""
+  metricsTotal: MetricAggregateResult
+}
+
+type EmailGroupData {
+  """The SendRoll email EID."""
+  eid: String!
+  """The EID of the AdRoll email campaign who owns this email."""
+  campaign: String!
+  """The position of this email in the campaign’s sequence. (0 for the first email)."""
+  sequencePosition: Int!
+  """The email’s subject."""
+  subject: String!
+  """The email’s name."""
+  name: String!
+  """One of ‘running’, ‘scheduled’, ‘ended’, ‘paused’, ‘draft’ or ‘deleted’."""
+  status: String!
+  """The effective status of the campaign. Details the reasons why it is not running, if applicable."""
+  actualStatus: JSON
+  """Minimal string representation of the actual status. One of ‘running’, ‘notRunning’ ,’ended’, ‘paused’, ‘draft’ or ‘deleted’."""
+  actualStatusString: String!
+  """Delay in hours between the previous event in the drip sequence and when this email is scheduled to be sent."""
+  delayHours: Float!
+  """The date this email was created."""
+  createdDate: DateTime
+  """Advertisable for this Email."""
+  advertisable: String!
+}
+
+type EmailQuery {
+  """Resolves an Email by its EID."""
+  byEID(email: String!): Email
+  """Resolves multiple Emails by their EID."""
+  byEIDs(eids: [String!]!): [Email]!
+  """Resolves all Emails for an Advertisable."""
+  byAdvertisable(advertisable: String!): [Email]!
+  """Resolves all Emails for a Campaign."""
+  byCampaign(campaign: String!): [Email]!
+  """Provides aggregation for any metrics in the current and child nodes."""
+  metricsTotal: MetricAggregateResult
+}
+
+type FieldAccountMetrics {
+  """The domain we show metrics for."""
+  domain: String
+  """The number of impressions from cookies attached to the domain."""
+  impressions: Decimal
+  """Spend against cookies belonging to then domain."""
+  cost: Decimal
+  """The number of clicks from cookies attached to the domain."""
+  clicks: Decimal
+  """A goal completion that happens after someone views your ad, but does not click."""
+  adjustedViewThroughs: Decimal
+  """A goal completion that happens after someone clicks your ad."""
+  adjustedClickThroughs: Decimal
+  """Total earnings when someone views your ad and converts."""
+  adjustedViewRevenue: Decimal
+  """Total earnings when someone clicks your ad and converts."""
+  adjustedClickRevenue: Decimal
+  """The number of page views on your site from cookie attached to the domain (at the advertisable level, not campaigns level)"""
+  pageViews: Decimal
+  """The number of unique engaged visitors to your site from cookie attached to the domain (at the advertisable level, not campaigns level)"""
+  engagedVisitors: Decimal
+  """The number of unique visitors to your site from cookie attached to the domain (at the advertisable level, not campaigns level)"""
+  uniqueVisitors: Decimal
+  """Most recent date within the last 30 days for which a cookie attached to the domain visited your site."""
+  lastActivityDate: Date
+}
+
+type FieldAccountMetricsSummary {
+  """Arguments:"""
+  summary(start: Date!, end: Date!, campaignEIDs: [String]!, advertisableEID: String!, currency: String): [FieldAccountMetrics]
+}
+
+type FieldConversions {
+  """Metrics for the entity broken down by conversion audiences."""
+  conversions(start: Date, end: Date, pastDays: Int, currency: String): ConversionResult!
+}
+
+type FieldGranularConversions {
+  """The granular conversions help understand the channels, campaigns, and ads that influence conversions. Lists the details about a conversion and the data points that determined the decision about its attribution. Limited to 90 days."""
+  granularConversions(start: Date, end: Date, pastDays: Int, currency: String): [GranularConversion!]!
+}
+
+type FieldMetrics {
+  """Metrics for the entity."""
+  metrics(start: Date, end: Date, pastDays: Int, currency: String, duration: Int): MetricResult!
+}
+
+type FieldMetricsForAdvertisable {
+  """Metrics for the Advertisable."""
+  metrics(start: Date, end: Date, pastDays: Int, currency: String, duration: Int): AdvertisableMetricResult!
+}
+
+type FieldMetricsForCampaign {
+  """Metrics for the Campaign."""
+  metrics(start: Date, end: Date, pastDays: Int, currency: String, duration: Int): CampaignMetricResult!
+}
+
+type FieldMetricsTotal {
+  """Provides aggregation for any metrics in the current and child nodes."""
+  metricsTotal: MetricAggregateResult
+}
+
+type FieldUtmBasedConversionsForAdvertisable {
+  """UTM based conversions for the Advertisable."""
+  utmBasedConversions(start: Date, end: Date, pastDays: Int, currency: String, model: String!): [UtmBasedConversionsForAdvertisable!]!
+}
+
+type FieldsAd {
+  """EID of the ad."""
+  eid: String!
+  """The id of the corresponding ad format in the AdRoll system."""
+  adFormatID: Int!
+  """Format string. i.e. ‘300 wide x 250 high’."""
+  adFormat: String!
+  """Format string. i.e. ‘300x250’."""
+  adFormatName: String!
+  """The EID of the advertisable to which this ad belongs."""
+  advertisable: String!
+  """Whether or not this ad has the possibility of serving based on the adgroups and campaigns in which it inhabits."""
+  hasFutureCampaigns: Boolean!
+  """The URL that the browser will navigate to when this ad is clicked."""
+  destinationURL: String!
+  """For Facebook ads, the text to be displayed as the ad’s headline."""
+  headline: String!
+  """For Facebook ads, the text to be displayed as the ad’s body."""
+  body: String!
+  """For Facebook Newsfeed ads, the text to be displayed as the ad’s message."""
+  message: String!
+  """Facebook call to action constant."""
+  callToAction: String!
+  """Whether or not this ad is currently active."""
+  isActive: Boolean!
+  """The name of this ad."""
+  name: String!
+  """This ad’s creative’s source URL."""
+  src: String!
+  """The preview URL for dynamic ads like HTML5."""
+  previewURL: String!
+  """One of ‘running’, ‘paused’, ‘review’, ‘draft’, ‘rejected’, ‘suspended’ or ‘deleted’."""
+  status: String!
+  """The effective status of the campaign. Details the reasons why it is not running, if applicable."""
+  actualStatus: JSON
+  """Minimal string representation of the actual status. One of ‘running’, ‘notRunning’ ,’ended’, ‘paused’, ‘review’, ‘draft’, ‘rejected’ or ‘deleted’."""
+  actualStatusString: String!
+  """The ad type: ‘liquid’, ‘image’, ‘flash’ or ‘ad_network’."""
+  type: String!
+  """The height in pixels of this ad’s creative."""
+  height: Int!
+  """The width in pixels of this ad’s creative."""
+  width: Int!
+  """The date this ad was created."""
+  createdDate: DateTime
+  """The date this ad was last updated."""
+  updatedDate: DateTime
+  """Whether or not this ad has been edited such that another ad has it’s original ad parameter set to this ad’s EID."""
+  hasEdits: Boolean!
+  """Whether or not this ad has edits that must be reviewed by an AdRoll administrator."""
+  hasPendingEdits: Boolean!
+  """The EID of the ad that was edited to create this ad."""
+  originalAd: String!
+  """Whether or not this is an ad that is dynamically composed when it is served to the user."""
+  isDynamic: Boolean!
+  """Whether or not an outline has been applied to the ad to satisfy network compliancy."""
+  isOutlined: Boolean!
+  """Hexadecimal color code corresponding to the outline of an ad."""
+  outlineColor: String!
+  """If the ad is in flash format, this is the flag showing whether or not the clickTAG is compliant."""
+  validClicktag: Boolean!
+  """DEPRECATED: please use adsManagerPermalink instead"""
+  facebookAdsManagerPermalink: String!
+  """The URL to the ad if it has been externally connected."""
+  adsManagerPermalink: String!
+  """Facebook permalink if applicable."""
+  facebookPermalink: String!
+  """Instagram permalink if applicable."""
+  instagramPermalink: String!
+  """LinkedIn permalink if applicable."""
+  linkedInPermalink: String!
+  """Only for Connected Campaigns’ ads, indicates the status of the sync’ing with the external service. When available, can be one of “pending”, “synced” or “error”"""
+  syncStatus: String!
+  """Only for Connected Campaigns’ ads, shows the error that caused the sync’ing with the external service to fail. Provided if the syncStatus field is “error”."""
+  syncError: String!
+  """The status of the Ad on the inventory network NextRoll has sync’ed it to (ex: Facebook)"""
+  remoteStatus: String!
+  """The reason why an Ad has been rejected on the inventory network NextRoll has sync’ed it to (ex: Facebook)"""
+  disapprovalReason: String!
+  """UTM Source Parameter from this Ad’s destination."""
+  utmSource: String!
+  """UTM Medium Parameter from this Ad’s destination."""
+  utmMedium: String!
+  """UTM Campaign Parameter from this Ad’s destination."""
+  utmCampaign: String!
+  """UTM Term Parameter from this Ad’s destination."""
+  utmTerm: String!
+  """UTM Content Parameter from this Ad’s destination."""
+  utmContent: String!
+  """The channel for the campaign this ad belongs to. This is only available when loading the ads through a campaign."""
+  channel: String!
+  """The type for the campaign this ad belongs to. This is only available when loading the ads through a campaign."""
+  campaignType: String!
+  """The adroll EID for prospecting ads."""
+  adrollEID: String!
+  """The AdCrab ad EID for this ad (ending in 8ADS)."""
+  adcrabEID: String!
+  """The AdGroup’s EID in the AdGroupAd relationship, if listed inside an AdGroup."""
+  inAdgroupEID: String!
+  """True of the AdGroupAd relationship is active, if listed inside an AdGroup."""
+  inAdgroupIsActive: Boolean!
+  """The status of the AdGroupAd relationship, if listed inside an AdGroup."""
+  inAdgroupStatus: String!
+  """The the internal EID of the AdGroupAd relationship, if such a EID exists and if the ad is listed inside an AdGroup."""
+  inAdgroupRelationshipEID: String!
+  """The list of custom labels to organize and filter the ad."""
+  labels: [AdLabel]!
+  """The list of custom labels as String. e.g.: “label1, label2”"""
+  labelsString: String!
+}
+
+type FieldsAdMetrics {
+  """The sum of the number of ad impressions."""
+  impressions: Decimal
+  """The sum of clicks of all kinds of ads and emails."""
+  clicks: Decimal
+  """Cost associated to all kinds of ads and emails."""
+  cost: Decimal
+  """Conversions Total. Conversions (count) = View Conversions + Click Conversions"""
+  conversions: Decimal
+  """Click-through conversion (CTC). A goal completion that happens after someone clicks your ad."""
+  clickThroughs: Decimal
+  """View-through conversion (VTC). A goal completion that happens after someone views your ad, but does not click."""
+  viewThroughs: Decimal
+  """Revenue (amount) = View Revenue + Click Conversions"""
+  revenue: Decimal
+  """Click-Attributed Revenue. Total earnings when someone clicks your ad and converts."""
+  clickRevenue: Decimal
+  """View-Attributed Revenue. Total earnings when someone views your ad and converts."""
+  viewRevenue: Decimal
+  """Click-through rate. The percentage of ad serves that were clicked."""
+  ctr: Decimal
+  """Cost per click. Your average spend for one click."""
+  cpc: Decimal
+  """Cost per mille. Cost per one thousand ad serves."""
+  cpm: Decimal
+  """Cost per acquisition. Your average spend per conversion."""
+  cpa: Decimal
+  """Cost-per-click acquisition. Your average spend for a conversion that happens after someone clicks your ad."""
+  clickCPA: Decimal
+  """Cost-per-view acquisition: Your average spend for a conversion that happens after someone views your ad."""
+  viewCPA: Decimal
+  """Average Order Value Average revenue per attributed conversion."""
+  averageOrderValue: Decimal
+  """Click-through conversion rate. The percentage of clicks that resulted in a click-through conversion."""
+  ctcRate: Decimal
+  """View-through conversion rate: The percentage of impressions that resulted in a view-through conversion."""
+  vtcRate: Decimal
+  """Return on advertising spend: Your profit per dollar spent on ads."""
+  roas: Decimal
+  """Click return on advertising spend: Your profit per dollar spent, generated from conversions that happen after someone clicks your ad."""
+  clickROAS: Decimal
+  """View return on advertising spend: Your profit per dollar spent, generated from conversions that happen after someone views your ad."""
+  viewROAS: Decimal
+  """Alias for ‘roas’."""
+  roi: Decimal
+  """Alias for ‘clickROAS’."""
+  clickROI: Decimal
+  """Alias for ‘viewROAS’."""
+  viewROI: Decimal
+}
+
+type FieldsAdgroup {
+  """The EID of the adgroup."""
+  eid: String!
+  """The strategy used to optimize ads when multiple ads fit a single ad space."""
+  adOptimization: String!
+  """The EID of the campaign that this adgroup is associated with."""
+  campaign: String!
+  """Whether or not this adgroup is currently active."""
+  isActive: Boolean!
+  """The name of this adgroup."""
+  name: String!
+  """One of ‘approved’, ‘paused’, ‘draft’, ‘rejected’ or ‘deleted’."""
+  status: String!
+  """The effective status of the adgroup. Details the reasons why it is not running, if applicable."""
+  actualStatus: JSON
+  """Minimal string representation of the actual status. One of ‘running’, ‘notRunning’ ,’ended’, ‘paused’, ‘review’, ‘draft’, ‘rejected’ or ‘deleted’."""
+  actualStatusString: String!
+  """The date this adgroup was created."""
+  createdDate: DateTime
+  """The date this adgroup was last updated."""
+  updatedDate: DateTime
+  """The timezone preference of all flights of this adgroup."""
+  flightTimezone: String!
+  """Scheduled flight periods when ads will be served. Null if there is no limitation."""
+  flights: JSON
+  """The processing status of the campaign inside the AdRoll. It may have a transient value other than “created” while the AdGroup is being processed by an internal job."""
+  processingStatus: String!
+  """Start date for the active or most recent flight period in the adgroup."""
+  significantFlightStartDate: DateTime
+  """End date for the active or most recent flight period in the adgroup."""
+  significantFlightEndDate: DateTime
+  """Advertisable for this Adgroup. NOTE/FIXME: the advertisable information is not usually available, so querying this will cause an additional request to be made."""
+  advertisable: String!
+  """Goal -for the kpiMetric- that drives the campaign’s bid strategy. Null for automatic."""
+  kpiGoal: Decimal
+  """ISO 4217 currency code for kpiGoal. If not provided assume the currency provided at the Advertisable level."""
+  kpiCurrency: String!
+  """Metric being targeted by the campaign’s bid strategy."""
+  kpiMetric: String!
+  """Ad type restriction for this adgroup. Empty if there is no explicit restriction. Currently one of “static”or “dynamic."""
+  adType: String!
+  """DEPRECATED: please use adsManagerPermalink instead"""
+  facebookAdsManagerPermalink: String!
+  """The URL to the adgroup if it has been externally connected."""
+  adsManagerPermalink: String!
+  """Only for Connected Campaigns’ adgroups, indicates the status of the sync’ing with the external service. When available, can be one of “pending”, “synced” or “error”"""
+  syncStatus: String!
+  """Only for Connected Campaigns’ adgroups, shows the error that caused the sync’ing with the external service to fail. Provided if the syncStatus field is “error”."""
+  syncError: String!
+  """The allowed targeting type configured for this adgroup."""
+  allowedTargeting: String!
+}
+
+type FieldsAdvertisable {
+  """EID of the advertisable."""
+  eid: String!
+  """Whether or not the advertisable is currently active."""
+  isActive: Boolean!
+  """Whether or not the advertisable is a B2B customer. Deprecated field: use businessUnit instead."""
+  isB2B: Boolean!
+  """The business unit this Advertisable has signed up for."""
+  businessUnit: String!
+  """Whether or not the advertisable is an ABM customer."""
+  isAbmCustomer: Boolean!
+  """The name of the advertisable."""
+  name: String!
+  """The EID of this advertisable’s organization."""
+  organization: String!
+  """The status of the advertisable. One of [‘admin_review’, ‘approved’, ‘rejected’, ‘suspended’]."""
+  status: String!
+  """The advertisable’s URL."""
+  url: String!
+  """The currency code (ISO-4217) use by the advertisable’s account."""
+  currency: String!
+  """Duration of this advertisable’s click through conversion window in days."""
+  clickThroughConversionWindow: Int!
+  """Duration of this advertisable’s view through conversion window in days."""
+  viewThroughConversionWindow: Int!
+  """The date this advertisable was created."""
+  createdDate: DateTime
+  revshareViewPercent: Decimal!
+  revshareClickPercent: Decimal!
+}
+
+type FieldsAudience {
+  """The EID of the audience in use."""
+  eid: String!
+  """The EID of the segment describing this audience."""
+  segmentEID: String!
+  """The Advertisable for the segment."""
+  advertisable: String!
+  """The Campaign for the segment."""
+  campaign: String!
+  """The Audience Name."""
+  name: String!
+  """The type of the segment. One of: - “url”: URL - “crm”: crm - “pages_viewed”: Pages Viewed - “products_viewed”: Products Viewed - “arbitrary_data”: External Data - “app_install”: App Install - “facebook_prospecting”: Facebook Prospecting - “custom”: Partner - “intent”: Intent - “impression”: Impression - “user_attributes”: Attributes - “user_events”: Events - “lead_generation”: Lead Generation - “composite”: Composite - “event_match”: Event JS Match - “js_match”: Explicit JS Match - “ipixel_match”: IPixel Match - “css_selector”: CSS Selector - “email_list”: Email List in AdRoll Email. - “email_domain”: Email Address Domain Match."""
+  type: String!
+  """Tags explicitly assigned to the segment."""
+  tags: String!
+  """Pieces to build the Audience’s description formatted following the type."""
+  description: JSON!
+  """The duration of the Audience, in days."""
+  duration: Int!
+  """False if this is segment has been deleted."""
+  isActive: Boolean!
+  """Is the segment an inclusion segment."""
+  inclusion: Boolean!
+  """True if this is a conversion audience."""
+  isConversion: Boolean!
+  """The value of a conversion from this segment."""
+  conversionValue: Decimal!
+  """The value of a conversion from this segment. Default to the Advertisable’s currency."""
+  currency: String!
+  """Date of creation."""
+  createdDate: DateTime
+  """Product the segment belongs to."""
+  product: String
+}
+
+type FieldsAudienceMetrics {
+  audienceSizeNew: Decimal
+  audienceSizeTotal: Decimal
+}
+
+type FieldsBrandAwarenessForAdvertisables {
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  siteBounceRate: Decimal
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  siteNewVisitors: Decimal
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  siteNewVisitorsNot: Decimal
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  siteEngaged: Decimal
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  siteEngagedNot: Decimal
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  siteEngagedNewVisitors: Decimal
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  siteEngagedNewVisitorsNot: Decimal
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  siteAddToCart: Decimal
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  siteAddToCartNot: Decimal
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  siteConverters: Decimal
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  siteConvertersNot: Decimal
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  siteReturningVisitors: Decimal
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  siteReturningVisitorsNot: Decimal
+}
+
+type FieldsBrandAwarenessForCampaigns {
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  siteBounceRate: Decimal
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  siteNewVisitors: Decimal
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  siteEngaged: Decimal
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  siteEngagedNewVisitors: Decimal
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  siteAddToCart: Decimal
+}
+
+type FieldsCTVHouseholdMetrics {
+  """Number of distinct households that received CTV impressions on a given day"""
+  totalUniqueHHsReached: Decimal
+  """Number of distinct households that visited the site, after viewing an ad"""
+  uniqueHHSiteVisits: Decimal
+}
+
+type FieldsCampaign {
+  """EID of the campaign."""
+  eid: String!
+  """EID of the advertisable to which this campaign belongs."""
+  advertisable: String!
+  """The daily budget of the campaign. Note that this can be an approximation, for example when budgetType = “lifetime” it is: budget = budgetGoal / numberOfDays(budgetStartDate, budgetEndDate)"""
+  budget: Decimal!
+  """The budget of the campaign, considered for the whole extent of its budgetType. When budgetType = “lifetime”, it will be applied in the period since budgetStartDate until budgetEndDate."""
+  budgetGoal: Decimal!
+  """The type of budget of the campaign (daily, lifetime…). If this includes -auto (i.e. daily-auto), then it is the inventory campaign of a proxy strategy that is auto-balancing the budget for this campaign"""
+  budgetType: String!
+  """The start date of a lifetime budget."""
+  budgetStartDate: DateTime
+  """The end date of a lifetime budget."""
+  budgetEndDate: DateTime
+  """Serialized budget settings as a string. “budgetType,budgetStartDate,budgetEndDate,budgetGoal”"""
+  budgetSettingsString: String!
+  """The date this campaign was created."""
+  createdDate: DateTime
+  """The CPC for this campaign."""
+  cpc: Decimal!
+  """The CPM for this campaign."""
+  cpm: Decimal!
+  """The maximum CPM for this campaign."""
+  maxCpm: Decimal!
+  """The name of this campaign."""
+  name: String!
+  """The day the campaign will start."""
+  startDate: DateTime
+  """The day the campaign will end, exclusive."""
+  endDate: DateTime
+  """The status of the campaign. One of ‘running’, ‘ended’, ‘paused’, ‘review’, ‘draft’, ‘rejected’ or ‘deleted’. Result is ‘billingFailedPermanent’ or ‘billingFailedRecoverable’ when BillingAuthStatus is ‘failed’."""
+  status: String!
+  """The effective status of the campaign. Details the reasons why it is not running, if applicable."""
+  actualStatus: JSON
+  """Minimal string representation of the actual status. One of ‘running’, ‘notRunning’ ,’ended’, ‘paused’, ‘review’, ‘draft’, ‘rejected’ or ‘deleted’."""
+  actualStatusString: String!
+  """The date this campaign was last updated."""
+  updatedDate: DateTime
+  """Campaign channel: one of ‘email’, ‘social’ or ‘web’"""
+  channel: String!
+  """True if the campaign is run by a third party."""
+  isConnectedChannel: Boolean!
+  """The service responsible for the creation of this campaign."""
+  source: String!
+  """ISO-4217 currency code for the given amount."""
+  currency: String!
+  """Type for the campaign. One of “prospecting”, “blended”r “retargeting”."""
+  type: String!
+  """Type of ABM campaign. Empty string if this is not an ABM campaign."""
+  abmType: String!
+  """The type of targeting that is used to pick which customers will be reached by this campaign."""
+  targetingType: String!
+  """Goal -for the kpiMetric- that drives the campaign’s bid strategy. Null for automatic."""
+  kpiGoal: Decimal!
+  """ISO 4217 currency code for kpiGoal. If not provided assume the currency provided at the Advertisable level."""
+  kpiCurrency: String!
+  """Metric being targeted by the campaign’s bid strategy."""
+  kpiMetric: String!
+  """SpendLimitUntil"""
+  spendLimitUntil: DateTime
+  """SpendLimitUntilReason"""
+  spendLimitUntilReason: String!
+  """The processing status of the campaign inside the AdRoll. It may have a transient value other than “created” while the campaign is being processed by an internal job."""
+  processingStatus: String!
+  """The billing auth status of the campaign inside the AdRoll. Will default to empty string when API BillingAuthStatus not present. Result is “failed” when the billing authorization did not complete."""
+  billingAuthStatus: String
+  """The parent Playbook’s EID for the campaign, only if it exists."""
+  playbookEID: String!
+  """The parent Playbook’s Name for the campaign, only if it exists."""
+  playbookName: String!
+  """The parent Playbook’s Type for the campaign, only if it exists."""
+  playbookType: String!
+  """The EID of this campaign as referenced from its Voltron strategy. Only available for inventory campaigns of Universal Campaigns."""
+  inVoltronStrategyEID: String!
+  """The eid of the Proxy Strategy that contains this campaign. Only for Inventory campaigns."""
+  proxyStrategyEID: String!
+  """The isFrozen value of the Proxy Strategy that contains this campaign. Only for Inventory campaigns."""
+  proxyStrategyIsFrozen: Boolean!
+  """The status of the Proxy Strategy that contains this campaign. Only for Inventory campaigns."""
+  proxyStrategyStatus: String!
+  """The name of the Proxy Strategy that contains this campaign. Only for Inventory campaigns."""
+  proxyStrategyName: String!
+  """If this is an Email Newsletter campaign, the number of potential recipients."""
+  newsletterScheduled: Decimal!
+  """If this is an Email Newsletter campaign, the number of emails sent."""
+  newsletterSends: Decimal!
+  """If this is an Email Newsletter campaign, the scheduled date for delivery. Only if the delivery is scheduled to happen or of it has already occurred. Omitted if in draft, paused or cancelled."""
+  newsletterScheduledDate: DateTime
+  """True if the campaign is run by NextRoll and will be directly billed to the advertisable’s account. False if it is run by a third party."""
+  isBillable: Boolean!
+  """True if the strategy is frozen, and no changes can be made to it."""
+  isFrozen: Boolean!
+  """Only for Connected Campaigns, indicates the status of the sync’ing with the external service. When available, can be one of “pending”, “synced” or “error”"""
+  syncStatus: String!
+  """Only for Connected Campaigns, shows the error that caused the sync’ing with the external service to fail. Provided if the syncStatus field is “error”."""
+  syncError: String!
+  """DEPRECATED: please use adsManagerPermalink instead"""
+  facebookAdsManagerPermalink: String!
+  """The URL to the campaign if it has been externally connected."""
+  adsManagerPermalink: String!
+  isIntegrated: Boolean!
+  useCase: String!
+  """The campaign marketing objective returned by AdRoll API."""
+  objective: String!
+  """Funnel stage for the campaign. One of “awareness”, “consideration”, “conversion”, or “other”."""
+  funnelStage: String
+  """Indicates if this campaign is a strategy that balances the budget automatically across its inventory campaigns. False means that inventory campaign budgets are manually set."""
+  isBudgetBalancingAutomated: Boolean!
+  """Available status changes for the current campaign. BETA."""
+  possibleStatusChanges: [String!]
+  """PerformanceTargets"""
+  performanceTargets: [PerformanceTarget]
+  """Internal tags set on creation."""
+  tags: [String!]
+  """If managed by an Automation, the EID of the Automation."""
+  automationEID: String
+  """If managed by an Automation, the EID of the Automation Node that references this entity."""
+  automationNodeEID: String
+  """If managed by an Automation, the name of the Automation."""
+  automationName: String
+  """Indicates if the campaign is disabled. Currently applies only to Automation-managed campaigns that have been disabled by subscription downgrade action."""
+  disabled: Boolean!
+  """If managed by a Klaviyo Flow, the EID of the Flow."""
+  klaviyoFlowEID: String
+  """If managed by a Klaviyo Flow, the name of the Flow."""
+  klaviyoFlowName: String
+}
+
+type FieldsCustomMetrics {
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  customMetric(formula: String): Decimal!
+}
+
+type FieldsEmail {
+  """The SendRoll email EID."""
+  eid: String!
+  """The EID of the AdRoll email campaign who owns this email."""
+  campaign: String!
+  """The position of this email in the campaign’s sequence. (0 for the first email)."""
+  sequencePosition: Int!
+  """The email’s subject."""
+  subject: String!
+  """The email’s name."""
+  name: String!
+  """One of ‘running’, ‘scheduled’, ‘ended’, ‘paused’, ‘draft’ or ‘deleted’."""
+  status: String!
+  """The effective status of the campaign. Details the reasons why it is not running, if applicable."""
+  actualStatus: JSON
+  """Minimal string representation of the actual status. One of ‘running’, ‘notRunning’ ,’ended’, ‘paused’, ‘draft’ or ‘deleted’."""
+  actualStatusString: String!
+  """Delay in hours between the previous event in the drip sequence and when this email is scheduled to be sent."""
+  delayHours: Float!
+  """The date this email was created."""
+  createdDate: DateTime
+  """Advertisable for this Email."""
+  advertisable: String!
+}
+
+type FieldsEmailMetrics {
+  """Number of emails sent by a campaign."""
+  sends: Decimal
+  """Number of unique-by-session email opens collected for a campaign."""
+  opens: Decimal
+  """WARNING: this field is deprecated, please use “emailUniqueOpenRate”. To ease up the transition this field will still be available, but always return null."""
+  openRate: Decimal
+  """Total emails scheduled to be sent as part if this campaign."""
+  emailScheduled: Decimal!
+  """Total emails attempted to be sent."""
+  emailSentUnconfirmed: Decimal!
+  """Deliveries that were rejected by the recipient's email service provider."""
+  emailBounced: Decimal!
+  """Total emails confirmed to have been sent by the Email Service Provider."""
+  emailSentConfirmed: Decimal!
+  """The percent of emails that have been confirmed to be delivered, over the send attempts."""
+  emailDeliveryRate: Decimal!
+  """Recipients who report your emails as spam."""
+  emailMarkedSpam: Decimal!
+  """Recipients who report your emails as spam, uniqued."""
+  emailUniqueMarkedSpam: Decimal!
+  """When an email is opened by a user in its lifetime."""
+  emailUniqueOpen: Decimal!
+  """The percent of sent emails that are opened once in a user's lifetime."""
+  emailUniqueOpenRate: Decimal!
+  """The number of times a link in an email was clicked once in a user's lifetime."""
+  emailUniqueClick: Decimal!
+  """The percentage of emails opened that were clicked once in a user's lifetime."""
+  emailUniqueClickRate: Decimal!
+  """Recipients that unsubscribe from the email list, uniqued."""
+  emailUniqueUnsubscribers: Decimal!
+  """The percent of recipients that have unsubscribers (unique) over the number of confirmed to be deliveries."""
+  emailUniqueUnsubscribeRate: Decimal!
+  """Recipients that unsubscribe from the email list"""
+  emailUnsubscribers: Decimal!
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  emailUniqueClicksByCountry: JSON
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  emailUniqueOpensByCountry: JSON
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  emailUniqueClicksByDeviceType: JSON
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  emailUniqueOpensByDeviceType: JSON
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  emailUniqueClicksByXpathUrl: JSON
+}
+
+type FieldsForUtmBasedConversions {
+  utm: String!
+  aov: Decimal!
+  assistConversions: Decimal!
+  assistRevenue: Decimal!
+  assistAov: Decimal!
+  conversions: Decimal!
+  revenue: Decimal!
+}
+
+type FieldsInfluencedAttributionMetrics {
+  """Influenced Conversions."""
+  influencedThroughs: Decimal
+  """Influenced Revenue."""
+  influencedRevenue: Decimal
+}
+
+type FieldsOrganization {
+  """EID of the organization."""
+  eid: String!
+  """Name of the organization."""
+  name: String!
+  """Created date for the organization."""
+  createdDate: DateTime
+}
+
+type FieldsProspectingMetrics {
+  """This field has been deprecated as metrics for it are no longer available and it will always be NULL. Use dailyNewVisitors instead."""
+  newVisitors: Decimal
+  """This field has been deprecated as metrics for it are no longer available and it will always be NULL. Use dailyEngagedVisitors instead."""
+  engagedVisitors: Decimal
+  """This field has been deprecated as metrics for it are no longer available and it will always be NULL."""
+  bouncedVisitors: Decimal
+  """This field has been deprecated as metrics for it are no longer available and it will always be NULL."""
+  nonBouncedVisitors: Decimal
+  """This field has been deprecated as metrics for it are no longer available and it will always be NULL. Use dailyNewVisitorCost instead."""
+  newVisitorCost: Decimal
+  """This field has been deprecated as metrics for it are no longer available and it will always be NULL. Use dailyEngagedVisitorCost instead."""
+  engagedVisitorCost: Decimal
+  """This field has been deprecated as metrics for it are no longer available and it will always be NULL."""
+  bounceRate: Decimal
+  """The number of daily new visitors who came to your site after viewing a prospecting ad."""
+  dailyNewVisitors: Decimal
+  """The number of daily new visitors who return to your site after viewing a prospecting ad."""
+  dailyReturnVisitors: Decimal
+  """The number of daily new visitors who have viewed at least 3 pages on your site after viewing a prospecting ad."""
+  dailyEngagedVisitors: Decimal
+  """The percentage of daily new visitors who have only viewed one page and left your site after viewing a prospecting ad."""
+  dailyBounceRate: Decimal
+  """The cost for each daily new visitor that came to your site after viewing a prospecting ad."""
+  dailyNewVisitorCost: Decimal
+  """The cost for each daily new visitor that has viewed at least 3 pages on your site after viewing a prospecting ad"""
+  dailyEngagedVisitorCost: Decimal
+}
+
+type FieldsReachFrequencyMetrics {
+  """Number of converters who saw an average of 0-1 ads/day in the last 30 days."""
+  convCountImpRate01: Decimal!
+  """Number of converters who saw an average of 1-2 ads/day in the last 30 days."""
+  convCountImpRate12: Decimal!
+  """Number of converters who saw an average of 2-3 ads/day in the last 30 days."""
+  convCountImpRate23: Decimal!
+  """Number of converters who saw an average of 3-4 ads/day in the last 30 days."""
+  convCountImpRate34: Decimal!
+  """Number of converters who saw an average of 4+ ads/day in the last 30 days."""
+  convCountImpRate4: Decimal!
+  """Number of non-converters who saw an average of 0-1 ads/day in the last 30 days."""
+  nonConvCountImpRate01: Decimal!
+  """Number of non-converters who saw an average of 1-2 ads/day in the last 30 days."""
+  nonConvCountImpRate12: Decimal!
+  """Number of non-converters who saw an average of 2-3 ads/day in the last 30 days."""
+  nonConvCountImpRate23: Decimal!
+  """Number of non-converters who saw an average of 3-4 ads/day in the last 30 days."""
+  nonConvCountImpRate34: Decimal!
+  """Number of non-converters who saw an average of 4+ ads/day in the last 30 days."""
+  nonConvCountImpRate4: Decimal!
+}
+
+type FieldsReachMetrics {
+  """Number of ads seen per day by reached users (only applies to WEB campaigns)"""
+  frequency: Decimal!
+  """Number of ads seen per day by reached devices (only applies to CTV campaigns)"""
+  deviceFrequency: Decimal!
+}
+
+type FieldsSMSMetrics {
+  """Total number of SMS messages that were delivered (and confirmed by the recipient)"""
+  smsSentDelivered: Decimal!
+  """Total number of times that a link in the SMS message was clicked."""
+  smsClicks: Decimal!
+}
+
+type FieldsSegment {
+  """The Segment EID."""
+  eid: String!
+  """The Segment Name."""
+  name: String!
+  """The Segment’s duration in days."""
+  duration: Int!
+  """False if the segment has been deleted."""
+  isActive: Boolean!
+  """True if this is a conversion segment."""
+  isConversion: Boolean!
+  """Segment type."""
+  type: String!
+  """Tags explicitly assigned to the segment."""
+  tags: String!
+  """The value of a conversion from this segment."""
+  conversionValue: Decimal!
+  """The value of a conversion from this segment. Default to the Advertisable’s currency."""
+  currency: String!
+  """Pieces to build the Segment’s description formatted following the type."""
+  description: JSON!
+  """Product the segment belongs to."""
+  product: String
+}
+
+type FieldsVideoMetrics {
+  """Impressions from video ads."""
+  videoImpressions: Decimal
+  """Number of times the video begun playing."""
+  videoViews: Decimal
+  """Number of times at least 25% of the video duration was played."""
+  videoTwentyFivePercent: Decimal
+  """Number of times at least 50% of the video duration was played."""
+  videoFiftyPercent: Decimal
+  """Number of times at least 75% of the video duration was played."""
+  videoSeventyFivePercent: Decimal
+  """Number of times the full video duration was played."""
+  videoHundredPercent: Decimal
+  """Video completion rate"""
+  videoCompletionRate: Decimal
+}
+
+"""
+A row describing a granular conversion.
+"""
+type GranularConversion {
+  """When the conversion happened."""
+  time: DateTime
+  """There are two types of conversions: “Click through” (CTC), “View through” (VTC) or “Influenced”."""
+  type: String!
+  """The attribution model applied at the time of conversion."""
+  attributionModel: String!
+  """The type of credit assigned: “attributed” or “influenced”."""
+  attributionCredit: String!
+  """The unique identifier for the attributed or influenced conversion."""
+  adrollConversionId: String!
+  """The last preceding AdRoll touchpoint, such as an impression or click."""
+  touchpointTimestamp: DateTime
+  """The number of conversions attributed to your AdRoll ads based on your selected attribution model. If the impression or click is attributed the conversion, the value will be 1. If the impression or click influenced the conversion, the value will be 0."""
+  attributedConversions: Decimal!
+  """True if it has been attributed as last touch."""
+  lastTouchAttribution: Boolean!
+  """The channel that served the converting ad (Web, Facebook, Email)."""
+  channel: String!
+  """The EID of the campaign that served the converting ad."""
+  campaignEID: String!
+  """The type of the campaign that served the converting ad. (Deprecated)"""
+  campaignType: String!
+  """The type for RollWorks ABM campaigns."""
+  campaignAbmType: String!
+  """The targeting type of the campaign that served the converting ad."""
+  campaignTargetingType: String!
+  """The name of the campaign that served the converting ad."""
+  campaignName: String!
+  """The EID of the AdGroup that served the converting ad."""
+  adgroupEID: String!
+  """The name of the AdGroup that served the converting ad."""
+  adgroupName: String!
+  """The EID of the ad that resulted in a conversion."""
+  adEID: String!
+  """The name of the ad that resulted in a conversion."""
+  adName: String!
+  """Size of the converting ad."""
+  adSize: String!
+  """The EID of the associated conversion audience."""
+  segmentEID: String!
+  """The name of the associated conversion audience."""
+  segmentName: String!
+  """The associated Playbook’s EID or empty string if not applicable."""
+  playbookEID: String!
+  """The associated Playbook’s Name or empty string if not applicable."""
+  playbookName: String!
+  """The associated Playbook’s Type or empty string if not applicable."""
+  playbookType: String!
+  """Revenue for the attributed conversions (only populates if you either specify a fixed conversion value or have [enhanced conversion tracking](https://help.adroll.com/hc/en-us/articles/212629938) set up)."""
+  attributedRevenue: Decimal!
+  """Data recorded by the AdRoll Pixel on the conversion event."""
+  externalData: JSON
+  """If available the device where the conversion happened."""
+  device: String!
+  """If available (provided by the network, unavailable on Facebook): the country where the conversion happened."""
+  country: String!
+  """If available (provided by the network, unavailable on Facebook): the city where the conversion happened."""
+  city: String!
+  """When the first AdRoll touch occurred."""
+  firstTouchTimestamp: DateTime
+  """When the final AdRoll touch occurred."""
+  lastTouchTimestamp: DateTime
+  """Time from first AdRoll touch to conversion (days)."""
+  daysToConversionFirstTouch: Decimal!
+  """Time from last AdRoll touch to conversion (days)."""
+  daysToConversionLastTouch: Decimal!
+  """URL preceding the conversion."""
+  referrerURL: String!
+  """The AdRoll cookie that was used to track this conversion’s journey. This field is for internal use only, it will always return an empty string for external users."""
+  cookie: String!
+}
+
+"""
+[BETA] This GraphQL node is currently under development.
+"""
+type GroupListRow {
+  """Unique ID for this group."""
+  id: String!
+  """The unique ID of the parent group. Empty for the root group."""
+  parentId: String!
+  """Leaf is true for the leaf groups (groups with no children). This corresponds to the last ‘groups’ parameter in the GroupBy."""
+  leaf: Boolean!
+  """When grouping by date, this is the metric date for this group. The format depends on the ‘date’ argument of the GroupBy:"""
+  date: String!
+  """This is a sortable value for the ‘date’ argument. It is equal to ‘date’ except for when using ‘dayofweek’ when it is the number corresponding to the week day order."""
+  dateKey: String!
+  """When grouping by domain, this returns the domain for the current group."""
+  domain: String!
+  """When grouping by columns, this will return a JSON object whose keys are the group column names (as specified in the GroupBy argument) and the values are the column values for the current group."""
+  columns: JSON!
+  """Organization data for the group. This is only available when grouping by organizations (e.g. ‘entity’ = ‘organization’)."""
+  organization: OrganizationGroupData
+  """Advertisable data for the group. This is only available when grouping by advertisables (e.g. ‘entity’ = ‘advertisable’)."""
+  advertisable: AdvertisableGroupData
+  """Campaign data for the group. This is only available when grouping by campaigns (e.g. ‘entity’ = ‘campaign’)."""
+  campaign: CampaignGroupData
+  """Adgroup data for the group. This is only available when grouping by adgroups (e.g. ‘entity’ = ‘adgroup’)."""
+  adgroup: AdgroupGroupData
+  """Ad data for the group. This is only available when grouping by ads (e.g. ‘entity’ = ‘ad’)."""
+  ad: AdGroupData
+  """Segment data for the group. This is only available when grouping by segments (e.g. ‘entity’ = ‘segment’)."""
+  segment: SegmentGroupData
+  """Email data for the group. This is only available when grouping by emails (e.g. ‘entity’ = ‘email’)."""
+  email: EmailGroupData
+  """Audience data for the group. This is only available when grouping by audiences (e.g. ‘entity’ = ‘audience’)."""
+  audience: AudienceGroupData
+  """The sum of the number of ad impressions."""
+  impressions: Decimal
+  """The sum of clicks of all kinds of ads and emails."""
+  clicks: Decimal
+  """Cost associated to all kinds of ads and emails."""
+  cost: Decimal
+  """Conversions Total. Conversions (count) = View Conversions + Click Conversions"""
+  conversions: Decimal
+  """Click-through conversion (CTC). A goal completion that happens after someone clicks your ad."""
+  clickThroughs: Decimal
+  """View-through conversion (VTC). A goal completion that happens after someone views your ad, but does not click."""
+  viewThroughs: Decimal
+  """Revenue (amount) = View Revenue + Click Conversions"""
+  revenue: Decimal
+  """Click-Attributed Revenue. Total earnings when someone clicks your ad and converts."""
+  clickRevenue: Decimal
+  """View-Attributed Revenue. Total earnings when someone views your ad and converts."""
+  viewRevenue: Decimal
+  """Click-through rate. The percentage of ad serves that were clicked."""
+  ctr: Decimal
+  """Cost per click. Your average spend for one click."""
+  cpc: Decimal
+  """Cost per mille. Cost per one thousand ad serves."""
+  cpm: Decimal
+  """Cost per acquisition. Your average spend per conversion."""
+  cpa: Decimal
+  """Cost-per-click acquisition. Your average spend for a conversion that happens after someone clicks your ad."""
+  clickCPA: Decimal
+  """Cost-per-view acquisition: Your average spend for a conversion that happens after someone views your ad."""
+  viewCPA: Decimal
+  """Average Order Value Average revenue per attributed conversion."""
+  averageOrderValue: Decimal
+  """Click-through conversion rate. The percentage of clicks that resulted in a click-through conversion."""
+  ctcRate: Decimal
+  """View-through conversion rate: The percentage of impressions that resulted in a view-through conversion."""
+  vtcRate: Decimal
+  """Return on advertising spend: Your profit per dollar spent on ads."""
+  roas: Decimal
+  """Click return on advertising spend: Your profit per dollar spent, generated from conversions that happen after someone clicks your ad."""
+  clickROAS: Decimal
+  """View return on advertising spend: Your profit per dollar spent, generated from conversions that happen after someone views your ad."""
+  viewROAS: Decimal
+  """Alias for ‘roas’."""
+  roi: Decimal
+  """Alias for ‘clickROAS’."""
+  clickROI: Decimal
+  """Alias for ‘viewROAS’."""
+  viewROI: Decimal
+  """Influenced Conversions."""
+  influencedThroughs: Decimal
+  """Influenced Revenue."""
+  influencedRevenue: Decimal
+  audienceSizeNew: Decimal
+  audienceSizeTotal: Decimal
+  """This field has been deprecated as metrics for it are no longer available and it will always be NULL. Use dailyNewVisitors instead."""
+  newVisitors: Decimal
+  """This field has been deprecated as metrics for it are no longer available and it will always be NULL. Use dailyEngagedVisitors instead."""
+  engagedVisitors: Decimal
+  """This field has been deprecated as metrics for it are no longer available and it will always be NULL."""
+  bouncedVisitors: Decimal
+  """This field has been deprecated as metrics for it are no longer available and it will always be NULL."""
+  nonBouncedVisitors: Decimal
+  """This field has been deprecated as metrics for it are no longer available and it will always be NULL. Use dailyNewVisitorCost instead."""
+  newVisitorCost: Decimal
+  """This field has been deprecated as metrics for it are no longer available and it will always be NULL. Use dailyEngagedVisitorCost instead."""
+  engagedVisitorCost: Decimal
+  """This field has been deprecated as metrics for it are no longer available and it will always be NULL."""
+  bounceRate: Decimal
+  """The number of daily new visitors who came to your site after viewing a prospecting ad."""
+  dailyNewVisitors: Decimal
+  """The number of daily new visitors who return to your site after viewing a prospecting ad."""
+  dailyReturnVisitors: Decimal
+  """The number of daily new visitors who have viewed at least 3 pages on your site after viewing a prospecting ad."""
+  dailyEngagedVisitors: Decimal
+  """The percentage of daily new visitors who have only viewed one page and left your site after viewing a prospecting ad."""
+  dailyBounceRate: Decimal
+  """The cost for each daily new visitor that came to your site after viewing a prospecting ad."""
+  dailyNewVisitorCost: Decimal
+  """The cost for each daily new visitor that has viewed at least 3 pages on your site after viewing a prospecting ad"""
+  dailyEngagedVisitorCost: Decimal
+  """Number of emails sent by a campaign."""
+  sends: Decimal
+  """Number of unique-by-session email opens collected for a campaign."""
+  opens: Decimal
+  """WARNING: this field is deprecated, please use “emailUniqueOpenRate”. To ease up the transition this field will still be available, but always return null."""
+  openRate: Decimal
+  """Total emails scheduled to be sent as part if this campaign."""
+  emailScheduled: Decimal!
+  """Total emails attempted to be sent."""
+  emailSentUnconfirmed: Decimal!
+  """Deliveries that were rejected by the recipient's email service provider."""
+  emailBounced: Decimal!
+  """Total emails confirmed to have been sent by the Email Service Provider."""
+  emailSentConfirmed: Decimal!
+  """The percent of emails that have been confirmed to be delivered, over the send attempts."""
+  emailDeliveryRate: Decimal!
+  """Recipients who report your emails as spam."""
+  emailMarkedSpam: Decimal!
+  """Recipients who report your emails as spam, uniqued."""
+  emailUniqueMarkedSpam: Decimal!
+  """When an email is opened by a user in its lifetime."""
+  emailUniqueOpen: Decimal!
+  """The percent of sent emails that are opened once in a user's lifetime."""
+  emailUniqueOpenRate: Decimal!
+  """The number of times a link in an email was clicked once in a user's lifetime."""
+  emailUniqueClick: Decimal!
+  """The percentage of emails opened that were clicked once in a user's lifetime."""
+  emailUniqueClickRate: Decimal!
+  """Recipients that unsubscribe from the email list, uniqued."""
+  emailUniqueUnsubscribers: Decimal!
+  """The percent of recipients that have unsubscribers (unique) over the number of confirmed to be deliveries."""
+  emailUniqueUnsubscribeRate: Decimal!
+  """Recipients that unsubscribe from the email list"""
+  emailUnsubscribers: Decimal!
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  emailUniqueClicksByCountry: JSON
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  emailUniqueOpensByCountry: JSON
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  emailUniqueClicksByDeviceType: JSON
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  emailUniqueOpensByDeviceType: JSON
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  emailUniqueClicksByXpathUrl: JSON
+  """Total number of SMS messages that were delivered (and confirmed by the recipient)"""
+  smsSentDelivered: Decimal!
+  """Total number of times that a link in the SMS message was clicked."""
+  smsClicks: Decimal!
+  """Impressions from video ads."""
+  videoImpressions: Decimal
+  """Number of times the video begun playing."""
+  videoViews: Decimal
+  """Number of times at least 25% of the video duration was played."""
+  videoTwentyFivePercent: Decimal
+  """Number of times at least 50% of the video duration was played."""
+  videoFiftyPercent: Decimal
+  """Number of times at least 75% of the video duration was played."""
+  videoSeventyFivePercent: Decimal
+  """Number of times the full video duration was played."""
+  videoHundredPercent: Decimal
+  """Video completion rate"""
+  videoCompletionRate: Decimal
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  siteBounceRate: Decimal
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  siteNewVisitors: Decimal
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  siteNewVisitorsNot: Decimal
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  siteEngaged: Decimal
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  siteEngagedNot: Decimal
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  siteEngagedNewVisitors: Decimal
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  siteEngagedNewVisitorsNot: Decimal
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  siteAddToCart: Decimal
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  siteAddToCartNot: Decimal
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  siteConverters: Decimal
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  siteConvertersNot: Decimal
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  siteReturningVisitors: Decimal
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  siteReturningVisitorsNot: Decimal
+}
+
+"""
+[BETA] This GraphQL node is currently under development.
+"""
+type GroupQuery {
+  """Loads entities and metrics providing for arbitrary grouping."""
+  loadBy(eids: [String!]!, by: String!, start: Date, end: Date, pastDays: Int, currency: String, groups: [GroupBy!]!): GroupResult
+  """Loads entities and metrics providing for arbitrary grouping."""
+  loadByList(eids: [String!]!, by: String!, start: Date, end: Date, pastDays: Int, currency: String, groups: [GroupBy!]!): [GroupListRow!]!
+}
+
+"""
+[BETA] This GraphQL node is currently under development.
+"""
+type GroupResult {
+  """Unique ID for this group."""
+  id: String!
+  """Return children groups if available."""
+  groups: [GroupResult!]!
+  """When grouping by date, this is the metric date for this group. The format depends on the ‘date’ argument of the GroupBy:"""
+  date: String!
+  """This is a sortable value for the ‘date’ argument. It is equal to ‘date’ except for when using ‘dayofweek’ when it is the number corresponding to the week day order."""
+  dateKey: String!
+  """When grouping by domain, this returns the domain for the current group."""
+  domain: String!
+  """When grouping by columns, this will return a JSON object whose keys are the group column names (as specified in the GroupBy argument) and the values are the column values for the current group."""
+  columns: JSON!
+  """Organization data for the group. This is only available when grouping by organizations (e.g. ‘entity’ = ‘organization’)."""
+  organization: OrganizationGroupData
+  """Advertisable data for the group. This is only available when grouping by advertisables (e.g. ‘entity’ = ‘advertisable’)."""
+  advertisable: AdvertisableGroupData
+  """Campaign data for the group. This is only available when grouping by campaigns (e.g. ‘entity’ = ‘campaign’)."""
+  campaign: CampaignGroupData
+  """Adgroup data for the group. This is only available when grouping by adgroups (e.g. ‘entity’ = ‘adgroup’)."""
+  adgroup: AdgroupGroupData
+  """Ad data for the group. This is only available when grouping by ads (e.g. ‘entity’ = ‘ad’)."""
+  ad: AdGroupData
+  """Segment data for the group. This is only available when grouping by segments (e.g. ‘entity’ = ‘segment’)."""
+  segment: SegmentGroupData
+  """Email data for the group. This is only available when grouping by emails (e.g. ‘entity’ = ‘email’)."""
+  email: EmailGroupData
+  """Audience data for the group. This is only available when grouping by audiences (e.g. ‘entity’ = ‘audience’)."""
+  audience: AudienceGroupData
+  """The sum of the number of ad impressions."""
+  impressions: Decimal
+  """The sum of clicks of all kinds of ads and emails."""
+  clicks: Decimal
+  """Cost associated to all kinds of ads and emails."""
+  cost: Decimal
+  """Conversions Total. Conversions (count) = View Conversions + Click Conversions"""
+  conversions: Decimal
+  """Click-through conversion (CTC). A goal completion that happens after someone clicks your ad."""
+  clickThroughs: Decimal
+  """View-through conversion (VTC). A goal completion that happens after someone views your ad, but does not click."""
+  viewThroughs: Decimal
+  """Revenue (amount) = View Revenue + Click Conversions"""
+  revenue: Decimal
+  """Click-Attributed Revenue. Total earnings when someone clicks your ad and converts."""
+  clickRevenue: Decimal
+  """View-Attributed Revenue. Total earnings when someone views your ad and converts."""
+  viewRevenue: Decimal
+  """Click-through rate. The percentage of ad serves that were clicked."""
+  ctr: Decimal
+  """Cost per click. Your average spend for one click."""
+  cpc: Decimal
+  """Cost per mille. Cost per one thousand ad serves."""
+  cpm: Decimal
+  """Cost per acquisition. Your average spend per conversion."""
+  cpa: Decimal
+  """Cost-per-click acquisition. Your average spend for a conversion that happens after someone clicks your ad."""
+  clickCPA: Decimal
+  """Cost-per-view acquisition: Your average spend for a conversion that happens after someone views your ad."""
+  viewCPA: Decimal
+  """Average Order Value Average revenue per attributed conversion."""
+  averageOrderValue: Decimal
+  """Click-through conversion rate. The percentage of clicks that resulted in a click-through conversion."""
+  ctcRate: Decimal
+  """View-through conversion rate: The percentage of impressions that resulted in a view-through conversion."""
+  vtcRate: Decimal
+  """Return on advertising spend: Your profit per dollar spent on ads."""
+  roas: Decimal
+  """Click return on advertising spend: Your profit per dollar spent, generated from conversions that happen after someone clicks your ad."""
+  clickROAS: Decimal
+  """View return on advertising spend: Your profit per dollar spent, generated from conversions that happen after someone views your ad."""
+  viewROAS: Decimal
+  """Alias for ‘roas’."""
+  roi: Decimal
+  """Alias for ‘clickROAS’."""
+  clickROI: Decimal
+  """Alias for ‘viewROAS’."""
+  viewROI: Decimal
+  """Influenced Conversions."""
+  influencedThroughs: Decimal
+  """Influenced Revenue."""
+  influencedRevenue: Decimal
+  audienceSizeNew: Decimal
+  audienceSizeTotal: Decimal
+  """This field has been deprecated as metrics for it are no longer available and it will always be NULL. Use dailyNewVisitors instead."""
+  newVisitors: Decimal
+  """This field has been deprecated as metrics for it are no longer available and it will always be NULL. Use dailyEngagedVisitors instead."""
+  engagedVisitors: Decimal
+  """This field has been deprecated as metrics for it are no longer available and it will always be NULL."""
+  bouncedVisitors: Decimal
+  """This field has been deprecated as metrics for it are no longer available and it will always be NULL."""
+  nonBouncedVisitors: Decimal
+  """This field has been deprecated as metrics for it are no longer available and it will always be NULL. Use dailyNewVisitorCost instead."""
+  newVisitorCost: Decimal
+  """This field has been deprecated as metrics for it are no longer available and it will always be NULL. Use dailyEngagedVisitorCost instead."""
+  engagedVisitorCost: Decimal
+  """This field has been deprecated as metrics for it are no longer available and it will always be NULL."""
+  bounceRate: Decimal
+  """The number of daily new visitors who came to your site after viewing a prospecting ad."""
+  dailyNewVisitors: Decimal
+  """The number of daily new visitors who return to your site after viewing a prospecting ad."""
+  dailyReturnVisitors: Decimal
+  """The number of daily new visitors who have viewed at least 3 pages on your site after viewing a prospecting ad."""
+  dailyEngagedVisitors: Decimal
+  """The percentage of daily new visitors who have only viewed one page and left your site after viewing a prospecting ad."""
+  dailyBounceRate: Decimal
+  """The cost for each daily new visitor that came to your site after viewing a prospecting ad."""
+  dailyNewVisitorCost: Decimal
+  """The cost for each daily new visitor that has viewed at least 3 pages on your site after viewing a prospecting ad"""
+  dailyEngagedVisitorCost: Decimal
+  """Number of emails sent by a campaign."""
+  sends: Decimal
+  """Number of unique-by-session email opens collected for a campaign."""
+  opens: Decimal
+  """WARNING: this field is deprecated, please use “emailUniqueOpenRate”. To ease up the transition this field will still be available, but always return null."""
+  openRate: Decimal
+  """Total emails scheduled to be sent as part if this campaign."""
+  emailScheduled: Decimal!
+  """Total emails attempted to be sent."""
+  emailSentUnconfirmed: Decimal!
+  """Deliveries that were rejected by the recipient's email service provider."""
+  emailBounced: Decimal!
+  """Total emails confirmed to have been sent by the Email Service Provider."""
+  emailSentConfirmed: Decimal!
+  """The percent of emails that have been confirmed to be delivered, over the send attempts."""
+  emailDeliveryRate: Decimal!
+  """Recipients who report your emails as spam."""
+  emailMarkedSpam: Decimal!
+  """Recipients who report your emails as spam, uniqued."""
+  emailUniqueMarkedSpam: Decimal!
+  """When an email is opened by a user in its lifetime."""
+  emailUniqueOpen: Decimal!
+  """The percent of sent emails that are opened once in a user's lifetime."""
+  emailUniqueOpenRate: Decimal!
+  """The number of times a link in an email was clicked once in a user's lifetime."""
+  emailUniqueClick: Decimal!
+  """The percentage of emails opened that were clicked once in a user's lifetime."""
+  emailUniqueClickRate: Decimal!
+  """Recipients that unsubscribe from the email list, uniqued."""
+  emailUniqueUnsubscribers: Decimal!
+  """The percent of recipients that have unsubscribers (unique) over the number of confirmed to be deliveries."""
+  emailUniqueUnsubscribeRate: Decimal!
+  """Recipients that unsubscribe from the email list"""
+  emailUnsubscribers: Decimal!
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  emailUniqueClicksByCountry: JSON
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  emailUniqueOpensByCountry: JSON
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  emailUniqueClicksByDeviceType: JSON
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  emailUniqueOpensByDeviceType: JSON
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  emailUniqueClicksByXpathUrl: JSON
+  """Total number of SMS messages that were delivered (and confirmed by the recipient)"""
+  smsSentDelivered: Decimal!
+  """Total number of times that a link in the SMS message was clicked."""
+  smsClicks: Decimal!
+  """Impressions from video ads."""
+  videoImpressions: Decimal
+  """Number of times the video begun playing."""
+  videoViews: Decimal
+  """Number of times at least 25% of the video duration was played."""
+  videoTwentyFivePercent: Decimal
+  """Number of times at least 50% of the video duration was played."""
+  videoFiftyPercent: Decimal
+  """Number of times at least 75% of the video duration was played."""
+  videoSeventyFivePercent: Decimal
+  """Number of times the full video duration was played."""
+  videoHundredPercent: Decimal
+  """Video completion rate"""
+  videoCompletionRate: Decimal
+}
+
+type InventoryCampaign {
+  """EID of the campaign."""
+  eid: String!
+  """EID of the advertisable to which this campaign belongs."""
+  advertisable: String!
+  """The daily budget of the campaign. Note that this can be an approximation, for example when budgetType = “lifetime” it is: budget = budgetGoal / numberOfDays(budgetStartDate, budgetEndDate)"""
+  budget: Decimal!
+  """The budget of the campaign, considered for the whole extent of its budgetType. When budgetType = “lifetime”, it will be applied in the period since budgetStartDate until budgetEndDate."""
+  budgetGoal: Decimal!
+  """The type of budget of the campaign (daily, lifetime…). If this includes -auto (i.e. daily-auto), then it is the inventory campaign of a proxy strategy that is auto-balancing the budget for this campaign"""
+  budgetType: String!
+  """The start date of a lifetime budget."""
+  budgetStartDate: DateTime
+  """The end date of a lifetime budget."""
+  budgetEndDate: DateTime
+  """Serialized budget settings as a string. “budgetType,budgetStartDate,budgetEndDate,budgetGoal”"""
+  budgetSettingsString: String!
+  """The date this campaign was created."""
+  createdDate: DateTime
+  """The CPC for this campaign."""
+  cpc: Decimal!
+  """The CPM for this campaign."""
+  cpm: Decimal!
+  """The maximum CPM for this campaign."""
+  maxCpm: Decimal!
+  """The name of this campaign."""
+  name: String!
+  """The day the campaign will start."""
+  startDate: DateTime
+  """The day the campaign will end, exclusive."""
+  endDate: DateTime
+  """The status of the campaign. One of ‘running’, ‘ended’, ‘paused’, ‘review’, ‘draft’, ‘rejected’ or ‘deleted’. Result is ‘billingFailedPermanent’ or ‘billingFailedRecoverable’ when BillingAuthStatus is ‘failed’."""
+  status: String!
+  """The effective status of the campaign. Details the reasons why it is not running, if applicable."""
+  actualStatus: JSON
+  """Minimal string representation of the actual status. One of ‘running’, ‘notRunning’ ,’ended’, ‘paused’, ‘review’, ‘draft’, ‘rejected’ or ‘deleted’."""
+  actualStatusString: String!
+  """The date this campaign was last updated."""
+  updatedDate: DateTime
+  """Campaign channel: one of ‘email’, ‘social’ or ‘web’"""
+  channel: String!
+  """True if the campaign is run by a third party."""
+  isConnectedChannel: Boolean!
+  """The service responsible for the creation of this campaign."""
+  source: String!
+  """ISO-4217 currency code for the given amount."""
+  currency: String!
+  """Type for the campaign. One of “prospecting”, “blended”r “retargeting”."""
+  type: String!
+  """Type of ABM campaign. Empty string if this is not an ABM campaign."""
+  abmType: String!
+  """The type of targeting that is used to pick which customers will be reached by this campaign."""
+  targetingType: String!
+  """Goal -for the kpiMetric- that drives the campaign’s bid strategy. Null for automatic."""
+  kpiGoal: Decimal!
+  """ISO 4217 currency code for kpiGoal. If not provided assume the currency provided at the Advertisable level."""
+  kpiCurrency: String!
+  """Metric being targeted by the campaign’s bid strategy."""
+  kpiMetric: String!
+  """SpendLimitUntil"""
+  spendLimitUntil: DateTime
+  """SpendLimitUntilReason"""
+  spendLimitUntilReason: String!
+  """The processing status of the campaign inside the AdRoll. It may have a transient value other than “created” while the campaign is being processed by an internal job."""
+  processingStatus: String!
+  """The billing auth status of the campaign inside the AdRoll. Will default to empty string when API BillingAuthStatus not present. Result is “failed” when the billing authorization did not complete."""
+  billingAuthStatus: String
+  """The parent Playbook’s EID for the campaign, only if it exists."""
+  playbookEID: String!
+  """The parent Playbook’s Name for the campaign, only if it exists."""
+  playbookName: String!
+  """The parent Playbook’s Type for the campaign, only if it exists."""
+  playbookType: String!
+  """The EID of this campaign as referenced from its Voltron strategy. Only available for inventory campaigns of Universal Campaigns."""
+  inVoltronStrategyEID: String!
+  """The eid of the Proxy Strategy that contains this campaign. Only for Inventory campaigns."""
+  proxyStrategyEID: String!
+  """The isFrozen value of the Proxy Strategy that contains this campaign. Only for Inventory campaigns."""
+  proxyStrategyIsFrozen: Boolean!
+  """The status of the Proxy Strategy that contains this campaign. Only for Inventory campaigns."""
+  proxyStrategyStatus: String!
+  """The name of the Proxy Strategy that contains this campaign. Only for Inventory campaigns."""
+  proxyStrategyName: String!
+  """If this is an Email Newsletter campaign, the number of potential recipients."""
+  newsletterScheduled: Decimal!
+  """If this is an Email Newsletter campaign, the number of emails sent."""
+  newsletterSends: Decimal!
+  """If this is an Email Newsletter campaign, the scheduled date for delivery. Only if the delivery is scheduled to happen or of it has already occurred. Omitted if in draft, paused or cancelled."""
+  newsletterScheduledDate: DateTime
+  """True if the campaign is run by NextRoll and will be directly billed to the advertisable’s account. False if it is run by a third party."""
+  isBillable: Boolean!
+  """True if the strategy is frozen, and no changes can be made to it."""
+  isFrozen: Boolean!
+  """Only for Connected Campaigns, indicates the status of the sync’ing with the external service. When available, can be one of “pending”, “synced” or “error”"""
+  syncStatus: String!
+  """Only for Connected Campaigns, shows the error that caused the sync’ing with the external service to fail. Provided if the syncStatus field is “error”."""
+  syncError: String!
+  """DEPRECATED: please use adsManagerPermalink instead"""
+  facebookAdsManagerPermalink: String!
+  """The URL to the campaign if it has been externally connected."""
+  adsManagerPermalink: String!
+  isIntegrated: Boolean!
+  useCase: String!
+  """The campaign marketing objective returned by AdRoll API."""
+  objective: String!
+  """Funnel stage for the campaign. One of “awareness”, “consideration”, “conversion”, or “other”."""
+  funnelStage: String
+  """Indicates if this campaign is a strategy that balances the budget automatically across its inventory campaigns. False means that inventory campaign budgets are manually set."""
+  isBudgetBalancingAutomated: Boolean!
+  """Available status changes for the current campaign. BETA."""
+  possibleStatusChanges: [String!]
+  """PerformanceTargets"""
+  performanceTargets: [PerformanceTarget]
+  """Internal tags set on creation."""
+  tags: [String!]
+  """If managed by an Automation, the EID of the Automation."""
+  automationEID: String
+  """If managed by an Automation, the EID of the Automation Node that references this entity."""
+  automationNodeEID: String
+  """If managed by an Automation, the name of the Automation."""
+  automationName: String
+  """Indicates if the campaign is disabled. Currently applies only to Automation-managed campaigns that have been disabled by subscription downgrade action."""
+  disabled: Boolean!
+  """If managed by a Klaviyo Flow, the EID of the Flow."""
+  klaviyoFlowEID: String
+  """If managed by a Klaviyo Flow, the name of the Flow."""
+  klaviyoFlowName: String
+  """EID for the parent Universal/Proxy campaign group."""
+  campaignGroupEID: String!
+  """Name for the parent Universal/Proxy campaign group."""
+  campaignGroupName: String!
+  """Adgroups for this Campaign."""
+  adgroups: [Adgroup]!
+  """Emails for this Campaign"""
+  emails: [Email]!
+  """Audiences for this Campaign."""
+  audiences(includeInactive: Boolean): [Audience]!
+  """Metrics for the Campaign."""
+  metrics(start: Date, end: Date, pastDays: Int, currency: String, duration: Int): CampaignMetricResult!
+  """Metrics for the entity broken down by conversion audiences."""
+  conversions(start: Date, end: Date, pastDays: Int, currency: String): ConversionResult!
+}
+
+"""
+Contains reporting metric data by keyword for Google Search campaign-adgroups.
+"""
+type Keyword {
+  """Keyword in the Google Search adgroup…"""
+  keyword: String!
+  """The sum of the number of ad impressions."""
+  impressions: Decimal!
+  """The sum of clicks of all kinds of ads and emails."""
+  clicks: Decimal!
+  """Cost associated to all kinds of ads and emails."""
+  cost: Decimal!
+  """Conversions Total. Conversions (count) = View Conversions + Click Conversions"""
+  conversions: Decimal!
+  """Click-through conversion (CTC). A goal completion that happens after someone clicks your ad."""
+  clickThroughs: Decimal!
+  """View-through conversion (VTC). A goal completion that happens after someone views your ad, but does not click."""
+  viewThroughs: Decimal!
+  """Revenue (amount) = View Revenue + Click Conversions"""
+  revenue: Decimal!
+  """Click-Attributed Revenue. Total earnings when someone clicks your ad and converts."""
+  clickRevenue: Decimal!
+  """View-Attributed Revenue. Total earnings when someone views your ad and converts."""
+  viewRevenue: Decimal!
+  """Click-through rate. The percentage of ad serves that were clicked."""
+  ctr: Decimal!
+  """Cost per click. Your average spend for one click."""
+  cpc: Decimal!
+  """Cost per mille. Cost per one thousand ad serves."""
+  cpm: Decimal!
+  """Cost per acquisition. Your average spend per conversion."""
+  cpa: Decimal!
+  """Cost-per-click acquisition. Your average spend for a conversion that happens after someone clicks your ad."""
+  clickCPA: Decimal!
+  """Cost-per-view acquisition: Your average spend for a conversion that happens after someone views your ad."""
+  viewCPA: Decimal!
+  """Average Order Value Average revenue per attributed conversion."""
+  averageOrderValue: Decimal!
+  """Click-through conversion rate. The percentage of clicks that resulted in a click-through conversion."""
+  ctcRate: Decimal!
+  """View-through conversion rate: The percentage of impressions that resulted in a view-through conversion."""
+  vtcRate: Decimal!
+  """Return on advertising spend: Your profit per dollar spent on ads."""
+  roas: Decimal!
+  """Click return on advertising spend: Your profit per dollar spent, generated from conversions that happen after someone clicks your ad."""
+  clickROAS: Decimal!
+  """View return on advertising spend: Your profit per dollar spent, generated from conversions that happen after someone views your ad."""
+  viewROAS: Decimal!
+}
+
+type KeywordResult {
+  """Summarizes by Google Search keyword the reporting data for the given date range. [ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  byKeyword: [Keyword!]!
+}
+
+"""
+Represents a single log event.
+"""
+type LogEvent {
+  """Provides the formatted summary line for the timeline item."""
+  info: String!
+  """Level for this log event."""
+  level: String!
+  """Log name for the entry."""
+  name: String!
+  """Message for the log entry."""
+  message: String!
+  """Time in seconds for this entry, relative to the start of the request."""
+  delta: Float!
+  """Time for this entry in RFC3339 format."""
+  time: String!
+  """Additional fields associated with the log entry."""
+  fields: JSON
+  """Caller for this entry."""
+  caller: String!
+  """Stack trace for this entry."""
+  stack: [String!]!
+  """Alias to fields.kind."""
+  kind: String!
+  """Alias to fields.operation."""
+  operation: String!
+  """Combined field to describe internal requests. “METHOD URL”"""
+  operationRequest: String!
+  """Returns a key that relates to the log entry code and target operation."""
+  key: String!
+}
+
+"""
+[WARNING] Log lines are intended for internal analysis and debugging.
+"""
+type LogItem {
+  """The kind, key, text and timing information for the entry in a single field, for convenience."""
+  info: String!
+  """Kind of operation referred by this log entry."""
+  kind: String!
+  """Key for the operation that generated this log entry."""
+  key: String!
+  """Text for the log entry."""
+  text: String!
+  """Start time for the operation in the log entry."""
+  start: DateTime
+  """End time for the operation in the log entry."""
+  end: DateTime
+  """Delta in seconds for the operation start from the query start."""
+  delta: Float!
+  """Duration in seconds for the operation."""
+  duration: Float!
+  """The log entry text and/or data split by lines."""
+  lines(filter: String): [String!]!
+  """Additional data for the log entry."""
+  data(filter: String): LogItemData
+  """Additional data for the log entry as JSON."""
+  json(filter: String): JSON
+  """Return all data items for the entry."""
+  allData: [LogItemData!]!
+}
+
+"""
+[WARNING] Log lines are intended for internal analysis and debugging.
+"""
+type LogItemData {
+  """Name for this entry. This can be used with LogItem.data and LogData.lines."""
+  name: String!
+  """Raw data for the entry."""
+  text: String!
+  """Text for the entry split by lines."""
+  lines: [String!]
+  """Text for the entry converted to a JSON value, or null if cannot be converted."""
+  json: JSON
+}
+
+type LogRoot {
+  """Log events."""
+  events: [LogEvent!]!
+}
+
+"""
+Contains reporting metric data for attributions, deliveries,
+"""
+type Metric {
+  """Date for this particular metric data. This is empty for summaries."""
+  date: Date
+  """The sum of the number of ad impressions."""
+  impressions: Decimal
+  """The sum of clicks of all kinds of ads and emails."""
+  clicks: Decimal
+  """Cost associated to all kinds of ads and emails."""
+  cost: Decimal
+  """Conversions Total. Conversions (count) = View Conversions + Click Conversions"""
+  conversions: Decimal
+  """Click-through conversion (CTC). A goal completion that happens after someone clicks your ad."""
+  clickThroughs: Decimal
+  """View-through conversion (VTC). A goal completion that happens after someone views your ad, but does not click."""
+  viewThroughs: Decimal
+  """Revenue (amount) = View Revenue + Click Conversions"""
+  revenue: Decimal
+  """Click-Attributed Revenue. Total earnings when someone clicks your ad and converts."""
+  clickRevenue: Decimal
+  """View-Attributed Revenue. Total earnings when someone views your ad and converts."""
+  viewRevenue: Decimal
+  """Click-through rate. The percentage of ad serves that were clicked."""
+  ctr: Decimal
+  """Cost per click. Your average spend for one click."""
+  cpc: Decimal
+  """Cost per mille. Cost per one thousand ad serves."""
+  cpm: Decimal
+  """Cost per acquisition. Your average spend per conversion."""
+  cpa: Decimal
+  """Cost-per-click acquisition. Your average spend for a conversion that happens after someone clicks your ad."""
+  clickCPA: Decimal
+  """Cost-per-view acquisition: Your average spend for a conversion that happens after someone views your ad."""
+  viewCPA: Decimal
+  """Average Order Value Average revenue per attributed conversion."""
+  averageOrderValue: Decimal
+  """Click-through conversion rate. The percentage of clicks that resulted in a click-through conversion."""
+  ctcRate: Decimal
+  """View-through conversion rate: The percentage of impressions that resulted in a view-through conversion."""
+  vtcRate: Decimal
+  """Return on advertising spend: Your profit per dollar spent on ads."""
+  roas: Decimal
+  """Click return on advertising spend: Your profit per dollar spent, generated from conversions that happen after someone clicks your ad."""
+  clickROAS: Decimal
+  """View return on advertising spend: Your profit per dollar spent, generated from conversions that happen after someone views your ad."""
+  viewROAS: Decimal
+  """Alias for ‘roas’."""
+  roi: Decimal
+  """Alias for ‘clickROAS’."""
+  clickROI: Decimal
+  """Alias for ‘viewROAS’."""
+  viewROI: Decimal
+  """Influenced Conversions."""
+  influencedThroughs: Decimal
+  """Influenced Revenue."""
+  influencedRevenue: Decimal
+  audienceSizeNew: Decimal
+  audienceSizeTotal: Decimal
+  """This field has been deprecated as metrics for it are no longer available and it will always be NULL. Use dailyNewVisitors instead."""
+  newVisitors: Decimal
+  """This field has been deprecated as metrics for it are no longer available and it will always be NULL. Use dailyEngagedVisitors instead."""
+  engagedVisitors: Decimal
+  """This field has been deprecated as metrics for it are no longer available and it will always be NULL."""
+  bouncedVisitors: Decimal
+  """This field has been deprecated as metrics for it are no longer available and it will always be NULL."""
+  nonBouncedVisitors: Decimal
+  """This field has been deprecated as metrics for it are no longer available and it will always be NULL. Use dailyNewVisitorCost instead."""
+  newVisitorCost: Decimal
+  """This field has been deprecated as metrics for it are no longer available and it will always be NULL. Use dailyEngagedVisitorCost instead."""
+  engagedVisitorCost: Decimal
+  """This field has been deprecated as metrics for it are no longer available and it will always be NULL."""
+  bounceRate: Decimal
+  """The number of daily new visitors who came to your site after viewing a prospecting ad."""
+  dailyNewVisitors: Decimal
+  """The number of daily new visitors who return to your site after viewing a prospecting ad."""
+  dailyReturnVisitors: Decimal
+  """The number of daily new visitors who have viewed at least 3 pages on your site after viewing a prospecting ad."""
+  dailyEngagedVisitors: Decimal
+  """The percentage of daily new visitors who have only viewed one page and left your site after viewing a prospecting ad."""
+  dailyBounceRate: Decimal
+  """The cost for each daily new visitor that came to your site after viewing a prospecting ad."""
+  dailyNewVisitorCost: Decimal
+  """The cost for each daily new visitor that has viewed at least 3 pages on your site after viewing a prospecting ad"""
+  dailyEngagedVisitorCost: Decimal
+  """Number of emails sent by a campaign."""
+  sends: Decimal
+  """Number of unique-by-session email opens collected for a campaign."""
+  opens: Decimal
+  """WARNING: this field is deprecated, please use “emailUniqueOpenRate”. To ease up the transition this field will still be available, but always return null."""
+  openRate: Decimal
+  """Total emails scheduled to be sent as part if this campaign."""
+  emailScheduled: Decimal!
+  """Total emails attempted to be sent."""
+  emailSentUnconfirmed: Decimal!
+  """Deliveries that were rejected by the recipient's email service provider."""
+  emailBounced: Decimal!
+  """Total emails confirmed to have been sent by the Email Service Provider."""
+  emailSentConfirmed: Decimal!
+  """The percent of emails that have been confirmed to be delivered, over the send attempts."""
+  emailDeliveryRate: Decimal!
+  """Recipients who report your emails as spam."""
+  emailMarkedSpam: Decimal!
+  """Recipients who report your emails as spam, uniqued."""
+  emailUniqueMarkedSpam: Decimal!
+  """When an email is opened by a user in its lifetime."""
+  emailUniqueOpen: Decimal!
+  """The percent of sent emails that are opened once in a user's lifetime."""
+  emailUniqueOpenRate: Decimal!
+  """The number of times a link in an email was clicked once in a user's lifetime."""
+  emailUniqueClick: Decimal!
+  """The percentage of emails opened that were clicked once in a user's lifetime."""
+  emailUniqueClickRate: Decimal!
+  """Recipients that unsubscribe from the email list, uniqued."""
+  emailUniqueUnsubscribers: Decimal!
+  """The percent of recipients that have unsubscribers (unique) over the number of confirmed to be deliveries."""
+  emailUniqueUnsubscribeRate: Decimal!
+  """Recipients that unsubscribe from the email list"""
+  emailUnsubscribers: Decimal!
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  emailUniqueClicksByCountry: JSON
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  emailUniqueOpensByCountry: JSON
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  emailUniqueClicksByDeviceType: JSON
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  emailUniqueOpensByDeviceType: JSON
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  emailUniqueClicksByXpathUrl: JSON
+  """Total number of SMS messages that were delivered (and confirmed by the recipient)"""
+  smsSentDelivered: Decimal!
+  """Total number of times that a link in the SMS message was clicked."""
+  smsClicks: Decimal!
+  """Impressions from video ads."""
+  videoImpressions: Decimal
+  """Number of times the video begun playing."""
+  videoViews: Decimal
+  """Number of times at least 25% of the video duration was played."""
+  videoTwentyFivePercent: Decimal
+  """Number of times at least 50% of the video duration was played."""
+  videoFiftyPercent: Decimal
+  """Number of times at least 75% of the video duration was played."""
+  videoSeventyFivePercent: Decimal
+  """Number of times the full video duration was played."""
+  videoHundredPercent: Decimal
+  """Video completion rate"""
+  videoCompletionRate: Decimal
+  """Number of ads seen per day by reached users (only applies to WEB campaigns)"""
+  frequency: Decimal!
+  """Number of ads seen per day by reached devices (only applies to CTV campaigns)"""
+  deviceFrequency: Decimal!
+  """Number of distinct households that received CTV impressions on a given day"""
+  totalUniqueHHsReached: Decimal
+  """Number of distinct households that visited the site, after viewing an ad"""
+  uniqueHHSiteVisits: Decimal
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  customMetric(formula: String): Decimal!
+}
+
+"""
+Groups reporting metric data in summary and by date format. This
+"""
+type MetricAggregateResult {
+  """Summarizes the reporting data for the given date range."""
+  summary: Metric!
+  """Reporting data by date in the given range."""
+  byDate: [Metric!]!
+}
+
+"""
+Contains reporting metric data for country
+"""
+type MetricCountry {
+  """Date for this particular metric data. This is empty for summaries."""
+  date: Date
+  """The sum of the number of ad impressions."""
+  impressions: Decimal
+  """The sum of clicks of all kinds of ads and emails."""
+  clicks: Decimal
+  """Cost associated to all kinds of ads and emails."""
+  cost: Decimal
+  """Conversions Total. Conversions (count) = View Conversions + Click Conversions"""
+  conversions: Decimal
+}
+
+"""
+Groups reporting metric data for the country in summary and by
+"""
+type MetricCountryResult {
+  """The country this metric pertains to."""
+  country: String!
+  """ISO-2 country code"""
+  countryCode: String!
+  """Summarizes the reporting data for the given date range."""
+  summary: MetricCountry!
+  """Reporting data by date in the given range."""
+  byDate: [MetricCountry!]!
+}
+
+"""
+Contains reporting metric data for the domain.
+"""
+type MetricDomain {
+  """Date for this particular metric data. This is empty for summaries."""
+  date: Date
+  """The sum of the number of ad impressions on the domain."""
+  impressions: Decimal!
+  """The sum of clicks of ads on the domain."""
+  clicks: Decimal!
+  """Cost associated to displaying ads on the domain."""
+  cost: Decimal!
+  """Cost per mille. Cost per one thousand ad serves on the domain."""
+  cpm: Decimal!
+  """Click-through rate. The percentage of ad serves that were clicked on the domain."""
+  ctr: Decimal!
+}
+
+"""
+Groups reporting metric data for the domain in summary and by
+"""
+type MetricDomainResult {
+  """The domain this metric pertains to."""
+  domain: String!
+  """Summarizes the reporting data for the given date range."""
+  summary: MetricDomain!
+  """Reporting data by date in the given range."""
+  byDate: [MetricDomain!]!
+}
+
+"""
+Contains advertisable level reporting metric data for attributions, deliveries,
+"""
+type MetricForAdvertisable {
+  """Date for this particular metric data. This is empty for summaries."""
+  date: Date
+  """The sum of the number of ad impressions."""
+  impressions: Decimal
+  """The sum of clicks of all kinds of ads and emails."""
+  clicks: Decimal
+  """Cost associated to all kinds of ads and emails."""
+  cost: Decimal
+  """Conversions Total. Conversions (count) = View Conversions + Click Conversions"""
+  conversions: Decimal
+  """Click-through conversion (CTC). A goal completion that happens after someone clicks your ad."""
+  clickThroughs: Decimal
+  """View-through conversion (VTC). A goal completion that happens after someone views your ad, but does not click."""
+  viewThroughs: Decimal
+  """Revenue (amount) = View Revenue + Click Conversions"""
+  revenue: Decimal
+  """Click-Attributed Revenue. Total earnings when someone clicks your ad and converts."""
+  clickRevenue: Decimal
+  """View-Attributed Revenue. Total earnings when someone views your ad and converts."""
+  viewRevenue: Decimal
+  """Click-through rate. The percentage of ad serves that were clicked."""
+  ctr: Decimal
+  """Cost per click. Your average spend for one click."""
+  cpc: Decimal
+  """Cost per mille. Cost per one thousand ad serves."""
+  cpm: Decimal
+  """Cost per acquisition. Your average spend per conversion."""
+  cpa: Decimal
+  """Cost-per-click acquisition. Your average spend for a conversion that happens after someone clicks your ad."""
+  clickCPA: Decimal
+  """Cost-per-view acquisition: Your average spend for a conversion that happens after someone views your ad."""
+  viewCPA: Decimal
+  """Average Order Value Average revenue per attributed conversion."""
+  averageOrderValue: Decimal
+  """Click-through conversion rate. The percentage of clicks that resulted in a click-through conversion."""
+  ctcRate: Decimal
+  """View-through conversion rate: The percentage of impressions that resulted in a view-through conversion."""
+  vtcRate: Decimal
+  """Return on advertising spend: Your profit per dollar spent on ads."""
+  roas: Decimal
+  """Click return on advertising spend: Your profit per dollar spent, generated from conversions that happen after someone clicks your ad."""
+  clickROAS: Decimal
+  """View return on advertising spend: Your profit per dollar spent, generated from conversions that happen after someone views your ad."""
+  viewROAS: Decimal
+  """Alias for ‘roas’."""
+  roi: Decimal
+  """Alias for ‘clickROAS’."""
+  clickROI: Decimal
+  """Alias for ‘viewROAS’."""
+  viewROI: Decimal
+  """Influenced Conversions."""
+  influencedThroughs: Decimal
+  """Influenced Revenue."""
+  influencedRevenue: Decimal
+  audienceSizeNew: Decimal
+  audienceSizeTotal: Decimal
+  """This field has been deprecated as metrics for it are no longer available and it will always be NULL. Use dailyNewVisitors instead."""
+  newVisitors: Decimal
+  """This field has been deprecated as metrics for it are no longer available and it will always be NULL. Use dailyEngagedVisitors instead."""
+  engagedVisitors: Decimal
+  """This field has been deprecated as metrics for it are no longer available and it will always be NULL."""
+  bouncedVisitors: Decimal
+  """This field has been deprecated as metrics for it are no longer available and it will always be NULL."""
+  nonBouncedVisitors: Decimal
+  """This field has been deprecated as metrics for it are no longer available and it will always be NULL. Use dailyNewVisitorCost instead."""
+  newVisitorCost: Decimal
+  """This field has been deprecated as metrics for it are no longer available and it will always be NULL. Use dailyEngagedVisitorCost instead."""
+  engagedVisitorCost: Decimal
+  """This field has been deprecated as metrics for it are no longer available and it will always be NULL."""
+  bounceRate: Decimal
+  """The number of daily new visitors who came to your site after viewing a prospecting ad."""
+  dailyNewVisitors: Decimal
+  """The number of daily new visitors who return to your site after viewing a prospecting ad."""
+  dailyReturnVisitors: Decimal
+  """The number of daily new visitors who have viewed at least 3 pages on your site after viewing a prospecting ad."""
+  dailyEngagedVisitors: Decimal
+  """The percentage of daily new visitors who have only viewed one page and left your site after viewing a prospecting ad."""
+  dailyBounceRate: Decimal
+  """The cost for each daily new visitor that came to your site after viewing a prospecting ad."""
+  dailyNewVisitorCost: Decimal
+  """The cost for each daily new visitor that has viewed at least 3 pages on your site after viewing a prospecting ad"""
+  dailyEngagedVisitorCost: Decimal
+  """Number of emails sent by a campaign."""
+  sends: Decimal
+  """Number of unique-by-session email opens collected for a campaign."""
+  opens: Decimal
+  """WARNING: this field is deprecated, please use “emailUniqueOpenRate”. To ease up the transition this field will still be available, but always return null."""
+  openRate: Decimal
+  """Total emails scheduled to be sent as part if this campaign."""
+  emailScheduled: Decimal!
+  """Total emails attempted to be sent."""
+  emailSentUnconfirmed: Decimal!
+  """Deliveries that were rejected by the recipient's email service provider."""
+  emailBounced: Decimal!
+  """Total emails confirmed to have been sent by the Email Service Provider."""
+  emailSentConfirmed: Decimal!
+  """The percent of emails that have been confirmed to be delivered, over the send attempts."""
+  emailDeliveryRate: Decimal!
+  """Recipients who report your emails as spam."""
+  emailMarkedSpam: Decimal!
+  """Recipients who report your emails as spam, uniqued."""
+  emailUniqueMarkedSpam: Decimal!
+  """When an email is opened by a user in its lifetime."""
+  emailUniqueOpen: Decimal!
+  """The percent of sent emails that are opened once in a user's lifetime."""
+  emailUniqueOpenRate: Decimal!
+  """The number of times a link in an email was clicked once in a user's lifetime."""
+  emailUniqueClick: Decimal!
+  """The percentage of emails opened that were clicked once in a user's lifetime."""
+  emailUniqueClickRate: Decimal!
+  """Recipients that unsubscribe from the email list, uniqued."""
+  emailUniqueUnsubscribers: Decimal!
+  """The percent of recipients that have unsubscribers (unique) over the number of confirmed to be deliveries."""
+  emailUniqueUnsubscribeRate: Decimal!
+  """Recipients that unsubscribe from the email list"""
+  emailUnsubscribers: Decimal!
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  emailUniqueClicksByCountry: JSON
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  emailUniqueOpensByCountry: JSON
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  emailUniqueClicksByDeviceType: JSON
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  emailUniqueOpensByDeviceType: JSON
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  emailUniqueClicksByXpathUrl: JSON
+  """Total number of SMS messages that were delivered (and confirmed by the recipient)"""
+  smsSentDelivered: Decimal!
+  """Total number of times that a link in the SMS message was clicked."""
+  smsClicks: Decimal!
+  """Impressions from video ads."""
+  videoImpressions: Decimal
+  """Number of times the video begun playing."""
+  videoViews: Decimal
+  """Number of times at least 25% of the video duration was played."""
+  videoTwentyFivePercent: Decimal
+  """Number of times at least 50% of the video duration was played."""
+  videoFiftyPercent: Decimal
+  """Number of times at least 75% of the video duration was played."""
+  videoSeventyFivePercent: Decimal
+  """Number of times the full video duration was played."""
+  videoHundredPercent: Decimal
+  """Video completion rate"""
+  videoCompletionRate: Decimal
+  """Number of ads seen per day by reached users (only applies to WEB campaigns)"""
+  frequency: Decimal!
+  """Number of ads seen per day by reached devices (only applies to CTV campaigns)"""
+  deviceFrequency: Decimal!
+  """Number of distinct households that received CTV impressions on a given day"""
+  totalUniqueHHsReached: Decimal
+  """Number of distinct households that visited the site, after viewing an ad"""
+  uniqueHHSiteVisits: Decimal
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  siteBounceRate: Decimal
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  siteNewVisitors: Decimal
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  siteNewVisitorsNot: Decimal
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  siteEngaged: Decimal
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  siteEngagedNot: Decimal
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  siteEngagedNewVisitors: Decimal
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  siteEngagedNewVisitorsNot: Decimal
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  siteAddToCart: Decimal
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  siteAddToCartNot: Decimal
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  siteConverters: Decimal
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  siteConvertersNot: Decimal
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  siteReturningVisitors: Decimal
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  siteReturningVisitorsNot: Decimal
+  """Number of converters who saw an average of 0-1 ads/day in the last 30 days."""
+  convCountImpRate01: Decimal!
+  """Number of converters who saw an average of 1-2 ads/day in the last 30 days."""
+  convCountImpRate12: Decimal!
+  """Number of converters who saw an average of 2-3 ads/day in the last 30 days."""
+  convCountImpRate23: Decimal!
+  """Number of converters who saw an average of 3-4 ads/day in the last 30 days."""
+  convCountImpRate34: Decimal!
+  """Number of converters who saw an average of 4+ ads/day in the last 30 days."""
+  convCountImpRate4: Decimal!
+  """Number of non-converters who saw an average of 0-1 ads/day in the last 30 days."""
+  nonConvCountImpRate01: Decimal!
+  """Number of non-converters who saw an average of 1-2 ads/day in the last 30 days."""
+  nonConvCountImpRate12: Decimal!
+  """Number of non-converters who saw an average of 2-3 ads/day in the last 30 days."""
+  nonConvCountImpRate23: Decimal!
+  """Number of non-converters who saw an average of 3-4 ads/day in the last 30 days."""
+  nonConvCountImpRate34: Decimal!
+  """Number of non-converters who saw an average of 4+ ads/day in the last 30 days."""
+  nonConvCountImpRate4: Decimal!
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  customMetric(formula: String): Decimal!
+}
+
+"""
+Contains campaign level reporting metric data for attributions, deliveries,
+"""
+type MetricForCampaign {
+  """Date for this particular metric data. This is empty for summaries."""
+  date: Date
+  """The sum of the number of ad impressions."""
+  impressions: Decimal
+  """The sum of clicks of all kinds of ads and emails."""
+  clicks: Decimal
+  """Cost associated to all kinds of ads and emails."""
+  cost: Decimal
+  """Conversions Total. Conversions (count) = View Conversions + Click Conversions"""
+  conversions: Decimal
+  """Click-through conversion (CTC). A goal completion that happens after someone clicks your ad."""
+  clickThroughs: Decimal
+  """View-through conversion (VTC). A goal completion that happens after someone views your ad, but does not click."""
+  viewThroughs: Decimal
+  """Revenue (amount) = View Revenue + Click Conversions"""
+  revenue: Decimal
+  """Click-Attributed Revenue. Total earnings when someone clicks your ad and converts."""
+  clickRevenue: Decimal
+  """View-Attributed Revenue. Total earnings when someone views your ad and converts."""
+  viewRevenue: Decimal
+  """Click-through rate. The percentage of ad serves that were clicked."""
+  ctr: Decimal
+  """Cost per click. Your average spend for one click."""
+  cpc: Decimal
+  """Cost per mille. Cost per one thousand ad serves."""
+  cpm: Decimal
+  """Cost per acquisition. Your average spend per conversion."""
+  cpa: Decimal
+  """Cost-per-click acquisition. Your average spend for a conversion that happens after someone clicks your ad."""
+  clickCPA: Decimal
+  """Cost-per-view acquisition: Your average spend for a conversion that happens after someone views your ad."""
+  viewCPA: Decimal
+  """Average Order Value Average revenue per attributed conversion."""
+  averageOrderValue: Decimal
+  """Click-through conversion rate. The percentage of clicks that resulted in a click-through conversion."""
+  ctcRate: Decimal
+  """View-through conversion rate: The percentage of impressions that resulted in a view-through conversion."""
+  vtcRate: Decimal
+  """Return on advertising spend: Your profit per dollar spent on ads."""
+  roas: Decimal
+  """Click return on advertising spend: Your profit per dollar spent, generated from conversions that happen after someone clicks your ad."""
+  clickROAS: Decimal
+  """View return on advertising spend: Your profit per dollar spent, generated from conversions that happen after someone views your ad."""
+  viewROAS: Decimal
+  """Alias for ‘roas’."""
+  roi: Decimal
+  """Alias for ‘clickROAS’."""
+  clickROI: Decimal
+  """Alias for ‘viewROAS’."""
+  viewROI: Decimal
+  """Influenced Conversions."""
+  influencedThroughs: Decimal
+  """Influenced Revenue."""
+  influencedRevenue: Decimal
+  audienceSizeNew: Decimal
+  audienceSizeTotal: Decimal
+  """This field has been deprecated as metrics for it are no longer available and it will always be NULL. Use dailyNewVisitors instead."""
+  newVisitors: Decimal
+  """This field has been deprecated as metrics for it are no longer available and it will always be NULL. Use dailyEngagedVisitors instead."""
+  engagedVisitors: Decimal
+  """This field has been deprecated as metrics for it are no longer available and it will always be NULL."""
+  bouncedVisitors: Decimal
+  """This field has been deprecated as metrics for it are no longer available and it will always be NULL."""
+  nonBouncedVisitors: Decimal
+  """This field has been deprecated as metrics for it are no longer available and it will always be NULL. Use dailyNewVisitorCost instead."""
+  newVisitorCost: Decimal
+  """This field has been deprecated as metrics for it are no longer available and it will always be NULL. Use dailyEngagedVisitorCost instead."""
+  engagedVisitorCost: Decimal
+  """This field has been deprecated as metrics for it are no longer available and it will always be NULL."""
+  bounceRate: Decimal
+  """The number of daily new visitors who came to your site after viewing a prospecting ad."""
+  dailyNewVisitors: Decimal
+  """The number of daily new visitors who return to your site after viewing a prospecting ad."""
+  dailyReturnVisitors: Decimal
+  """The number of daily new visitors who have viewed at least 3 pages on your site after viewing a prospecting ad."""
+  dailyEngagedVisitors: Decimal
+  """The percentage of daily new visitors who have only viewed one page and left your site after viewing a prospecting ad."""
+  dailyBounceRate: Decimal
+  """The cost for each daily new visitor that came to your site after viewing a prospecting ad."""
+  dailyNewVisitorCost: Decimal
+  """The cost for each daily new visitor that has viewed at least 3 pages on your site after viewing a prospecting ad"""
+  dailyEngagedVisitorCost: Decimal
+  """Number of emails sent by a campaign."""
+  sends: Decimal
+  """Number of unique-by-session email opens collected for a campaign."""
+  opens: Decimal
+  """WARNING: this field is deprecated, please use “emailUniqueOpenRate”. To ease up the transition this field will still be available, but always return null."""
+  openRate: Decimal
+  """Total emails scheduled to be sent as part if this campaign."""
+  emailScheduled: Decimal!
+  """Total emails attempted to be sent."""
+  emailSentUnconfirmed: Decimal!
+  """Deliveries that were rejected by the recipient's email service provider."""
+  emailBounced: Decimal!
+  """Total emails confirmed to have been sent by the Email Service Provider."""
+  emailSentConfirmed: Decimal!
+  """The percent of emails that have been confirmed to be delivered, over the send attempts."""
+  emailDeliveryRate: Decimal!
+  """Recipients who report your emails as spam."""
+  emailMarkedSpam: Decimal!
+  """Recipients who report your emails as spam, uniqued."""
+  emailUniqueMarkedSpam: Decimal!
+  """When an email is opened by a user in its lifetime."""
+  emailUniqueOpen: Decimal!
+  """The percent of sent emails that are opened once in a user's lifetime."""
+  emailUniqueOpenRate: Decimal!
+  """The number of times a link in an email was clicked once in a user's lifetime."""
+  emailUniqueClick: Decimal!
+  """The percentage of emails opened that were clicked once in a user's lifetime."""
+  emailUniqueClickRate: Decimal!
+  """Recipients that unsubscribe from the email list, uniqued."""
+  emailUniqueUnsubscribers: Decimal!
+  """The percent of recipients that have unsubscribers (unique) over the number of confirmed to be deliveries."""
+  emailUniqueUnsubscribeRate: Decimal!
+  """Recipients that unsubscribe from the email list"""
+  emailUnsubscribers: Decimal!
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  emailUniqueClicksByCountry: JSON
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  emailUniqueOpensByCountry: JSON
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  emailUniqueClicksByDeviceType: JSON
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  emailUniqueOpensByDeviceType: JSON
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  emailUniqueClicksByXpathUrl: JSON
+  """Total number of SMS messages that were delivered (and confirmed by the recipient)"""
+  smsSentDelivered: Decimal!
+  """Total number of times that a link in the SMS message was clicked."""
+  smsClicks: Decimal!
+  """Impressions from video ads."""
+  videoImpressions: Decimal
+  """Number of times the video begun playing."""
+  videoViews: Decimal
+  """Number of times at least 25% of the video duration was played."""
+  videoTwentyFivePercent: Decimal
+  """Number of times at least 50% of the video duration was played."""
+  videoFiftyPercent: Decimal
+  """Number of times at least 75% of the video duration was played."""
+  videoSeventyFivePercent: Decimal
+  """Number of times the full video duration was played."""
+  videoHundredPercent: Decimal
+  """Video completion rate"""
+  videoCompletionRate: Decimal
+  """Number of ads seen per day by reached users (only applies to WEB campaigns)"""
+  frequency: Decimal!
+  """Number of ads seen per day by reached devices (only applies to CTV campaigns)"""
+  deviceFrequency: Decimal!
+  """Number of distinct households that received CTV impressions on a given day"""
+  totalUniqueHHsReached: Decimal
+  """Number of distinct households that visited the site, after viewing an ad"""
+  uniqueHHSiteVisits: Decimal
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  siteBounceRate: Decimal
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  siteNewVisitors: Decimal
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  siteEngaged: Decimal
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  siteEngagedNewVisitors: Decimal
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  siteAddToCart: Decimal
+  """[ALPHA] This GraphQL field is currently under development and QA, please hold off from using it. It might change or be removed in the future, within this API’s version."""
+  customMetric(formula: String): Decimal!
+}
+
+"""
+Groups reporting metric data in summary and by date format.
+"""
+type MetricResult {
+  """Summarizes the reporting data for the given date range."""
+  summary: Metric!
+  """Reporting data by date in the given range."""
+  byDate: [Metric!]!
+}
+
+type Organization {
+  """EID of the organization."""
+  eid: String!
+  """Name of the organization."""
+  name: String!
+  """Created date for the organization."""
+  createdDate: DateTime
+  """Advertisables for the current organization."""
+  advertisables: [Advertisable!]!
+  """Provides aggregation for any metrics in the current and child nodes."""
+  metricsTotal: MetricAggregateResult
+}
+
+type OrganizationGroupData {
+  """EID of the organization."""
+  eid: String!
+  """Name of the organization."""
+  name: String!
+  """Created date for the organization."""
+  createdDate: DateTime
+}
+
+type OrganizationQuery {
+  """Obtain an Organization by its unique identifier (EID)."""
+  byEID(organization: String!): Organization
+  """Obtain a list of Organizations by their unique identifiers (EID)."""
+  byEIDs(eids: [String!]!): [Organization]!
+  """Obtain the Organization the current user is part of."""
+  current: Organization
+  """Provides aggregation for any metrics in the current and child nodes."""
+  metricsTotal: MetricAggregateResult
+}
+
+type PerformanceTarget {
+  metric: String!
+  currencyCode: String!
+  goal: Decimal!
+}
+
+"""
+Contains reporting metric data for attributions, deliveries
+"""
+type Placement {
+  """Placement of the Ad in Facebook. For example ‘desktop’, ‘feed’…"""
+  placement: String!
+  """The sum of the number of ad impressions."""
+  impressions: Decimal!
+  """The sum of clicks of all kinds of ads and emails."""
+  clicks: Decimal!
+  """Cost associated to all kinds of ads and emails."""
+  cost: Decimal!
+  """Conversions Total. Conversions (count) = View Conversions + Click Conversions"""
+  conversions: Decimal!
+  """Click-through conversion (CTC). A goal completion that happens after someone clicks your ad."""
+  clickThroughs: Decimal!
+  """View-through conversion (VTC). A goal completion that happens after someone views your ad, but does not click."""
+  viewThroughs: Decimal!
+  """Revenue (amount) = View Revenue + Click Conversions"""
+  revenue: Decimal!
+  """Click-Attributed Revenue. Total earnings when someone clicks your ad and converts."""
+  clickRevenue: Decimal!
+  """View-Attributed Revenue. Total earnings when someone views your ad and converts."""
+  viewRevenue: Decimal!
+  """Click-through rate. The percentage of ad serves that were clicked."""
+  ctr: Decimal!
+  """Cost per click. Your average spend for one click."""
+  cpc: Decimal!
+  """Cost per mille. Cost per one thousand ad serves."""
+  cpm: Decimal!
+  """Cost per acquisition. Your average spend per conversion."""
+  cpa: Decimal!
+  """Cost-per-click acquisition. Your average spend for a conversion that happens after someone clicks your ad."""
+  clickCPA: Decimal!
+  """Cost-per-view acquisition: Your average spend for a conversion that happens after someone views your ad."""
+  viewCPA: Decimal!
+  """Average Order Value Average revenue per attributed conversion."""
+  averageOrderValue: Decimal!
+  """Click-through conversion rate. The percentage of clicks that resulted in a click-through conversion."""
+  ctcRate: Decimal!
+  """View-through conversion rate: The percentage of impressions that resulted in a view-through conversion."""
+  vtcRate: Decimal!
+  """Return on advertising spend: Your profit per dollar spent on ads."""
+  roas: Decimal!
+  """Click return on advertising spend: Your profit per dollar spent, generated from conversions that happen after someone clicks your ad."""
+  clickROAS: Decimal!
+  """View return on advertising spend: Your profit per dollar spent, generated from conversions that happen after someone views your ad."""
+  viewROAS: Decimal!
+  """Alias for ‘roas’."""
+  roi: Decimal!
+  """Alias for ‘clickROAS’."""
+  clickROI: Decimal!
+  """Alias for ‘viewROAS’."""
+  viewROI: Decimal!
+}
+
+"""
+Groups reporting metric data in summary and by date format.
+"""
+type PlacementResult {
+  """Summarizes by placement the reporting data for the given date range."""
+  byPlacement: [Placement!]!
+}
+
+"""
+Root element for a Reporting API GraphQL’s query.
+"""
+type Query {
+  """Setup global request flags"""
+  flags(enableAdcrabLabels: Boolean!, enableKlaviyoFlowCampaigns: Boolean!, enableUniversalCampaigns: Boolean!, enableProxyCampaigns: Boolean!, enablePinterestCampaigns: Boolean!, enableTikTokCampaigns: Boolean!, enableGoogleSearchCampaigns: Boolean!, enableMultiChannelCampaigns: Boolean!, enableConnectedTVCampaigns: Boolean!, enableSMSCampaigns: Boolean!, enableObjectiveLedCampaigns: Boolean!, listOnlyInventoryForVoltronStrategies: Boolean!, useExperimentalProxyCampaigns: Boolean!, includeExpiredData: Boolean!, useAdrollAdsStatusOnlyEndpoint: Boolean!, useAdcrabDimensionsForSize: Boolean!, useOnlyCostMetricsUhura: Boolean!, stripNullValues: Boolean!, useSemanticLayer: Boolean!): Boolean!
+  """Unique ID for this request. This can be used to retrieve debugging and profiling info for the request."""
+  requestId: String!
+  """Reporting API build number and environment."""
+  build: String!
+  """Root for querying Organizations."""
+  organization: OrganizationQuery!
+  """Root for querying Advertisables."""
+  advertisable: AdvertisableQuery!
+  """Root for querying Campaigns."""
+  campaign: CampaignQuery!
+  """Root for querying Adgroups."""
+  adgroup: AdgroupQuery!
+  """Root for querying Ads."""
+  ad: AdQuery!
+  """Root for querying Automation."""
+  automation: AutomationQuery!
+  """Root for querying Emails."""
+  email: EmailQuery!
+  """Use the child Audiences of Campaigns and AdGroups instead."""
+  segment: SegmentQuery
+  """[BETA] This GraphQL node is currently under development. Avoid its use in production until it has passed some thorough QA."""
+  group: GroupQuery
+  """Currently logged user."""
+  user: User!
+  """Currently logged actual user."""
+  actualUser: User!
+  """Provides aggregation for any metrics in the current and child nodes."""
+  metricsTotal: MetricAggregateResult
+  """[ALPHA] This GraphQL node is currently under development Avoid its use in production until it has passed some thorough QA."""
+  accountMetrics: FieldAccountMetricsSummary
+  """[WARNING] Log lines are intended for internal analysis and debugging. They are not available for external developers to consume."""
+  log: [LogItem!]!
+  """[WARNING] Log lines are intended for internal analysis and debugging. They are not available for external developers to consume."""
+  logSchema: [String!]!
+  """Available only for internal developers."""
+  queryLog: LogRoot
+}
+
+type Segment {
+  """The Segment EID."""
+  eid: String!
+  """The Segment Name."""
+  name: String!
+  """The Segment’s duration in days."""
+  duration: Int!
+  """False if the segment has been deleted."""
+  isActive: Boolean!
+  """True if this is a conversion segment."""
+  isConversion: Boolean!
+  """Segment type."""
+  type: String!
+  """Tags explicitly assigned to the segment."""
+  tags: String!
+  """The value of a conversion from this segment."""
+  conversionValue: Decimal!
+  """The value of a conversion from this segment. Default to the Advertisable’s currency."""
+  currency: String!
+  """Pieces to build the Segment’s description formatted following the type."""
+  description: JSON!
+  """Product the segment belongs to."""
+  product: String
+}
+
+type SegmentGroupData {
+  """The Segment EID."""
+  eid: String!
+  """The Segment Name."""
+  name: String!
+  """The Segment’s duration in days."""
+  duration: Int!
+  """False if the segment has been deleted."""
+  isActive: Boolean!
+  """True if this is a conversion segment."""
+  isConversion: Boolean!
+  """Segment type."""
+  type: String!
+  """Tags explicitly assigned to the segment."""
+  tags: String!
+  """The value of a conversion from this segment."""
+  conversionValue: Decimal!
+  """The value of a conversion from this segment. Default to the Advertisable’s currency."""
+  currency: String!
+  """Pieces to build the Segment’s description formatted following the type."""
+  description: JSON!
+  """Product the segment belongs to."""
+  product: String
+}
+
+type SegmentQuery {
+  """[WARNING] Fetching Segments directly through this operation will ignore the overrides and state provided by its relationship to an AdGroup. For a complete state fetch segments as children of Campaigns or AdGroups."""
+  byEID(segment: String!): Segment
+  """[WARNING] Fetching Segments directly through this operation will ignore the overrides and state provided by its relationship to an AdGroup. For a complete state fetch segments as children of Campaigns or AdGroups."""
+  byEIDs(eids: [String!]!): [Segment]!
+  """[WARNING] Fetching Segments directly through this operation will ignore the overrides and state provided by its relationship to an AdGroup. For a complete state fetch segments as children of Campaigns or AdGroups."""
+  byAdvertisable(advertisable: String!, isActive: Boolean, isConversion: Boolean): [Segment]!
+}
+
+"""
+Provides information about a logged user.
+"""
+type User {
+  """User EID."""
+  eid: String!
+  """Is the user active?"""
+  isActive: Boolean!
+  """User’s status."""
+  status: String!
+  """User’s email."""
+  email: String!
+  """User’s login name."""
+  userName: String!
+  """Full user name"""
+  name: String!
+  """User’s first name."""
+  firstName: String!
+  """User’s last name."""
+  lastName: String!
+  """List of user advertisables."""
+  advertisables: [String!]
+  """The organization the user belongs to."""
+  organization: String!
+  """User’s locale."""
+  locale: String!
+  """Default timezone for the user."""
+  defaultTimezone: String!
+  """Date the user was created."""
+  createdDate: Date
+  """User’s role."""
+  role: String!
+  """Is true if the user has the given permission."""
+  hasPermission(name: String): Boolean!
+  """Full list of user’s permissions."""
+  permissions: [String!]
+  """Is true if the user is considered an internal user. This is based on the user’s permissions."""
+  isInternal: Boolean!
+}
+
+"""
+Contains advertisable-level UTM-based conversions data.
+"""
+type UtmBasedConversionsForAdvertisable {
+  utm: String!
+  aov: Decimal!
+  assistConversions: Decimal!
+  assistRevenue: Decimal!
+  assistAov: Decimal!
+  conversions: Decimal!
+  revenue: Decimal!
+  """Campaign level data."""
+  campaigns: [UtmBasedConversionsForCampaign!]!
+}
+
+"""
+Contains campaign-level UTM-based conversions data.
+"""
+type UtmBasedConversionsForCampaign {
+  campaignEID: String
+  utm: String!
+  aov: Decimal!
+  assistConversions: Decimal!
+  assistRevenue: Decimal!
+  assistAov: Decimal!
+  conversions: Decimal!
+  revenue: Decimal!
+}
+
+"""
+The Boolean scalar type represents true or false.
+"""
+type Boolean {
+}
+
+"""
+Scalar type for dates.
+"""
+type Date {
+}
+
+"""
+Scalar type for dates with time information.
+"""
+type DateTime {
+}
+
+"""
+Scalar type for decimal numeric values.
+"""
+type Decimal {
+}
+
+"""
+The Float scalar type represents signed double‐precision fractional values as specified by IEEE 754.
+"""
+type Float {
+}
+
+"""
+The ID scalar type represents a unique identifier, often used to refetch an object or as the key for a cache.
+"""
+type ID {
+}
+
+"""
+The Int scalar type represents a signed 32‐bit numeric non‐fractional value.
+"""
+type Int {
+}
+
+"""
+Scalar type for arbitrary JSON data.
+"""
+type JSON {
+}
+
+"""
+The String scalar type represents textual data, represented as UTF‐8 character sequences.
+"""
+type String {
+}

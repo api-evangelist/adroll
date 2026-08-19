@@ -1,11 +1,11 @@
-generated: '2026-07-11'
+generated: '2026-08-13'
 method: probed
 source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
 hosts:
 - host: www.adroll.com
   https: true
   tls_version: TLSv1.2
-  cert_expires: Sep  1 20:08:07 2026 GMT
+  cert_expires: Feb  2 19:13:05 2027 GMT
   hsts: true
   hsts_max_age: 604800
 - host: apidocs.nextroll.com

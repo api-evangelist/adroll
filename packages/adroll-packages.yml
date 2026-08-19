@@ -1,0 +1,84 @@
+generated: '2026-08-13'
+method: searched
+source: 'registry.npmjs.org, pypi.org, rubygems.org, api.github.com/orgs/adroll'
+package_count: 0
+official_package_count: 0
+note: >-
+  NextRoll ships NO first-party client library for the AdRoll / NextRoll API in
+  any package registry. This was checked, not assumed: npm registry search for
+  "adroll" returns only third-party packages (angulartics-adroll, react-adroll —
+  both community-maintained, last published 2018-2019), npm search for
+  "nextroll" returns zero results, and pypi.org/pypi/adroll, pypi.org/pypi/
+  nextroll and rubygems.org/api/v1/gems/adroll all 404. The scoped names an
+  official SDK would plausibly occupy — @adroll/sdk, @adroll/mcp, @nextroll/mcp,
+  adroll-mcp, adroll-api — are all unregistered. The 69-repo AdRoll GitHub
+  organisation is real and active but publishes infrastructure and Erlang/Go OSS
+  (erlcloud, kinetic, baker, rebar3 plugins), not API clients. The docs teach
+  integration with generic HTTP tooling instead: cURL, Python `requests`, PHP
+  cURL and node-fetch code samples on the Get Started guide.
+
+packages: []
+
+first_party_code_resources:
+- name: AdRoll/server-to-server
+  kind: sample-code
+  url: https://github.com/AdRoll/server-to-server
+  registry: null
+  version: null
+  published: null
+  official: true
+  description: >-
+    First-party example client and server code for the Server-to-Server Event
+    API, including first-party-cookie generation samples in several languages.
+    A samples repository, not a distributable package — no registry entry, no
+    release tags, so there is no version to record.
+  referenced_by: https://apidocs.nextroll.com/server-to-server-api/overview.html
+- name: AdRoll/gtm-smart-pixel
+  kind: gtm-template
+  url: https://github.com/AdRoll/gtm-smart-pixel
+  registry: null
+  version: null
+  published: '2026-01-09'
+  published_note: 'last push date from the GitHub API; the repo carries no release tags'
+  official: true
+  description: Google Tag Manager template for the AdRoll Smart Pixel.
+- name: AdRoll/adroll-google-tag-manager
+  kind: gtm-template
+  url: https://github.com/AdRoll/adroll-google-tag-manager
+  registry: null
+  version: null
+  published: '2019-09-16'
+  published_note: 'last push date from the GitHub API; the repo carries no release tags'
+  official: true
+  description: Earlier Google Tag Manager template for AdRoll.
+
+third_party_packages:
+- {language: javascript, registry: npm, name: angulartics-adroll, version: 1.0.6, published: '2019-06-19', official: false, url: 'https://www.npmjs.com/package/angulartics-adroll'}
+- {language: javascript, registry: npm, name: react-adroll, version: 0.1.7, published: '2018-04-30', official: false, url: 'https://www.npmjs.com/package/react-adroll'}
+
+postman:
+  workspace: https://www.postman.com/postman-atlas/workspace/adroll
+  collections: 11
+  first_party: false
+  note: >-
+    A public "AdRoll" Postman workspace exists but its publisher is Postman's own
+    "Postman Atlas" team, not NextRoll. It is recorded here so it is not mistaken
+    for a provider-published collection; no Postman pointer is wired into
+    apis.yml for that reason.
+
+gap: >-
+  A developer integrating AdRoll writes their own HTTP client, handles the
+  two-credential scheme (Authorization header + apikey query parameter) by hand,
+  and has no typed model for the 107-type GraphQL reporting schema. A first-party
+  SDK in even one language would be the single highest-leverage ergonomics
+  improvement available to this API.
+
+x-evidence:
+  checked: '2026-08-13'
+  probes:
+  - {url: 'https://registry.npmjs.org/-/v1/search?text=adroll', http_status: 200, finding: 'third-party only'}
+  - {url: 'https://registry.npmjs.org/-/v1/search?text=nextroll', http_status: 200, finding: '0 results'}
+  - {url: 'https://pypi.org/pypi/adroll/json', http_status: 404}
+  - {url: 'https://pypi.org/pypi/nextroll/json', http_status: 404}
+  - {url: 'https://rubygems.org/api/v1/gems/adroll.json', http_status: 404}
+  - {url: 'https://api.github.com/orgs/adroll/repos', http_status: 200, finding: '69 repos, no API client libraries'}

@@ -1,0 +1,66 @@
+generated: '2026-08-13'
+method: searched
+source: https://apidocs.nextroll.com/guides/oauth.html
+docs: https://apidocs.nextroll.com/guides/oauth.html
+note: >-
+  Two distinct OAuth authorization surfaces exist and they do not share a scope
+  vocabulary. The platform OAuth server supports exactly one scope; the MCP
+  authorization server (published as RFC 8414 metadata) supports exactly one
+  different scope. Neither is fine-grained. This file was written from the docs
+  and the live metadata document, not derived from an OpenAPI — NextRoll
+  publishes no spec file.
+
+schemes:
+- name: platform-oauth2
+  source: https://apidocs.nextroll.com/guides/oauth.html
+  applies_to: All NextRoll REST + GraphQL services on https://services.adroll.com
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://services.adroll.com/auth/authorize
+    tokenUrl: https://services.adroll.com/auth/token
+  - flow: implicit
+    authorizationUrl: https://services.adroll.com/auth/authorize
+  - flow: password
+    tokenUrl: https://services.adroll.com/auth/token
+
+- name: mcp-oauth2
+  source: https://services.adroll.com/.well-known/oauth-authorization-server
+  applies_to: AdRoll MCP Server — https://services.adroll.com/mcp
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://services.adroll.com/mcp/auth/authorize
+    tokenUrl: https://services.adroll.com/mcp/auth/token
+    pkce: [S256]
+
+scopes:
+- scope: all
+  description: >-
+    Gives access to all resources. This is the default when no scope is
+    specified. It is currently the ONLY scope the platform OAuth server offers.
+  flows: [authorizationCode, implicit, password]
+  schemes: [platform-oauth2]
+  sources: ['https://apidocs.nextroll.com/guides/oauth.html']
+- scope: mcp
+  description: >-
+    The single scope advertised by the MCP authorization server metadata
+    (scopes_supported) and echoed by the protected-resource metadata for
+    https://services.adroll.com/mcp.
+  flows: [authorizationCode]
+  schemes: [mcp-oauth2]
+  sources: ['https://services.adroll.com/.well-known/oauth-authorization-server', 'https://services.adroll.com/.well-known/oauth-protected-resource']
+
+granularity:
+  fine_grained: false
+  provider_statement: >-
+    "At this time, we only support a single scope. We plan to implement
+    fine-grained scopes in the future."
+  consequence: >-
+    There is no read-only grant. Any application a user authorizes — including an
+    AI agent — receives full access to every resource in the account, so
+    least-privilege delegation is not expressible on this API today.
+
+x-evidence:
+  checked: '2026-08-13'
+  probes:
+  - {url: 'https://apidocs.nextroll.com/guides/oauth.html', http_status: 200}
+  - {url: 'https://services.adroll.com/.well-known/oauth-authorization-server', http_status: 200}

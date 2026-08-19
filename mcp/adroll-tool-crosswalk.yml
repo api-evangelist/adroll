@@ -1,0 +1,392 @@
+generated: '2026-08-13'
+method: derived
+source: >-
+  mcp/adroll-mcp.yml (probed), graphql/adroll-reporting.graphql (derived from the
+  published schema reference), and the NextRoll REST reference pages at
+  https://apidocs.nextroll.com/
+note: >-
+  AdRoll runs three overlapping-but-non-identical surfaces: a REST API family
+  (CRUD, Audience, Prospecting, User Lists, Geotargeting, Server-to-Server), a
+  GraphQL Reporting API, and — since 2026-05-27 — a remote MCP server. This
+  crosswalk records the surfaces and the divergence between them. It contains NO
+  tool bindings, and that is the finding, not an omission: the MCP tool manifest
+  is auth-gated (tools/list -> HTTP 401 invalid_token) and NextRoll publishes no
+  tool list anywhere, so there are no tool NAMES to bind. Mapping AdRoll's six
+  marketing capability claims onto operationIds would be invention, so the
+  crosswalk[] array is deliberately empty until an authenticated tools/list can
+  be captured.
+
+surfaces:
+  rest:
+    openapi: null
+    note: >-
+      NextRoll publishes no OpenAPI file. Its reference pages are BUILT from
+      OpenAPI/Swagger documents — the Sphinx sources carry directives such as
+      `.. openapi:spec:: ../apispecs/adroll.json` and
+      `.. openapi:spec:: ../apispecs/audience.json` — but those apispecs/*.json
+      inputs are not copied into the published site (HTTP 404 at every
+      apispecs/ path probed). The specs exist; they are simply unpublished.
+    reference: https://apidocs.nextroll.com/index.html
+    base_url: https://services.adroll.com
+    operations_documented: 176
+    gated: false
+  graphql:
+    endpoint: https://services.adroll.com/reporting/api/v1/query
+    schema: graphql/adroll-reporting.graphql
+    published_schema_reference: https://apidocs.nextroll.com/graphql-reporting-api/schema.html
+    console: https://app.adroll.com/reporting/graphiql
+    types: 107
+    fields: 1710
+    gated: true
+    gated_note: >-
+      Anonymous introspection returns HTTP 401
+      {"code":"apiproxy:3","message":"Missing 'apikey' query parameter"}.
+      The SDL in graphql/ is transcribed from the published schema reference,
+      not from an introspection response.
+  mcp:
+    url: https://services.adroll.com/mcp
+    gated: true
+    gated_note: 'tools/list -> HTTP 401, WWW-Authenticate: Bearer realm="mcp", error="invalid_token"'
+
+crosswalk: []
+
+mcp_only: []
+
+mcp_unbound:
+- capability: reporting
+  reason: >-
+    AdRoll claims "retrieve campaign performance and reporting data" for MCP. The
+    backing surface is almost certainly the GraphQL Reporting API
+    (POST /reporting/api/v1/query) and/or GET /api/v1/report/{advertisable,campaign,ad},
+    but with no tool names published this cannot be asserted as a binding.
+- capability: campaign-creation
+  reason: >-
+    "Create new campaign drafts" plausibly backs onto POST /api/v1/campaign/create
+    and POST /prospecting/api/v2/advertisables/(adv)/campaigns. Unverifiable while
+    tools/list is gated.
+- capability: abm-account-intelligence
+  reason: >-
+    "Surface AdRoll ABM account intelligence" plausibly backs onto the Audience
+    API target-accounts and ideal_customer_profile families. Unverifiable while
+    tools/list is gated.
+
+graphql_only:
+- root: Query.organization / advertisable / campaign / adgroup / ad / automation / email / segment / group / log
+  reason: >-
+    The GraphQL Reporting API replaces the /report endpoints of the CRUD API and
+    the /report and /metrics endpoints of the Prospecting API, and exposes
+    metric shapes (reach/frequency, brand awareness, CTV household, contextual
+    keyword/topic targeting, UTM-based conversions, placement and domain
+    breakdowns) that have no REST equivalent at all.
+  source: https://apidocs.nextroll.com/graphql-reporting-api/overview.html
+
+rest_only:
+  - group: audience:advertisers
+    count: 1
+    operations:
+    - 'GET /audience/v1/advertisers'
+  - group: audience:crosschannel_lal_segments
+    count: 1
+    operations:
+    - 'GET /audience/v1/crosschannel_lal_segments/valid-segments'
+  - group: audience:ideal_customer_profile
+    count: 7
+    operations:
+    - 'GET /audience/v1/ideal_customer_profile'
+    - 'POST /audience/v1/ideal_customer_profile'
+    - 'DELETE /audience/v1/ideal_customer_profile/(icp_eid)'
+    - 'GET /audience/v1/ideal_customer_profile/(icp_eid)'
+    - 'POST /audience/v1/ideal_customer_profile/(icp_eid)'
+    - 'POST /audience/v1/ideal_customer_profile/accounts'
+    - 'GET /audience/v1/ideal_customer_profile/all_scores'
+  - group: audience:segments
+    count: 10
+    operations:
+    - 'GET /audience/v1/segments'
+    - 'POST /audience/v1/segments'
+    - 'DELETE /audience/v1/segments/(segment_id)'
+    - 'GET /audience/v1/segments/(segment_id)'
+    - 'POST /audience/v1/segments/(segment_id)'
+    - 'POST /audience/v1/segments/(segment_id)/reactivate'
+    - 'POST /audience/v1/segments/bulk'
+    - 'GET /audience/v1/segments/general_exclusions'
+    - 'GET /audience/v1/segments/tal_references'
+    - 'PUT /audience/v1/segments/tal_references'
+  - group: audience:segments_bulk
+    count: 1
+    operations:
+    - 'POST /audience/v1/segments_bulk/put'
+  - group: audience:sharing
+    count: 6
+    operations:
+    - 'GET /audience/v1/sharing/get_source_segment'
+    - 'DELETE /audience/v1/sharing/invitation'
+    - 'GET /audience/v1/sharing/invitation'
+    - 'POST /audience/v1/sharing/invitation'
+    - 'DELETE /audience/v1/sharing/segment'
+    - 'POST /audience/v1/sharing/segment'
+  - group: audience:target_accounts
+    count: 20
+    operations:
+    - 'GET /audience/v1/target_accounts'
+    - 'POST /audience/v1/target_accounts'
+    - 'DELETE /audience/v1/target_accounts/(tal_eid)'
+    - 'GET /audience/v1/target_accounts/(tal_eid)'
+    - 'POST /audience/v1/target_accounts/(tal_eid)'
+    - 'GET /audience/v1/target_accounts/(tal_eid)/tiers'
+    - 'POST /audience/v1/target_accounts/(tal_eid)/tiers'
+    - 'DELETE /audience/v1/target_accounts/(tal_eid)/tiers/(ta_tier_eid)'
+    - 'GET /audience/v1/target_accounts/(tal_eid)/tiers/(ta_tier_eid)'
+    - 'POST /audience/v1/target_accounts/(tal_eid)/tiers/(ta_tier_eid)'
+    - 'DELETE /audience/v1/target_accounts/(tal_eid)/tiers/(ta_tier_eid)/items'
+    - 'GET /audience/v1/target_accounts/(tal_eid)/tiers/(ta_tier_eid)/items'
+    - 'POST /audience/v1/target_accounts/(tal_eid)/tiers/(ta_tier_eid)/items'
+    - 'PUT /audience/v1/target_accounts/(tal_eid)/tiers/(ta_tier_eid)/items'
+    - 'POST /audience/v1/target_accounts/(tal_eid)/tiers/(ta_tier_eid)/items/delete'
+    - 'POST /audience/v1/target_accounts/(tal_eid)/tiers/(ta_tier_eid)/items/filter'
+    - 'POST /audience/v1/target_accounts/domain_references'
+    - 'GET /audience/v1/target_accounts/domains'
+    - 'GET /audience/v1/target_accounts/general_exclusions'
+    - 'GET /audience/v1/target_accounts/names'
+  - group: audience:user_attribute_counts
+    count: 1
+    operations:
+    - 'POST /audience/v1/user_attribute_counts'
+  - group: audience:user_attribute_names
+    count: 1
+    operations:
+    - 'GET /audience/v1/user_attribute_names/(advertisable_eid)'
+  - group: crud:ad
+    count: 5
+    operations:
+    - 'POST /api/v1/ad/clone'
+    - 'POST /api/v1/ad/create'
+    - 'POST /api/v1/ad/create_templated_web_ads'
+    - 'PUT /api/v1/ad/edit'
+    - 'GET /api/v1/ad/get'
+  - group: crud:adgroup
+    count: 14
+    operations:
+    - 'POST /api/v1/adgroup/add_segments'
+    - 'POST /api/v1/adgroup/create'
+    - 'POST /api/v1/adgroup/deselect_ads'
+    - 'POST /api/v1/adgroup/edit'
+    - 'GET /api/v1/adgroup/get'
+    - 'GET /api/v1/adgroup/get_ads'
+    - 'POST /api/v1/adgroup/pause'
+    - 'POST /api/v1/adgroup/pause_ad'
+    - 'POST /api/v1/adgroup/pause_ads'
+    - 'POST /api/v1/adgroup/remove_segments'
+    - 'POST /api/v1/adgroup/select_ads'
+    - 'POST /api/v1/adgroup/unpause'
+    - 'POST /api/v1/adgroup/unpause_ad'
+    - 'POST /api/v1/adgroup/unpause_ads'
+  - group: crud:advertisable
+    count: 13
+    operations:
+    - 'POST /api/v1/advertisable/create'
+    - 'POST /api/v1/advertisable/edit'
+    - 'POST /api/v1/advertisable/enable_rollcrawl'
+    - 'GET /api/v1/advertisable/get'
+    - 'GET /api/v1/advertisable/get_adgroups'
+    - 'GET /api/v1/advertisable/get_adgroups_fast'
+    - 'GET /api/v1/advertisable/get_ads'
+    - 'GET /api/v1/advertisable/get_ads_fast'
+    - 'GET /api/v1/advertisable/get_campaigns'
+    - 'GET /api/v1/advertisable/get_campaigns_fast'
+    - 'GET /api/v1/advertisable/get_pixel'
+    - 'GET /api/v1/advertisable/get_segments'
+    - 'GET /api/v1/advertisable/get_suggested_country'
+  - group: crud:advertisable_logo
+    count: 1
+    operations:
+    - 'POST /api/v1/advertisable_logo/create'
+  - group: crud:campaign
+    count: 8
+    operations:
+    - 'POST /api/v1/campaign/create'
+    - 'POST /api/v1/campaign/edit'
+    - 'GET /api/v1/campaign/get'
+    - 'GET /api/v1/campaign/get_adgroups'
+    - 'PUT /api/v1/campaign/pause'
+    - 'PUT /api/v1/campaign/pause_ads'
+    - 'PUT /api/v1/campaign/unpause'
+    - 'PUT /api/v1/campaign/unpause_ads'
+  - group: crud:consent_banner
+    count: 2
+    operations:
+    - 'GET /api/v1/consent_banner/retrieve'
+    - 'POST /api/v1/consent_banner/update'
+  - group: crud:contextual_categories
+    count: 1
+    operations:
+    - 'GET /api/v1/contextual_categories/get_all_contextual_categories'
+  - group: crud:dynamic_configuration
+    count: 3
+    operations:
+    - 'PUT /api/v1/dynamic_configuration/edit'
+    - 'POST /api/v1/dynamic_configuration/enable'
+    - 'GET /api/v1/dynamic_configuration/get'
+  - group: crud:dynamic_template
+    count: 1
+    operations:
+    - 'GET /api/v1/dynamic_template/get_all_for_advertisable'
+  - group: crud:dynamic_template_capability_description
+    count: 1
+    operations:
+    - 'GET /api/v1/dynamic_template_capability_description/get_all'
+  - group: crud:feed
+    count: 1
+    operations:
+    - 'POST /api/v1/feed/autoconfigure'
+  - group: crud:invoice
+    count: 1
+    operations:
+    - 'GET /api/v1/invoice/get'
+  - group: crud:marketplace
+    count: 2
+    operations:
+    - 'POST /api/v1/marketplace/create'
+    - 'GET /api/v1/marketplace/get'
+  - group: crud:marketplace_deals
+    count: 2
+    operations:
+    - 'GET /api/v1/marketplace_deals/get'
+    - 'GET /api/v1/marketplace_deals/metadata'
+  - group: crud:organization
+    count: 6
+    operations:
+    - 'GET /api/v1/organization/get'
+    - 'GET /api/v1/organization/get_accounts'
+    - 'GET /api/v1/organization/get_advertisables'
+    - 'GET /api/v1/organization/get_advertisables_paginated'
+    - 'GET /api/v1/organization/get_billing_methods'
+    - 'GET /api/v1/organization/get_users'
+  - group: crud:pixel
+    count: 3
+    operations:
+    - 'GET /api/v1/pixel/get'
+    - 'GET /api/v1/pixel/get_rules'
+    - 'GET /api/v1/pixel/get_segments'
+  - group: crud:policy
+    count: 1
+    operations:
+    - 'POST /api/v1/policy/send_email'
+  - group: crud:product_feeds
+    count: 15
+    operations:
+    - 'PUT /api/v1/product_feeds/add_feed_config'
+    - 'POST /api/v1/product_feeds/autoconfigure'
+    - 'GET /api/v1/product_feeds/delete_feed_config'
+    - 'GET /api/v1/product_feeds/delete_parser_config'
+    - 'PUT /api/v1/product_feeds/edit_feed_config'
+    - 'GET /api/v1/product_feeds/feed_downloadable'
+    - 'GET /api/v1/product_feeds/feed_status'
+    - 'GET /api/v1/product_feeds/get_feed_config'
+    - 'GET /api/v1/product_feeds/get_parser_config'
+    - 'GET /api/v1/product_feeds/get_products'
+    - 'GET /api/v1/product_feeds/get_troubled_products'
+    - 'GET /api/v1/product_feeds/match_rate'
+    - 'GET /api/v1/product_feeds/parse_preview'
+    - 'GET /api/v1/product_feeds/set_parser_config'
+    - 'POST /api/v1/product_feeds/set_parser_configs'
+  - group: crud:report
+    count: 3
+    operations:
+    - 'GET /api/v1/report/ad'
+    - 'GET /api/v1/report/advertisable'
+    - 'GET /api/v1/report/campaign'
+  - group: crud:rule
+    count: 3
+    operations:
+    - 'POST /api/v1/rule/create'
+    - 'GET /api/v1/rule/get'
+    - 'GET /api/v1/rule/get_segments'
+  - group: crud:segment
+    count: 2
+    operations:
+    - 'POST /api/v1/segment/edit'
+    - 'GET /api/v1/segment/get'
+  - group: crud:user
+    count: 3
+    operations:
+    - 'POST /api/v1/user/edit'
+    - 'GET /api/v1/user/get'
+    - 'POST /api/v1/user/grant'
+  - group: crud:xdevice_opt_in
+    count: 2
+    operations:
+    - 'GET /api/v1/xdevice_opt_in/retrieve'
+    - 'POST /api/v1/xdevice_opt_in/update'
+  - group: geotargeting
+    count: 1
+    operations:
+    - 'GET /geo/api/search/v2/geo'
+  - group: prospecting:adgroups
+    count: 8
+    operations:
+    - 'GET /prospecting/api/v2/adgroups/(adgroup)'
+    - 'POST /prospecting/api/v2/adgroups/(adgroup)'
+    - 'GET /prospecting/api/v2/adgroups/(adgroup)/audience'
+    - 'POST /prospecting/api/v2/adgroups/(adgroup)/audience'
+    - 'GET /prospecting/api/v2/adgroups/(adgroup)/flights'
+    - 'POST /prospecting/api/v2/adgroups/(adgroup)/flights'
+    - 'GET /prospecting/api/v2/adgroups/(adgroup)/geo-targets'
+    - 'POST /prospecting/api/v2/adgroups/(adgroup)/geo-targets'
+  - group: prospecting:advertisables
+    count: 5
+    operations:
+    - 'GET /prospecting/api/v2/advertisables/(adv)/campaigns'
+    - 'PATCH /prospecting/api/v2/advertisables/(adv)/campaigns'
+    - 'POST /prospecting/api/v2/advertisables/(adv)/campaigns'
+    - 'GET /prospecting/api/v2/advertisables/(adv)/settings'
+    - 'POST /prospecting/api/v2/advertisables/(adv)/settings'
+  - group: prospecting:attribute_names
+    count: 3
+    operations:
+    - 'GET /prospecting/api/v2/attribute_names/(adv)'
+    - 'GET /prospecting/api/v2/attribute_names/(adv)/(name)'
+    - 'GET /prospecting/api/v2/attribute_names/(adv)/sources'
+  - group: prospecting:audiences
+    count: 2
+    operations:
+    - 'GET /prospecting/api/v2/audiences/(audience)'
+    - 'POST /prospecting/api/v2/audiences/(audience)'
+  - group: prospecting:campaigns
+    count: 5
+    operations:
+    - 'GET /prospecting/api/v2/campaigns/(campaign)'
+    - 'POST /prospecting/api/v2/campaigns/(campaign)'
+    - 'GET /prospecting/api/v2/campaigns/(campaign)/adgroups'
+    - 'POST /prospecting/api/v2/campaigns/(campaign)/adgroups'
+    - 'GET /prospecting/api/v2/campaigns/(campaign)/geo-targets'
+  - group: prospecting:flights
+    count: 2
+    operations:
+    - 'DELETE /prospecting/api/v2/flights/(flight)'
+    - 'PUT /prospecting/api/v2/flights/(flight)'
+  - group: reporting-graphql
+    count: 1
+    operations:
+    - 'POST /reporting/api/v1/query'
+  - group: user-lists
+    count: 8
+    operations:
+    - 'GET /user-lists/api/v1/userlists/ad'
+    - 'GET /user-lists/api/v1/userlists/adgroup'
+    - 'GET /user-lists/api/v1/userlists/advertisable'
+    - 'GET /user-lists/api/v1/userlists/audience_preview'
+    - 'GET /user-lists/api/v1/userlists/segment'
+    - 'POST /user-lists/api/v1/userlists/segment'
+    - 'GET /user-lists/api/v1/userlists/segment/cdp_plus'
+    - 'GET /user-lists/api/v1/userlists/segment/exact'
+
+coverage:
+  mcp_tools_named: 0
+  mcp_tools_bound: 0
+  mcp_capability_claims: 6
+  graphql_types: 107
+  graphql_fields: 1710
+  rest_operations_documented: 176
+  rest_operations_with_a_tool: 0
+  binding_blocked_by: auth-gated tools/list, no published tool manifest

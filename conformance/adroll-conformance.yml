@@ -1,0 +1,118 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  https://apidocs.nextroll.com/guides/oauth.html,
+  https://services.adroll.com/.well-known/oauth-authorization-server,
+  https://security.nextroll.com/
+note: >-
+  Standards conformance for the NextRoll API family. Each entry is either a claim
+  NextRoll makes in its own docs or something observed in a live document. No
+  OpenAPI is published, so nothing here is derived from a spec.
+
+standards:
+- id: oauth2-rfc6749
+  conforms: true
+  evidence: >-
+    "AdRoll's OAuth implementation conforms to RFC 6749" — authorization,
+    implicit and password grants documented at
+    https://apidocs.nextroll.com/guides/oauth.html
+- id: oauth2-bearer-rfc6750
+  conforms: true
+  evidence: >-
+    "uses Bearer Tokens (RFC 6750)"; header, form-encoded body and query
+    parameter transports all documented.
+- id: oauth2-authorization-server-metadata-rfc8414
+  conforms: true
+  evidence: >-
+    https://services.adroll.com/.well-known/oauth-authorization-server returns
+    200 with issuer, authorization/token/registration/revocation/introspection
+    endpoints, grant types, PKCE methods and scopes (MCP surface only).
+- id: oauth2-protected-resource-metadata-rfc9728
+  conforms: true
+  evidence: >-
+    https://services.adroll.com/.well-known/oauth-protected-resource returns 200
+    with resource, authorization_servers, scopes_supported,
+    bearer_methods_supported and resource_documentation (MCP surface only).
+- id: oauth2-dynamic-client-registration-rfc7591
+  conforms: true
+  evidence: 'registration_endpoint https://services.adroll.com/mcp/auth/register advertised in AS metadata.'
+- id: oauth2-pkce-rfc7636
+  conforms: true
+  partial: true
+  evidence: >-
+    code_challenge_methods_supported ["S256"] on the MCP authorization server.
+    The platform OAuth guide does not mention PKCE at all, so this holds for the
+    MCP surface only.
+- id: oauth2-token-revocation-rfc7009
+  conforms: true
+  evidence: 'revocation_endpoint https://services.adroll.com/mcp/auth/revoke advertised in AS metadata.'
+- id: oauth2-token-introspection-rfc7662
+  conforms: true
+  evidence: 'introspection_endpoint https://services.adroll.com/mcp/auth/introspect advertised in AS metadata.'
+- id: openid-connect
+  conforms: false
+  evidence: 'No /.well-known/openid-configuration served on any host (404/504/SPA-shell).'
+- id: mcp
+  conforms: true
+  evidence: >-
+    Remote MCP server at https://services.adroll.com/mcp; JSON-RPC POST returns
+    401 with WWW-Authenticate Bearer realm="mcp" per the MCP authorization spec.
+    Launched 2026-05-27, in beta.
+- id: graphql
+  conforms: true
+  partial: true
+  evidence: >-
+    GraphQL Reporting API at POST /reporting/api/v1/query with a published
+    schema reference (107 types). Deviates from the GraphQL spec on error
+    handling — it uses a custom has_errors / errors[{id,msg}] envelope rather
+    than the standard top-level errors array, and its own docs call this out.
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: 'Errors use a vendor {"errors":[{message,code,field}]} envelope; no application/problem+json anywhere in the docs.'
+- id: rfc6585-429
+  conforms: true
+  evidence: 'Support page cites HTTP 429 Too Many Requests (RFC 6585 §4) as the rate-limit response.'
+- id: rfc8594-sunset-header
+  conforms: false
+  evidence: 'Retirements are announced as doc banners; no Sunset or Deprecation headers documented.'
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: 'No /.well-known/security.txt served on any of 7 hosts probed.'
+- id: rfc8615-well-known-agent-card
+  conforms: false
+  evidence: 'No A2A agent card at /.well-known/agent-card.json or /.well-known/agent.json on any host.'
+- id: asyncapi
+  conforms: false
+  evidence: 'No AsyncAPI document and no outbound webhook surface published; the event traffic is inbound only (S2S ingestion + pixel).'
+- id: openapi
+  conforms: false
+  partial: true
+  evidence: >-
+    NextRoll BUILDS its reference pages from OpenAPI/Swagger documents — the
+    Sphinx sources carry `.. openapi:spec:: ../apispecs/adroll.json` and
+    `../apispecs/audience.json` — but the spec files are not published (404 at
+    every apispecs/ path probed). Conformance is therefore unverifiable and the
+    machine-readable contract is unavailable to consumers.
+- id: iso8601
+  conforms: true
+  evidence: 'DateTime inputs and outputs are documented as ISO 8601, always UTC.'
+- id: rest
+  conforms: false
+  partial: true
+  evidence: >-
+    Self-described as "RESTful", but the CRUD API is RPC-shaped: the action is in
+    the path (/api/v1/ad/create, /api/v1/adgroup/pause_ads) and PUT/POST are used
+    interchangeably for edit.
+
+compliance_programs:
+- {id: soc2-type2, published: true, auditor: Sensiba, source: 'https://security.nextroll.com/'}
+- {id: soc3, published: true, auditor: Sensiba, source: 'https://security.nextroll.com/'}
+- {id: iso-27001, published: true, detail: 'ISO 27001 - 2013', source: 'https://security.nextroll.com/'}
+- {id: pci-dss, published: true, auditor: Security Metrics, source: 'https://security.nextroll.com/'}
+- {id: gdpr, published: true, source: 'https://www.nextroll.com/trust-center/gdpr'}
+- {id: ccpa, published: true, source: 'https://www.nextroll.com/trust-center'}
+- {id: caiq-v4.0.2, published: true, kind: self-assessment, source: 'https://security.nextroll.com/'}
+- {id: sig-lite, published: true, kind: self-assessment, source: 'https://security.nextroll.com/'}
+
+x-evidence:
+  checked: '2026-08-13'

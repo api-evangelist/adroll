@@ -1,0 +1,74 @@
+generated: '2026-08-13'
+method: searched
+source: https://apidocs.nextroll.com/guides/pixel-javascript-api.html
+note: >-
+  AdRoll ships no embeddable UI widget library. What it does ship on the client
+  side is a tag/measurement layer with a documented JavaScript API, plus a
+  browser-side firmographic lookup for ABM customers. Those are the real
+  client-side components and they are catalogued here; nothing else was found.
+
+families:
+- family: AdRoll Pixel (v2)
+  kind: measurement-tag
+  loader: 'site-wide pixel snippet placed in the page header'
+  global: adroll
+  docs: https://apidocs.nextroll.com/guides/pixel-javascript-api.html
+  description: >-
+    The AdRoll Pixel exposes a JavaScript API on the global `adroll` object for
+    tracking custom events and passing product attributes for dynamic ads, on top
+    of the automatic page-view tracking the pixel does by default. No extra
+    install beyond the pixel snippet.
+  methods:
+  - name: adroll.track
+    signature: 'adroll.track(eventName, attributes?)'
+    description: 'Send a custom event, optionally with product attributes such as product_id, price, quantity and category.'
+    example: 'adroll.track("addToCart", { product_id: "SKU-12345" })'
+  - name: adroll.get_cookie
+    signature: 'adroll.get_cookie(callback)'
+    description: >-
+      Fetch the AdRoll first-party cookie value as a string. This is the bridge
+      between the browser tag and the Server-to-Server Event API — the cookie is
+      one of the two accepted user identifiers there.
+    example: 'adroll.get_cookie(function (result) { /* result is the cookie value */ });'
+  event_vocabulary:
+    b2c: [pageView, homeView, productSearch, addToCart, purchase]
+    b2b_abm: [highValuePage, gatedContent, demoRequest, signupPlan, signupTrial, contactSales, liveChat, formFill]
+    note: >-
+      The same event vocabulary is shared with the Server-to-Server Event API, so
+      an event can be delivered from the browser or from your server. Event names
+      transcribed from the S2S events reference and the Pixel JS API guide.
+  verification_tools:
+  - {name: PixelPal, url: 'https://help.adroll.com/hc/en-us/articles/360040010352'}
+  - {name: Pixel Assistant, url: 'https://help.adroll.com/hc/en-us/articles/8261197025165'}
+
+- family: Site Traffic Revealer
+  kind: browser-side data API
+  availability: AdRoll ABM accounts, must be enabled per account
+  docs: https://apidocs.nextroll.com/site-traffic-revealer/overview.html
+  description: >-
+    Real-time firmographic identification of a site visitor, exposed as
+    additional JavaScript data everywhere the AdRoll ABM pixel is placed. Used
+    for page personalisation, analytics, and pushing ABM segmentation (Account
+    Lists, Account Groups, Journey Stages) into other platforms.
+  requirements:
+  - A properly configured and installed AdRoll ABM pixel
+  - The visitor's browser must allow third-party cookies for best results
+  - Account enablement — contact your Account Manager or ABM support
+
+- family: Google Tag Manager templates
+  kind: tag-template
+  first_party: true
+  repos:
+  - {name: gtm-smart-pixel, url: 'https://github.com/AdRoll/gtm-smart-pixel', description: 'GTM template for the AdRoll Smart Pixel'}
+  - {name: adroll-google-tag-manager, url: 'https://github.com/AdRoll/adroll-google-tag-manager', description: 'GTM template for AdRoll'}
+
+not_found:
+- embeddable dashboard or report widgets
+- hosted checkout / prebuilt UI surfaces
+- a web-component or element library
+
+x-evidence:
+  checked: '2026-08-13'
+  probes:
+  - {url: 'https://apidocs.nextroll.com/guides/pixel-javascript-api.html', http_status: 200}
+  - {url: 'https://apidocs.nextroll.com/site-traffic-revealer/overview.html', http_status: 200}

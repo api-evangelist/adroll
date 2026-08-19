@@ -1,0 +1,103 @@
+generated: '2026-08-13'
+method: searched
+status: published
+source: https://services.adroll.com/.well-known/oauth-protected-resource
+docs: https://www.adroll.com/blog/adroll-mcp-server
+announcement: https://www.adroll.com/blog/adroll-mcp-server
+help_center: https://help.adroll.com/hc/en-us/articles/44128588376077-AdRoll-MCP-Server-Beta
+
+deployment:
+  mode: remote
+  endpoint: https://services.adroll.com/mcp
+  auth: oauth
+  verified: probed
+
+server:
+  name: adroll
+  vendor: NextRoll, Inc.
+  transport: http
+  url: https://services.adroll.com/mcp
+  status: beta
+  launched: '2026-05-27'
+  resource_documentation: https://docs.adroll.com/mcp
+
+authorization:
+  model: OAuth 2.1 / MCP authorization
+  protected_resource_metadata: https://services.adroll.com/.well-known/oauth-protected-resource
+  authorization_server_metadata: https://services.adroll.com/.well-known/oauth-authorization-server
+  issuer: https://services.adroll.com/mcp
+  authorization_endpoint: https://services.adroll.com/mcp/auth/authorize
+  token_endpoint: https://services.adroll.com/mcp/auth/token
+  registration_endpoint: https://services.adroll.com/mcp/auth/register
+  revocation_endpoint: https://services.adroll.com/mcp/auth/revoke
+  introspection_endpoint: https://services.adroll.com/mcp/auth/introspect
+  dynamic_client_registration: true
+  pkce: [S256]
+  grant_types: [authorization_code, refresh_token]
+  scopes_supported: [mcp]
+  bearer_methods_supported: [header]
+
+tools:
+  status: auth-gated
+  note: >-
+    POST {"jsonrpc":"2.0","id":1,"method":"tools/list"} to
+    https://services.adroll.com/mcp returns HTTP 401 with
+    WWW-Authenticate: Bearer realm="mcp", error="invalid_token". The live tool
+    manifest (and therefore every tool inputSchema) requires an authenticated
+    OAuth introspection and cannot be captured anonymously. NextRoll's own
+    resource_documentation URL, https://docs.adroll.com/mcp, currently serves an
+    unpopulated MkDocs placeholder shell (page title "Lorem ipsum dolor sit
+    amet"), so no published tool list exists to fall back to either. The
+    capability areas below are the ones AdRoll names in its own launch post —
+    they are capability CLAIMS, not a tool manifest, and no tool names are
+    asserted here.
+  capability_areas:
+  - area: reporting
+    claim: Retrieve campaign performance and reporting data
+    source: https://www.adroll.com/blog/adroll-mcp-server
+  - area: trend-analysis
+    claim: Analyze trends and summarize changes over time
+    source: https://www.adroll.com/blog/adroll-mcp-server
+  - area: campaign-creation
+    claim: Create new campaign drafts (draft-first, staged for review before going live)
+    source: https://www.adroll.com/blog/adroll-mcp-server
+  - area: campaign-management
+    claim: Support selected campaign management workflows
+    source: https://www.adroll.com/blog/adroll-mcp-server
+  - area: abm-account-intelligence
+    claim: Surface AdRoll ABM account intelligence
+    source: https://www.adroll.com/blog/adroll-mcp-server
+  - area: account-prioritization
+    claim: Help prioritize accounts for sales or marketing follow-up
+    source: https://www.adroll.com/blog/adroll-mcp-server
+
+clients_supported:
+- ChatGPT
+- Claude
+- Cursor
+- n8n
+- Microsoft Copilot Studio
+
+safety:
+  draft_first: true
+  note: >-
+    AdRoll states new campaigns created through MCP are staged as drafts for human
+    review before going live, and that write capability follows the authenticated
+    user's own platform permissions.
+
+third_party_connectors:
+- name: Pipedream AdRoll MCP
+  url: https://mcp.pipedream.net/v2
+  first_party: false
+  note: >-
+    A Pipedream-hosted connector for AdRoll is listed in third-party MCP
+    directories. It is NOT NextRoll's server and is recorded here only so it is
+    not confused with the first-party endpoint above.
+
+x-evidence:
+  fetched: '2026-08-13'
+  probes:
+  - {url: 'https://services.adroll.com/.well-known/oauth-authorization-server', http_status: 200, content_type: application/json}
+  - {url: 'https://services.adroll.com/.well-known/oauth-protected-resource', http_status: 200, content_type: application/json}
+  - {url: 'https://services.adroll.com/mcp', method: 'POST tools/list', http_status: 401, www_authenticate: 'Bearer realm="mcp", error="invalid_token"'}
+  - {url: 'https://docs.adroll.com/mcp', http_status: 200, note: 'unpopulated MkDocs placeholder shell'}

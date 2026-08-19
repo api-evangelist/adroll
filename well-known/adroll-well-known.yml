@@ -1,0 +1,109 @@
+generated: '2026-08-13'
+method: probed
+source: live GET of /.well-known/* on every apis.yml host
+note: >-
+  Only https://services.adroll.com serves real /.well-known documents, and both of
+  them belong to the AdRoll MCP Server: an RFC 8414 authorization-server metadata
+  document and an RFC 9728 protected-resource metadata document. app.adroll.com and
+  developers.nextroll.com answer HTTP 200 on EVERY /.well-known/* path with the
+  single-page-app HTML shell — those are catch-all false positives, not documents,
+  and are recorded as misses. services.adroll.com returns a persistent 504 from its
+  API proxy on the paths it does not implement (retried twice, 45s timeout).
+hosts:
+- host: https://services.adroll.com
+  documents:
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    content_type: application/json
+    file: adroll-oauth-authorization-server.json
+    document: true
+  - path: /.well-known/oauth-protected-resource
+    status: 200
+    content_type: application/json
+    file: adroll-oauth-protected-resource.json
+    document: true
+  - path: /.well-known/security.txt
+    status: 504
+    document: false
+  - path: /.well-known/openid-configuration
+    status: 504
+    document: false
+  - path: /.well-known/api-catalog
+    status: 504
+    document: false
+  - path: /.well-known/ai-plugin.json
+    status: 504
+    document: false
+  - path: /.well-known/agent-card.json
+    status: 504
+    document: false
+  - path: /.well-known/agent.json
+    status: 504
+    document: false
+- host: https://www.adroll.com
+  documents:
+  - {path: /.well-known/security.txt, status: 404, document: false}
+  - {path: /.well-known/openid-configuration, status: 404, document: false}
+  - {path: /.well-known/oauth-authorization-server, status: 404, document: false}
+  - {path: /.well-known/api-catalog, status: 404, document: false}
+  - {path: /.well-known/ai-plugin.json, status: 404, document: false}
+  - {path: /.well-known/agent-card.json, status: 404, document: false}
+  - {path: /.well-known/agent.json, status: 404, document: false}
+- host: https://www.nextroll.com
+  documents:
+  - {path: /.well-known/security.txt, status: 404, document: false}
+  - {path: /.well-known/openid-configuration, status: 404, document: false}
+  - {path: /.well-known/oauth-authorization-server, status: 404, document: false}
+  - {path: /.well-known/api-catalog, status: 404, document: false}
+  - {path: /.well-known/ai-plugin.json, status: 404, document: false}
+  - {path: /.well-known/agent-card.json, status: 404, document: false}
+  - {path: /.well-known/agent.json, status: 404, document: false}
+- host: https://apidocs.nextroll.com
+  documents:
+  - {path: /.well-known/security.txt, status: 404, document: false}
+  - {path: /.well-known/openid-configuration, status: 404, document: false}
+  - {path: /.well-known/oauth-authorization-server, status: 404, document: false}
+  - {path: /.well-known/api-catalog, status: 404, document: false}
+  - {path: /.well-known/ai-plugin.json, status: 404, document: false}
+  - {path: /.well-known/agent-card.json, status: 404, document: false}
+  - {path: /.well-known/agent.json, status: 404, document: false}
+- host: https://srv.adroll.com
+  documents:
+  - {path: /.well-known/security.txt, status: 404, document: false}
+  - {path: /.well-known/oauth-authorization-server, status: 404, document: false}
+  - {path: /.well-known/agent-card.json, status: 404, document: false}
+- host: https://app.adroll.com
+  note: >-
+    Answers 200 with the dashboard SPA HTML shell on every /.well-known/* path
+    probed. No document was served; all recorded as misses.
+  documents:
+  - {path: /.well-known/security.txt, status: 200, document: false, body: html-spa-shell}
+  - {path: /.well-known/openid-configuration, status: 200, document: false, body: html-spa-shell}
+  - {path: /.well-known/oauth-authorization-server, status: 200, document: false, body: html-spa-shell}
+  - {path: /.well-known/api-catalog, status: 200, document: false, body: html-spa-shell}
+  - {path: /.well-known/ai-plugin.json, status: 200, document: false, body: html-spa-shell}
+  - {path: /.well-known/agent-card.json, status: 200, document: false, body: html-spa-shell}
+  - {path: /.well-known/agent.json, status: 200, document: false, body: html-spa-shell}
+- host: https://developers.nextroll.com
+  note: >-
+    Same catch-all behaviour as app.adroll.com — 200 HTML shell on every path.
+    Recorded as misses.
+  documents:
+  - {path: /.well-known/security.txt, status: 200, document: false, body: html-spa-shell}
+  - {path: /.well-known/openid-configuration, status: 200, document: false, body: html-spa-shell}
+  - {path: /.well-known/oauth-authorization-server, status: 200, document: false, body: html-spa-shell}
+  - {path: /.well-known/api-catalog, status: 200, document: false, body: html-spa-shell}
+  - {path: /.well-known/ai-plugin.json, status: 200, document: false, body: html-spa-shell}
+  - {path: /.well-known/agent-card.json, status: 200, document: false, body: html-spa-shell}
+  - {path: /.well-known/agent.json, status: 200, document: false, body: html-spa-shell}
+summary:
+  documents_found: 2
+  security_txt: false
+  openid_configuration: false
+  oauth_authorization_server: true
+  oauth_protected_resource: true
+  api_catalog: false
+  agent_card: false
+x-evidence:
+  checked: '2026-08-13'
+  method: curl -L, 12-45s timeout, statuses recorded as observed

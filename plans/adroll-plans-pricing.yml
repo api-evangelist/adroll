@@ -1,0 +1,88 @@
+generated: '2026-08-13'
+method: searched
+source: https://www.adroll.com/pricing
+plan_count: 4
+currency: USD
+note: >-
+  AdRoll publishes named packages but no prices. Every tier on the pricing page
+  is either pay-as-you-go on dynamic CPM (so the unit price is auction-set and
+  not quotable) or explicitly gated behind "contact sales" / "request a demo".
+  No dollar figure, no monthly platform fee and no included-quota number appears
+  on the page, so `price: null` below is a recorded absence, not a lookup
+  failure. API access is priced separately from media — it is free with an
+  account, rationed by daily call quota rather than by dollars.
+
+plans:
+- name: Ads (Self-Service)
+  category: media
+  price: null
+  currency: USD
+  billing_period: pay-as-you-go
+  pricing_model: dynamic CPM
+  minimum_spend: none
+  statement: 'AdRoll does not have a minimum spend amount.'
+  includes:
+  - Cross-channel advertising from a self-service dashboard
+  add_ons:
+  - Cross-channel attribution
+  - Social ads (self-service only)
+  contact_sales_required: false
+- name: Ads (Managed Services)
+  category: media
+  price: null
+  currency: USD
+  billing_period: pay-as-you-go
+  pricing_model: dynamic CPM plus managed service
+  includes:
+  - Managed services with qualifying ad spend
+  contact_sales_required: true
+- name: Advanced Package
+  category: media
+  price: null
+  currency: USD
+  billing_period: annual commitment
+  includes:
+  - Full AdRoll platform
+  - Free ad credits
+  - Guaranteed services
+  contact_sales_required: true
+- name: AdRoll ABM packages
+  category: abm
+  price: null
+  currency: USD
+  billing_period: null
+  includes:
+  - 'Account-Based Retargeting — "No fee to get started and pay only for media."'
+  contact_sales_required: true
+  note: All ABM packages require a demo request or a sales conversation.
+
+api_access_tiers:
+  note: >-
+    API access is not sold. It is granted per registered application at
+    developers.nextroll.com and rationed by daily call quota. See
+    rate-limits/adroll-rate-limits.yml.
+  tiers:
+  - name: Basic
+    price: 0
+    approval_required: false
+    quota: 10,000 API calls per day (stated on the API key migration guide)
+    access: all API features
+  - name: Partner
+    price: null
+    approval_required: true
+    quota: not published
+    note: 'Applications on the Partner tier must be approved before they can make API calls.'
+  source: https://apidocs.nextroll.com/guides/api-key-migration.html
+
+transparency:
+  published_prices: false
+  pricing_page: https://www.adroll.com/pricing
+  gap: >-
+    A buyer — human or agent — cannot compute cost from the published page. Every
+    tier resolves to auction CPM or a sales conversation.
+
+x-evidence:
+  checked: '2026-08-13'
+  probes:
+  - {url: 'https://www.adroll.com/pricing', http_status: 200}
+  - {url: 'https://apidocs.nextroll.com/guides/api-key-migration.html', http_status: 200}

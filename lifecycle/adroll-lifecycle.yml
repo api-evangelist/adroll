@@ -1,0 +1,117 @@
+generated: '2026-08-13'
+method: searched
+source: https://apidocs.nextroll.com/index.html
+note: >-
+  Versioning, retirement and status posture for the NextRoll API family, read
+  from the published docs and the live Statuspage. No deprecated-operation list
+  can be derived from a spec because NextRoll publishes no OpenAPI.
+
+versioning:
+  scheme: uri-path
+  note: >-
+    The version sits in the path and is per-service rather than platform-wide:
+    /api/v1 (CRUD), /audience/v1, /prospecting/api/v2, /user-lists/api/v1,
+    /geo/api/search/v2, /reporting/api/v1. There is no version header, no date
+    pinning and no published version-support policy.
+  current:
+    crud: v1
+    audience: v1
+    prospecting: v2
+    user-lists: v1
+    geotargeting: v2
+    reporting-graphql: v1
+  graphql_note: >-
+    The GraphQL Reporting API's own overview cites "evolve without API versions"
+    as a benefit of GraphQL; every response carries a `version` build string
+    (e.g. "2018.09.11-1") for support purposes, not for client pinning.
+  docs: https://apidocs.nextroll.com/index.html
+
+deprecation:
+  policy_url: null
+  policy_published: false
+  sunset_header: false
+  rfc8594: false
+  note: >-
+    NextRoll announces retirements in the docs as warning banners on the affected
+    service pages, with a month-and-year date and no migration deadline
+    mechanics. There is no written deprecation policy, no notice period
+    commitment, and no Sunset/Deprecation response headers.
+  announced_retirements:
+  - api: Automated Campaigns API
+    status: retired
+    announced_date: April 2025
+    statement: 'The Automated Campaigns API will be retired April 2025.'
+    docs: https://apidocs.nextroll.com/automated-campaigns-api/overview.html
+    note: >-
+      The retirement date has passed but the reference pages remain published
+      with the warning banner in place, so the docs do not say whether the
+      endpoints are actually gone.
+  - api: Universal Campaigns API
+    status: retired
+    announced_date: April 2025
+    statement: 'The Universal Campaigns API will be retired April 2025.'
+    docs: https://apidocs.nextroll.com/universal-campaigns-api/overview.html
+  deprecated_parameters:
+  - parameter: display_url_override
+    scope: web campaigns
+    statement: 'For web campaigns, display_url_override parameter is deprecated.'
+    docs: https://apidocs.nextroll.com/faq.html
+
+beta_surfaces:
+- api: Server-to-Server (S2S) Event API
+  statement: >-
+    "The S2S event API is under active development. Although the API is
+    generally stable, it may change. Event processing is not yet fully complete."
+  docs: https://apidocs.nextroll.com/server-to-server-api/overview.html
+- api: AdRoll MCP Server
+  statement: 'AdRoll MCP is currently available in beta.'
+  launched: '2026-05-27'
+  docs: https://www.adroll.com/blog/adroll-mcp-server
+- feature: Audience Sharing
+  statement: "Audience Sharing is an upcoming feature and isn't available to everyone"
+  docs: https://apidocs.nextroll.com/guides/audience-sharing.html
+
+migrations_published:
+- from: api.adroll.com / app.adroll.com
+  to: services.adroll.com
+  requirement: 'Register an application and send the consumer key in the apikey query parameter on every call; the /api basepath became mandatory.'
+  docs: https://apidocs.nextroll.com/guides/api-key-migration.html
+- from: CRUD /report and Prospecting /report + /metrics endpoints
+  to: GraphQL Reporting API
+  docs: https://apidocs.nextroll.com/graphql-reporting-api/reporting-api-migration.html
+- from: developers.adroll.com
+  to: developers.nextroll.com
+  docs: https://apidocs.nextroll.com/guides/developer-site-migration.html
+
+status_page:
+  url: https://status.nextroll.com
+  alias: https://status.adroll.com
+  platform: Atlassian Statuspage
+  api: https://status.nextroll.com/api/v2/summary.json
+  history_feed: https://status.nextroll.com/history.rss
+  api_component: true
+  components_probed: 22
+  named_api_components: [API, AdRoll ABM API]
+  all_operational_at_check: true
+  http_status: 200
+
+sla:
+  url: null
+  uptime_target: null
+  note: 'No public uptime SLA is published for the API.'
+
+changelog:
+  url: null
+  note: >-
+    No dated API changelog was found. developers.nextroll.com is a client-side
+    application that returns the same 2,138-byte shell for /changelog, /docs and
+    /api, and apidocs.nextroll.com has no changelog page in its own llms.txt
+    page index. Version history is visible only as build strings in GraphQL
+    responses and as retirement banners on service pages.
+
+x-evidence:
+  checked: '2026-08-13'
+  probes:
+  - {url: 'https://status.adroll.com/api/v2/summary.json', http_status: 200}
+  - {url: 'https://apidocs.nextroll.com/automated-campaigns-api/overview.html', http_status: 200}
+  - {url: 'https://developers.nextroll.com/changelog', http_status: 200, note: 'SPA shell, no content'}

@@ -1,0 +1,132 @@
+generated: '2026-08-13'
+method: searched
+source: https://apidocs.nextroll.com/guides/get-started.html
+docs: https://apidocs.nextroll.com/guides/oauth.html
+note: >-
+  NextRoll publishes no OpenAPI file, so this profile is read from the published
+  auth guides rather than derived from securitySchemes. Every NextRoll API
+  requires TWO credentials at once: a user credential (OAuth access token or
+  Personal Access Token) in the Authorization header AND the registered
+  application's client ID in the `apikey` query parameter. Omitting the apikey
+  returns HTTP 401 apiproxy:3 even when the user credential is valid — verified
+  live against https://services.adroll.com/reporting/api/v1/query.
+
+summary:
+  types: [oauth2, apiKey, http]
+  api_key_in: [query]
+  oauth2_flows: [authorizationCode, implicit, password, refreshToken]
+  requires_two_credentials: true
+  registration_required: true
+  registration_url: https://developers.nextroll.com/accounts/create
+
+schemes:
+- name: apikey
+  type: apiKey
+  in: query
+  parameter: apikey
+  required_on: every request to every service
+  description: >-
+    The registered application's consumer key (client ID). Always sent in the URL
+    query string regardless of HTTP method — the docs state explicitly that it
+    must NOT be placed in the body of POST/PUT/PATCH requests.
+  obtained_from: https://developers.nextroll.com/my-apps/new-app
+  source: https://apidocs.nextroll.com/guides/api-key-migration.html
+
+- name: personalAccessToken
+  type: http
+  scheme: Token
+  in: header
+  header: Authorization
+  format: 'Authorization: Token MYTOKEN'
+  description: >-
+    Personal Access Token identifying the AdRoll user, for scripts and simple
+    integrations. Created and revoked by the user at
+    https://app.adroll.com/settings/personal-access-tokens. Must be paired with
+    the application's client ID in the apikey query parameter.
+  source: https://apidocs.nextroll.com/guides/get-started.html
+
+- name: oauth2
+  type: oauth2
+  conforms_to: [RFC 6749, RFC 6750]
+  authorizationUrl: https://services.adroll.com/auth/authorize
+  tokenUrl: https://services.adroll.com/auth/token
+  flows:
+  - flow: authorizationCode
+    note: three-legged; the most commonly used grant
+  - flow: implicit
+    note: for clients that cannot keep a secret, e.g. single-page apps
+  - flow: password
+    note: >-
+      Resource Owner Password Credentials. The docs recommend it only when
+      browser redirection is impossible.
+  - flow: refreshToken
+    note: >-
+      Refresh tokens expire one year after issue AND on first use; a new refresh
+      token is returned with every new access token.
+  token_lifetime:
+    access_token: 24 hours (all grant types)
+    refresh_token: 1 year, single-use
+  token_transport:
+  - 'Authorization: Bearer {ACCESS_TOKEN}'
+  - 'form-encoded body parameter access_token={ACCESS_TOKEN}'
+  - 'URL query parameter ?access_token={ACCESS_TOKEN}'
+  scopes: [all]
+  source: https://apidocs.nextroll.com/guides/oauth.html
+
+- name: serverAccessToken
+  type: http
+  scheme: Token
+  in: header
+  header: Authorization
+  applies_to: Server-to-Server (S2S) Event API — https://srv.adroll.com/api
+  description: >-
+    Server Access Tokens (SATs) are a separate credential class for the S2S event
+    endpoint. They are not self-service: the docs say you must contact your
+    account manager, and NextRoll shares the credential through a one-time
+    1Password share link that expires after seven days.
+  self_service: false
+  source: https://apidocs.nextroll.com/server-to-server-api/reference.html
+
+- name: mcpOAuth
+  type: oauth2
+  applies_to: AdRoll MCP Server — https://services.adroll.com/mcp
+  conforms_to: [RFC 8414, RFC 9728, RFC 7591, PKCE RFC 7636]
+  issuer: https://services.adroll.com/mcp
+  authorizationUrl: https://services.adroll.com/mcp/auth/authorize
+  tokenUrl: https://services.adroll.com/mcp/auth/token
+  registrationUrl: https://services.adroll.com/mcp/auth/register
+  revocationUrl: https://services.adroll.com/mcp/auth/revoke
+  introspectionUrl: https://services.adroll.com/mcp/auth/introspect
+  grant_types: [authorization_code, refresh_token]
+  code_challenge_methods: [S256]
+  token_endpoint_auth_methods: [none, client_secret_basic, client_secret_post]
+  scopes: [mcp]
+  dynamic_client_registration: true
+  note: >-
+    A separate authorization surface from the platform OAuth above, published as
+    RFC 8414 / RFC 9728 metadata documents. This one supports Dynamic Client
+    Registration and mandatory PKCE, which the platform OAuth guide does not
+    mention.
+  source: https://services.adroll.com/.well-known/oauth-authorization-server
+
+transport:
+  https_only: true
+  note: 'The docs state HTTPS is the only supported protocol.'
+
+gaps:
+- >-
+  Fine-grained OAuth scopes are not implemented — the docs say "At this time, we
+  only support a single scope" (`all`), with finer scopes "in the future". An
+  agent granted an AdRoll token therefore holds full account access.
+- >-
+  Passing the access token in a URL query parameter is documented as a supported
+  option; tokens in URLs leak through logs, referrers and proxies.
+- >-
+  The S2S credential is distributed by human handoff (account manager + a
+  1Password share link), so it cannot be provisioned programmatically.
+
+x-evidence:
+  checked: '2026-08-13'
+  probes:
+  - {url: 'https://services.adroll.com/reporting/api/v1/query', http_status: 401, body: "apiproxy:3 Missing 'apikey' query parameter"}
+  - {url: 'https://services.adroll.com/.well-known/oauth-authorization-server', http_status: 200}

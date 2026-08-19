@@ -1,0 +1,100 @@
+generated: '2026-08-13'
+method: searched
+source: https://apidocs.nextroll.com/guides/get-started.html
+docs: https://apidocs.nextroll.com/support.html
+limit_count: 3
+note: >-
+  NextRoll publishes numbers but not signals. Two of its own guides state
+  DIFFERENT default quotas and neither is dated, so both are recorded verbatim
+  rather than reconciled. No rate-limit response headers are documented
+  anywhere, which is the material gap for an agent: the only runtime signal is
+  the 429 itself, with no remaining-quota counter and no Retry-After contract.
+
+limits:
+- scope: per-application, per-service
+  window: day
+  limit: 100
+  unit: requests
+  tier: default (as stated on the Get Started guide)
+  statement: 'The default quota is 100 API requests per service per day.'
+  source: https://apidocs.nextroll.com/guides/get-started.html
+- scope: per-application
+  window: day
+  limit: 10000
+  unit: API calls
+  tier: Basic
+  statement: >-
+    "Most developers will select the Basic tier when creating their
+    applications. This gives access to all API features, with a daily limit of
+    10,000 API calls."
+  source: https://apidocs.nextroll.com/guides/api-key-migration.html
+- scope: per-application
+  window: day
+  limit: null
+  unit: API calls
+  tier: Partner
+  statement: >-
+    Partner access must be approved before any API calls can be made; no numeric
+    limit is published for this tier.
+  source: https://apidocs.nextroll.com/guides/api-key-migration.html
+
+discrepancy:
+  note: >-
+    "100 requests per service per day" (Get Started) and "10,000 API calls per
+    day" (API key migration, Basic tier) are both presented as the default and
+    are three orders of magnitude apart. NextRoll also warns "As we roll out API
+    quotas, we may need to fine-tune the default limit." A client cannot tell
+    from the docs which figure applies to a newly registered Basic application.
+
+enforcement:
+  status_code: 429
+  status_name: Too Many Requests
+  spec: RFC 6585 section 4
+  enforced_at: services.adroll.com
+  statement: >-
+    "A new subdomain for API calls that enforces API keys and rate limiting:
+    services.adroll.com"
+  source: https://apidocs.nextroll.com/support.html
+
+headers:
+  documented: false
+  ratelimit_standard: null
+  x_ratelimit_limit: null
+  x_ratelimit_remaining: null
+  x_ratelimit_reset: null
+  retry_after: null
+  note: >-
+    No X-RateLimit-*, RateLimit-* or Retry-After response header is documented in
+    any NextRoll guide or reference page. Live confirmation is not possible
+    unauthenticated: every request without an apikey is rejected at the gateway
+    with 401 apiproxy:3 before any limit header could be emitted.
+
+increase_process:
+  self_service: false
+  form: https://docs.google.com/forms/d/e/1FAIpQLSccdzxBoB_BHfAzkjoz9tc_gCPXsniGXcgYNMFvPXMRxS17uA/viewform
+  statement: >-
+    "If you frequently run into rate limits when creating your applications
+    (HTTP 429 Too Many Requests statuses), you can request an increase to your
+    limit." Reviewed and answered by email.
+  source: https://apidocs.nextroll.com/support.html
+
+related:
+  graphql_query_size:
+    limit: none
+    statement: >-
+      "There is no limit to the size of GraphQL queries." NextRoll explicitly
+      recommends one large query over several small ones, since the Reporting
+      API fans out to backing services in parallel and in bulk — which also
+      means a single GraphQL call is the cheapest way to stay under the
+      per-service daily quota.
+    source: https://apidocs.nextroll.com/faq.html
+  mcp_server:
+    limits_published: false
+    note: 'No rate limits are published for https://services.adroll.com/mcp.'
+
+x-evidence:
+  checked: '2026-08-13'
+  probes:
+  - {url: 'https://apidocs.nextroll.com/guides/get-started.html', http_status: 200}
+  - {url: 'https://apidocs.nextroll.com/guides/api-key-migration.html', http_status: 200}
+  - {url: 'https://apidocs.nextroll.com/support.html', http_status: 200}
