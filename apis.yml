@@ -133,6 +133,12 @@ apis:
   humanURL: https://apidocs.nextroll.com/server-to-server-api/overview.html
   baseURL: https://srv.adroll.com/api
   tags:
+  - Event
+  - Conversions
+  - Attribution
+  - Server-to-Server
+  - Advertising
+  tags_raw:
   - Events
   - Conversions
   - Attribution
