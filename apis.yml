@@ -31,6 +31,10 @@ accessModel:
   generated: '2026-07-22'
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/adroll.png
+x-docs-platform: sphinx
+x-docs-platform-confidence: medium
+x-docs-platform-checked: 2026-09-17
+x-docs-hosting: aws-cloudfront
 tags:
 - Advertising
 - Display Advertising
@@ -146,7 +150,7 @@ apis:
   baseURL: https://srv.adroll.com/api
   tags:
   - Event
-  - Conversions
+  - Conversion
   - Attribution
   - Server-to-Server
   - Advertising
