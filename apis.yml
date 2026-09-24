@@ -99,10 +99,6 @@ apis:
   - Attribution
   - Advertising
   properties:
-  - type: GraphQL
-    url: graphql/adroll-reporting.graphql
-  - type: Documentation
-    url: graphql/adroll-graphql.md
   - type: APIReference
     url: https://apidocs.nextroll.com/graphql-reporting-api/reference.html
   - type: Schema
@@ -250,8 +246,6 @@ common:
   url: components/adroll-components.yml
 - type: Packages
   url: packages/adroll-packages.yml
-- type: GraphQL
-  url: graphql/adroll-reporting.graphql
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
