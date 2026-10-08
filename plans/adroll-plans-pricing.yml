@@ -86,3 +86,33 @@ x-evidence:
   probes:
   - {url: 'https://www.adroll.com/pricing', http_status: 200}
   - {url: 'https://apidocs.nextroll.com/guides/api-key-migration.html', http_status: 200}
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models: []
+  units: []
+  plans:
+  - name: Ads (Self-Service)
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Ads (Managed Services)
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Advanced Package
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: AdRoll ABM packages
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
