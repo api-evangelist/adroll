@@ -42,8 +42,26 @@ edges:
   detected: '2026-10-15'
   detected_by: mirror-platform-listings.py
   category: extension
+- partner_name: WordPress (own)
+  partner: wordpress
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://wordpress.org/plugins/adroll-for-woocommerce-stores-dev/
+  mirror_of: wordpress/integrations/wordpress-integration-edges.yml
+  apps:
+  - AdRoll for WooCommerce Stores
+  listing_count: 1
+  detected: '2026-10-15'
+  detected_by: mirror-platform-listings.py
+  category: WordPress plugin
 method: searched
 checked:
 - https://www.twilio.com/docs/segment/connections/destinations/catalog/adroll
 - woocommerce/integrations/woocommerce-integration-edges.yml
+- wordpress/integrations/wordpress-integration-edges.yml
 source: https://www.twilio.com/docs/segment/connections/destinations/catalog/adroll
