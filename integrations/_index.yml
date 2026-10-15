@@ -51,7 +51,7 @@
     app_slug: adroll
     beta: false
     builder: unknown (not in the directory record)
-  status: pending-partner-spec
+  status: not-a-workflow
   arazzo: null
 - slug: adroll-pipedream
   label: Pipedream
@@ -77,7 +77,7 @@
     actions: true
     sources: false
     builder: Pipedream repo (component)
-  status: pending-partner-spec
+  status: not-a-workflow
   arazzo: null
 - slug: adroll-wordpress-own
   label: WordPress (own)
