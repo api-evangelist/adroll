@@ -25,7 +25,25 @@ edges:
       - Track
   detected_by: sweep-cdp.py
   first_seen: '2026-10-14'
+- partner_name: WooCommerce (own)
+  partner: woocommerce
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://woocommerce.com/products/adroll-for-woocommerce-stores/
+  mirror_of: woocommerce/integrations/woocommerce-integration-edges.yml
+  apps:
+  - AdRoll Integration
+  listing_count: 1
+  detected: '2026-10-15'
+  detected_by: mirror-platform-listings.py
+  category: extension
 method: searched
 checked:
 - https://www.twilio.com/docs/segment/connections/destinations/catalog/adroll
+- woocommerce/integrations/woocommerce-integration-edges.yml
 source: https://www.twilio.com/docs/segment/connections/destinations/catalog/adroll
