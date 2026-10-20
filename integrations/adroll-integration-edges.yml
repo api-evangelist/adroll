@@ -1,4 +1,105 @@
-generated: '2026-10-14'
+generated: '2026-10-20'
+method: searched
+source:
+- https://www.twilio.com/docs/segment/connections/destinations/catalog/adroll
+- https://n8n.io/integrations/adroll/
+- https://composio.dev/toolkits/adroll
+checked:
+- https://fivetran.com/docs-sitemap.xml
+- https://fivetran.com/docs/connectors/partner-built-program
+- https://github.com/PipedreamHQ/pipedream/tree/94800dd6de6640b942c65ea7ee655f71ac56d438/components/
+- https://github.com/PipedreamHQ/pipedream/tree/d5872355ef27b4efa769f05352f2820c299a456e/components/
+- https://github.com/meltano/hub
+- https://www.twilio.com/docs/segment/connections/destinations/catalog/adroll
+- https://zapier.com/api/v4/apps/
+- woocommerce/integrations/woocommerce-integration-edges.yml
+- wordpress/integrations/wordpress-integration-edges.yml
+- https://composio.dev/toolkits/adroll
+- https://monid.ai/tools/adroll
+- https://n8n.io/integrations/adroll/
+- https://zapier.com/apps/adroll/integrations
+summary: null
+marketplace_apps:
+- marketplace: n8n
+  channel: open-source-node
+  app: adroll
+  url: https://n8n.io/integrations/adroll/
+  identity: title
+  pair_pages: 16
+  pairs:
+  - airtable
+  - discord
+  - github
+  - gmail
+  - google-calendar
+  - google-drive
+  - google-sheets
+  - http-request
+  - microsoft-excel
+  - mysql
+  - notion
+  - openai
+  - postgres
+  - slack
+  - supabase
+  - telegram
+- marketplace: composio
+  channel: agent-gateway
+  app: adroll
+  url: https://composio.dev/toolkits/adroll
+  identity: action-prefix
+  actions:
+  - key: ADROLL_CREATE_AD
+  - key: ADROLL_CREATE_ADGROUP
+  - key: ADROLL_CREATE_ADVERTISABLE
+  - key: ADROLL_CREATE_ASSET
+  - key: ADROLL_CREATE_CAMPAIGN
+  - key: ADROLL_CREATE_MARKETPLACE
+  - key: ADROLL_CREATE_RULE
+  - key: ADROLL_CREATE_SEGMENT
+  - key: ADROLL_CREATE_STRATEGY
+  - key: ADROLL_DELETE_SEGMENT
+  - key: ADROLL_EDIT_ADVERTISABLE
+  - key: ADROLL_GET_AD
+  - key: ADROLL_GET_ADGROUP
+  - key: ADROLL_GET_ADGROUP_GEOTARGETS
+  - key: ADROLL_GET_ADVERTISABLE
+  - key: ADROLL_GET_ADVERTISABLE_PIXEL
+  - key: ADROLL_GET_ASSET
+  - key: ADROLL_GET_CAMPAIGN
+  - key: ADROLL_GET_CONSENT_BANNER
+  - key: ADROLL_GET_CURRENT_ORGANIZATION
+  - key: ADROLL_GET_MARKETPLACE
+  - key: ADROLL_GET_PIXEL
+  - key: ADROLL_GET_PIXEL_SEGMENTS
+  - key: ADROLL_GET_RULE
+  - key: ADROLL_GET_RULE_SEGMENTS
+  - key: ADROLL_GET_SEGMENT
+  - key: ADROLL_GET_STRATEGY
+  - key: ADROLL_GET_XDEVICE_OPT_IN
+  - key: ADROLL_LIST_ADGROUPS
+  - key: ADROLL_LIST_ADS
+  - key: ADROLL_LIST_ADVERTISABLES
+  - key: ADROLL_LIST_ASSETS
+  - key: ADROLL_LIST_CAMPAIGNS
+  - key: ADROLL_LIST_SEGMENTS
+  - key: ADROLL_LIST_STRATEGIES
+  - key: ADROLL_REPORTING_ADGROUPS
+  - key: ADROLL_REPORTING_ADS
+  - key: ADROLL_REPORTING_ADVERTISABLES
+  - key: ADROLL_REPORTING_CAMPAIGNS
+  - key: ADROLL_REPORTING_ORGANIZATIONS
+  - key: ADROLL_REPORTING_QUERY
+  - key: ADROLL_REPORTING_SEGMENTS
+  - key: ADROLL_RUN_PERFORMANCE_REPORT
+  - key: ADROLL_SEARCH_GEOTARGETS
+  - key: ADROLL_SET_CAMPAIGN_STATUS
+  - key: ADROLL_UPDATE_ADGROUP
+  - key: ADROLL_UPDATE_CAMPAIGN
+  - key: ADROLL_UPDATE_CONSENT_BANNER
+  - key: ADROLL_UPDATE_SEGMENT
+  - key: ADROLL_UPDATE_STRATEGY
+  - key: ADROLL_UPDATE_XDEVICE_OPT_IN
 edges:
 - partner_name: WooCommerce (own)
   partner: woocommerce
@@ -165,15 +266,4 @@ edges:
     builder: Pipedream repo (component)
   detected_by: sweep-workflow-automation.py
   first_seen: '2026-10-15'
-method: searched
-checked:
-- https://fivetran.com/docs-sitemap.xml
-- https://fivetran.com/docs/connectors/partner-built-program
-- https://github.com/PipedreamHQ/pipedream/tree/94800dd6de6640b942c65ea7ee655f71ac56d438/components/
-- https://github.com/PipedreamHQ/pipedream/tree/d5872355ef27b4efa769f05352f2820c299a456e/components/
-- https://github.com/meltano/hub
-- https://www.twilio.com/docs/segment/connections/destinations/catalog/adroll
-- https://zapier.com/api/v4/apps/
-- woocommerce/integrations/woocommerce-integration-edges.yml
-- wordpress/integrations/wordpress-integration-edges.yml
-source: https://www.twilio.com/docs/segment/connections/destinations/catalog/adroll
+templates: []
