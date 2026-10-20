@@ -1,5 +1,39 @@
 generated: '2026-10-14'
 edges:
+- partner_name: WooCommerce (own)
+  partner: woocommerce
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://woocommerce.com/products/adroll-for-woocommerce-stores/
+  mirror_of: woocommerce/integrations/woocommerce-integration-edges.yml
+  apps:
+  - AdRoll Integration
+  listing_count: 1
+  detected: '2026-10-15'
+  detected_by: mirror-platform-listings.py
+  category: extension
+- partner_name: WordPress (own)
+  partner: wordpress
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://wordpress.org/plugins/adroll-for-woocommerce-stores-dev/
+  mirror_of: wordpress/integrations/wordpress-integration-edges.yml
+  apps:
+  - AdRoll for WooCommerce Stores
+  listing_count: 1
+  detected: '2026-10-15'
+  detected_by: mirror-platform-listings.py
+  category: WordPress plugin
 - partner_name: Twilio Segment
   partner: segment
   partner_match: aggregator
@@ -25,91 +59,6 @@ edges:
       - Track
   detected_by: sweep-cdp.py
   first_seen: '2026-10-14'
-- partner_name: WooCommerce (own)
-  partner: woocommerce
-  partner_match: mirror
-  mirror_match: domain
-  type: marketplace
-  relationship: platform-app
-  direction: third-party
-  channel: partner-built
-  marketplace: own
-  evidence: https://woocommerce.com/products/adroll-for-woocommerce-stores/
-  mirror_of: woocommerce/integrations/woocommerce-integration-edges.yml
-  apps:
-  - AdRoll Integration
-  listing_count: 1
-  detected: '2026-10-15'
-  detected_by: mirror-platform-listings.py
-  category: extension
-- partner_name: Zapier
-  partner: zapier
-  partner_match: aggregator
-  type: marketplace
-  marketplace: zapier-directory
-  channel: ipaas-listing
-  relationship: ipaas-bridge
-  direction: third-party
-  evidence: https://zapier.com/apps/adroll/integrations
-  category: null
-  contract_reference:
-    register: Zapier app directory (zapier.com/api/v4/apps)
-    spec_file: null
-    role: ipaas-connector:zapier
-    registered_name: AdRoll
-    matched_domain: adroll.com
-    matched_by: domain
-    detected_by: sweep-workflow-automation.py
-    detected: '2026-10-15'
-    signal_note: one edge per (provider, platform); actions, triggers and usage counts are context, never read
-    app_slug: adroll
-    beta: false
-    builder: unknown (not in the directory record)
-  detected_by: sweep-workflow-automation.py
-  first_seen: '2026-10-15'
-- partner_name: Pipedream
-  partner: pipedream
-  partner_match: aggregator
-  type: marketplace
-  marketplace: pipedream-components
-  channel: open-source-node
-  relationship: ipaas-bridge
-  direction: third-party
-  evidence: https://github.com/PipedreamHQ/pipedream/tree/94800dd6de6640b942c65ea7ee655f71ac56d438/components/adroll
-  category: null
-  contract_reference:
-    register: Pipedream components (PipedreamHQ/pipedream components/)
-    spec_file: null
-    role: ipaas-connector:pipedream
-    registered_name: adroll
-    matched_domain: adroll.com
-    matched_by: domain
-    detected_by: sweep-workflow-automation.py
-    detected: '2026-10-15'
-    signal_note: one edge per (provider, platform); actions, triggers and usage counts are context, never read
-    app_slug: adroll
-    actions: true
-    sources: false
-    builder: Pipedream repo (component)
-  detected_by: sweep-workflow-automation.py
-  first_seen: '2026-10-15'
-- partner_name: WordPress (own)
-  partner: wordpress
-  partner_match: mirror
-  mirror_match: domain
-  type: marketplace
-  relationship: platform-app
-  direction: third-party
-  channel: partner-built
-  marketplace: own
-  evidence: https://wordpress.org/plugins/adroll-for-woocommerce-stores-dev/
-  mirror_of: wordpress/integrations/wordpress-integration-edges.yml
-  apps:
-  - AdRoll for WooCommerce Stores
-  listing_count: 1
-  detected: '2026-10-15'
-  detected_by: mirror-platform-listings.py
-  category: WordPress plugin
 - partner_name: Fivetran
   partner: fivetran
   partner_match: aggregator
@@ -165,11 +114,63 @@ edges:
     builder: 'community (Meltano Hub variant maintainers: singer-io)'
   detected_by: sweep-data-integration.py
   first_seen: '2026-10-18'
+- partner_name: Zapier
+  partner: zapier
+  partner_match: aggregator
+  type: marketplace
+  marketplace: zapier-directory
+  channel: ipaas-listing
+  relationship: ipaas-bridge
+  direction: third-party
+  evidence: https://zapier.com/apps/adroll/integrations
+  category: null
+  contract_reference:
+    register: Zapier app directory (zapier.com/api/v4/apps)
+    spec_file: null
+    role: ipaas-connector:zapier
+    registered_name: AdRoll
+    matched_domain: adroll.com
+    matched_by: domain
+    detected_by: sweep-workflow-automation.py
+    detected: '2026-10-15'
+    signal_note: one edge per (provider, platform); actions, triggers and usage counts are context, never read
+    app_slug: adroll
+    beta: false
+    builder: unknown (not in the directory record)
+  detected_by: sweep-workflow-automation.py
+  first_seen: '2026-10-15'
+- partner_name: Pipedream
+  partner: pipedream
+  partner_match: aggregator
+  type: marketplace
+  marketplace: pipedream-components
+  channel: open-source-node
+  relationship: ipaas-bridge
+  direction: third-party
+  evidence: https://github.com/PipedreamHQ/pipedream/tree/d5872355ef27b4efa769f05352f2820c299a456e/components/adroll
+  category: null
+  contract_reference:
+    register: Pipedream components (PipedreamHQ/pipedream components/)
+    spec_file: null
+    role: ipaas-connector:pipedream
+    registered_name: adroll
+    matched_domain: adroll.com
+    matched_by: domain
+    detected_by: sweep-workflow-automation.py
+    detected: '2026-10-15'
+    signal_note: one edge per (provider, platform); actions, triggers and usage counts are context, never read
+    app_slug: adroll
+    actions: true
+    sources: false
+    builder: Pipedream repo (component)
+  detected_by: sweep-workflow-automation.py
+  first_seen: '2026-10-15'
 method: searched
 checked:
 - https://fivetran.com/docs-sitemap.xml
 - https://fivetran.com/docs/connectors/partner-built-program
 - https://github.com/PipedreamHQ/pipedream/tree/94800dd6de6640b942c65ea7ee655f71ac56d438/components/
+- https://github.com/PipedreamHQ/pipedream/tree/d5872355ef27b4efa769f05352f2820c299a456e/components/
 - https://github.com/meltano/hub
 - https://www.twilio.com/docs/segment/connections/destinations/catalog/adroll
 - https://zapier.com/api/v4/apps/
