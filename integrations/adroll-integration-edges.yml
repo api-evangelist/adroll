@@ -19,6 +19,11 @@ checked:
 - https://n8n.io/integrations/adroll/
 - https://zapier.com/apps/adroll/integrations
 - yotpo/integrations/yotpo-integration-edges.yml
+- https://app.hubspot.com/api/chirp-frontend-external/v1/gateway/com.hubspot.marketplace.personalization.rpc.PersonalizationPublicRpc/search
+- https://ecosystem.hubspot.com/marketplace/apps
+- https://ecosystem.hubspot.com/marketplace/explore?eco_PRODUCT_TYPE=APP&eco_CERTIFIED=true
+- https://ecosystem.hubspot.com/marketplace/solutions
+- hubspot/integrations/hubspot-integration-edges.yml
 summary: null
 marketplace_apps:
 - marketplace: n8n
@@ -102,40 +107,6 @@ marketplace_apps:
   - key: ADROLL_UPDATE_STRATEGY
   - key: ADROLL_UPDATE_XDEVICE_OPT_IN
 edges:
-- partner_name: WooCommerce (own)
-  partner: woocommerce
-  partner_match: mirror
-  mirror_match: domain
-  type: marketplace
-  relationship: platform-app
-  direction: third-party
-  channel: partner-built
-  marketplace: own
-  evidence: https://woocommerce.com/products/adroll-for-woocommerce-stores/
-  mirror_of: woocommerce/integrations/woocommerce-integration-edges.yml
-  apps:
-  - AdRoll Integration
-  listing_count: 1
-  detected: '2026-10-15'
-  detected_by: mirror-platform-listings.py
-  category: extension
-- partner_name: WordPress (own)
-  partner: wordpress
-  partner_match: mirror
-  mirror_match: domain
-  type: marketplace
-  relationship: platform-app
-  direction: third-party
-  channel: partner-built
-  marketplace: own
-  evidence: https://wordpress.org/plugins/adroll-for-woocommerce-stores-dev/
-  mirror_of: wordpress/integrations/wordpress-integration-edges.yml
-  apps:
-  - AdRoll for WooCommerce Stores
-  listing_count: 1
-  detected: '2026-10-15'
-  detected_by: mirror-platform-listings.py
-  category: WordPress plugin
 - partner_name: Twilio Segment
   partner: segment
   partner_match: aggregator
@@ -267,6 +238,73 @@ edges:
     builder: Pipedream repo (component)
   detected_by: sweep-workflow-automation.py
   first_seen: '2026-10-15'
+- partner_name: HubSpot App Certification
+  partner: hubspot
+  partner_match: register
+  type: register
+  channel: standard-directory
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://ecosystem.hubspot.com/marketplace/explore?eco_PRODUCT_TYPE=APP&eco_CERTIFIED=true
+  category: HubSpot certified app publisher
+  contract_reference:
+    register: HubSpot App Marketplace Certified Apps (CERTIFIED filter on the storefront's public search JSON)
+    standard: HubSpot App Certification
+    spec_file: null
+    role: certified-app-publisher
+    registered_name: AdRoll
+    matched_domain: adroll.com
+    matched_by: domain
+    identity_source: the listing's own companyUrl (no lookup)
+    certified_products:
+    - product: HubSpot Certified App
+      product_type: APP
+      certifier: HubSpot (App Certification)
+      listings: 2
+      example_listing: https://ecosystem.hubspot.com/marketplace/listing/adroll-abm
+      lapsed: false
+      lapsed_note: the certified flag is printed on a LIVE public listing card (CERTIFIED filter); HubSpot prints
+        no certification date, so the badge reads as current
+    signal_note: certified_products = ONE entry per product type (HubSpot Certified App), never per listing; listing
+      counts are context
+    detected_by: sweep-hubspot-app-marketplace.py
+    detected: '2026-10-21'
+  detected_by: sweep-hubspot-app-marketplace.py
+  first_seen: '2026-10-21'
+- partner_name: WooCommerce (own)
+  partner: woocommerce
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://woocommerce.com/products/adroll-for-woocommerce-stores/
+  mirror_of: woocommerce/integrations/woocommerce-integration-edges.yml
+  apps:
+  - AdRoll Integration
+  listing_count: 1
+  detected: '2026-10-15'
+  detected_by: mirror-platform-listings.py
+  category: extension
+- partner_name: WordPress (own)
+  partner: wordpress
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://wordpress.org/plugins/adroll-for-woocommerce-stores-dev/
+  mirror_of: wordpress/integrations/wordpress-integration-edges.yml
+  apps:
+  - AdRoll for WooCommerce Stores
+  listing_count: 1
+  detected: '2026-10-15'
+  detected_by: mirror-platform-listings.py
+  category: WordPress plugin
 - partner_name: Yotpo (own)
   partner: yotpo
   partner_match: mirror
@@ -284,4 +322,22 @@ edges:
   detected: '2026-10-20'
   detected_by: mirror-platform-listings.py
   category: Reviews & UGC
+- partner_name: HubSpot (own)
+  partner: hubspot
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://ecosystem.hubspot.com/marketplace/listing/adroll-abm
+  mirror_of: hubspot/integrations/hubspot-integration-edges.yml
+  apps:
+  - AdRoll ABM (formerly RollWorks)
+  - AdRoll Marketing & Advertising
+  listing_count: 1
+  detected: '2026-10-21'
+  detected_by: mirror-platform-listings.py
+  category: ACCOUNT_BASED_MARKETING
 templates: []
