@@ -147,3 +147,16 @@
     builder: Pipedream repo (component)
   status: not-a-workflow
   arazzo: null
+- slug: adroll-yotpo-own
+  label: Yotpo (own)
+  partner: yotpo
+  partner_name: Yotpo (own)
+  category: Reviews & UGC
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://www.yotpo.com/integrations/adroll/
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
