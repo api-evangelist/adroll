@@ -1,4 +1,4 @@
-# AdRoll (adroll)
+# AdRoll
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,4 +64,134 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-API and integration profile for AdRoll.
+AdRoll is a display advertising and retargeting platform from NextRoll that helps direct-to-consumer brands run cross-channel display, social, and email campaigns from a single dashboard powered by the BidIQ machine learning bidder. The platform manages audience segmentation, creative serving, and attribution across the open web and major social networks. The NextRoll API for AdRoll exposes campaign, ad, audience, and reporting endpoints using OAuth 2.0 or Personal Access Token authentication.
+
+**Areas:** Advertising · Display Advertising · Retargeting · Marketing · AdTech · Programmatic
+
+## AdRoll on APIs.io
+
+Everything profiled for AdRoll is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/adroll/](https://apis.io/providers/adroll/)** — or go straight to one of the APIs or properties below.
+
+### APIs (4)
+
+- [NextRoll API for AdRoll](https://apis.io/apis/adroll/nextroll-api/) — REST API for managing AdRoll advertisers, campaigns, ads, audience segments, and reporting on the NextRoll platform. Supports OAuth 2.0 flows and Personal…
+- [NextRoll GraphQL Reporting API](https://apis.io/apis/adroll/nextroll-graphql-reporting/) — GraphQL API for retrieving all AdRoll and AdRoll ABM reporting data in a single request — organization, advertisable, campaign, adgroup, ad, audience, email…
+- [AdRoll MCP Server](https://apis.io/apis/adroll/nextroll-mcp/) — Remote Model Context Protocol server that exposes AdRoll and AdRoll ABM data and supported workflows to MCP-compatible AI clients including Claude, ChatGPT,…
+- [NextRoll Server-to-Server (S2S) Event API](https://apis.io/apis/adroll/nextroll-s2s/) — Server-side event ingestion API for sending user events and conversions to AdRoll directly from your own servers, complementing the AdRoll pixel and mobile…
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### GraphQL (1)
+
+GraphQL schemas.
+
+- [Moved to /providers/adroll/](https://apis.io/graphqls/adroll/adroll-graphql/)
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [adroll](https://apis.io/servers/adroll/adroll/)
+
+#### Security (4)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Adroll Authentication](https://apis.io/security/adroll/adroll-authentication/)
+- [Adroll Domain Security](https://apis.io/security/adroll/adroll-domain-security/)
+- [Adroll Trust Center](https://apis.io/security/adroll/adroll-trust-center/)
+- [Adroll Vulnerability Disclosure](https://apis.io/security/adroll/adroll-vulnerability-disclosure/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Adroll Scopes](https://apis.io/scopes/adroll/adroll-scopes/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Adroll Plans Pricing](https://apis.io/plans/adroll/adroll-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Adroll Rate Limits](https://apis.io/rate-limits/adroll/adroll-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.adroll.com)
+- [Documentation](https://apidocs.nextroll.com)
+- [Getting started](https://apidocs.nextroll.com/guides/get-started.html)
+- [API reference](https://apidocs.nextroll.com/crud-api/reference.html)
+- [Pricing](https://www.adroll.com/pricing)
+- [Sign up](https://app.adroll.com/signup)
+- [Support](https://apidocs.nextroll.com/support.html)
+- [Blog](https://www.nextroll.com/blog)
+- [Security](https://security.nextroll.com/)
+- [Compliance](https://security.nextroll.com/)
+- [Terms of service](https://www.nextroll.com/terms)
+- [Privacy policy](https://www.nextroll.com/privacy)
+- [GitHub](https://github.com/adroll)
+- [Status](https://status.nextroll.com)
+
+## API Evangelist rating
+
+**Kin Score 52.2** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 80.0 |
+| Contract quality | 6.5 |
+| Contract governance | 18.2 |
+| Operational transparency | 68.4 |
+| Developer ergonomics | 49.4 |
+| Access clarity | 85.5 |
+
+**Agent readiness 29.7** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | documented (partial credit) |
+| Auth Clarity | served (partial credit) |
+| Idempotency | — |
+| Error Semantics | documented (partial credit) |
+| OpenAPI Examples | documented (partial credit) |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | served (partial credit) |
+| Protected Resource Metadata | verified |
+| Dynamic Client Registration | yes |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | na |
+
+**Regulatory alignment 45.1** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/adroll/](https://apis.io/providers/adroll/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for AdRoll: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/adroll/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
