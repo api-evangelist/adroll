@@ -99,28 +99,34 @@ Model Context Protocol servers that expose the API to agents.
 
 Authentication, trust centre, and vulnerability disclosure.
 
-- [Adroll Authentication](https://apis.io/security/adroll/adroll-authentication/)
-- [Adroll Domain Security](https://apis.io/security/adroll/adroll-domain-security/)
-- [Adroll Trust Center](https://apis.io/security/adroll/adroll-trust-center/)
-- [Adroll Vulnerability Disclosure](https://apis.io/security/adroll/adroll-vulnerability-disclosure/)
+- [AdRoll Authentication](https://apis.io/security/adroll/adroll-authentication/)
+- [AdRoll Domain Security](https://apis.io/security/adroll/adroll-domain-security/)
+- [AdRoll Trust Center](https://apis.io/security/adroll/adroll-trust-center/)
+- [AdRoll Vulnerability Disclosure](https://apis.io/security/adroll/adroll-vulnerability-disclosure/)
 
 #### OAuth scopes (1)
 
 The permissions the API asks for.
 
-- [Adroll Scopes](https://apis.io/scopes/adroll/adroll-scopes/)
+- [AdRoll Scopes](https://apis.io/scopes/adroll/adroll-scopes/)
 
 #### Plans and pricing (1)
 
 Published plans, tiers and prices.
 
-- [Adroll Plans Pricing](https://apis.io/plans/adroll/adroll-plans-pricing/)
+- [AdRoll Plans Pricing](https://apis.io/plans/adroll/adroll-plans-pricing/)
 
 #### Rate limits (1)
 
 Published request limits.
 
-- [Adroll Rate Limits](https://apis.io/rate-limits/adroll/adroll-rate-limits/)
+- [AdRoll Rate Limits](https://apis.io/rate-limits/adroll/adroll-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [AdRoll Finops](https://apis.io/finops/adroll/adroll-finops/)
 
 ## Where to find this API
 
@@ -143,18 +149,18 @@ Links to the company's own pages. This repository publishes no copy of their spe
 
 ## API Evangelist rating
 
-**Kin Score 52.2** — developing · rubric 0.25.0 · scored 2026-10-23
+**Kin Score 51.1** — developing · rubric 0.28.1 · scored 2026-11-21
 
 | Facet | Score |
 |---|---|
 | Discoverability | 80.0 |
 | Contract quality | 6.5 |
 | Contract governance | 18.2 |
-| Operational transparency | 68.4 |
+| Operational transparency | 64.3 |
 | Developer ergonomics | 49.4 |
-| Access clarity | 85.5 |
+| Access clarity | 83.0 |
 
-**Agent readiness 29.7** — agent-ready
+**Agent readiness 29.1** — agent-ready
 
 | Agent-readiness dimension | Result |
 |---|---|
@@ -179,6 +185,10 @@ Links to the company's own pages. This repository publishes no copy of their spe
 | Agentic Commerce | — |
 | Pagination Ratio | na |
 | Operation Distinctiveness | na |
+| MCP Tool Quality | na |
+| Onboarding Descriptor | — |
+| Dns Aid Index | na |
+| Markdown Negotiation | na |
 
 **Regulatory alignment 45.1** — Horizontal (data, software, accessibility, platform)
 
